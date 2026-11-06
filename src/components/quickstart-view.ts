@@ -126,7 +126,7 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
           <div>
             <h3>Simulação Prática: Como seria a 1ª Rodada de Hoje (${escapeHtml(cipher.dateLabel)})</h3>
             <p class="subtitle">
-              Veja exatamente as duas cartas que saem no topo e no fundo hoje no tema <strong>${escapeHtml(deck.name)}</strong>:
+              Veja as duas cartas que saem no topo e no fundo hoje no tema <strong>${escapeHtml(deck.name)}</strong> (clique em qualquer carta para ampliar a leitura):
             </p>
           </div>
           <button type="button" class="btn-primary" data-goto-tab="playtest">
@@ -138,10 +138,10 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
           <div class="walkthrough-column">
             <div class="walkthrough-step-tag">1º Movimento · Jogador no Papel de ☀ Vigia (Topo)</div>
             <div class="walkthrough-card-wrap">
-              ${renderMagicCardHtml(sampleTopCard, { highlightRole: 'vigia' })}
+              ${renderMagicCardHtml(sampleTopCard, { interactive: true, highlightRole: 'vigia' })}
             </div>
             <div class="walkthrough-dialogue">
-              <strong>O que o Jogador A faz na vida real:</strong>
+              <strong>O que o Jogador A lê (${escapeHtml(sampleTopCard.playingCardCode)} — ${escapeHtml(sampleTopCard.title)}):</strong>
               <p>
                 Observa o gatilho <em>"${escapeHtml(sampleTopCard.topWatcherTrigger ?? '')}"</em> e conta ao parceiro:
                 "${escapeHtml(sampleTopCard.topWatcherEvent ?? '')}"
@@ -152,16 +152,54 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
           <div class="walkthrough-column">
             <div class="walkthrough-step-tag">2º Movimento · Jogador no Papel de ☾ Eco (Fundo)</div>
             <div class="walkthrough-card-wrap">
-              ${renderMagicCardHtml(sampleBottomCard, { highlightRole: 'eco' })}
+              ${renderMagicCardHtml(sampleBottomCard, { interactive: true, highlightRole: 'eco' })}
             </div>
             <div class="walkthrough-dialogue">
-              <strong>Como o Jogador B responde:</strong>
+              <strong>Como o Jogador B responde (${escapeHtml(sampleBottomCard.playingCardCode)} — ${escapeHtml(sampleBottomCard.title)}):</strong>
               <p>
                 Cumpre a interação <em>"${escapeHtml(sampleBottomCard.bottomEchoPrompt ?? '')}"</em> e resolve:
                 "${escapeHtml(sampleBottomCard.bottomEchoEffect ?? '')}"
               </p>
             </div>
           </div>
+        </div>
+
+        <div class="walkthrough-real-life-grid">
+          <article class="real-life-narrative-card">
+            <h4>Como essa rodada acontece na vida real (Em Dupla)</h4>
+            <ol class="narrative-timeline">
+              <li>
+                <strong>O saque no horário combinado:</strong> Imagine que você (Jogador A) e seu parceiro (Jogador B) combinaram de jogar às 14h (ou a cada hora num passeio). Às 14h, você é o <strong>☀ Vigia</strong>: você puxa a 1ª carta de cima do seu baralho (<strong>${escapeHtml(sampleTopCard.playingCardCode)} — ${escapeHtml(sampleTopCard.title)}</strong>) e olha apenas a parte <strong>☀ TOPO</strong>.
+              </li>
+              <li>
+                <strong>O sinal acontece na rotina:</strong> A carta pede o gatilho: <em>"${escapeHtml(sampleTopCard.topWatcherTrigger ?? '')}"</em>. Assim que você notar isso acontecendo onde você está (no trabalho, na rua, num café ou em casa), você puxa assunto ou manda um áudio/mensagem para o Jogador B incorporando o local real à cena: <em>"${escapeHtml(sampleTopCard.topWatcherEvent ?? '')}"</em>.
+              </li>
+              <li>
+                <strong>A resposta do parceiro:</strong> Ao receber seu aviso, o Jogador B age como <strong>☾ Eco</strong>: ele puxa a última carta de baixo do baralho dele (<strong>${escapeHtml(sampleBottomCard.playingCardCode)} — ${escapeHtml(sampleBottomCard.title)}</strong>) e lê apenas a caixa <strong>☾ FUNDO</strong>. Para ajudar você na história, ele cumpre na vida real a tarefa: <em>"${escapeHtml(sampleBottomCard.bottomEchoPrompt ?? '')}"</em>.
+              </li>
+              <li>
+                <strong>Desfecho e troca de papéis:</strong> Vocês conferem a resolução: <em>"${escapeHtml(sampleBottomCard.bottomEchoEffect ?? '')}"</em>. Se alguém não pôde cumprir a interação ou a carta exigiu um custo do naipe, basta girar a <strong>Dama (Q ⟳)</strong> em 90° no bolso ou virar o <strong>Valete (J)</strong> para cima. No próximo horário (ex.: às 15h ou no dia seguinte), o Jogador B será o Vigia (puxando a 2ª carta do topo) e você será o Eco (puxando a penúltima do fundo)!
+              </li>
+            </ol>
+          </article>
+
+          <article class="real-life-narrative-card">
+            <h4>E como funciona no Modo Solo (Diário / Oráculo)?</h4>
+            <ol class="narrative-timeline">
+              <li>
+                <strong>Saque duplo num único movimento:</strong> Jogando sozinho, você usa um único baralho (físico ou na aba <em>Mesa</em> clicando no botão <strong>Modo Solo</strong>). No horário que você escolheu para o seu turno, você puxa <strong>1 carta do TOPO</strong> e <strong>1 carta do FUNDO</strong> ao mesmo tempo.
+              </li>
+              <li>
+                <strong>A Carta do Topo é o Mundo ao seu redor:</strong> Você lê o bloco <strong>☀ TOPO</strong> da carta de cima (<strong>${escapeHtml(sampleTopCard.playingCardCode)}</strong>). Quando o gatilho real (<em>"${escapeHtml(sampleTopCard.topWatcherTrigger ?? '')}"</em>) acontecer diante de você hoje, o evento ficcional se instala no seu caminho.
+              </li>
+              <li>
+                <strong>A Carta do Fundo é o seu Desafio Pessoal:</strong> Em vez de esperar outra pessoa, você mesmo lê o bloco <strong>☾ FUNDO</strong> da carta de baixo (<strong>${escapeHtml(sampleBottomCard.playingCardCode)}</strong>) como a reação que seu personagem precisa executar sozinho.
+              </li>
+              <li>
+                <strong>Registro de Sobrevivente:</strong> Quando a interação pedir para "enviar ao parceiro" (uma foto, áudio ou decisão), no Modo Solo você registra isso como seu <strong>Diário de Campanha</strong> — tirando a foto no celular, gravando uma nota de voz de 15 segundos ou anotando duas linhas num bloco de notas. Se não conseguir realizar antes do próximo turno, você gira sua <strong>Dama (Q ⟳)</strong> ou ativa seu <strong>Valete (J)</strong>!
+              </li>
+            </ol>
+          </article>
         </div>
       </section>
     </div>

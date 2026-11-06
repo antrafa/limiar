@@ -957,6 +957,230 @@ button:focus-visible {
   font-weight: 600;
 }
 
+.oracle-hero-helper {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.oracle-didactic-list {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--text-primary);
+}
+
+.oracle-didactic-list ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  color: var(--text-secondary);
+}
+
+.oracle-subrole {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  margin-top: 3px;
+}
+
+.oracle-step-block + .oracle-step-block {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.oracle-step-label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 2px;
+}
+
+.oracle-zoom-btn {
+  display: block;
+  margin-top: 6px;
+}
+
+/* Real-Life Dual & Solo Narrative Walkthrough */
+.walkthrough-real-life-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.real-life-narrative-card {
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 20px 22px;
+}
+
+.real-life-narrative-card h4 {
+  font-size: 1.05rem;
+  margin-bottom: 12px;
+}
+
+.narrative-timeline {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.narrative-timeline strong {
+  color: var(--text-primary);
+}
+
+/* Native Modal Dialog (<dialog closedby="any">) */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgba(24, 24, 27, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.card-zoom-dialog[open] {
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 24px 28px;
+  max-width: 860px;
+  width: calc(100vw - 32px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+}
+
+.zoom-modal-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.zoom-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.zoom-card-code {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background-color: var(--bg-muted);
+  border: 1px solid var(--border-subtle);
+  padding: 2px 9px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.zoom-modal-body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 720px) {
+  .zoom-modal-body {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+.zoom-reading-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.zoom-section-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background-color: var(--bg-muted);
+  border: 1px solid var(--border-subtle);
+  padding: 6px 12px;
+  border-radius: 6px;
+  align-self: flex-start;
+}
+
+.zoom-detail-box {
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--accent-ink);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.zoom-detail-box.zoom-box-vigia {
+  background-color: #faf6ee;
+  border-left-color: var(--accent-vigia);
+}
+
+.zoom-detail-box.zoom-box-eco {
+  background-color: #f3f7fa;
+  border-left-color: var(--accent-eco);
+}
+
+.zoom-role-kicker {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.zoom-detail-box h4 {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  margin: 8px 0 4px;
+}
+
+.zoom-detail-box h4:first-of-type {
+  margin-top: 0;
+}
+
+.zoom-detail-box p {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.zoom-trigger-text {
+  font-weight: 600;
+}
+
+.zoom-flavor {
+  margin: 0;
+  padding: 10px 14px;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-left: 2px solid var(--border-strong);
+  background-color: var(--bg-page);
+  border-radius: 4px;
+}
+
 .toast-banner {
   position: fixed;
   bottom: 20px;

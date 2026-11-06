@@ -91,7 +91,7 @@ export function renderStudioGalleryHtml(
         <section class="theme-banner">
           <div>
             <h2>${escapeHtml(deck.name)} <span class="badge-pill">${escapeHtml(deck.subtitle)}</span></h2>
-            <p class="subtitle">${escapeHtml(deck.tagline)}</p>
+            <p class="subtitle">${escapeHtml(deck.tagline)} — <em>Dica: clique numa carta para selecioná-la, e clique novamente na carta selecionada para abrir em tela cheia.</em></p>
           </div>
           <div class="deck-io-actions">
             <button type="button" id="btn-export-json" class="btn-secondary">⬇ Exportar Deck (.json)</button>
@@ -113,12 +113,17 @@ export function renderStudioGalleryHtml(
       <aside class="studio-editor-sidebar">
         <div class="editor-panel">
           <header class="editor-header">
-            <h3>Editor de Carta (63×88mm)</h3>
-            <span class="editor-card-code">${escapeHtml(selectedCard.playingCardCode)} · #${String(selectedCard.collectorNumber).padStart(2, '0')}</span>
+            <div>
+              <h3>Editor de Carta (63×88mm)</h3>
+              <span class="editor-card-code">${escapeHtml(selectedCard.playingCardCode)} · #${String(selectedCard.collectorNumber).padStart(2, '0')}</span>
+            </div>
+            <button type="button" class="btn-secondary btn-sm" data-zoom-card-id="${escapeHtml(selectedCard.id)}">
+              🔍 Ampliar Leitura
+            </button>
           </header>
 
-          <div class="editor-preview-slot" id="editor-live-preview">
-            ${renderMagicCardHtml(selectedCard)}
+          <div class="editor-preview-slot" id="editor-live-preview" data-zoom-card-id="${escapeHtml(selectedCard.id)}" title="Clique para ampliar a carta">
+            ${renderMagicCardHtml(selectedCard, { interactive: true })}
           </div>
 
           <form id="card-editor-form" class="editor-form" data-editing-card-id="${escapeHtml(selectedCard.id)}">

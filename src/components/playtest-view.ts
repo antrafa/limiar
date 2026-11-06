@@ -53,11 +53,11 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
         <div class="spotlight-duo">
           <div class="spotlight-slot">
             <span class="spotlight-badge badge-vigia">☀ TOPO · O VIGIA (Turno #${vigiaEntry.turn})</span>
-            ${renderMagicCardHtml(vigiaEntry.card, { highlightRole: 'vigia' })}
+            ${renderMagicCardHtml(vigiaEntry.card, { interactive: true, highlightRole: 'vigia' })}
           </div>
           <div class="spotlight-slot">
             <span class="spotlight-badge badge-eco">☾ FUNDO · O ECO (Turno #${ecoEntry.turn})</span>
-            ${renderMagicCardHtml(ecoEntry.card, { highlightRole: 'eco' })}
+            ${renderMagicCardHtml(ecoEntry.card, { interactive: true, highlightRole: 'eco' })}
           </div>
         </div>
       `;
@@ -71,7 +71,7 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
         <div class="spotlight-single">
           <div class="spotlight-slot">
             <span class="spotlight-badge ${badgeClass}">${roleLabel} · Turno #${latestItem.turn}</span>
-            ${renderMagicCardHtml(latestItem.card, { highlightRole: latestItem.role })}
+            ${renderMagicCardHtml(latestItem.card, { interactive: true, highlightRole: latestItem.role })}
           </div>
         </div>
       `;
@@ -150,7 +150,7 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
               <span class="pocket-role-tag">REI (K) · ARQUÉTIPO ATIVO</span>
               <span class="status-pill status-ready">Sempre Ativo</span>
             </div>
-            ${renderMagicCardHtml(kingCard)}
+            ${renderMagicCardHtml(kingCard, { interactive: true })}
           </div>
 
           <div class="pocket-slot">
@@ -161,7 +161,7 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
               </button>
             </div>
             <div class="queen-card-holder">
-              ${renderMagicCardHtml(queenCard, { tapped: session.queenTapped })}
+              ${renderMagicCardHtml(queenCard, { interactive: true, tapped: session.queenTapped })}
             </div>
           </div>
 
@@ -173,7 +173,7 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
               </button>
             </div>
             <div class="jack-card-holder">
-              ${renderMagicCardHtml(jackCard, { selected: session.jackActive })}
+              ${renderMagicCardHtml(jackCard, { interactive: true, selected: session.jackActive })}
             </div>
           </div>
         </div>

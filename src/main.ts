@@ -2,7 +2,7 @@ import './styles/main.css';
 import './styles/card-magic.css';
 import './styles/print.css';
 
-import { renderMagicCardHtml } from './components/card-renderer';
+import { renderCardModalContentHtml, renderMagicCardHtml } from './components/card-renderer';
 import { renderOracleGuideHtml } from './components/oracle-view';
 import { renderPlaytestTableHtml } from './components/playtest-view';
 import { type PrintFilterMode, renderPrintSheetsHtml } from './components/print-view';
@@ -179,11 +179,22 @@ export function mountSinaleiroApp(root: HTMLElement): void {
           ${tabBodyHtml}
         </main>
 
+        <dialog id="card-zoom-dialog" class="card-zoom-dialog no-print" closedby="any" aria-labelledby="zoom-dialog-title"></dialog>
+
         ${state.toastMessage ? `<div class="toast-banner no-print">${state.toastMessage}</div>` : ''}
       </div>
     `;
 
     bindEvents(deck, selectedCard);
+  }
+
+  function openCardZoomModal(card: GameCard): void {
+    const dialog = root.querySelector<HTMLDialogElement>('#card-zoom-dialog');
+    if (!dialog) return;
+    dialog.innerHTML = renderCardModalContentHtml(card);
+    if (typeof dialog.showModal === 'function' && !dialog.open) {
+      dialog.showModal();
+    }
   }
 
   function bindEvents(deck: ReturnType<typeof loadThemeWithOverrides>, selectedCard: GameCard): void {
@@ -214,6 +225,46 @@ export function mountSinaleiroApp(root: HTMLElement): void {
       });
     });
 
+    // 2b. Modal Zoom Dialog fallback for browsers without native closedby="any" & explicit zoom triggers
+    const zoomDialog = root.querySelector<HTMLDialogElement>('#card-zoom-dialog');
+    if (
+      zoomDialog &&
+      typeof HTMLDialogElement !== 'undefined' &&
+      !('closedBy' in HTMLDialogElement.prototype)
+    ) {
+      const isOutsideDialog = (e: PointerEvent, dlg: HTMLDialogElement): boolean => {
+        const r = dlg.getBoundingClientRect();
+        return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+      };
+      let pressedOutside = false;
+      zoomDialog.addEventListener('pointerdown', (e) => {
+        pressedOutside = isOutsideDialog(e, zoomDialog);
+      });
+      zoomDialog.addEventListener('pointerup', (e) => {
+        if (pressedOutside && isOutsideDialog(e, zoomDialog)) {
+          zoomDialog.close();
+        }
+      });
+    }
+
+    root.querySelectorAll<HTMLElement>('[data-zoom-card-id]').forEach((el) => {
+      el.addEventListener('click', () => {
+        const cardId = el.dataset.zoomCardId;
+        const found = deck.cards.find((c) => c.id === cardId);
+        if (found) openCardZoomModal(found);
+      });
+    });
+
+    if (state.activeTab === 'quickstart' || state.activeTab === 'playtest') {
+      root.querySelectorAll<HTMLElement>('.mtg-card[data-card-id]').forEach((cardEl) => {
+        cardEl.addEventListener('click', () => {
+          const cardId = cardEl.dataset.cardId;
+          const found = deck.cards.find((c) => c.id === cardId);
+          if (found) openCardZoomModal(found);
+        });
+      });
+    }
+
     // 3. Studio Gallery Events
     if (state.activeTab === 'studio') {
       root.querySelectorAll<HTMLButtonElement>('[data-suit-filter]').forEach((pill) => {
@@ -228,7 +279,11 @@ export function mountSinaleiroApp(root: HTMLElement): void {
         .forEach((cardEl) => {
           cardEl.addEventListener('click', () => {
             const cardId = cardEl.dataset.cardId;
-            if (cardId) {
+            if (!cardId) return;
+            if (cardId === state.selectedCardId) {
+              const found = deck.cards.find((c) => c.id === cardId);
+              if (found) openCardZoomModal(found);
+            } else {
               state.selectedCardId = cardId;
               render();
             }

@@ -108,7 +108,7 @@ export function renderMagicCardHtml(card: GameCard, options: RenderCardOptions =
   }
 
   return `
-    <article class="${classes}" data-card-id="${escapeHtml(card.id)}">
+    <article class="${classes}" data-card-id="${escapeHtml(card.id)}" title="Clique para selecionar ou ampliar a carta">
       <header class="mtg-titlebar">
         <span class="mtg-card-title">${escapeHtml(card.title)}</span>
         <span class="mtg-mana-pip">${escapeHtml(card.playingCardCode)}</span>
@@ -123,5 +123,93 @@ export function renderMagicCardHtml(card: GameCard, options: RenderCardOptions =
         <span>${String(card.collectorNumber).padStart(2, '0')}/54 · 63×88mm</span>
       </footer>
     </article>
+  `;
+}
+
+export function renderCardModalContentHtml(card: GameCard): string {
+  const isFigure =
+    card.kind === 'archetype_king' || card.kind === 'trump_queen' || card.kind === 'scar_jack';
+
+  let detailBlocksHtml = '';
+  if (isFigure) {
+    const roleTitle =
+      card.kind === 'archetype_king'
+        ? 'Carta de Bolso 1/3 · Rei (K) — Seu Arquétipo'
+        : card.kind === 'trump_queen'
+          ? 'Carta de Bolso 2/3 · Dama (Q) — Seu Trunfo Virável (⟳)'
+          : 'Carta de Bolso 3/3 · Valete (J) — Sua Cicatriz e Tabu';
+
+    const label1 =
+      card.kind === 'archetype_king'
+        ? 'Como interpretar seu personagem hoje (Passiva na Vida Real)'
+        : card.kind === 'trump_queen'
+          ? 'O que acontece quando você gira esta carta 90° (⟳ Virar / Tap)'
+          : 'Quando esta Cicatriz é revelada (Gatilho de Entrada)';
+
+    const label2 =
+      card.kind === 'archetype_king'
+        ? 'Sua vantagem especial (Sinergia quando sai uma carta do seu naipe)'
+        : card.kind === 'trump_queen'
+          ? 'Como recuperar este recurso (Desvirar / Recarga)'
+          : 'Restrição que você deve cumprir na rotina (Tabu na Vida Real)';
+
+    detailBlocksHtml = `
+      <div class="zoom-reading-section">
+        <div class="zoom-section-badge">${escapeHtml(roleTitle)}</div>
+        <div class="zoom-detail-box">
+          <h4>${escapeHtml(label1)}</h4>
+          <p>${escapeHtml(card.figurePassiveOrRule ?? '')}</p>
+        </div>
+        <div class="zoom-detail-box">
+          <h4>${escapeHtml(label2)}</h4>
+          <p>${escapeHtml(card.figureSpecialOrTaboo ?? '')}</p>
+        </div>
+        <blockquote class="zoom-flavor">"${escapeHtml(card.flavorText)}"</blockquote>
+      </div>
+    `;
+  } else {
+    detailBlocksHtml = `
+      <div class="zoom-reading-section">
+        <div class="zoom-detail-box zoom-box-vigia">
+          <div class="zoom-role-kicker">Se você tirou esta carta do TOPO (☀ Vigia)</div>
+          <h4>1º Observe este sinal no mundo real:</h4>
+          <p class="zoom-trigger-text">👁 ${escapeHtml(card.topWatcherTrigger ?? '')}</p>
+          <h4>2º O que acontece na história (conte ao parceiro ou registre no diário):</h4>
+          <p>${escapeHtml(card.topWatcherEvent ?? '')}</p>
+        </div>
+
+        <div class="zoom-detail-box zoom-box-eco">
+          <div class="zoom-role-kicker">Se você tirou esta carta do FUNDO (☾ Eco)</div>
+          <h4>1º O que você deve fazer na prática para responder:</h4>
+          <p class="zoom-trigger-text">⚡ ${escapeHtml(card.bottomEchoPrompt ?? '')}</p>
+          <h4>2º Como resolver na regra (Sucesso ou Custo):</h4>
+          <p>${escapeHtml(card.bottomEchoEffect ?? '')}</p>
+        </div>
+
+        <blockquote class="zoom-flavor">"${escapeHtml(card.flavorText)}"</blockquote>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="zoom-modal-inner">
+      <header class="zoom-modal-header">
+        <div>
+          <span class="zoom-card-code">${escapeHtml(card.playingCardCode)} · Carta #${String(card.collectorNumber).padStart(2, '0')} de 54</span>
+          <h2 id="zoom-dialog-title">${escapeHtml(card.title)}</h2>
+          <p class="subtitle">${escapeHtml(card.typeLine)}</p>
+        </div>
+        <form method="dialog">
+          <button type="submit" class="btn-secondary" autofocus>Fechar (Esc)</button>
+        </form>
+      </header>
+
+      <div class="zoom-modal-body">
+        <div class="zoom-card-Visual">
+          ${renderMagicCardHtml(card)}
+        </div>
+        ${detailBlocksHtml}
+      </div>
+    </div>
   `;
 }
