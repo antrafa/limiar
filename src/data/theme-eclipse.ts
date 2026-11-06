@@ -95,7 +95,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
       jack: {
         title: 'Esquecimento',
         artGlyph: '🌫️',
-        artSubtitle: 'Nomes eDatas Desbotando das Fotografias',
+        artSubtitle: 'Nomes e Datas Desbotando das Fotografias',
         entryTrigger:
           'Gatilho de Entrada: Revele ao falhar numa carta de ♥ Copas ou deixar uma pergunta do parceiro sem resposta emocional.',
         realLifeTaboo:
@@ -581,7 +581,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
       },
       {
         rank: '8',
-        title: 'Prisma queDecompõe a Luz Negra',
+        title: 'Prisma que Decompõe a Luz Negra',
         artGlyph: '💎',
         artSubtitle: 'Sete Cores que Nunca Existiram Antes',
         topWatcherTrigger:

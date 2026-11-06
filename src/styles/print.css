@@ -12,8 +12,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: rgba(15, 23, 42, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
   padding: 18px 22px;
 }
@@ -34,13 +34,14 @@
 
 .print-a4-sheet {
   background: #ffffff;
-  color: #0f172a;
+  color: #18181b;
   width: 210mm;
   min-height: 297mm;
   padding: 8mm 6mm;
   box-sizing: border-box;
   border-radius: 6px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   align-items: center;

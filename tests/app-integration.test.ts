@@ -2,8 +2,20 @@ import { describe, expect, it } from 'vitest';
 import { getDefaultPlaySession, loadThemeWithOverrides } from '../src/core/storage';
 import { renderStudioGalleryHtml } from '../src/components/studio-view';
 import { renderPlaytestTableHtml } from '../src/components/playtest-view';
+import { renderQuickstartGuideHtml } from '../src/components/quickstart-view';
 
 describe('Studio Gallery & Synchronized Playtest Table views', () => {
+  it('renders the Quickstart Guide ("Como Começar a Jogar") with step-by-step instructions and real turn example', () => {
+    const deck = loadThemeWithOverrides('zombies');
+    const html = renderQuickstartGuideHtml(deck, '2026-11-06');
+    expect(html).toContain('Como Começar a Jogar');
+    expect(html).toContain('1. Escolha seu Material');
+    expect(html).toContain('2. Separe seu Trio de Bolso');
+    expect(html).toContain('3. Combine o Ritmo e a Cifra');
+    expect(html).toContain('4. Exemplo Real de 1 Rodada');
+    expect(html).toContain('data-goto-tab="playtest"');
+  });
+
   it('renders the Studio Gallery with live editor form for the selected card', () => {
     const deck = loadThemeWithOverrides('zombies');
     const html = renderStudioGalleryHtml(deck, deck.cards[0], 'all');

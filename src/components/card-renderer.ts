@@ -12,29 +12,24 @@ export function escapeHtml(str: string): string {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 function buildProceduralSvgArt(card: GameCard): string {
   const paletteByTheme: Record<string, { bg1: string; bg2: string; stroke: string }> = {
-    zombies: { bg1: '#2b1616', bg2: '#0b0f12', stroke: '#ef4444' },
-    vampires: { bg1: '#2a0e24', bg2: '#09070d', stroke: '#e11d48' },
-    eclipse: { bg1: '#171b30', bg2: '#08090f', stroke: '#f59e0b' },
+    zombies: { bg1: '#f0ede6', bg2: '#e4e0d6', stroke: '#57534e' },
+    vampires: { bg1: '#f2eceb', bg2: '#e5dddc', stroke: '#7f1d1d' },
+    eclipse: { bg1: '#eceef2', bg2: '#dfe2e8', stroke: '#334155' },
   };
   const pal = paletteByTheme[card.themeId] ?? paletteByTheme.zombies;
 
   return `
-    <div class="mtg-art-box" style="background: radial-gradient(circle at 50% 38%, ${pal.bg1} 0%, ${pal.bg2} 92%);">
+    <div class="mtg-art-box" style="background: linear-gradient(180deg, ${pal.bg1} 0%, ${pal.bg2} 100%);">
       <svg class="mtg-art-svg" viewBox="0 0 200 84" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs>
-          <radialGradient id="glow-${escapeHtml(card.id)}" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="${pal.stroke}" stop-opacity="0.35"/>
-            <stop offset="100%" stop-color="${pal.stroke}" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <circle cx="100" cy="42" r="38" fill="url(#glow-${escapeHtml(card.id)})" />
-        <circle cx="100" cy="42" r="28" fill="none" stroke="${pal.stroke}" stroke-opacity="0.35" stroke-dasharray="3 3" />
-        <path d="M 16 42 L 62 42 M 138 42 L 184 42" stroke="${pal.stroke}" stroke-opacity="0.28" stroke-width="1" />
+        <circle cx="100" cy="42" r="32" fill="none" stroke="${pal.stroke}" stroke-opacity="0.22" stroke-width="1" />
+        <circle cx="100" cy="42" r="24" fill="none" stroke="${pal.stroke}" stroke-opacity="0.32" stroke-dasharray="2 3" />
+        <path d="M 18 42 L 66 42 M 134 42 L 182 42" stroke="${pal.stroke}" stroke-opacity="0.28" stroke-width="1" />
       </svg>
       <div class="mtg-art-overlay">
         <span class="mtg-art-glyph">${escapeHtml(card.artGlyph)}</span>

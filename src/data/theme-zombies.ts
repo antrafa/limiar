@@ -611,7 +611,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
       },
       {
         rank: '10',
-        title: 'Helicóptero deCarga no Heliponto',
+        title: 'Helicóptero de Carga no Heliponto',
         artGlyph: '🚁',
         artSubtitle: 'Chave na Ignição e Tanque pela Metade',
         topWatcherTrigger:
@@ -675,7 +675,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         rank: '4',
         title: 'Laboratório Clandestino do Paciente Zero',
         artGlyph: '🧪',
-        artSubtitle: 'Gaiolas Abertas eProntuários Queimados',
+        artSubtitle: 'Gaiolas Abertas e Prontuários Queimados',
         topWatcherTrigger:
           'Ao ver garrafas de vidro, produtos de limpeza, cozinha ou telas de computador.',
         topWatcherEvent:

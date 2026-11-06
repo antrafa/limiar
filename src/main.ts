@@ -6,6 +6,7 @@ import { renderMagicCardHtml } from './components/card-renderer';
 import { renderOracleGuideHtml } from './components/oracle-view';
 import { renderPlaytestTableHtml } from './components/playtest-view';
 import { type PrintFilterMode, renderPrintSheetsHtml } from './components/print-view';
+import { renderQuickstartGuideHtml } from './components/quickstart-view';
 import { renderStudioGalleryHtml } from './components/studio-view';
 import { applyDailyCipher } from './core/cipher';
 import {
@@ -22,7 +23,7 @@ import { splitPocketAndWorld } from './data/engine-deck';
 import { ALL_THEME_IDS, THEMES } from './data/index';
 import type { GameCard, PlaySessionState, Suit, ThemeId } from './types/card';
 
-export type StudioTab = 'studio' | 'playtest' | 'print' | 'oracle';
+export type StudioTab = 'quickstart' | 'studio' | 'playtest' | 'print' | 'oracle';
 
 interface AppState {
   activeTab: StudioTab;
@@ -42,7 +43,7 @@ export function mountSinaleiroApp(root: HTMLElement): void {
   const initialDeck = loadThemeWithOverrides(initialThemeId);
 
   const state: AppState = {
-    activeTab: 'studio',
+    activeTab: 'quickstart',
     activeThemeId: initialThemeId,
     suitFilter: 'all',
     printFilter: 'all',
@@ -127,7 +128,9 @@ export function mountSinaleiroApp(root: HTMLElement): void {
     }).join('');
 
     let tabBodyHtml = '';
-    if (state.activeTab === 'studio') {
+    if (state.activeTab === 'quickstart') {
+      tabBodyHtml = renderQuickstartGuideHtml(deck, state.session.dateSeed);
+    } else if (state.activeTab === 'studio') {
       tabBodyHtml = renderStudioGalleryHtml(deck, selectedCard, state.suitFilter);
     } else if (state.activeTab === 'playtest') {
       tabBodyHtml = renderPlaytestTableHtml(deck, state.session);
@@ -141,31 +144,34 @@ export function mountSinaleiroApp(root: HTMLElement): void {
       <div class="app-shell">
         <header class="studio-topbar no-print">
           <div class="brand-block">
-            <div class="brand-emblem" aria-hidden="true">🎴</div>
+            <div class="brand-emblem" aria-hidden="true">♠</div>
             <div>
-              <h1 class="brand-title">SINALEIRO</h1>
-              <div class="brand-subtitle">RPG de Vida Real · Baralho Sincronizado 54 Cartas · Formato Magic 63×88mm</div>
+              <h1 class="brand-title">Sinaleiro</h1>
+              <div class="brand-subtitle">RPG de Vida Real · Baralho de 54 Cartas · Formato 63×88mm</div>
             </div>
           </div>
 
           <div class="theme-switcher-group">
-            <span class="theme-switcher-label">Tema do Baralho:</span>
+            <span class="theme-switcher-label">Tema:</span>
             ${themeButtonsHtml}
           </div>
         </header>
 
         <nav class="studio-tabs-nav no-print" aria-label="Módulos do Estúdio">
-          <button type="button" class="tab-nav-btn ${state.activeTab === 'studio' ? 'is-active' : ''}" data-tab="studio">
-            🎨 Galeria &amp; Editor
+          <button type="button" class="tab-nav-btn ${state.activeTab === 'quickstart' ? 'is-active' : ''}" data-tab="quickstart">
+            Como Começar
           </button>
           <button type="button" class="tab-nav-btn ${state.activeTab === 'playtest' ? 'is-active' : ''}" data-tab="playtest">
-            🕯️ Mesa &amp; Cifra do Dia
+            Mesa &amp; Cifra do Dia
           </button>
-          <button type="button" class="tab-nav-btn ${state.activeTab === 'print' ? 'is-active' : ''}" data-tab="print">
-            🖨️ Print &amp; Play A4 63×88mm
+          <button type="button" class="tab-nav-btn ${state.activeTab === 'studio' ? 'is-active' : ''}" data-tab="studio">
+            Galeria &amp; Editor (54 Cartas)
           </button>
           <button type="button" class="tab-nav-btn ${state.activeTab === 'oracle' ? 'is-active' : ''}" data-tab="oracle">
-            📖 Guia de Oráculo
+            Guia de Oráculo
+          </button>
+          <button type="button" class="tab-nav-btn ${state.activeTab === 'print' ? 'is-active' : ''}" data-tab="print">
+            Print &amp; Play A4
           </button>
         </nav>
 
@@ -198,10 +204,10 @@ export function mountSinaleiroApp(root: HTMLElement): void {
       });
     });
 
-    // 2. Navigation Tabs
-    root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((btn) => {
+    // 2. Navigation Tabs & Quickstart CTA shortcuts
+    root.querySelectorAll<HTMLButtonElement>('[data-tab], [data-goto-tab]').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const tab = btn.dataset.tab as StudioTab;
+        const tab = (btn.dataset.tab ?? btn.dataset.gotoTab) as StudioTab;
         if (!tab) return;
         state.activeTab = tab;
         render();
