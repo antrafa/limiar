@@ -178,7 +178,7 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
                 <strong>A resposta do parceiro:</strong> Ao receber seu aviso, o Jogador B age como <strong>☾ Eco</strong>: ele puxa a última carta de baixo do baralho dele (<strong>${escapeHtml(sampleBottomCard.playingCardCode)} — ${escapeHtml(sampleBottomCard.title)}</strong>) e lê apenas a caixa <strong>☾ FUNDO</strong>. Para ajudar você na história, ele cumpre na vida real a tarefa: <em>"${escapeHtml(sampleBottomCard.bottomEchoPrompt ?? '')}"</em>.
               </li>
               <li>
-                <strong>Desfecho e troca de papéis:</strong> Vocês conferem a resolução: <em>"${escapeHtml(sampleBottomCard.bottomEchoEffect ?? '')}"</em>. Se alguém não pôde cumprir a interação ou a carta exigiu um custo do naipe, basta girar a <strong>Dama (Q ⟳)</strong> em 90° no bolso ou virar o <strong>Valete (J)</strong> para cima. No próximo horário (ex.: às 15h ou no dia seguinte), o Jogador B será o Vigia (puxando a 2ª carta do topo) e você será o Eco (puxando a penúltima do fundo)!
+                <strong>Desfecho, Trio de Bolso e troca de papéis:</strong> Vocês conferem a resolução: <em>"${escapeHtml(sampleBottomCard.bottomEchoEffect ?? '')}"</em>. Se a carta for do naipe do seu <strong>Rei (K)</strong>, você ganha o bônus dele na hora. Se alguém não pôde cumprir a interação na rotina real, pode girar a <strong>Dama (Q ⟳)</strong> em 90° como salva-vidas ou, se a Dama já estiver gasta, virar o <strong>Valete (J)</strong> para cima e assumir seu Tabu (veja o detalhamento logo abaixo!). No próximo horário, o Jogador B será o Vigia e você será o Eco!
               </li>
             </ol>
           </article>
@@ -200,6 +200,80 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
               </li>
             </ol>
           </article>
+        </div>
+
+        <div class="walkthrough-figures-explainer">
+          <div class="figures-explainer-header">
+            <h4>Como o Rei (K), a Dama (Q) e o Valete (J) entram em ação nessa rodada?</h4>
+            <p class="subtitle">
+              Enquanto as cartas de cima e de baixo contam o que acontece no mundo, as <strong>3 Figuras do seu Naipe</strong> ficam sempre com você e funcionam como sua ficha viva de personagem, seu equipamento de emergência e sua barra de ferimentos (clique em qualquer uma para ampliar):
+            </p>
+          </div>
+
+          <div class="figures-explainer-grid">
+            <article class="figure-role-card">
+              <div class="figure-role-badge badge-king">Rei (K) · Sempre Aberto</div>
+              <h5>Qual a importância do Rei (K)?</h5>
+              <p class="figure-role-lead">
+                O Rei é a sua <strong>identidade e bússola durante todo o dia</strong>. Ele nunca é descartado e tem duas funções práticas:
+              </p>
+              <ul class="figure-role-points">
+                <li>
+                  <strong>1. Hábito na Vida Real (Passiva):</strong> Ele dá uma pequena atitude real para você praticar ao longo do dia, mantendo você no clima do personagem mesmo quando não está sacando cartas.
+                  <span class="figure-example-quote">Exemplo (${escapeHtml(sampleKing.playingCardCode)} — ${escapeHtml(sampleKing.title)}): "${escapeHtml(sampleKing.figurePassiveOrRule ?? '')}"</span>
+                </li>
+                <li>
+                  <strong>2. Vantagem Automática de Naipe (Sinergia):</strong> Toda vez que a carta sacada na rodada for do <strong>mesmo naipe do seu Rei</strong>, seu personagem domina a situação e ativa um bônus imediato!
+                  <span class="figure-example-quote">Exemplo: "${escapeHtml(sampleKing.figureSpecialOrTaboo ?? '')}"</span>
+                </li>
+              </ul>
+              <div class="figure-card-mini-preview">
+                ${renderMagicCardHtml(sampleKing, { interactive: true })}
+              </div>
+            </article>
+
+            <article class="figure-role-card">
+              <div class="figure-role-badge badge-queen">Dama (Q ⟳) · Começa em Pé</div>
+              <h5>Qual é o efeito da Dama (Q)?</h5>
+              <p class="figure-role-lead">
+                A Dama é o seu <strong>Trunfo de Emergência (salva-vidas)</strong>. Na vida real, imprevistos acontecem: às vezes você está ocupado e não consegue cumprir a tarefa do Eco, ou a carta exige um custo pesado demais.
+              </p>
+              <ul class="figure-role-points">
+                <li>
+                  <strong>1. Virar em 90° para Salvar a Rodada (⟳ Tap):</strong> Quando não puder cumprir o desafio da carta (ou quiser anular um perigo), você <strong>deita a sua Dama em 90°</strong> e ativa o efeito especial dela. A rodada é vencida na hora, sem punição!
+                  <span class="figure-example-quote">Exemplo (${escapeHtml(sampleQueen.playingCardCode)} — ${escapeHtml(sampleQueen.title)}): "${escapeHtml(sampleQueen.figurePassiveOrRule ?? '')}"</span>
+                </li>
+                <li>
+                  <strong>2. Recarregar na Rotina (Untap):</strong> Enquanto estiver deitada, a Dama está "gasta" e não pode ser usada de novo. Para colocá-la em pé novamente, basta cumprir na vida real a condição de recarga dela:
+                  <span class="figure-example-quote">Exemplo: "${escapeHtml(sampleQueen.figureSpecialOrTaboo ?? '')}"</span>
+                </li>
+              </ul>
+              <div class="figure-card-mini-preview">
+                ${renderMagicCardHtml(sampleQueen, { interactive: true })}
+              </div>
+            </article>
+
+            <article class="figure-role-card">
+              <div class="figure-role-badge badge-jack">Valete (J) · Começa Virado para Baixo</div>
+              <h5>Qual é o efeito do Valete (J)?</h5>
+              <p class="figure-role-lead">
+                O Valete é a sua <strong>Cicatriz (penalidade)</strong>. Ele começa <strong>fechado (inativo)</strong>, e o seu objetivo é evitar que ele vire para cima!
+              </p>
+              <ul class="figure-role-points">
+                <li>
+                  <strong>1. Quando ele entra em jogo:</strong> Se você falhar na missão de uma rodada (ou recusar pagar o custo da carta) e <strong>sua Dama (Q) já estiver gasta/deitada</strong>, você é obrigado a revelar seu Valete para cima.
+                  <span class="figure-example-quote">Gatilho (${escapeHtml(sampleJack.playingCardCode)} — ${escapeHtml(sampleJack.title)}): "${escapeHtml(sampleJack.figurePassiveOrRule ?? '')}"</span>
+                </li>
+                <li>
+                  <strong>2. O Tabu na Vida Real:</strong> Enquanto o Valete estiver virado para cima, seu personagem está ferido ou traumatizado. Você passa a ter uma <strong>proibição real de fala ou comportamento</strong> em todas as interações com o parceiro (ou no seu diário solo)! Se você esquecer e quebrar o Tabu, ou se falhar de novo com o Valete já aberto, o Relógio da dupla perde <strong>-1 ponto</strong>.
+                  <span class="figure-example-quote">Tabu Real: "${escapeHtml(sampleJack.figureSpecialOrTaboo ?? '')}"</span>
+                </li>
+              </ul>
+              <div class="figure-card-mini-preview">
+                ${renderMagicCardHtml(sampleJack, { interactive: true })}
+              </div>
+            </article>
+          </div>
         </div>
       </section>
     </div>

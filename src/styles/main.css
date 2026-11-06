@@ -1040,6 +1040,111 @@ button:focus-visible {
   color: var(--text-primary);
 }
 
+/* Pocket Figures (K, Q, J) Practical Explainer */
+.walkthrough-figures-explainer {
+  margin-top: 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.figures-explainer-header h4 {
+  font-size: 1.12rem;
+  margin-bottom: 4px;
+}
+
+.figures-explainer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.figure-role-card {
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.figure-role-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+}
+
+.badge-king {
+  background-color: var(--accent-vigia-bg);
+  color: var(--accent-vigia);
+  border-color: #d97706;
+}
+
+.badge-queen {
+  background-color: var(--accent-eco-bg);
+  color: var(--accent-eco);
+  border-color: #0284c7;
+}
+
+.badge-jack {
+  background-color: var(--accent-burgundy-bg);
+  color: var(--accent-burgundy);
+  border-color: #b91c1c;
+}
+
+.figure-role-card h5 {
+  margin: 0;
+  font-size: 1.02rem;
+  color: var(--text-primary);
+}
+
+.figure-role-lead {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.figure-role-points {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.figure-role-points strong {
+  color: var(--text-primary);
+}
+
+.figure-example-quote {
+  display: block;
+  margin-top: 5px;
+  padding: 6px 10px;
+  background-color: var(--bg-surface);
+  border-left: 3px solid var(--border-strong);
+  border-radius: 4px;
+  font-size: 0.81rem;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+.figure-card-mini-preview {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-subtle);
+}
+
 /* Native Modal Dialog (<dialog closedby="any">) */
 dialog:modal {
   overscroll-behavior: contain;

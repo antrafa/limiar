@@ -15,6 +15,10 @@ describe('Studio Gallery & Synchronized Playtest Table views', () => {
     expect(html).toContain('4. Exemplo Real de 1 Rodada');
     expect(html).toContain('Como essa rodada acontece na vida real (Em Dupla)');
     expect(html).toContain('E como funciona no Modo Solo');
+    expect(html).toContain('Como o Rei (K), a Dama (Q) e o Valete (J) entram em ação');
+    expect(html).toContain('Qual a importância do Rei (K)?');
+    expect(html).toContain('Qual é o efeito da Dama (Q)?');
+    expect(html).toContain('Qual é o efeito do Valete (J)?');
     expect(html).toContain('data-goto-tab="playtest"');
   });
 
