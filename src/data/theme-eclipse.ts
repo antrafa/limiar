@@ -57,7 +57,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Dissipe instantaneamente uma anomalia gravitacional ou ameaça de ♠/♣, iluminando o caminho seguro.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao recalibrar um instrumento de ♦ Ouros ou quando estiverem sob a mesma luz.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou quando você e seu parceiro se encontrarem pessoalmente no mesmo ambiente iluminado.',
         flavorText: 'Dentro do bulbo de vidro sopra o último suspiro de uma estrela que morreu há mil anos.',
       },
       jack: {
@@ -89,7 +89,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Rebobine os últimos minutos da cena: anule uma falha recém-ocorrida ou recupere uma memória apagada pelo Valete (J).',
         rechargeRule:
-          'Recarga (Untap): Desvire ao resolver uma carta de ♦ Ouros ou trocar um áudio de voz com o parceiro.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou ao trocar um áudio de voz com o parceiro.',
         flavorText: 'Lado A: o som das ondas em janeiro. Lado B: nossas risadas antes de o céu parar.',
       },
       jack: {
@@ -121,7 +121,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Ignore qualquer distância ou barreira espacial do evento e conecte sua posição diretamente à do parceiro.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao completar uma coordenada de ♦ Ouros ou alinhar dois objetos em cima da mesa.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou ao alinhar dois objetos lado a lado em cima da mesa.',
         flavorText: 'O norte magnético morreu na terça-feira; agora a agulha só aponta para o calor da sua mão.',
       },
       jack: {
@@ -153,7 +153,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Congele o avanço do cataclismo por um turno inteiro, anulando qualquer custo de ♣ ou do Coringa Escuro.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao resolver uma carta de ♦ Ouros ou quando o relógio real marcar horas ou meias-horas exatas.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou quando o relógio real marcar horas ou meias-horas exatas (ex.: 14:00 ou 14:30).',
         flavorText: 'Se os ponteiros não se movem, a última hora nunca termina de chegar.',
       },
       jack: {

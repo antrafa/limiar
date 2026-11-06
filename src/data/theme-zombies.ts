@@ -57,7 +57,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Cancele imediatamente uma emboscada ou falha de comunicação. Você avisa o parceiro segundos antes do impacto.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao cumprir um desafio de ♦ Ouros ou ao encontrar o parceiro pessoalmente.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou ao encontrar o parceiro pessoalmente.',
         flavorText: 'Chiado estático, três cliques no botão de transmissão: o código para "ainda estou respirando".',
       },
       jack: {
@@ -89,7 +89,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Reverta a ativação de um Valete (J) de qualquer jogador ou converta um sacrifício em sucesso pleno.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao cumprir um desafio de ♦ Ouros ou quando dividirem uma refeição ou bebida real.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou quando dividirem uma refeição ou bebida real.',
         flavorText: 'Líquido âmbar que queima como gelo nas veias e compra mais vinte e quatro horas de humanidade.',
       },
       jack: {
@@ -121,7 +121,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Ignore o requisito de ambiente de qualquer carta de Jornada e substitua por um objeto que esteja ao alcance da sua mão.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao abrir uma porta trancada, encontrar um suprimento de ♦ Ouros ou reencontrar o parceiro.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦), abrir uma porta trancada ou reencontrar o parceiro.',
         flavorText: 'Nenhuma grade do exército resiste a três minutos de alavanca silenciosa.',
       },
       jack: {
@@ -153,7 +153,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Espie a próxima carta do Topo ou do Fundo do baralho antes de decidir quem assumirá o turno, ou anule um pânico de ♣.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao concluir um desafio de ♦ Ouros ou permanecer em silêncio absoluto com o parceiro por um minuto.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou permanecer em silêncio absoluto com o parceiro por um minuto.',
         flavorText: 'Feche os olhos e sinta a vibração no asfalto: trezentos passos arrastados dobrando a esquina.',
       },
       jack: {

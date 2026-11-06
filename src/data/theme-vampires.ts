@@ -57,7 +57,7 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Anule um ataque da Segunda Inquisição ou vença um duelo de honra instantaneamente em favor da dupla.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao selar um contrato de ♦ Ouros ou encontrar seu parceiro de coterie pessoalmente.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou ao encontrar seu parceiro pessoalmente.',
         flavorText: 'Queima a mão de quem a empunha, mas reduz um ancião a cinzas antes que ele pronuncie uma maldição.',
       },
       jack: {
@@ -89,7 +89,7 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Apague a memória de qualquer testemunha mortal ou converta uma falha social em um favor devoto.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao cumprir uma carta de ♦ Ouros ou quando brindarem com uma bebida vermelha ou escura.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou quando brindarem com uma bebida vermelha ou escura.',
         flavorText: 'Olhe para a chama do meu isqueiro. Quando ela apagar, você nunca esteve neste beco.',
       },
       jack: {
@@ -121,7 +121,7 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Beba o selo ancestral para curar instantaneamente um Valete (J) ativo ou realizar uma façanha sobrenatural.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao concluir qualquer negociação de ♦ Ouros ou receber um presente/objeto real do parceiro.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou ao entregar/receber um objeto real nas mãos do parceiro.',
         flavorText: 'Denso como licor de romã, guardado desde a queda de Constantinopla.',
       },
       jack: {
@@ -153,7 +153,7 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         tapEffect:
           'Virar (⟳ Tap): Torne a dupla completamente invisível a olhos mortais, câmeras e feitiços de rastreamento por toda a cena.',
         rechargeRule:
-          'Recarga (Untap): Desvire ao cumprir uma carta de ♦ Ouros ou enviar uma mensagem a partir de um ambiente totalmente à meia-luz.',
+          'Recarga (Untap): Desvire ao cumprir qualquer carta do naipe de ♦ Ouros (A♦ a 10♦) ou enviar uma mensagem a partir de um ambiente totalmente à meia-luz.',
         flavorText: 'A sombra não é a ausência de luz; é uma porta que só abre para quem perdeu o reflexo.',
       },
       jack: {
