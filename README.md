@@ -2,6 +2,8 @@
 
 **Sinaleiro** é um RPG de cartas *pervasivo* (jogado misturado à rotina da vida real, presencialmente ou à distância) projetado para um baralho de **54 cartas** (52 tradicionais + 2 Coringas) no formato clássico de Magic/Poker (**63mm × 88mm**), acompanhado de um **Estúdio Web, Mesa Digital Sincronizada, Guia de Oráculo e Gerador Print & Play A4**.
 
+> 📖 **Quer o livro completo em um único arquivo?** Consulte [**LIVRO_COMPLETO_SINALEIRO.md**](./LIVRO_COMPLETO_SINALEIRO.md) — com todas as regras passo a passo, exemplos na vida real (Em Dupla e Solo) e os **3 Oráculos Completos (162 cartas)**.
+
 ---
 
 ## Como o Jogo Funciona ("Sinaleiro & Relógio")
