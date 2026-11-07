@@ -1,38 +1,40 @@
-# Sinaleiro — RPG de Cartas na Vida Real (63×88mm)
+# LIMIAR — O Jogo que Ultrapassa a Mesa (Edição Revisada 1.1 · 63×88mm)
 
-**Sinaleiro** é um RPG de cartas *pervasivo* (jogado misturado à rotina da vida real, presencialmente ou à distância) projetado para um baralho de **54 cartas** (52 tradicionais + 2 Coringas) no formato clássico de Magic/Poker (**63mm × 88mm**), acompanhado de um **Estúdio Web, Mesa Digital Sincronizada, Guia de Oráculo e Gerador Print & Play A4**.
+![Limiar — O Jogo que Ultrapassa a Mesa](./public/limiar-banner.png)
 
-> 📖 **Quer o livro completo em um único arquivo?** Consulte [**LIVRO_COMPLETO_SINALEIRO.md**](./LIVRO_COMPLETO_SINALEIRO.md) — com todas as regras passo a passo, exemplos na vida real (Em Dupla e Solo) e os **3 Oráculos Completos (162 cartas)**.
+**Limiar** (*anteriormente nome de trabalho: Sinaleiro*) é um RPG narrativo cooperativo na vida real (*pervasive tabletop card game*) em que sinais do cotidiano disparam cenas de uma aventura compartilhada. Um jogador observa e narra (**☀ Vigia**); o outro reage (**☾ Eco**). A história continua entre uma rodada e outra, dentro do ritmo normal da vida — usando qualquer baralho de **54 cartas** (52 tradicionais + 2 Coringas) ou cartas impressas no tamanho padrão de Magic/Poker (**63mm × 88mm**), acompanhado de um **Estúdio Web, Mesa Digital Sincronizada, Guia de Oráculo e Gerador Print & Play A4**.
+
+> 📖 **Quer o manual completo (Edição Revisada 1.1) em um único arquivo?** Consulte [**LIVRO_COMPLETO_LIMIAR.md**](./LIVRO_COMPLETO_LIMIAR.md) (ou [**LIVRO_COMPLETO_SINALEIRO.md**](./LIVRO_COMPLETO_SINALEIRO.md)) — com todas as regras revisadas 1.1, ordem de prioridade de 7 passos, segurança na vida real, marcos de campanha e os **3 Oráculos Completos (162 cartas)**.
 
 ---
 
-## Como o Jogo Funciona ("Sinaleiro & Relógio")
+## Como o Jogo Funciona (Edição Revisada 1.1)
 
 O baralho de 54 cartas é dividido antes da partida em duas partes:
 
 ### 1. Seu Trio de Bolso (12 Figuras: `K`, `Q`, `J`)
 Cada jogador escolhe um naipe que define sua vocação (`♠ Espadas`, `♥ Copas`, `♦ Ouros` ou `♣ Paus`) e separa as **3 Figuras daquele naipe** para levar consigo:
-- **Rei (`K`) — O Arquétipo (Sempre aberto):** É a sua identidade no jogo. Traz um **Hábito Passivo na Vida Real** para manter durante o dia e uma **Sinergia de Naipe** (vantagem automática sempre que sair uma carta do seu naipe).
-- **Dama (`Q ⟳`) — O Trunfo (Começa em pé):** É o seu recurso de emergência. Se você não puder cumprir a tarefa de uma rodada na vida real ou quiser cancelar um perigo/custo, **vire sua Dama em 90° (`⟳ Tap`)** para ativar seu efeito especial e vencer a cena sem punição. Ela volta a ficar em pé (`Untap`) quando você cumprir sua regra de recarga na rotina.
-- **Valete (`J`) — A Cicatriz (Começa virado para baixo):** Se você falhar numa rodada e sua Dama já estiver gasta (deitada), você revela seu Valete. Enquanto ele estiver aberto, você carrega um **Tabu na Vida Real** (uma restrição real de fala ou comportamento nas interações). Se quebrar o Tabu ou falhar novamente com a Dama deitada e o Valete aberto, seu personagem entra em colapso na cena e precisa ser salvo pela Dama (`Q ⟳`) do parceiro.
+- **Rei (`K`) — Identidade (Sempre aberto):** Fica aberto durante toda a campanha. Oferece uma interpretação temática para a rotina (**convite narrativo, não obrigação**) e concede a **Sinergia de Naipe** descrita na carta.
+- **Dama (`Q ⟳`) — Proteção (Começa aberta e pronta):** Recurso individual e limitado. Gire-a 90° (`⟳ Tap`) para ativar seu efeito ou evitar uma consequência quando permitido. Uma Dama deitada está esgotada até ser recarregada — como regra-base, **cumprir com sucesso qualquer carta de `♦ Ouros` (de Ás a 10)** recarrega a Dama do jogador que realizou a ação.
+- **Valete (`J`) — Cicatriz e Colapso (Começa fechado):** Revelado ao sofrer uma falha grave sem Dama pronta (ou quando um efeito determinar). Quando aberto, ativa um **Tabu somente dentro das interações do jogo** até ser curado. Se uma nova falha exigir revelar/agravar um Valete já ativo enquanto sua Dama está esgotada, o personagem entra em **Colapso** (podendo ser salvo pela Dama pronta do parceiro em jogo cooperativo).
 
 ### 2. O Deck do Mundo (42 Cartas: `Ás` a `10` + 2 Coringas)
-As 40 cartas numéricas e os 2 Coringas (`★ Presságio da Luz` e `💀 Cataclismo`) formam o baralho de eventos.
+As 40 cartas numeradas e os 2 Coringas (`★ Coringa Claro` e `💀 Coringa Escuro`) formam o baralho de eventos.
 
-- **Sincronia Fria (Cifra do Dia `DD/MM`):** Quando dois jogadores estão longe um do outro, ambos ordenam o Deck do Mundo e aplicam um embaralhamento determinístico de 3 passos baseado no dia e mês atuais (ou usam a mesma data na aba **Mesa & Cifra do Dia**). Os dois baralhos ficam exatamente na mesma ordem sem precisar de mestre ou internet constante.
+- **Partida à Distância (Cifra do Dia `DD/MM`):** Sincroniza a ordem inicial de dois baralhos independentes em 3 passos (Ordem-base → Corte do Dia em 3 montes → Corte do Mês em 2 montes) sem precisar de aplicativo ou chamada de vídeo.
 - **Dupla Câmara (`☀ Topo · Vigia` vs. `☾ Fundo · Eco`):**
-  - **☀ Jogador A (Vigia):** Puxa a **1ª carta do TOPO** e lê apenas o bloco superior. Quando o **Gatilho Real** acontecer ao seu redor na rotina, ele narra o evento ao parceiro.
-  - **☾ Jogador B (Eco):** Puxa a **última carta do FUNDO** e lê apenas o bloco inferior. Ele realiza a **Interação Real** proposta para socorrer o Vigia e aplica o desfecho.
-  - Na rodada seguinte (próxima hora ou próximo turno do dia), os papéis se invertem.
-- **Modo Solo (Diário / Oráculo):** Um único jogador saca simultaneamente **1 carta do TOPO** (o gatilho e o evento do mundo) e **1 carta do FUNDO** (a reação prática que precisa cumprir e registrar em seu diário/notas de voz).
+  - **☀ Primeiro Papel — Vigia (Topo):** Retira a carta do topo do próprio baralho e lê apenas a coluna **☀ Topo**. Aguarda o gatilho por **até 2 horas** (ou usa um gatilho substituto simples e seguro; ou adia sem penalidade) e narra o evento ficcional ao parceiro.
+  - **☾ Segundo Papel — Eco (Fundo):** Retira a carta disponível no fundo do próprio baralho e lê apenas a coluna **☾ Fundo**. Aplica a reação sugerida à cena narrada pelo Vigia.
+  - **Ficção em 1º Lugar & Segurança:** Toda ação física (foto, áudio, toque, deslocamento) é opcional de ambientação e pode ser substituída por uma descrição ou escolha narrada. Qualquer jogador pode dizer **"pausa"** ou **"passo"** a qualquer momento sem penalidade.
+  - **Alternância:** Na rodada seguinte, os papéis se invertem.
 
 ---
 
-## Temas Inclusos (54 Cartas Completas em Português)
+## Três Universos Inclusos (162 Cartas em Português)
 
-1. **Zona de Quarentena (`zombies`):** Apocalipse Zumbi — Sobrevivência Urbana.
-2. **Sangue & Veludo (`vampires`):** Vampiros na Metrópole — Intriga Gótica e Sede.
-3. **Crônicas do Eclipse (`eclipse`):** Fantasia Sombria — Magia Antiga Infiltrada no Mundo Moderno.
+1. **Zona de Quarentena (`zombies`):** Apocalipse Zumbi — Sobrevivência Urbana (54 cartas).
+2. **Sangue & Néon (`vampires`):** Vampiros — Crônica da Noite Eterna (54 cartas).
+3. **O Último Eclipse (`eclipse`):** Fim do Mundo — Crônica da Coroa Solar (54 cartas).
 
 Todas as 54 cartas de cada tema podem ser editadas ao vivo no **Estúdio**, salvas automaticamente no navegador (`localStorage`) e exportadas/importadas em JSON.
 
@@ -40,7 +42,7 @@ Todas as 54 cartas de cada tema podem ser editadas ao vivo no **Estúdio**, salv
 
 ## Funcionalidades da Aplicação Web
 
-- **Como Começar (Guia Rápido):** Passo a passo em 4 etapas + simulação prática com as cartas do dia (Em Dupla, Modo Solo e explicação detalhada de `K`, `Q` e `J`).
+- **Como Começar (Manual v1.1 + Guia Rápido):** Arte oficial de **Limiar**, passo a passo de início, simulação prática com as cartas do dia (Em Dupla e Modo Solo), explicação detalhada de `K`, `Q` e `J`, Ordem de Prioridade (7 passos), Duração de Campanha (6, 12 ou 18 rodadas) e Regras de Segurança.
 - **Mesa & Cifra do Dia:** Simulador sincronizado para jogar pelo celular/computador (em dupla ou solo), com controle de virar Dama (`Q ⟳`), ativar Valete (`J`), sacar do Topo/Fundo e histórico de turnos.
 - **Estúdio & Editor (63×88mm):** Galeria das 54 cartas com filtro por naipe e editor ao vivo. Clicar em qualquer carta selecionada abre o **Modal de Leitura Ampliada**.
 - **Guia de Oráculo (Baralho Comum):** Tabelas didáticas passo a passo para jogar usando qualquer baralho físico tradicional de 54 cartas.

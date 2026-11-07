@@ -16,26 +16,37 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
   return `
     <div class="quickstart-container">
       <section class="quickstart-hero">
-        <div class="quickstart-hero-copy">
-          <span class="quickstart-kicker">Guia Rápido de Início · 3 Minutos</span>
-          <h2>Como Começar a Jogar</h2>
-          <p>
-            <strong>Sinaleiro</strong> é um RPG de bolso que acontece misturado à sua rotina real.
-            Você e outra pessoa (ou você sozinho, no modo diário) sacam cartas em momentos combinados
-            — <strong>uma por hora</strong> durante um passeio/encontro, ou <strong>uma a três vezes por dia</strong>
-            à distância — transformando sinais do cotidiano em cenas do tema <strong>${escapeHtml(deck.name)}</strong>.
-          </p>
-          <div class="quickstart-cta-row">
-            <button type="button" class="btn-primary" data-goto-tab="playtest">
-              Abrir a Mesa e Sacar a 1ª Carta
-            </button>
-            <button type="button" class="btn-secondary" data-goto-tab="oracle">
-              Jogar com Baralho Comum (Oráculo)
-            </button>
-            <button type="button" class="btn-ghost" data-goto-tab="print">
-              Imprimir Folhas A4 (63×88mm)
-            </button>
+        <div class="quickstart-hero-grid">
+          <div class="quickstart-hero-copy">
+            <span class="quickstart-kicker">Manual Revisado · Edição 1.1 · Guia Rápido em 5 Minutos</span>
+            <h2>LIMIAR — Como Começar a Jogar</h2>
+            <p class="quickstart-lead-slogan">
+              <em>"O jogo que acontece na sua realidade — O Jogo que Ultrapassa a Mesa."</em>
+            </p>
+            <p>
+              <strong>Limiar</strong> é um RPG narrativo cooperativo de bolso em que sinais do cotidiano disparam cenas de uma aventura compartilhada.
+              Um jogador observa e narra (<strong>☀ Vigia</strong>); o outro reage (<strong>☾ Eco</strong>). A história continua entre uma rodada e outra, dentro do ritmo normal da vida — usando qualquer baralho de 54 cartas ou cartas impressas no tamanho padrão de Magic/Poker (63mm × 88mm) no universo <strong>${escapeHtml(deck.name)}</strong>.
+            </p>
+            <div class="quickstart-cta-row">
+              <button type="button" class="btn-primary" data-goto-tab="playtest">
+                Abrir a Mesa e Sacar a 1ª Carta
+              </button>
+              <button type="button" class="btn-secondary" data-goto-tab="oracle">
+                Jogar com Baralho Comum (Oráculo)
+              </button>
+              <button type="button" class="btn-ghost" data-goto-tab="print">
+                Imprimir Folhas A4 (63×88mm)
+              </button>
+            </div>
           </div>
+          <figure class="quickstart-hero-artwork">
+            <img
+              src="/limiar-banner.png"
+              alt="Limiar — O Jogo que Ultrapassa a Mesa: três portais para Zona de Quarentena, Sangue & Néon e O Último Eclipse"
+              loading="eager"
+            />
+            <figcaption>Arte Oficial · Limiar: O Jogo que Ultrapassa a Mesa (3 Universos · 162 Cartas)</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -43,16 +54,16 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
         <article class="quickstart-step-card">
           <div class="step-number">Passo 1</div>
           <h3>1. Escolha seu Material</h3>
-          <p>Você pode jogar agora mesmo de três formas (e misturá-las entre os jogadores):</p>
+          <p>Limiar pode ser jogado em três formatos (e o aplicativo é opcional):</p>
           <ul class="quickstart-list">
             <li>
-              <strong>Na tela (Zero preparo):</strong> Use a aba <em>Mesa &amp; Cifra do Dia</em> no celular ou computador.
+              <strong>1. Baralho comum (54 cartas):</strong> Um baralho tradicional (52 cartas + 2 coringas). Use as tabelas da aba <em>Guia de Oráculo</em> para consultar os efeitos.
             </li>
             <li>
-              <strong>Com um baralho comum (54 cartas):</strong> Pegue qualquer baralho tradicional (52 cartas + 2 Coringas) e consulte a aba <em>Guia de Oráculo</em> para ler o significado da carta sacada.
+              <strong>2. Cartas impressas (63×88mm):</strong> Imprima as 6 páginas da aba <em>Print &amp; Play A4</em> no tamanho padrão de pôquer/Magic, com frente temática e identificação clara do naipe e valor.
             </li>
             <li>
-              <strong>Com cartas impressas (63×88mm):</strong> Imprima as 6 páginas da aba <em>Print &amp; Play A4</em> e coloque cada recorte dentro de um sleeve padrão de Magic na frente de uma carta comum.
+              <strong>3. Digital (Web):</strong> Use a aba <em>Mesa &amp; Cifra do Dia</em> direto no celular ou computador. Para partida em dupla à distância, cada participante usa seu próprio baralho de 42 cartas sincronizado na mesma ordem inicial.
             </li>
           </ul>
         </article>
@@ -61,19 +72,19 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
           <div class="step-number">Passo 2</div>
           <h3>2. Separe seu Trio de Bolso (K, Q, J)</h3>
           <p>
-            Antes de embaralhar, cada jogador escolhe um naipe que define sua vocação
+            Retire do baralho as 12 figuras (os quatro Reis, Damas e Valetes). Cada jogador escolhe um naipe que representa sua vocação
             (<strong>♠ Espadas</strong>, <strong>♥ Copas</strong>, <strong>♦ Ouros</strong> ou <strong>♣ Paus</strong>)
-            e separa para a sua carteira ou mão as <strong>3 Figuras daquele naipe</strong>:
+            e recebe as <strong>3 figuras desse naipe</strong>:
           </p>
           <ul class="quickstart-list">
             <li>
-              <strong>Rei (K) — O Arquétipo:</strong> Fica sempre aberto. É quem você é (${escapeHtml(sampleKing.title)}) e traz um hábito simples para você manter no dia.
+              <strong>Rei (K) — Identidade (${escapeHtml(sampleKing.title)}):</strong> Fica aberto durante toda a campanha. Oferece um convite narrativo para a rotina (não obrigatório) e concede a sinergia descrita na carta.
             </li>
             <li>
-              <strong>Dama (Q) — O Trunfo (${escapeHtml(sampleQueen.title)}):</strong> Começa em pé. Se uma cena apertar, <strong>vire-a 90° (⟳)</strong> para escapar do custo ou socorrer o parceiro.
+              <strong>Dama (Q) — Proteção (${escapeHtml(sampleQueen.title)}):</strong> Começa aberta e pronta (em pé). Pode ser virada 90° (⟳) para ativar seu poder ou evitar uma consequência. Uma Dama deitada está esgotada até ser recarregada (cumprindo uma carta de ♦ Ouros).
             </li>
             <li>
-              <strong>Valete (J) — A Cicatriz (${escapeHtml(sampleJack.title)}):</strong> Começa virado para baixo. Só entra em jogo se você sofrer um dano ou falhar sem usar sua Dama, impondo um pequeno <em>Tabu na Vida Real</em>.
+              <strong>Valete (J) — Cicatriz (${escapeHtml(sampleJack.title)}):</strong> Começa fechado (face para baixo). Quando revelado por uma falha grave sem Dama pronta, ativa o tabu descrito na carta somente dentro das interações do jogo.
             </li>
           </ul>
         </article>
@@ -82,18 +93,18 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
           <div class="step-number">Passo 3</div>
           <h3>3. Combine o Ritmo e a Cifra</h3>
           <p>
-            As <strong>42 cartas restantes</strong> (Ás a 10 dos quatro naipes + os 2 Coringas) formam o <strong>Deck do Mundo</strong>.
+            As <strong>42 cartas restantes</strong> (Ás a 10 dos quatro naipes + Coringa Claro ★ e Coringa Escuro 💀) formam o <strong>Deck do Mundo</strong>. As 12 figuras não entram nesse deck.
           </p>
           <ul class="quickstart-list">
             <li>
-              <strong>Juntos no mesmo lugar:</strong> Usem um único maço na mesa ou no bolso. Combinem de sacar a cada hora cheia (ou a cada mudança de lugar).
+              <strong>Partida presencial:</strong> Embaralhem as 42 cartas e coloquem o baralho no centro. Um único baralho é suficiente.
             </li>
             <li>
-              <strong>Longe um do outro (Sincronia Fria):</strong> Para que dois baralhos físicos em casas diferentes fiquem na mesma ordem sem precisar de mestre, façam a <strong>Cifra do Dia (${escapeHtml(cipher.dateLabel)})</strong> em 30 segundos:
+              <strong>Partida à distância — Cifra do Dia (${escapeHtml(cipher.dateLabel)}):</strong> Sincroniza a ordem inicial de dois baralhos independentes sem aplicativo ou chamada de vídeo:
               <ol class="quickstart-mini-ol">
-                <li>Organizem de Ás a 10 na ordem ♠, ♥, ♦, ♣ com os 2 Coringas no fim.</li>
-                <li>Cortem <strong>${cipher.dayCut}</strong> cartas (dia) e distribuam em 3 montes alternados (juntando Centro → Esquerda → Direita).</li>
-                <li>Cortem <strong>${cipher.monthCut}</strong> cartas (mês) e distribuam em 2 montes alternados (Esquerda sobre Direita).</li>
+                <li><strong>Ordem-base:</strong> Ás a 10 de ♠, Ás a 10 de ♥, Ás a 10 de ♦, Ás a 10 de ♣, Coringa Claro (★) e Coringa Escuro (💀).</li>
+                <li><strong>Corte do dia (${cipher.dayCut}):</strong> Separem do topo ${cipher.dayCut} cartas e coloquem no fundo sem inverter. Distribuam as cartas uma a uma em 3 montes (Esquerda, Centro, Direita) e reúnam: Centro sobre Esquerda, e esse conjunto sobre Direita.</li>
+                <li><strong>Corte do mês (${cipher.monthCut}):</strong> Separem do topo ${cipher.monthCut} cartas e coloquem no fundo. Distribuam alternando em 2 montes (Esquerda e Direita) e coloquem Esquerda sobre Direita.</li>
               </ol>
             </li>
           </ul>
@@ -103,20 +114,20 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
           <div class="step-number">Passo 4</div>
           <h3>4. Topo (Cena) vs. Fundo (Reação Imprevisível)</h3>
           <p>
-            Para que o <strong>☀ Vigia</strong> nunca saiba de antemão qual será a reação ou o teste do parceiro, vocês puxam de <strong>pontas opostas</strong> do baralho:
+            Em dupla, cada rodada combina <strong>duas cartas diferentes</strong> (uma de cada extremidade do baralho sincronizado) para criar uma cena e uma resposta imprevisível:
           </p>
           <div class="turn-roles-summary">
             <div class="role-box role-box-vigia">
-              <strong>☀ Jogador A: O Vigia (Saca a 1ª do TOPO — Define a CENA)</strong>
-              <p>Lê apenas a caixa <strong>☀ TOPO · VIGIA</strong> da carta de cima. Espera o gatilho real acontecer ao seu redor e narra o perigo ao parceiro — sem saber qual carta está lá no fundo!</p>
+              <strong>☀ Primeiro Papel: Vigia (Topo — A Cena)</strong>
+              <p>Retira a carta do topo do próprio baralho e lê somente a coluna <strong>☀ TOPO</strong>. Aguarda o gatilho por <strong>até 2 horas</strong> (ou usa um gatilho substituto simples e seguro) e envia ao parceiro uma mensagem curta narrando o evento ficcional, sem consultar a carta do fundo.</p>
             </div>
             <div class="role-box role-box-eco">
-              <strong>☾ Jogador B: O Eco (Saca a última do FUNDO — Define a REAÇÃO)</strong>
-              <p>Lê apenas a caixa <strong>☾ FUNDO · ECO</strong> da carta de baixo. Aplica a manobra/improviso dessa carta diretamente para resolver a cena que o Vigia acabou de contar!</p>
+              <strong>☾ Segundo Papel: Eco (Fundo — A Reação)</strong>
+              <p>Depois de receber a cena, retira a carta disponível no fundo do próprio baralho e lê somente a coluna <strong>☾ FUNDO</strong>. Aplica a ação sugerida à cena narrada pelo Vigia (toda ação física pode ser substituída por narração/decisão).</p>
             </div>
           </div>
           <p class="quickstart-note">
-            Na rodada seguinte (próxima hora ou próximo turno do dia), vocês <strong>invertem os papéis</strong> (quem foi Vigia vira Eco) puxando a 2ª carta do topo e a penúltima do fundo!
+            <strong>Alternância:</strong> Na rodada seguinte, os papéis se invertem (quem foi Vigia vira Eco e retira do fundo; quem foi Eco vira Vigia e retira do topo).
           </p>
         </article>
       </section>
@@ -169,16 +180,16 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
             <h4>Como essa rodada acontece na vida real (Em Dupla)</h4>
             <ol class="narrative-timeline">
               <li>
-                <strong>O saque no horário combinado:</strong> Imagine que você (Jogador A) e seu parceiro (Jogador B) combinaram de jogar às 14h (ou a cada hora num passeio). Às 14h, você é o <strong>☀ Vigia</strong>: você puxa a 1ª carta de cima do seu baralho (<strong>${escapeHtml(sampleTopCard.playingCardCode)} — ${escapeHtml(sampleTopCard.title)}</strong>) e olha apenas a parte <strong>☀ TOPO</strong>.
+                <strong>O saque no horário combinado:</strong> Imagine que você (Jogador A) e seu parceiro (Jogador B) combinaram uma rodada pela manhã e outra à noite (ou a cada hora num passeio). Você começa como <strong>☀ Vigia</strong>: retira a 1ª carta de cima do seu baralho (<strong>${escapeHtml(sampleTopCard.playingCardCode)} — ${escapeHtml(sampleTopCard.title)}</strong>) e lê apenas a parte <strong>☀ TOPO</strong>.
               </li>
               <li>
-                <strong>O sinal acontece na rotina:</strong> A carta pede o gatilho: <em>"${escapeHtml(sampleTopCard.topWatcherTrigger ?? '')}"</em>. Assim que você notar isso acontecendo onde você está (no trabalho, na rua, num café ou em casa), você puxa assunto ou manda um áudio/mensagem para o Jogador B incorporando o local real à cena: <em>"${escapeHtml(sampleTopCard.topWatcherEvent ?? '')}"</em>.
+                <strong>O sinal acontece na rotina (Prazo de até 2h):</strong> A carta pede o gatilho: <em>"${escapeHtml(sampleTopCard.topWatcherTrigger ?? '')}"</em>. Você aguarda até 2 horas na sua rotina normal (se não acontecer, pode usar um gatilho substituto seguro ou adiar a carta sem penalidade). Quando notar o sinal, envie uma mensagem curta narrando o evento ficcional: <em>"${escapeHtml(sampleTopCard.topWatcherEvent ?? '')}"</em>.
               </li>
               <li>
-                <strong>A resposta imprevisível do parceiro (Carta do Fundo):</strong> Ao receber seu aviso, o Jogador B age como <strong>☾ Eco</strong>: ele puxa a última carta de baixo do baralho dele (<strong>${escapeHtml(sampleBottomCard.playingCardCode)} — ${escapeHtml(sampleBottomCard.title)}</strong>) e lê apenas a caixa <strong>☾ FUNDO</strong>. Como ela veio do fundo, <strong>você (Vigia) não sabe qual reação saiu para ele!</strong> Para resolver a cena que você acabou de contar, ele adapta a manobra dessa carta na vida real: <em>"${escapeHtml(sampleBottomCard.bottomEchoPrompt ?? '')}"</em>.
+                <strong>A resposta imprevisível do parceiro (Carta do Fundo):</strong> Ao receber a cena, o Jogador B age como <strong>☾ Eco</strong>: ele retira a última carta de baixo do próprio baralho (<strong>${escapeHtml(sampleBottomCard.playingCardCode)} — ${escapeHtml(sampleBottomCard.title)}</strong>) e lê apenas a coluna <strong>☾ FUNDO</strong>. Ele aplica a reação diretamente à cena que você narrou: <em>"${escapeHtml(sampleBottomCard.bottomEchoPrompt ?? '')}"</em> (lembrando que fotos, áudios ou gestos são opcionais e podem ser substituídos por narração escrita).
               </li>
               <li>
-                <strong>Desfecho, Trio de Bolso e troca de papéis:</strong> Vocês conferem a resolução: <em>"${escapeHtml(sampleBottomCard.bottomEchoEffect ?? '')}"</em>. Se a carta for do naipe do seu <strong>Rei (K)</strong>, você ganha o bônus dele na hora. Se alguém não pôde cumprir a interação na rotina real, pode girar a <strong>Dama (Q ⟳)</strong> em 90° como salva-vidas ou, se a Dama já estiver gasta, virar o <strong>Valete (J)</strong> para cima e assumir seu Tabu (veja o detalhamento logo abaixo!). No próximo horário, o Jogador B será o Vigia (puxando a 2ª carta do topo) e você será o Eco (puxando a penúltima do fundo)!
+                <strong>Ordem de Prioridade e Alternância:</strong> Vocês resolvem o desfecho (<em>"${escapeHtml(sampleBottomCard.bottomEchoEffect ?? '')}"</em>) verificando a Sinergia do <strong>Rei (K)</strong>, o uso opcional da <strong>Dama (Q ⟳)</strong> ou a revelação do <strong>Valete (J)</strong>. Na rodada seguinte, vocês invertem os papéis!
               </li>
             </ol>
           </article>
@@ -187,16 +198,16 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
             <h4>E como funciona no Modo Solo (Diário / Oráculo)?</h4>
             <ol class="narrative-timeline">
               <li>
-                <strong>Saque duplo (Topo + Fundo):</strong> Jogando sozinho, você usa um único baralho (físico ou na aba <em>Mesa</em> clicando no botão <strong>Modo Solo</strong>). No seu turno, você puxa <strong>1 carta do TOPO</strong> (que define <em>o que aconteceu no mundo</em>) e, quando o gatilho acontecer, puxa <strong>1 carta do FUNDO</strong> (que define <em>como você precisará reagir</em>).
+                <strong>1. Retire uma carta do topo:</strong> No modo solo, você controla o protagonista e o narrador. Retire 1 carta do topo e leia apenas a coluna <strong>☀ TOPO</strong> (<strong>${escapeHtml(sampleTopCard.playingCardCode)}</strong>).
               </li>
               <li>
-                <strong>A Carta do Topo é o Mundo ao seu redor:</strong> Você lê o bloco <strong>☀ TOPO</strong> da carta de cima (<strong>${escapeHtml(sampleTopCard.playingCardCode)}</strong>). Quando o gatilho real (<em>"${escapeHtml(sampleTopCard.topWatcherTrigger ?? '')}"</em>) acontecer diante de você hoje, o evento ficcional se instala no seu caminho.
+                <strong>2. Aguarde o gatilho por até 2 horas:</strong> Espere o gatilho acontecer normalmente na sua rotina (<em>"${escapeHtml(sampleTopCard.topWatcherTrigger ?? '')}"</em>) ou escolha um substituto seguro.
               </li>
               <li>
-                <strong>A Carta do Fundo é o seu Desafio Imprevisível:</strong> Só depois que o evento do Topo acontecer, você olha o bloco <strong>☾ FUNDO</strong> da carta de baixo (<strong>${escapeHtml(sampleBottomCard.playingCardCode)}</strong>) para descobrir qual manobra prática seu personagem precisa executar para sair daquela cena.
+                <strong>3. Quando a cena for ativada, retire do fundo:</strong> Só depois que a cena do Topo disparar, retire 1 carta do fundo do baralho (<strong>${escapeHtml(sampleBottomCard.playingCardCode)}</strong>) e leia a coluna <strong>☾ FUNDO</strong>.
               </li>
               <li>
-                <strong>Registro de Sobrevivente:</strong> Quando a interação pedir para "enviar ao parceiro" (uma foto, áudio ou decisão), no Modo Solo você registra isso como seu <strong>Diário de Campanha</strong> — tirando a foto no celular, gravando uma nota de voz de 15 segundos ou anotando duas linhas num bloco de notas. Se não conseguir realizar antes do próximo turno, você gira sua <strong>Dama (Q ⟳)</strong> ou ativa seu <strong>Valete (J)</strong>!
+                <strong>4. Responda em voz, texto ou diário e resolva:</strong> Adapte qualquer instrução dirigida ao parceiro para uma escolha narrativa ou registro de uma ou duas frases no seu diário de campanha, resolvendo o efeito com seu Trio de Bolso (<strong>K, Q, J</strong>).
               </li>
             </ol>
           </article>
@@ -206,24 +217,24 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
           <div class="figures-explainer-header">
             <h4>Como o Rei (K), a Dama (Q) e o Valete (J) entram em ação nessa rodada?</h4>
             <p class="subtitle">
-              Você <strong>não precisa de papel, dados ou marcadores de pontos</strong>: enquanto as cartas de cima e de baixo contam o que acontece no mundo, as <strong>3 Figuras do seu Naipe</strong> ficam sempre com você e funcionam como sua ficha viva, seu escudo de emergência e seu medidor de ferimentos (clique em qualquer uma para ampliar):
+              Em <strong>Limiar</strong>, as 3 Figuras do seu Naipe ficam sempre com você e funcionam como identidade, proteção e cicatriz (clique em qualquer carta para ampliar):
             </p>
           </div>
 
           <div class="figures-explainer-grid">
             <article class="figure-role-card">
-              <div class="figure-role-badge badge-king">Rei (K) · Sempre Aberto</div>
+              <div class="figure-role-badge badge-king">Rei (K) · Identidade · Sempre Aberto</div>
               <h5>Qual a importância do Rei (K)?</h5>
               <p class="figure-role-lead">
-                O Rei é a sua <strong>identidade e bússola durante todo o dia</strong>. Ele nunca é descartado e tem duas funções práticas:
+                O Rei fica aberto durante toda a campanha. Ele representa a vocação do personagem e possui duas regras:
               </p>
               <ul class="figure-role-points">
                 <li>
-                  <strong>1. Hábito na Vida Real (Passiva):</strong> Ele dá uma pequena atitude real para você praticar ao longo do dia, mantendo você no clima do personagem mesmo quando não está sacando cartas.
+                  <strong>1. Convite Narrativo na Rotina (Passiva):</strong> Sugere uma pequena interpretação temática para o seu dia. <em>Importante (v1.1):</em> as atitudes sugeridas pelo Rei são <strong>convites narrativos, não obrigações</strong> — não precisam ser realizadas se forem inconvenientes, inseguras ou inadequadas ao contexto.
                   <span class="figure-example-quote">Exemplo (${escapeHtml(sampleKing.playingCardCode)} — ${escapeHtml(sampleKing.title)}): "${escapeHtml(sampleKing.figurePassiveOrRule ?? '')}"</span>
                 </li>
                 <li>
-                  <strong>2. Vantagem Automática de Naipe (Sinergia):</strong> Toda vez que a carta sacada na rodada for do <strong>mesmo naipe do seu Rei</strong>, seu personagem domina a situação e ativa um bônus imediato!
+                  <strong>2. Sinergia de Naipe:</strong> Quando a condição de naipe da rodada é atendida, você aplica gratuitamente a habilidade do seu Rei! (O Rei de Ouros K♦ possui recarga automática aplicada apenas ao seu portador).
                   <span class="figure-example-quote">Exemplo: "${escapeHtml(sampleKing.figureSpecialOrTaboo ?? '')}"</span>
                 </li>
               </ul>
@@ -233,18 +244,18 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
             </article>
 
             <article class="figure-role-card">
-              <div class="figure-role-badge badge-queen">Dama (Q ⟳) · Começa em Pé</div>
+              <div class="figure-role-badge badge-queen">Dama (Q ⟳) · Proteção · Começa Pronta</div>
               <h5>Qual é o efeito da Dama (Q)?</h5>
               <p class="figure-role-lead">
-                A Dama é o seu <strong>Trunfo de Emergência (salva-vidas)</strong>. Na vida real, imprevistos acontecem: às vezes você está ocupado e não consegue cumprir a tarefa do Eco, ou a carta exige um custo pesado demais.
+                A Dama é um recurso individual e limitado de proteção. Ela não transforma automaticamente qualquer tentativa em vitória: só produz o efeito descrito na sua carta ou na regra que autorizou seu uso.
               </p>
               <ul class="figure-role-points">
                 <li>
-                  <strong>1. Virar em 90° para Salvar a Rodada (⟳ Tap):</strong> Quando não puder cumprir o desafio da carta (ou quiser anular um perigo), você <strong>deita a sua Dama em 90°</strong> e ativa o efeito especial dela. A rodada é vencida na hora, sem punição!
+                  <strong>1. Ativação (Gire 90° ⟳):</strong> Para ativá-la, gire-a 90° e aplique o efeito descrito na própria carta, ou gaste-a quando uma carta permitir evitar uma consequência. Uma Dama deitada está esgotada e não pode ser ativada novamente até ser recarregada.
                   <span class="figure-example-quote">Exemplo (${escapeHtml(sampleQueen.playingCardCode)} — ${escapeHtml(sampleQueen.title)}): "${escapeHtml(sampleQueen.figurePassiveOrRule ?? '')}"</span>
                 </li>
                 <li>
-                  <strong>2. Recarregar na Rotina (Untap):</strong> Enquanto estiver deitada, a Dama está "gasta" e não pode ser usada de novo. Para colocá-la em pé novamente, basta cumprir na vida real a condição de recarga dela:
+                  <strong>2. Recarga-Base com ♦ Ouros (Untap):</strong> Como regra-base, <strong>cumprir com sucesso uma carta de Ouros (♦, de Ás a 10)</strong> recarrega a Dama do jogador que realizou a ação (além das condições específicas descritas na carta).
                   <span class="figure-example-quote">Exemplo: "${escapeHtml(sampleQueen.figureSpecialOrTaboo ?? '')}"</span>
                 </li>
               </ul>
@@ -254,19 +265,19 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
             </article>
 
             <article class="figure-role-card">
-              <div class="figure-role-badge badge-jack">Valete (J) · Começa Virado para Baixo</div>
+              <div class="figure-role-badge badge-jack">Valete (J) · Cicatriz &amp; Colapso</div>
               <h5>Qual é o efeito do Valete (J)?</h5>
               <p class="figure-role-lead">
-                O Valete é a sua <strong>Cicatriz (ferimento/penalidade)</strong>. Ele começa <strong>fechado (inativo)</strong>, e o seu objetivo é evitar que ele vire para cima!
+                O Valete começa fechado (face para baixo) e é revelado quando o jogador sofre uma falha grave sem ter uma Dama pronta para absorver a consequência, ou quando um efeito determina sua revelação.
               </p>
               <ul class="figure-role-points">
                 <li>
-                  <strong>1. Quando ele entra em jogo:</strong> Se você falhar na missão de uma rodada (ou recusar pagar o custo da carta) e <strong>sua Dama (Q) já estiver gasta/deitada</strong>, você é obrigado a revelar seu Valete para cima.
+                  <strong>1. Tabu Somente Dentro do Jogo:</strong> Quando aberto, aplique o tabu escrito na carta <strong>somente dentro das interações do jogo</strong> até que uma carta ou habilidade o cure. Quebrar um tabu não é falha de caráter nem gera punição real (comunicação urgente, trabalho e necessidades reais têm sempre prioridade).
                   <span class="figure-example-quote">Gatilho (${escapeHtml(sampleJack.playingCardCode)} — ${escapeHtml(sampleJack.title)}): "${escapeHtml(sampleJack.figurePassiveOrRule ?? '')}"</span>
                 </li>
                 <li>
-                  <strong>2. O Tabu na Vida Real e Limite de Colapso:</strong> Enquanto o Valete estiver virado para cima, seu personagem está ferido/marcado e você passa a ter uma <strong>proibição real de fala ou comportamento</strong> em todas as interações! Se você quebrar o Tabu ou falhar de novo quando sua Dama já está deitada e o Valete já está aberto, seu personagem entra em <strong>Colapso</strong> — só escapando se o parceiro gastar a <strong>Dama (Q ⟳)</strong> dele para te socorrer!
-                  <span class="figure-example-quote">Tabu Real: "${escapeHtml(sampleJack.figureSpecialOrTaboo ?? '')}"</span>
+                  <strong>2. Regra de Colapso:</strong> Um personagem entra em <strong>Colapso</strong> (estado puramente ficcional) quando uma nova falha exigiria revelar ou agravar um Valete já ativo e sua Dama está esgotada. Em partida cooperativa, o parceiro pode evitar o Colapso gastando a própria Dama pronta (se ela permitir essa proteção); caso contrário, a campanha termina em derrota narrativa e o grupo pode escrever um epílogo.
+                  <span class="figure-example-quote">Tabu no Jogo: "${escapeHtml(sampleJack.figureSpecialOrTaboo ?? '')}"</span>
                 </li>
               </ul>
               <div class="figure-card-mini-preview">
@@ -274,6 +285,79 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
               </div>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section class="quickstart-v11-rules-section">
+        <div class="v11-section-header">
+          <span class="quickstart-kicker">Referência Oficial · Edição Revisada 1.1</span>
+          <h3>Regras de Resolução, Campanha e Segurança na Vida Real</h3>
+          <p class="subtitle">
+            As regras desta edição foram organizadas para reduzir ambiguidades, facilitar o primeiro jogo e proteger a rotina e a segurança dos participantes.
+          </p>
+        </div>
+
+        <div class="v11-rules-grid">
+          <article class="v11-rule-card">
+            <h4>⚖️ 1.5. Ordem de Prioridade na Resolução (7 Passos)</h4>
+            <p>Quando a ação do Eco for concluída, resolvam os efeitos exatamente nesta ordem:</p>
+            <ol class="quickstart-mini-ol">
+              <li><strong>Segurança e limites reais:</strong> qualquer jogador pode adaptar, substituir ou ignorar uma ação insegura, invasiva ou inconveniente, sem penalidade.</li>
+              <li><strong>Ação do Eco:</strong> o jogador declara o que seu personagem tenta fazer (decisão narrada ou mensagem resolve a cena).</li>
+              <li><strong>Efeito específico da carta:</strong> leiam o desfecho na carta do Eco e verifiquem se a condição foi cumprida (<em>Sucesso</em>, <em>Sucesso com custo</em> ou <em>Falha</em>).</li>
+              <li><strong>Sinergia do Rei (K):</strong> aplique a habilidade do Rei envolvido, se a condição de naipe for atendida.</li>
+              <li><strong>Dama (Q ⟳):</strong> o jogador pode ativar uma Dama pronta se o texto da carta ou a regra permitir.</li>
+              <li><strong>Consequência:</strong> se a condição não foi cumprida e nenhuma proteção foi usada, aplique a falha indicada.</li>
+              <li><strong>Valete (J) e Colapso:</strong> revele o Valete ou verifique o Colapso, quando aplicável.</li>
+            </ol>
+          </article>
+
+          <article class="v11-rule-card">
+            <h4>🏆 1.9. Duração da Campanha, Marcos e Encerramento</h4>
+            <p>Não é necessário esgotar as 42 cartas. Escolha a duração da campanha antes de começar:</p>
+            <ul class="quickstart-list">
+              <li><strong>Campanha curta (6 rodadas — 3 cenas cada):</strong> Ao concluir, cada jogador escolhe uma <em>frase de título</em> para seu personagem (ex.: "O Sobrevivente do Viaduto").</li>
+              <li><strong>Campanha padrão (12 rodadas):</strong> Cada jogador escolhe uma <em>habilidade narrativa pequena</em>, aprovada pelo grupo, usada uma única vez na próxima campanha.</li>
+              <li><strong>Campanha longa (18 rodadas):</strong> O grupo desbloqueia um <em>epílogo especial</em> ou cria uma <em>carta de memória</em> para a próxima campanha.</li>
+            </ul>
+            <div class="v11-closing-questions">
+              <strong>Ao fim da campanha, cada jogador responde:</strong>
+              <ol class="quickstart-mini-ol">
+                <li>Qual foi a cena mais marcante?</li>
+                <li>Qual escolha mudou a história?</li>
+                <li>Qual personagem ou ameaça merece voltar em outra campanha?</li>
+              </ol>
+            </div>
+          </article>
+
+          <article class="v11-rule-card">
+            <h4>🛡️ 1.8. Segurança, Privacidade e Acessibilidade</h4>
+            <p><strong>Limiar deve caber na vida real, não colocar a vida real em risco:</strong></p>
+            <ul class="quickstart-list">
+              <li>Nunca jogue enquanto dirige, pedala, atravessa ruas, opera máquinas ou realiza tarefas que exijam atenção.</li>
+              <li>Não corra, suba em lugares, toque em objetos perigosos, mexa em instalações elétricas, abra portas desconhecidas ou se aproxime de pessoas/animais por causa de uma carta.</li>
+              <li>Não fotografe nem grave terceiros sem consentimento. Não compartilhe endereço, localização em tempo real, placas ou dados privados.</li>
+              <li>Não faça desafios que envolvam prender a respiração, ingerir substâncias, consumir alimentos, gastar dinheiro ou alterar medicação.</li>
+              <li><strong>"Pausa" ou "Passo":</strong> Qualquer jogador pode dizer "pausa" ou "passo" a qualquer momento, sem punição.</li>
+              <li><strong>Ficção em 1º lugar:</strong> Toda ação física (foto, áudio, toque, deslocamento) é apenas ambientação opcional. Narrar ou escrever o que o personagem faria sempre valida a jogada. Prazos curtos (ex.: 10 min) são ritmo ficcional e não se sobrepõem ao prazo-base de até 2 horas.</li>
+            </ul>
+          </article>
+
+          <article class="v11-rule-card">
+            <h4>⚡ A.4. Resumo Rápido para Ensinar em 5 Minutos</h4>
+            <ol class="quickstart-mini-ol">
+              <li>Escolha um universo e um naipe.</li>
+              <li>Pegue seu Rei, Dama e Valete daquele naipe.</li>
+              <li>Monte o Deck do Mundo com 40 cartas numeradas e 2 coringas.</li>
+              <li>O <strong>Vigia</strong> compra do topo e lê a parte do topo.</li>
+              <li>Quando o gatilho acontecer, narra a cena ao parceiro.</li>
+              <li>O <strong>Eco</strong> compra do fundo, lê a parte do fundo e responde à cena.</li>
+              <li>Resolva o efeito usando o Rei, a Dama e o Valete.</li>
+              <li>Na rodada seguinte, troquem os papéis.</li>
+              <li>Se algo não for seguro ou conveniente, adaptem ou pulem sem penalidade.</li>
+              <li>Joguem seis rodadas e conversem sobre o que funcionou.</li>
+            </ol>
+          </article>
         </div>
       </section>
     </div>

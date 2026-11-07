@@ -180,7 +180,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O perímetro do exército caiu a três quadras daqui. Corredores infectados avançam em disparada pelo viaduto.',
         bottomEchoPrompt:
-          'Mande uma foto do ponto mais protegido ou elevado onde você está agora e diga como usa esse local para proteger a dupla do perigo narrado pelo Vigia.',
+          'Descreva, sem revelar sua localização, um tipo de abrigo fictício que protegeria a dupla do perigo narrado pelo Vigia.',
         bottomEchoEffect:
           'Sucesso se responder em menos de 10 minutos (ou se seu Rei for ♠). Caso contrário, vire sua Dama (Q ⟳) para conter o avanço.',
         flavorText: 'Quando a sirene para de tocar, não significa que o perigo passou — significa que o operador morreu.',
@@ -195,7 +195,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Alguém quebrou a vitrine da farmácia abaixo do esconderijo. Dois estaladores farejam o chão coberto de cacos.',
         bottomEchoPrompt:
-          'Para tirar a dupla da cena do Vigia em silêncio, envie um áudio sussurrando uma instrução tática curta sem nenhum barulho de fundo.',
+          'Para tirar a dupla da cena do Vigia em silêncio, escreva uma instrução tática curta, como se estivesse sussurrando para a equipe.',
         bottomEchoEffect:
           'Se o áudio tiver ruído alto ou hesitação, revele seu Valete (J). Se seu Rei for ♠ ou ♣, você passa invisível.',
         flavorText: 'Um único fragmento de cristal sob a bota vale mais que um tiro de escopeta no silêncio.',
@@ -210,7 +210,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O alarme de uma caminhonete abandonada dispara sozinho, atraindo silhuetas trôpegas entre as colunas de concreto.',
         bottomEchoPrompt:
-          'Descreva ou fotografe o obstáculo ou estrutura mais próxima de você que serviria de cobertura para a cena que o Vigia narrou.',
+          'Descreva um obstáculo fictício que serviria de cobertura na cena narrada pelo Vigia.',
         bottomEchoEffect:
           'Vire sua Dama (Q ⟳) para neutralizar o perigo sem ser visto (se seu Rei for ♠ Espadas, você resolve sem precisar virar a Dama).',
         flavorText: 'Nunca entre num carro sem antes olhar o banco de trás.',
@@ -756,7 +756,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Uma variante blindada do vírus derruba um poste de luz inteiro bloqueando a rua. Balas comuns ricocheteiam nele.',
         bottomEchoPrompt:
-          'Combine com o parceiro uma armadilha usando eletricidade, fogo ou altura do seu ambiente atual para derrubar a ameaça narrada pelo Vigia.',
+          'Imagine e descreva uma armadilha fictícia para deter a ameaça. Não use eletricidade, fogo, altura ou objetos reais.',
         bottomEchoEffect:
           'Exige virar a Dama (Q ⟳) de um dos jogadores (ou ter Rei de ♠ ou ♣) para vencer sem revelar o Valete (J).',
         flavorText: 'A evolução levou milhões de anos para nos erguer, e seis semanas para criar nosso substituto.',

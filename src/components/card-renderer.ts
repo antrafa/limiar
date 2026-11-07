@@ -119,7 +119,7 @@ export function renderMagicCardHtml(card: GameCard, options: RenderCardOptions =
       </div>
       ${bodyHtml}
       <footer class="mtg-collector-bar">
-        <span>SINALEIRO · ${escapeHtml(card.themeId.toUpperCase())}</span>
+        <span>LIMIAR · ${escapeHtml(card.themeId.toUpperCase())}</span>
         <span>${String(card.collectorNumber).padStart(2, '0')}/54 · 63×88mm</span>
       </footer>
     </article>

@@ -1,125 +1,252 @@
-# SINALEIRO — Livro Completo de Regras, Exemplos e Oráculos (3 Temas · 162 Cartas)
+# LIMIAR — Manual de Jogo, Regras e Oráculos
 
-**Sinaleiro** é um RPG de cartas na vida real (*pervasive tabletop card game*) feito para ser jogado misturado à sua rotina diária — durante um passeio, em casa ou à distância por mensagens e áudios — usando qualquer baralho de **54 cartas** (52 tradicionais + 2 Coringas) ou cartas impressas no tamanho padrão de Magic/Poker (**63mm × 88mm**).
+> **Edição revisada 1.1 · 3 universos · 162 cartas de referência**  
+> **Slogan:** *"O Jogo que Ultrapassa a Mesa — O jogo que acontece na sua realidade."*
 
-Este documento único reúne:
-1. **Todas as Regras do Jogo (Passo a Passo)**
-2. **Explicação Completa do Trio de Bolso (`Rei K`, `Dama Q ⟳` e `Valete J`)**
-3. **A Cifra do Dia (`DD/MM`) e por que puxamos do Topo e do Fundo**
-4. **Exemplos Práticos Detalhados (Em Dupla, Modo Solo e Combinação de Cartas Diferentes)**
-5. **Oráculo Completo 1: Zona de Quarentena (Apocalipse Zumbi — 54 Cartas)**
-6. **Oráculo Completo 2: Sangue & Veludo (Vampiros na Metrópole — 54 Cartas)**
-7. **Oráculo Completo 3: Crônicas do Eclipse (Fantasia Sombria & Magia — 54 Cartas)**
+![Limiar — O Jogo que Ultrapassa a Mesa](./public/limiar-banner.png)
+
+**Limiar** é um RPG de cartas na vida real (*pervasive tabletop card game*) feito para ser jogado misturado à sua rotina diária — durante um passeio, em casa ou à distância por mensagens e áudios — usando qualquer baralho de **54 cartas** (52 tradicionais + 2 Coringas) ou cartas impressas no tamanho padrão de Magic/Poker (**63mm × 88mm**).
+
+Este manual reúne as regras-base, exemplos de partida e três universos narrativos. Cada universo contém 54 cartas de referência: 12 cartas do **Trio de Bolso** e 42 cartas do **Deck do Mundo**. As regras desta edição foram organizadas para reduzir ambiguidades, facilitar o primeiro jogo e proteger a rotina e a segurança dos participantes. As cartas dos três universos foram preservadas como conteúdo criativo; seus comandos devem ser interpretados à luz das regras gerais de segurança e resolução.
 
 ---
 
 # Parte 1: Manual de Regras & Como Começar a Jogar
 
-## 1.1. O Que Você Precisa para Jogar
-Você pode jogar de **três formas** (e até misturá-las entre os jogadores):
-1. **Com um Baralho Comum de 54 Cartas (52 cartas + 2 Coringas):** Cada jogador separa seu baralho físico e usa as tabelas deste documento (ou a aba *Guia de Oráculo* do app) para consultar o significado de cada carta sacada.
-2. **Com as Cartas Impressas (Print & Play A4 · `63mm × 88mm`):** Imprima as 6 páginas A4 (9 cartas por folha em grade `3 × 3`), recorte e coloque dentro de *sleeves* padrão na frente de cartas comuns.
-3. **Direto no Celular / Computador:** Use a aba *Mesa & Cifra do Dia* da aplicação web.
+## 1.1. O que você precisa para jogar
+
+**Limiar** pode ser jogado em três formatos:
+
+1. **Baralho comum:** um baralho de 54 cartas (52 cartas tradicionais e 2 coringas). Use as tabelas deste manual para consultar os efeitos.
+2. **Cartas impressas:** cartas no tamanho padrão de pôquer (`63 × 88 mm`), com frente temática e identificação clara do naipe e valor.
+3. **Digital:** uma versão web ou aplicativo, quando disponível. O aplicativo é opcional; as regras não dependem dele.
+
+Para uma partida em dupla à distância, cada participante precisa de um baralho próprio, com as mesmas 42 cartas do Deck do Mundo e na mesma ordem inicial. As 12 figuras ficam separadas para formar os Trios de Bolso.
 
 ---
 
-## 1.2. Passo 1 — Escolha seu Naipe e Separe seu Trio de Bolso (`K`, `Q`, `J`)
+## 1.2. Preparação: seu Trio de Bolso
 
-Antes de começar, retire do baralho todas as **12 Figuras** (os 4 Reis `K`, as 4 Damas `Q` e os 4 Valetes `J`).
-Cada jogador escolhe **um naipe** que define a vocação do seu personagem (`♠ Espadas`, `♥ Copas`, `♦ Ouros` ou `♣ Paus`) e pega para si as **3 Figuras daquele naipe** (seu **Trio de Bolso**). As outras Figuras não escolhidas voltam para a caixa.
+Retire do baralho as 12 figuras: os quatro Reis (`K`), as quatro Damas (`Q`) e os quatro Valetes (`J`). Cada jogador escolhe um naipe que representa sua vocação e recebe as três figuras desse naipe. Esse conjunto é seu **Trio de Bolso**.
 
-Você **não precisa de ficha de papel, lápis, dados nem contadores de pontos**. As próprias 3 cartas do seu Trio de Bolso controlam tudo:
+- **👑 Rei (`K`) — identidade:** fica aberto durante toda a campanha. Representa a vocação do personagem, oferece uma pequena interpretação temática para a rotina e concede a sinergia descrita na carta.
+- **🛡️ Dama (`Q`) — proteção:** começa aberta e pronta. Pode ser virada 90° (`⟳`) para ativar seu poder ou evitar uma consequência, conforme as regras gerais e o texto da carta. Uma Dama deitada está esgotada.
+- **🩸 Valete (`J`) — cicatriz:** começa fechado, com a face para baixo. Quando é revelado, representa uma complicação persistente e ativa o tabu descrito na carta. O Valete revelado permanece ativo até ser curado por um efeito.
 
-### 👑 1. Qual a importância do Rei (`K`)? — *Fica Sempre Aberto*
-O Rei representa **quem você é** na história. Ele fica sempre visível na mesa ou na carteira e nunca é descartado. Ele tem **duas funções**:
-1. **Hábito na Vida Real (Passiva):** Propõe uma pequena atitude real para você praticar ao longo do dia (ex.: *identificar duas saídas ao entrar num cômodo*, *fazer um elogio elegante*, *observar luzes e sombras*), mantendo você no clima do personagem mesmo fora dos horários de saque.
-2. **Vantagem Automática de Naipe (Sinergia):** Toda vez que a carta sacada na rodada for do **mesmo naipe do seu Rei**, o seu personagem domina aquela situação e ativa o bônus especial dele sem precisar gastar recursos!
+> **Importante:** as atitudes de rotina sugeridas pelo Rei são **convites narrativos, não obrigações**. Não precisam ser realizadas se forem inconvenientes, inseguras ou inadequadas ao contexto.
 
-### 🛡️ 2. Qual é o efeito da Dama (`Q ⟳`)? — *Começa em Pé (Pronta)*
-A Dama é o seu **Trunfo de Emergência (salva-vidas)**. Na vida real, imprevistos acontecem: às vezes você está numa reunião ou no trânsito e não consegue cumprir a tarefa da carta a tempo, ou a carta exige um custo pesado demais.
-1. **Virar em 90° para Salvar a Rodada (`⟳ Tap`):** Quando não puder cumprir o desafio da carta (ou quando a regra da carta pedir para usar a Dama), você **gira sua Dama em 90° (deita a carta)** e dispara o efeito especial dela. A rodada é vencida na hora, sem nenhuma penalidade!
-2. **Recarregar na Rotina (`Untap`):** Enquanto estiver deitada, a Dama já foi gasta e não pode ser usada de novo. Para colocá-la **em pé novamente**, basta cumprir qualquer carta do naipe de **`♦ Ouros` (`A♦` a `10♦`)** durante o jogo ou realizar a condição real de recarga escrita na sua Dama (como reencontrar o parceiro pessoalmente).
+### 1.2.1. Como funciona a Dama (`Q`)
 
-### 🩸 3. Qual é o efeito do Valete (`J`)? — *Começa Virado para Baixo (Inativo)*
-O Valete é a sua **Cicatriz (ferimento ou trauma)**. Ele começa **fechado (virado para baixo)**, e o seu objetivo é evitar que ele vire para cima!
-1. **Quando ele entra em jogo:** Se você falhar na missão de uma rodada (ou recusar pagar o custo da carta) e **sua Dama (`Q`) já estiver deitada/gasta**, você é obrigado a **virar seu Valete para cima**.
-2. **O Tabu na Vida Real:** Enquanto o Valete estiver virado para cima, seu personagem está ferido/marcado e você passa a ter uma **proibição real de fala ou comportamento** em todas as mensagens e interações com o parceiro (ou no seu diário solo)!
-   - *Exemplos de Tabu:* Não poder usar palavras como "ajuda" ou "medo"; não poder usar verbos no passado; não poder dizer "não" ao parceiro; responder em no máximo duas frases.
-3. **Cura e Colapso:**
-   - **Como curar o Valete:** Cartas especiais de `♥ Copas`, `♦ Ouros`, o Coringa Claro (`★`) ou certas Damas permitem **virar o Valete de volta para baixo**, encerrando o Tabu.
-   - **Colapso:** Se você quebrar o Tabu por descuido ou falhar novamente numa rodada quando **sua Dama já está deitada E seu Valete já está aberto**, seu personagem entra em **Colapso** — e só escapa se o seu parceiro gastar a **Dama (`Q ⟳`)** dele para te socorrer!
+A Dama é um recurso individual e limitado:
 
----
+1. Para ativá-la, gire-a 90° (`⟳`) e aplique o efeito descrito na própria carta.
+2. Se uma carta permitir gastar a Dama para evitar uma consequência, o jogador decide se aceita a consequência ou usa a proteção.
+3. Uma Dama deitada não pode ser ativada novamente até ser recarregada.
+4. Como regra-base, cumprir com sucesso uma carta de **Ouros (`♦`, de Ás a 10)** recarrega a Dama do jogador que realizou a ação. Efeitos específicos podem recarregar outras Damas, se disserem isso expressamente.
+5. O Rei de Ouros (`K♦`) pode ter uma recarga automática como habilidade própria. Essa habilidade é aplicada apenas ao seu portador e não substitui a regra de recarga dos demais.
 
-## 1.3. Passo 2 — O Deck do Mundo (42 Cartas) e a Cifra do Dia (`DD/MM`)
+A Dama não transforma automaticamente qualquer tentativa em vitória. Ela só produz o efeito descrito na sua carta ou na regra que autorizou seu uso.
 
-Junte as **40 cartas numéricas (`Ás` a `10` de `♠, ♥, ♦, ♣`)** mais os **2 Coringas (`★ Coringa Claro` e `💀 Coringa Escuro`)**. Essas **42 cartas** formam o **Deck do Mundo**.
+### 1.2.2. Como funciona o Valete (`J`)
 
-- **Se estiverem jogando juntos no mesmo local:** Embaralhem normalmente e deixem um único maço de 42 cartas sobre a mesa (ou no bolso).
-- **Se estiverem jogando à distância (cada um na sua casa com seu baralho):** Para que os dois baralhos fiquem **exatamente na mesma ordem** sem precisar de mestre ou chamada de vídeo, façam a **Cifra do Dia** usando o **Dia (`1 a 31`)** e o **Mês (`1 a 12`)** de hoje:
-  1. **Ordem Base:** Coloquem as 42 cartas em ordem crescente (`Ás` ao `10`) na sequência de naipes **`♠ Espadas` → `♥ Copas` → `♦ Ouros` → `♣ Paus`**, deixando o **`★ Coringa Claro`** na posição 41 e o **`💀 Coringa Escuro`** na posição 42.
-  2. **Corte do Dia (3 Montes):** Contem do topo um número de cartas igual ao **DIA de hoje** (ex.: dia `7` = 7 cartas) e passem esse bloco para o fundo do baralho. Em seguida, distribuam as 42 cartas uma a uma, alternadamente, em **3 montes** sobre a mesa (Esquerda, Centro, Direita). Junte os montes colocando o **Centro sobre a Esquerda, e ambos sobre a Direita**.
-  3. **Corte do Mês (2 Montes):** Contem do topo um número de cartas igual ao **MÊS atual** (ex.: novembro `11` = 11 cartas) e passem para o fundo. Depois, distribuam as 42 cartas uma a uma em **2 montes** (Esquerda e Direita) e coloque o **monte da Esquerda sobre o da Direita**.
+O Valete é revelado quando o jogador sofre uma falha grave sem ter uma Dama pronta para absorver a consequência, ou quando um efeito de carta determina sua revelação.
 
-Pronto! Os dois baralhos físicos em lugares diferentes agora são **espelhos perfeitos um do outro**.
+Quando o Valete fica aberto:
+- aplique o tabu escrito na carta, **somente dentro das interações do jogo**;
+- mantenha o Valete aberto até que uma carta ou habilidade o cure;
+- **não transforme o tabu em uma obrigação fora do jogo**, nem em algo que impeça comunicação urgente, trabalho, direção, cuidado de crianças ou qualquer necessidade real.
 
----
+Quebrar um tabu não é uma falha de caráter nem gera punição na vida real. Para fins de jogo, o grupo pode simplesmente considerar o tabu encerrado e manter o Valete aberto até que seja curado por uma regra.
 
-## 1.4. Passo 3 — Como Funciona uma Rodada (`☀ Topo` vs. `☾ Fundo`)
+### 1.2.3. Colapso
 
-Combinem de quantas em quantas horas (ou quantas vezes ao dia) vão jogar uma rodada (por exemplo: **1 rodada por hora** durante um passeio, ou **2 a 3 rodadas por dia** pelo WhatsApp/Telegram).
+Um personagem entra em **Colapso** quando uma nova falha exigiria revelar ou agravar um Valete já ativo e sua Dama está esgotada.
 
-### Por que um jogador puxa de CIMA e o outro puxa de BAIXO?
-Se os dois jogadores tirassem a mesma carta na rodada, o Jogador 1 ao olhar a carta já veria qual é a resposta do Jogador 2, tirando toda a surpresa e aleatoriedade!
-Por isso, **vocês sacam de pontas opostas do baralho**:
+Em uma partida cooperativa, o parceiro pode evitar o Colapso gastando a própria Dama pronta, desde que a carta dele permita esse tipo de proteção. Se não puder ou não quiser fazê-lo, a campanha termina em derrota narrativa. O grupo pode então escrever um epílogo ou iniciar uma nova campanha.
 
-1. **☀ Jogador A — O Vigia (Puxa a 1ª carta de CIMA / TOPO):**
-   - O Vigia lê **APENAS a metade de cima (`☀ TOPO · VIGIA`)** da carta que tirou do topo.
-   - Ele **não sabe** qual carta está lá no fundo do baralho!
-   - Ele fica atento à sua rotina até acontecer o **1º Gatilho Real** (ex.: *tocar numa maçaneta*, *ouvir um cachorro*, *ver uma placa*).
-   - Assim que o gatilho acontecer na vida real, ele manda mensagem, foto ou áudio para o parceiro narrando o **2º Evento da História** (que estabelece **O QUE está acontecendo / qual é a ameaça**).
-
-2. **☾ Jogador B — O Eco (Puxa a última carta de BAIXO / FUNDO):**
-   - Ao receber o alerta do Vigia, o Eco puxa a **última carta de baixo** do baralho e lê **APENAS a metade de baixo (`☾ FUNDO · ECO`)**.
-   - A metade de baixo traz uma **Manobra de Reação Universal**: o Eco aplica a **1ª Ação Prática** da sua carta **diretamente para resolver a cena que o Vigia acabou de contar**, e ambos aplicam o **2º Desfecho na Regra**!
-
-3. **Inversão na Próxima Rodada:**
-   - Na rodada seguinte, vocês **trocam de papel**: quem foi o Vigia passa a ser o Eco (puxando a penúltima carta de baixo) e quem foi o Eco passa a ser o Vigia (puxando a 2ª carta de cima)!
+O Colapso não representa dano, risco ou obrigação na vida real. É apenas um estado ficcional.
 
 ---
 
-## 1.5. Exemplos Práticos na Vida Real (Passo a Passo)
+## 1.3. O Deck do Mundo: 42 cartas
 
-### Exemplo 1: Como duas cartas diferentes (`6♣` no Topo + `7♠` no Fundo) se encaixam perfeitamente Em Dupla
-Imagine que vocês estão jogando o tema **Zona de Quarentena (Zumbis)**.
-- O **Jogador A** escolheu o naipe de **`♣ Paus`** (tem no bolso o Rei `K♣`, a Dama `Q♣` em pé e o Valete `J♣` fechado).
-- O **Jogador B** escolheu o naipe de **`♠ Espadas`** (tem no bolso o Rei `K♠`, a Dama `Q♠` em pé e o Valete `J♠` fechado).
+O Deck do Mundo contém:
+- **40 cartas numeradas:** Ás a 10 de cada um dos quatro naipes (`♠, ♥, ♦, ♣`);
+- **1 Coringa Claro (`★`)**;
+- **1 Coringa Escuro (`💀`)**.
 
-Veja como a rodada acontece na vida real:
-1. **Saque do Vigia (Topo = `6♣ — Marca de Mão Ensanguentada na Porta`):**
-   - Às 14h, o Jogador A é o **☀ Vigia**. Ele puxa a carta de cima do baralho (`6♣`) e lê apenas o bloco **☀ TOPO**:
-     - *1º Gatilho Real:* *"Ao tocar numa maçaneta, corrimão, interruptor ou porta de entrada."*
-     - *2º Evento:* *"Um grupo de sobreviventes fanáticos que adoram a horda marcou a porta do esconderijo de vocês com tinta fosforescente."*
-2. **O Gatilho acontece na rotina:**
-   - Às 14h20, o Jogador A vai abrir a porta da sala no trabalho/casa e toca na maçaneta. O gatilho disparou!
-   - Ele manda um áudio rápido para o Jogador B: *"Cara, acabei de abrir a porta aqui e vi uma marca de mão com tinta fosforescente na madeira... Os fanáticos da horda descobriram nosso esconderijo!"*
-   - Repare: o Jogador A **não faz ideia** de qual carta está no fundo do baralho nem de como o Jogador B terá que reagir!
-3. **Saque e Reação do Eco (Fundo = `7♠ — Cachorro Latindo para o Vazio`):**
-   - O Jogador B recebe o áudio e puxa a última carta de **baixo** do baralho dele (`7♠`), lendo apenas o bloco **☾ FUNDO**:
-     - *1º Ação Prática:* *"Diante da cena que o Vigia acabou de narrar, decida em uma frase curta: você parte para o confronto direto agora ou tranca/isola a passagem para ganhar tempo?"*
-     - *2º Regra:* *"Se confrontar: Rei de ♠ vence sem custo; outros naipes viram a Dama (Q ⟳). Se isolar e recuar: escapam agora, mas na próxima falha você vira a Dama (Q ⟳) e o Valete (J)."*
-4. **Resolução com o Trio de Bolso:**
-   - O Jogador B conecta a manobra do `7♠` à cena da porta marcada do `6♣` e responde em uma frase curta: *"Eu não vou esperar eles voltarem à noite: abro a porta agora mesmo e parto para o confronto contra o batedor dos fanáticos que deixou a tinta!"*
-   - Como o Jogador B tem o **Rei de Espadas (`K♠`)** aberto no bolso, ele tem a **Sinergia de `♠`**: ele vence o confronto **sem custo nenhum** (não precisa deitar sua Dama `Q♠`)!
-   - Se o Jogador B fosse de outro naipe (ex.: `♥ Copas`) e escolhesse atacar, ele teria que **girar sua Dama em 90° (`Q♥ ⟳`)** para vencer sem se ferir.
+As 12 figuras do Trio de Bolso não entram nesse deck.
+
+### Partida presencial
+Embaralhem as 42 cartas e coloquem o baralho no centro. Um único baralho é suficiente.
+
+### Partida à distância: Cifra do Dia
+A Cifra do Dia permite que dois baralhos independentes comecem na mesma ordem, sem aplicativo ou chamada de vídeo. Os dois participantes devem usar a mesma data local e executar os passos exatamente da mesma maneira.
+
+- **Ordem-base:** organizem as cartas nesta sequência: Ás a 10 de Espadas (`♠`), Ás a 10 de Copas (`♥`), Ás a 10 de Ouros (`♦`), Ás a 10 de Paus (`♣`), Coringa Claro (`★`) e Coringa Escuro (`💀`).
+- **Corte do dia:**
+  1. Separem do topo um bloco com a quantidade de cartas igual ao dia do mês.
+  2. Coloquem esse bloco inteiro no fundo, sem inverter sua ordem.
+  3. Distribuam as cartas restantes, uma por vez, em três montes: Esquerda, Centro e Direita, repetindo sempre essa sequência.
+  4. Ao distribuir, cada carta nova deve ser colocada sobre o monte correspondente.
+  5. Reúnam os montes nesta ordem: coloquem o monte Centro sobre o monte Esquerda; depois coloquem esse conjunto sobre o monte Direita.
+- **Corte do mês:**
+  1. Separem do topo um bloco com a quantidade de cartas igual ao número do mês.
+  2. Coloquem esse bloco inteiro no fundo, sem inverter sua ordem.
+  3. Distribuam as cartas, uma por vez, alternando entre dois montes: Esquerda e Direita.
+  4. Coloquem o monte Esquerda sobre o monte Direita.
+
+Os dois participantes devem manter a orientação do baralho e a ordem de recolhimento idênticas. Não embaralhem depois da Cifra do Dia.
+
+*Exemplo:* em 7 de novembro, o corte do dia usa 7 cartas e o corte do mês usa 11 cartas.
+
+> **Nota importante:** A Cifra do Dia sincroniza a ordem inicial. Ela não significa que os dois jogadores terão o mesmo estado de baralho depois de começarem a retirar cartas: cada um retira cartas de uma extremidade diferente, conforme a sequência de turnos.
 
 ---
 
-### Exemplo 2: Como jogar no Modo Solo (Diário / Oráculo)
-Jogando sozinho, você usa um único baralho e faz o papel de protagonista e cronista:
-1. **1º Passo (Abrir a Cena no Topo):** No início do seu turno, puxe **apenas a 1ª carta de CIMA** e leia o bloco **☀ TOPO**. Guarde a carta e siga sua rotina até o **Gatilho Real** acontecer diante de você.
-2. **2º Passo (Descobrir o Desafio no Fundo):** Assim que o gatilho acontecer no seu dia, puxe a **última carta de BAIXO** do baralho e leia o bloco **☾ FUNDO**. Agora você descobre qual manobra prática precisa executar para resolver aquele evento!
-3. **3º Passo (Registro de Diário):** Sempre que a carta pedir para "enviar ao parceiro" (uma foto, um áudio de 10 segundos ou uma frase curta), você registra isso no seu **Diário de Campanha** (um grupo consigo mesmo no WhatsApp, bloco de notas ou gravador de voz do celular). Se não puder cumprir a tarefa antes do próximo turno, gire sua **Dama (`Q ⟳`)** ou revele seu **Valete (`J`)**!
+## 1.4. Como funciona uma rodada: Vigia e Eco
+
+Em dupla, cada rodada combina duas cartas diferentes para criar uma cena e uma resposta.
+
+### Primeiro papel: Vigia (`☀ Topo`)
+1. O Vigia retira a carta disponível no topo do próprio baralho.
+2. Lê somente a coluna **☀ Se tirar do topo**.
+3. Aguarda o gatilho indicado. Quando ele acontecer, ou quando usar um gatilho substituto permitido, envia ao parceiro uma mensagem curta narrando o evento ficcional.
+4. O Vigia não revela nem consulta a carta que está no fundo.
+
+### Segundo papel: Eco (`☾ Fundo`)
+1. Depois de receber a cena, o Eco retira a carta disponível no fundo do próprio baralho.
+2. Lê somente a coluna **☾ Se tirar do fundo**.
+3. Aplica a ação sugerida à cena narrada pelo Vigia.
+4. Os jogadores resolvem o resultado usando a regra da carta e seus Trios de Bolso.
+
+### Alternância
+Na rodada seguinte, os papéis se invertem:
+- quem foi Vigia passa a retirar do fundo e será Eco;
+- quem foi Eco passa a retirar do topo e será Vigia.
+
+Cada jogador usa seu próprio baralho sincronizado. Não se deve retirar duas cartas do mesmo baralho compartilhado em uma partida remota.
+
+### Prazo dos gatilhos
+Para evitar que a campanha fique parada:
+- o gatilho original pode ser aguardado por **até 2 horas** a partir do momento em que a carta foi comprada;
+- se não acontecer, o Vigia pode escolher um **gatilho substituto simples e seguro** relacionado ao tema da carta;
+- se não houver um substituto adequado, a carta é considerada **adiada**: não há penalidade, e a rodada pode ser retomada mais tarde;
+- nenhum jogador precisa interromper uma atividade, criar uma situação artificial ou correr riscos para ativar um gatilho.
+
+O grupo pode escolher antes da campanha um ritmo mais lento, como uma rodada por manhã e outra à noite. O importante é combinar o ritmo e mantê-lo.
+
+---
+
+## 1.5. Resolução de uma cena: ordem de prioridade
+
+Quando a ação do Eco for concluída, resolvam os efeitos nesta ordem:
+
+1. **Segurança e limites reais:** qualquer jogador pode adaptar, substituir ou ignorar uma ação que seja insegura, invasiva ou inconveniente, sem penalidade.
+2. **Ação do Eco:** o jogador declara o que seu personagem tenta fazer.
+3. **Efeito específico da carta:** leiam o desfecho indicado na carta do Eco. Se houver uma condição, verifiquem se ela foi cumprida.
+4. **Sinergia do Rei:** aplique a habilidade do Rei do jogador envolvido, se a condição de naipe for atendida.
+5. **Dama:** o jogador pode ativar uma Dama pronta se o texto da carta ou a regra permitir.
+6. **Consequência:** se a condição não foi cumprida e nenhuma proteção foi usada, aplique a falha indicada.
+7. **Valete e Colapso:** revele o Valete ou verifique o Colapso, quando aplicável.
+
+> **Regra de desempate:** o texto específico da carta prevalece sobre a regra geral somente quando disser claramente que substitui, cancela ou modifica aquela regra. Na ausência dessa indicação, vale a ordem de prioridade acima. Um efeito nunca pode obrigar alguém a fazer algo inseguro na vida real.
+
+### Sucesso, falha e custo
+- **Sucesso:** a ação narrativa atende à condição da carta. Aplique o benefício indicado.
+- **Sucesso com custo:** a ação funciona, mas o jogador precisa gastar uma Dama ou aceitar outra consequência descrita.
+- **Falha:** a condição não é atendida. Se houver Dama pronta e a regra permitir, o jogador pode gastá-la para evitar a consequência. Caso contrário, aplique o efeito de falha e verifique o Valete.
+- **Escolha narrativa:** quando uma carta apresenta duas opções, o jogador escolhe uma delas. Não é necessário executar uma ação física; uma decisão narrada ou mensagem pode resolver a cena.
+
+---
+
+## 1.6. Exemplo de partida em dupla
+
+Imagine uma partida de *Zona de Quarentena*:
+- **Jogador A** tem o Rei de Paus (`K♣`) e está no papel de **Vigia**.
+- **Jogador B** tem o Rei de Espadas (`K♠`) e está no papel de **Eco**.
+- O Vigia compra `6♣` e lê o texto do topo.
+- Ao tocar normalmente numa maçaneta durante o dia, o gatilho acontece. Não é necessário procurar uma porta especial nem fotografar o local.
+- O Vigia manda: *"A marca de uma mão ensanguentada apareceu na porta do abrigo. Os fanáticos descobriram onde estamos."*
+- O Eco compra `7♠` do fundo e lê a reação.
+- A carta pede que ele escolha entre confronto narrativo ou recuo estratégico.
+- O Eco escolhe recuar e explica como o personagem protege a dupla.
+- O efeito específico da carta é aplicado. Se houver condição de naipe, o Rei de Espadas pode ativar sua sinergia. Se a carta exigir custo, o Eco decide se gasta sua Dama pronta.
+- A cena termina e, na próxima rodada, os papéis se invertem.
+
+A ação ocorre na ficção. Nenhum jogador precisa abrir portas desconhecidas, confrontar pessoas, procurar locais perigosos ou sair do caminho.
+
+---
+
+## 1.7. Modo solo
+
+No modo solo, o jogador controla o protagonista e o narrador:
+
+1. Retire uma carta do topo e leia apenas a coluna **☀ Topo**.
+2. Aguarde o gatilho por até 2 horas ou escolha um substituto seguro.
+3. Quando a cena for ativada, retire uma carta do fundo e leia a coluna **☾ Fundo**.
+4. Responda à ação em voz, texto ou diário.
+5. Resolva o efeito usando o Trio de Bolso.
+6. Registre uma ou duas frases sobre o que aconteceu na campanha.
+
+No modo solo, o jogador pode adaptar qualquer instrução originalmente dirigida ao parceiro para uma resposta no diário. Se uma ação não fizer sentido sozinho, substitua-a por uma escolha narrativa equivalente.
+
+---
+
+## 1.8. Regras de segurança, privacidade e acessibilidade
+
+**Limiar deve caber na vida real, não colocar a vida real em risco.**
+
+- Nunca jogue enquanto dirige, pedala, atravessa ruas, opera máquinas ou realiza uma tarefa que exija atenção.
+- Não corra, suba em lugares, toque em objetos perigosos, mexa em instalações elétricas, abra portas desconhecidas ou se aproxime de pessoas/animais por causa de uma carta.
+- Não fotografe nem grave terceiros sem consentimento. Não compartilhe endereço, localização em tempo real, placas, rostos ou informações privadas.
+- Não faça desafios que envolvam prender a respiração, ingerir substâncias, consumir alimentos, gastar dinheiro ou alterar medicação.
+- Não interrompa trabalho, estudo, sono, compromissos ou cuidados com outras pessoas.
+- Qualquer jogador pode dizer **"pausa"** ou **"passo"** a qualquer momento. Isso não gera punição, perda de personagem ou discussão.
+- **Toda ação física pode ser substituída por uma descrição, escolha ou mensagem.**
+- Quando uma carta sugerir foto, áudio, toque, deslocamento, gesto ou uso de um objeto, isso é apenas um recurso opcional de ambientação. A versão padrão é narrar ou escrever o que o personagem faria. Nunca é necessário fotografar o ambiente real, tocar em algo, mover-se ou usar um objeto para validar uma jogada.
+- Prazos curtos impressos em cartas (por exemplo, responder em 10 minutos) são ritmo ficcional. Não se sobrepõem ao prazo-base de até 2 horas nem às pausas e prioridades da vida real.
+- Os tabus dos Valetes são brincadeiras narrativas opcionais e valem apenas dentro do jogo. Comunicação de emergência e necessidades reais sempre têm prioridade.
+
+---
+
+## 1.9. Campanha, encerramento e progressão
+
+A primeira versão deve priorizar partidas curtas e fáceis de testar. Para uma campanha inicial, recomendamos:
+- **Campanha curta:** 6 rodadas (3 cenas iniciadas por cada jogador).
+- **Campanha padrão:** 12 rodadas.
+- **Campanha longa:** 18 rodadas ou até o grupo decidir concluir o arco narrativo.
+
+Ao fim da campanha, cada jogador responde:
+1. **Qual foi a cena mais marcante?**
+2. **Qual escolha mudou a história?**
+3. **Qual personagem ou ameaça merece voltar em outra campanha?**
+
+A campanha termina por conclusão narrativa, por Colapso dos dois personagens ou por decisão conjunta de encerrar. Não é necessário esgotar as 42 cartas.
+
+### Progressão opcional: Marcos
+Para não adicionar complexidade ao primeiro jogo, a progressão é opcional:
+- **Após 6 rodadas concluídas:** cada jogador escolhe uma frase de título para seu personagem (por exemplo, *"O Sobrevivente do Viaduto"*).
+- **Após 12 rodadas:** cada jogador pode escolher uma habilidade narrativa pequena, aprovada pelo grupo, que só pode ser usada uma vez na próxima campanha.
+- **Após 18 rodadas:** o grupo desbloqueia um epílogo especial ou cria uma carta de memória para a próxima campanha.
+
+Esses marcos não aumentam atributos nem criam pontos extras. São recompensas narrativas simples, fáceis de acompanhar sem fichas.
+
+---
+
+## 1.10. Recomendações para testar e equilibrar o jogo
+
+Antes de publicar ou produzir uma tiragem, teste o jogo com pessoas que não participaram da criação. Registrem, no mínimo:
+- quanto tempo alguém leva para explicar e começar;
+- quantos gatilhos são ativados dentro do prazo;
+- quantas vezes os jogadores precisam consultar uma regra;
+- quantas cartas parecem fortes demais, fracas demais ou confusas;
+- se a alternância Vigia/Eco fica clara;
+- se a partida gera vontade de jogar outra campanha.
+
+**Critério inicial de sucesso:** um novo grupo deve conseguir começar em até cinco minutos com o resumo rápido, concluir pelo menos seis rodadas e explicar com as próprias palavras como funcionam Rei, Dama, Valete, Vigia e Eco.
+
+Não se deve declarar o jogo "balanceado" antes desses testes. Os efeitos das cartas ainda precisam de validação prática.
 
 ---
 
@@ -146,7 +273,7 @@ Após executar a **Cifra do Dia `07/11`** (Cortar `7` cartas em 3 montes + Corta
   - **1º Gatilho na Rotina:** *Ao ouvir um avião passando no céu, um estrondo ou ver o pôr do sol vermelho.*
   - **2º Evento que o Vigia narra:** *"O alto comando desistiu da cidade. Sirenes de ataque aéreo anunciam a incineração total da Zona de Quarentena em minutos."*
 - **Última Carta de Baixo (`☾ Eco`):** **`9♣` — Mutação Alfa: O Colosso da Avenida**
-  - **1º Como o Eco reage à cena do Vigia:** *Combine com o parceiro uma armadilha usando eletricidade, fogo ou altura do seu ambiente atual para derrubar a ameaça narrada pelo Vigia.*
+  - **1º Como o Eco reage à cena do Vigia:** *Imagine e descreva uma armadilha fictícia para deter a ameaça. Não use eletricidade, fogo, altura ou objetos reais.*
   - **2º Resolução na Regra:** *Exige virar a Dama (Q ⟳) de um dos jogadores (ou ter Rei de ♠ ou ♣) para vencer sem revelar o Valete (J).*
 
 ---
@@ -180,9 +307,9 @@ As **42 cartas abaixo** formam o **Deck do Mundo**.
 
 | Carta | Cena & Tipo | ☀ SE TIRAR DO TOPO (Papel de Vigia — A Cena) | ☾ SE TIRAR DO FUNDO (Papel de Eco — A Reação) | Citação (Flavor) |
 | :---: | :--- | :--- | :--- | :--- |
-| **`A♠`** | **🚨 Sirene do Bloqueio Militar**<br>*(Jornada · Espadas (Patrulha & Lâmina))* | **1º Gatilho Real:** 👁 Ao ouvir qualquer sirene, buzina prolongada ou alarme de carro/celular no seu dia.<br><br>**2º O que acontece (Narre ao parceiro):** O perímetro do exército caiu a três quadras daqui. Corredores infectados avançam em disparada pelo viaduto. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Mande uma foto do ponto mais protegido ou elevado onde você está agora e diga como usa esse local para proteger a dupla do perigo narrado pelo Vigia.<br><br>**2º Desfecho na Regra:** Sucesso se responder em menos de 10 minutos (ou se seu Rei for ♠). Caso contrário, vire sua Dama (Q ⟳) para conter o avanço. | *"Quando a sirene para de tocar, não significa que o perigo passou — significa que o operador morreu."* |
-| **`2♠`** | **🪟 Vidro Estilhaçado no Corredor**<br>*(Jornada · Espadas (Patrulha & Lâmina))* | **1º Gatilho Real:** 👁 Ao pisar em uma superfície barulhenta ou ver uma janela/porta de vidro perto de você.<br><br>**2º O que acontece (Narre ao parceiro):** Alguém quebrou a vitrine da farmácia abaixo do esconderijo. Dois estaladores farejam o chão coberto de cacos. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Para tirar a dupla da cena do Vigia em silêncio, envie um áudio sussurrando uma instrução tática curta sem nenhum barulho de fundo.<br><br>**2º Desfecho na Regra:** Se o áudio tiver ruído alto ou hesitação, revele seu Valete (J). Se seu Rei for ♠ ou ♣, você passa invisível. | *"Um único fragmento de cristal sob a bota vale mais que um tiro de escopeta no silêncio."* |
-| **`3♠`** | **🔦 Ronda no Estacionamento Subterrâneo**<br>*(Jornada · Espadas (Patrulha & Lâmina))* | **1º Gatilho Real:** 👁 Ao passar perto de carros estacionados, garagem ou rua com pouca iluminação.<br><br>**2º O que acontece (Narre ao parceiro):** O alarme de uma caminhonete abandonada dispara sozinho, atraindo silhuetas trôpegas entre as colunas de concreto. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Descreva ou fotografe o obstáculo ou estrutura mais próxima de você que serviria de cobertura para a cena que o Vigia narrou.<br><br>**2º Desfecho na Regra:** Vire sua Dama (Q ⟳) para neutralizar o perigo sem ser visto (se seu Rei for ♠ Espadas, você resolve sem precisar virar a Dama). | *"Nunca entre num carro sem antes olhar o banco de trás."* |
+| **`A♠`** | **🚨 Sirene do Bloqueio Militar**<br>*(Jornada · Espadas (Patrulha & Lâmina))* | **1º Gatilho Real:** 👁 Ao ouvir qualquer sirene, buzina prolongada ou alarme de carro/celular no seu dia.<br><br>**2º O que acontece (Narre ao parceiro):** O perímetro do exército caiu a três quadras daqui. Corredores infectados avançam em disparada pelo viaduto. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Descreva, sem revelar sua localização, um tipo de abrigo fictício que protegeria a dupla do perigo narrado pelo Vigia.<br><br>**2º Desfecho na Regra:** Sucesso se responder em menos de 10 minutos (ou se seu Rei for ♠). Caso contrário, vire sua Dama (Q ⟳) para conter o avanço. | *"Quando a sirene para de tocar, não significa que o perigo passou — significa que o operador morreu."* |
+| **`2♠`** | **🪟 Vidro Estilhaçado no Corredor**<br>*(Jornada · Espadas (Patrulha & Lâmina))* | **1º Gatilho Real:** 👁 Ao pisar em uma superfície barulhenta ou ver uma janela/porta de vidro perto de você.<br><br>**2º O que acontece (Narre ao parceiro):** Alguém quebrou a vitrine da farmácia abaixo do esconderijo. Dois estaladores farejam o chão coberto de cacos. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Para tirar a dupla da cena do Vigia em silêncio, escreva uma instrução tática curta, como se estivesse sussurrando para a equipe.<br><br>**2º Desfecho na Regra:** Se o áudio tiver ruído alto ou hesitação, revele seu Valete (J). Se seu Rei for ♠ ou ♣, você passa invisível. | *"Um único fragmento de cristal sob a bota vale mais que um tiro de escopeta no silêncio."* |
+| **`3♠`** | **🔦 Ronda no Estacionamento Subterrâneo**<br>*(Jornada · Espadas (Patrulha & Lâmina))* | **1º Gatilho Real:** 👁 Ao passar perto de carros estacionados, garagem ou rua com pouca iluminação.<br><br>**2º O que acontece (Narre ao parceiro):** O alarme de uma caminhonete abandonada dispara sozinho, atraindo silhuetas trôpegas entre as colunas de concreto. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Descreva um obstáculo fictício que serviria de cobertura na cena narrada pelo Vigia.<br><br>**2º Desfecho na Regra:** Vire sua Dama (Q ⟳) para neutralizar o perigo sem ser visto (se seu Rei for ♠ Espadas, você resolve sem precisar virar a Dama). | *"Nunca entre num carro sem antes olhar o banco de trás."* |
 | **`4♠`** | **🎯 Atirador no Terraço Vizinho**<br>*(Jornada · Espadas (Patrulha & Lâmina))* | **1º Gatilho Real:** 👁 Ao ver o topo de um prédio alto, janela no andar superior ou poste de câmera.<br><br>**2º O que acontece (Narre ao parceiro):** Um sobrevivente hostil controla o cruzamento com um rifle de caça e exige pedágio para deixar vocês passarem. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Aponte ou fotografe qual objeto perto de você jogaria longe como isca para distrair a ameaça narrada pelo Vigia.<br><br>**2º Desfecho na Regra:** Se seu Rei for de ♠ ou ♦, a distração funciona sem custo. Outros naipes precisam virar a Dama (Q ⟳) ou revelar o Valete (J). | *"Os vivos aprenderam a ser piores que os mortos na segunda semana do surto."* |
 | **`5♠`** | **⛓️ Portão de Grade Enferrujada**<br>*(Jornada · Espadas (Patrulha & Lâmina))* | **1º Gatilho Real:** 👁 Ao ver qualquer portão de ferro, cerca, catraca ou grade de segurança.<br><br>**2º O que acontece (Narre ao parceiro):** O peso de vinte infectados está entortando o cadeado principal do refúgio. Os parafusos estão cedendo. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Mande uma mensagem rápida dizendo qual móvel ou estrutura pesada perto de você usaria como barricada contra o perigo narrado pelo Vigia.<br><br>**2º Desfecho na Regra:** Se responder rápido, a barricada segura a cena. Se demorar ou recusar, vire sua Dama (Q ⟳) ou revele seu Valete (J). | *"Eles não sentem dor nos dedos quebrados; só empurram até o ferro chorar."* |
 | **`6♠`** | **🗺️ Faca Cravada no Mapa**<br>*(Jornada · Espadas (Patrulha & Lâmina))* | **1º Gatilho Real:** 👁 Ao olhar para uma placa de rua, tela de GPS, mapa ou letreiro de direção.<br><br>**2º O que acontece (Narre ao parceiro):** O posto avançado para onde vocês caminhavam foi marcado com o símbolo de "Bio-Perigo Total — Fogo Artilheiro". | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Para contornar o problema que o Vigia narrou, escolha uma direção nova (Norte, Sul, Leste ou Oeste) ou uma rua real próxima e avise o parceiro.<br><br>**2º Desfecho na Regra:** Muda a rota com segurança. Se o Eco estiver com o Valete (J) aberto, o esforço extra exige virar a Dama (Q ⟳). | *"A ponte segura de ontem é o abatedouro de hoje."* |
@@ -218,7 +345,7 @@ As **42 cartas abaixo** formam o **Deck do Mundo**.
 | **`6♣`** | **🖐️ Marca de Mão Ensanguentada na Porta**<br>*(Jornada · Paus (Sombra & Mutação))* | **1º Gatilho Real:** 👁 Ao tocar numa maçaneta, corrimão, interruptor ou porta de entrada.<br><br>**2º O que acontece (Narre ao parceiro):** Um grupo de sobreviventes fanáticos que adoram a horda marcou a porta do esconderijo de vocês com tinta fosforescente. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Para despistar a ameaça que o Vigia narrou, diga como você apaga seus rastros ou que pista falsa deixa no local.<br><br>**2º Desfecho na Regra:** Despista o perigo com sucesso! Se você estiver com o Valete (J) aberto, precisa virar sua Dama (Q ⟳) para não deixar vestígios. | *"Eles pintam os dentes de preto e abrem as trancas dos abrigos durante a madrugada."* |
 | **`7♣`** | **🌧️ Chuva Cinzenta de Cinzas Humanas**<br>*(Jornada · Paus (Sombra & Mutação))* | **1º Gatilho Real:** 👁 Ao olhar para as nuvens, sentir vento no rosto ou ver chuva/neblina.<br><br>**2º O que acontece (Narre ao parceiro):** O céu escurece ao meio-dia com a fuligem dos fornos da quarentena. Os infectados ficam agitados e mais velozes na penumbra. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Cubra a boca/nariz com a gola ou mão por um instante e mande uma mensagem curta descrevendo o ar para guiar o Vigia pela fumaça.<br><br>**2º Desfecho na Regra:** Evita a contaminação e resolve a cena. Se seu Rei for de ♣ Paus, você também desvira a Dama (Q) do parceiro. | *"A neve que cai em novembro não derrete na língua; ela tem gosto de ferro e despedida."* |
 | **`8♣`** | **🪞 Espelho Trincado no Banheiro do Posto**<br>*(Jornada · Paus (Sombra & Mutação))* | **1º Gatilho Real:** 👁 Ao ver seu reflexo num espelho, vidro escuro, janela ou tela desligada.<br><br>**2º O que acontece (Narre ao parceiro):** Ao lavar o rosto, você percebe pelo reflexo trincado que uma figura parada no canto do banheiro não estava morta de verdade. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Reflexo de sobrevivência para salvar o Vigia: sem olhar para trás onde você está agora, mande uma mensagem instantânea dizendo: "Saia daí agora!".<br><br>**2º Desfecho na Regra:** Reflexo rápido salva o Vigia sem custo! Se demorar a responder, vire a Dama (Q ⟳) ou revele o Valete (J). | *"Os mais perigosos são os que ficam imóveis por dias esperando alguém abaixar a guarda."* |
-| **`9♣`** | **☣️ Mutação Alfa: O Colosso da Avenida**<br>*(Jornada · Paus (Sombra & Mutação))* | **1º Gatilho Real:** 👁 Ao ouvir um barulho pesado (caminhão, obra, trovão, porta batendo forte).<br><br>**2º O que acontece (Narre ao parceiro):** Uma variante blindada do vírus derruba um poste de luz inteiro bloqueando a rua. Balas comuns ricocheteiam nele. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Combine com o parceiro uma armadilha usando eletricidade, fogo ou altura do seu ambiente atual para derrubar a ameaça narrada pelo Vigia.<br><br>**2º Desfecho na Regra:** Exige virar a Dama (Q ⟳) de um dos jogadores (ou ter Rei de ♠ ou ♣) para vencer sem revelar o Valete (J). | *"A evolução levou milhões de anos para nos erguer, e seis semanas para criar nosso substituto."* |
+| **`9♣`** | **☣️ Mutação Alfa: O Colosso da Avenida**<br>*(Jornada · Paus (Sombra & Mutação))* | **1º Gatilho Real:** 👁 Ao ouvir um barulho pesado (caminhão, obra, trovão, porta batendo forte).<br><br>**2º O que acontece (Narre ao parceiro):** Uma variante blindada do vírus derruba um poste de luz inteiro bloqueando a rua. Balas comuns ricocheteiam nele. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Imagine e descreva uma armadilha fictícia para deter a ameaça. Não use eletricidade, fogo, altura ou objetos reais.<br><br>**2º Desfecho na Regra:** Exige virar a Dama (Q ⟳) de um dos jogadores (ou ter Rei de ♠ ou ♣) para vencer sem revelar o Valete (J). | *"A evolução levou milhões de anos para nos erguer, e seis semanas para criar nosso substituto."* |
 | **`10♣`** | **⛪ A Catedral Silenciosa da Mente Colmeia**<br>*(Jornada · Paus (Sombra & Mutação))* | **1º Gatilho Real:** 👁 Ao entrar num prédio amplo, ouvir música distante ou notar um silêncio súbito.<br><br>**2º O que acontece (Narre ao parceiro):** Milhares de infectados estão parados em círculo perfeito dentro da catedral destelhada, olhando para uma flor que cresce no altar. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Diante da cena do Vigia, vocês descobrem um segredo da infecção: envie um áudio ou texto dizendo se vocês guardam essa prova ou se queimam tudo.<br><br>**2º Desfecho na Regra:** Clímax de ♣: Revela a verdade da Zona de Quarentena e vira para baixo (cura) qualquer Valete (J) ativo! | *"Não era o fim da vida na Terra; era o nascimento doloroso de outra coisa."* |
 | **`★`** | **🕊️ Comboio de Evacuação da ONU**<br>*(Coringa Claro — Presságio Raro)* | **1º Gatilho Real:** 👁 Ao ver uma luz verde (semáforo, LED, placa de saída) ou um pássaro voando.<br><br>**2º O que acontece (Narre ao parceiro):** Um foguete sinalizador verde corta o céu! Uma zona segura flutuante no porto abriu corredor humanitário por uma hora. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Celebre com o parceiro: mandem juntos uma mensagem confirmando que alcançaram o píer e o que levaram da velha vida.<br><br>**2º Desfecho na Regra:** Presságio Claro (★): Ambos os jogadores desviram suas Damas (Q) e ocultam seus Valetes (J) imediatamente! | *"O navio-hospital apitou três vezes na baía. Pela primeira vez em meses, o mar parecia infinito."* |
 | **`💀`** | **☢️ Bombardeio Termobárico ("Protocolo Tabula Rasa")**<br>*(Coringa Escuro — Cataclismo)* | **1º Gatilho Real:** 👁 Ao ouvir um avião passando no céu, um estrondo ou ver o pôr do sol vermelho.<br><br>**2º O que acontece (Narre ao parceiro):** O alto comando desistiu da cidade. Sirenes de ataque aéreo anunciam a incineração total da Zona de Quarentena em minutos. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Decisão imediata de sacrifício: um de vocês precisa trancar a comporta do bunker pelo lado de fora ou gastar seu último recurso.<br><br>**2º Desfecho na Regra:** Cataclismo (💀): Um dos jogadores deve virar sua Dama (Q ⟳) E revelar seu Valete (J) para salvar o parceiro da onda de choque. | *"Quando o horizonte inteiro virou ouro incandescente, seguramos a porta do abrigo até o aço derreter."* |
@@ -404,28 +531,76 @@ As **42 cartas abaixo** formam o **Deck do Mundo**.
 | **`6♥`** | **📮 Caixa de Correio Cheia de Confissões**<br>*(Jornada · Copas (Memória & Despedida))* | **1º Gatilho Real:** 👁 Ao ver uma caixa, gaveta, bolsa ou envelope fechado.<br><br>**2º O que acontece (Narre ao parceiro):** As pessoas da cidade deixaram bilhetes sinceros nas portas e bancos de praça dizendo tudo o que calaram a vida inteira. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Conte ao parceiro uma coisa sincera e bonita que seu personagem sempre quis dizer desde o começo da jornada.<br><br>**2º Desfecho na Regra:** A verdade liberta: desvira uma Dama (Q) virada de qualquer um dos dois jogadores. | *"No fim do mundo, a timidez parece a maior perda de tempo da história humana."* |
 | **`7♥`** | **🪁 Criança Soltando Pipa na Gravidade Zero**<br>*(Jornada · Copas (Memória & Despedida))* | **1º Gatilho Real:** 👁 Ao ver algo voando (pássaro, folha ao vento, nuvem) ou uma cor viva.<br><br>**2º O que acontece (Narre ao parceiro):** No topo do morro, uma pipa de papel colorido sobe sem precisar de vento, puxada suavemente pela maré gravitacional do eclipse. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Aponte um detalhe pequeno de beleza ou leveza que você consegue ver ao seu redor agora mesmo.<br><br>**2º Desfecho na Regra:** Protege a esperança da dupla contra qualquer efeito de desespero na próxima carta. | *"Mesmo quando os planetas saem dos trilhos, alguém ainda lembra como brincar."* |
 | **`8♥`** | **🌱 Cápsula do Tempo Enterrada sob a Árvore**<br>*(Jornada · Copas (Memória & Despedida))* | **1º Gatilho Real:** 👁 Ao ver terra, jardim, vaso de planta ou chão de pedra.<br><br>**2º O que acontece (Narre ao parceiro):** Vocês encontram uma caixa de metal hermética pronta para ser lacrada nas raízes de uma figueira centenária. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Escolha um objeto real que está com você agora para deixar dentro da cápsula como testemunho da humanidade.<br><br>**2º Desfecho na Regra:** O legado está salvo! Jogadores de ♥ ou ♦ desviram sua Dama (Q). | *"Colocamos um relógio de pulso, duas moedas, uma fita cassete e a foto de nós dois."* |
-| **`9♥`** | **💃 Dança Lenta no Asfalto Vazio**<br>*(Jornada · Copas (Memória & Despedida))* | **1º Gatilho Real:** 👁 Ao ver uma rua vazia, corredor livre ou ouvir uma batida de música.<br><br>**2º O que acontece (Narre ao parceiro):** Os semáforos piscam em amarelo intermitente na avenida deserta. Não há mais pressa para chegar a lugar nenhum. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Pare por 10 segundos onde estiver, feche os olhos e mande uma mensagem convidando o parceiro para essa última valsa.<br><br>**2º Desfecho na Regra:** Remove qualquer Valete (J) ativo na mesa e sincroniza os corações da dupla. | *"O mundo inteiro parou o trânsito só para que tivéssemos salão suficiente."* |
+| **`9♥`** | **💃 Dança Lenta no Asfalto Vazio**<br>*(Jornada · Copas (Memória & Despedida))* | **1º Gatilho Real:** 👁 Ao ver uma rua vazia, corredor livre ou ouvir uma batida de música.<br><br>**2º O que acontece (Narre ao parceiro):** Os semáforos piscam em amarelo intermitente na avenida deserta. Não há mais pressa para chegar a lugar nenhum. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Imagine a última valsa e mande uma mensagem convidando o parceiro para ela.<br><br>**2º Desfecho na Regra:** Remove qualquer Valete (J) ativo na mesa e sincroniza os corações da dupla. | *"O mundo inteiro parou o trânsito só para que tivéssemos salão suficiente."* |
 | **`10♥`** | **📚 A Biblioteca das Memórias Salvas**<br>*(Jornada · Copas (Memória & Despedida))* | **1º Gatilho Real:** 👁 Ao ver uma estante de livros, caderno aberto ou tela cheia de texto.<br><br>**2º O que acontece (Narre ao parceiro):** Vocês depositam a Fita Cassete com a crônica completa no cofre de quartzo do observatório antes que a coroa se feche. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Dê um título poético para o livro que conta a história de vocês dois neste jogo.<br><br>**2º Desfecho na Regra:** Clímax de ♥: Amor e memória vencem o apagamento! Restaura todas as Damas (Q) e Valetes (J). | *"As estrelas podem apagar uma por uma; nossa história já foi escrita fora do tempo."* |
-| **`A♦`** | **🔭 Sextante de Latão no Observatório**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao ver óculos, lente de câmera, janela redonda ou instrumento de medida.<br><br>**2º O que acontece (Narre ao parceiro):** Na cúpula astronômica, as lentes de cristal revelam uma coordenada segura onde a gravidade permanecerá estável. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Enquadre algo redondo numa foto ou descreva a vista da sua janela para calibrar o telescópio da dupla.<br><br>**2º Desfecho na Regra:** Sucesso de ♦ Ouros: Desvira a Dama (Q) de ambos os jogadores imediatamente! | *"A matemática não mente, mesmo quando o céu decide dobrar sobre si mesmo."* |
+| **`A♦`** | **🔭 Sextante de Latão no Observatório**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao ver óculos, lente de câmera, janela redonda ou instrumento de medida.<br><br>**2º O que acontece (Narre ao parceiro):** Na cúpula astronômica, as lentes de cristal revelam uma coordenada segura onde a gravidade permanecerá estável. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Descreva um objeto redondo ou uma paisagem imaginária para calibrar o telescópio da dupla.<br><br>**2º Desfecho na Regra:** Sucesso de ♦ Ouros: Desvira a Dama (Q) de ambos os jogadores imediatamente! | *"A matemática não mente, mesmo quando o céu decide dobrar sobre si mesmo."* |
 | **`2♦`** | **🌡️ Gotas de Mercúrio Subindo no Ar**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao ver um copo de água, gotas na pia ou objeto prateado/metálico.<br><br>**2º O que acontece (Narre ao parceiro):** Pequenas esferas prateadas flutuam na altura do peito, apontando o fluxo magnético que leva ao abrigo subterrâneo. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Fotografe ou toque em um objeto prateado/metálico perto de você para seguir a trilha magnética.<br><br>**2º Desfecho na Regra:** Desvira a Dama (Q) do jogador Eco e estabiliza o caminho do turno. | *"Quando o chumbo aprende a voar, basta seguir a direção para onde ele sobe."* |
 | **`3♦`** | **🪜 Escadaria que Termina no Teto**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao subir ou descer degraus, olhar para o teto ou ver um corredor.<br><br>**2º O que acontece (Narre ao parceiro):** O segundo andar do prédio dobrou espacialmente: quem sobe a escada norte sai caminhando de cabeça para baixo no salão sul. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Gire o celular ou mande uma foto com ângulo inclinado/invertido para guiar o parceiro pelo labirinto espacial.<br><br>**2º Desfecho na Regra:** Vocês decifram a dobra! Desvira a Dama (Q) do Vigia e remove o Valete de Vertigem (J♦). | *""Embaixo" e "em cima" são apenas convenções sociais que o eclipse cancelou."* |
 | **`4♦`** | **📻 Rádio de Cristal de Quartzo**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao usar fones de ouvido, caixa de som ou microfone.<br><br>**2º O que acontece (Narre ao parceiro):** Um receptor artesanal feito com fio de cobre e pedra galena consegue furar a interferência solar para conectar vocês dois. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Mande um áudio curto batendo duas vezes no microfone antes de falar: "Câmbio, frequência estabilizada".<br><br>**2º Desfecho na Regra:** Reconexão perfeita (♦): Desvira sua Dama (Q) na hora. | *"Quando os satélites caem, a velha física dos anos 1920 volta a salvar o mundo."* |
 | **`5♦`** | **🗝️ Chave do Bunker Geodésico**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao pegar suas chaves, abrir uma tranca ou ver uma porta reforçada.<br><br>**2º O que acontece (Narre ao parceiro):** Vocês encontram o cartão perfurado de acesso ao abrigo científico construído para suportar a inversão dos polos. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Mostre uma chave ou cartão real e confirme o código de abertura com o parceiro.<br><br>**2º Desfecho na Regra:** Desvira a Dama (Q) de qualquer jogador que estiver virada. | *"Três metros de chumbo e granito separam esta porta do silêncio cósmico."* |
-| **`6♦`** | **🗺️ Mapa Dobrado em Quatro Dimensões**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao atravessar uma porta entre dois cômodos ou dobrar uma folha de papel.<br><br>**2º O que acontece (Narre ao parceiro):** Abrindo a porta do armário da esquina no segundo exato, ela dá diretamente para a praia a cinquenta quilômetros dali. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Toque no batente de uma porta perto de você e diga para qual lugar do mundo você abriria essa passagem com o parceiro.<br><br>**2º Desfecho na Regra:** Teletransporte poético concluído! Desvira a Dama (Q) da dupla. | *"Se você dobrar o mapa até os dois pontos se tocarem, não precisa caminhar a linha entre eles."* |
-| **`7♦`** | **⚖️ Pêndulo de Foucault Parado no Ar**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao ver algo pendurado (luminária, cordão, chaveiro, planta pendente).<br><br>**2º O que acontece (Narre ao parceiro):** O grande pêndulo de bronze do museu parou no ponto mais alto da oscilação, provando que o planeta prendeu a respiração. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Balance levemente um objeto pendurado (ou sua mão) e avise o parceiro que você devolveu o movimento à sala.<br><br>**2º Desfecho na Regra:** Recarrega (Untap) sua Dama (Q) e impede qualquer atraso temporal neste turno. | *"Por quatro segundos inteiros, o planeta esqueceu para que lado costumava girar."* |
+| **`6♦`** | **🗺️ Mapa Dobrado em Quatro Dimensões**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao atravessar uma porta entre dois cômodos ou dobrar uma folha de papel.<br><br>**2º O que acontece (Narre ao parceiro):** Abrindo a porta do armário da esquina no segundo exato, ela dá diretamente para a praia a cinquenta quilômetros dali. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Imagine uma porta e diga para qual lugar do mundo você abriria essa passagem com o parceiro.<br><br>**2º Desfecho na Regra:** Teletransporte poético concluído! Desvira a Dama (Q) da dupla. | *"Se você dobrar o mapa até os dois pontos se tocarem, não precisa caminhar a linha entre eles."* |
+| **`7♦`** | **⚖️ Pêndulo de Foucault Parado no Ar**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao ver algo pendurado (luminária, cordão, chaveiro, planta pendente).<br><br>**2º O que acontece (Narre ao parceiro):** O grande pêndulo de bronze do museu parou no ponto mais alto da oscilação, provando que o planeta prendeu a respiração. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Narre como seu personagem devolve o movimento à sala.<br><br>**2º Desfecho na Regra:** Recarrega (Untap) sua Dama (Q) e impede qualquer atraso temporal neste turno. | *"Por quatro segundos inteiros, o planeta esqueceu para que lado costumava girar."* |
 | **`8♦`** | **💎 Prisma que Decompõe a Luz Negra**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao ver um reflexo colorido em vidro, água, tela ou óculos.<br><br>**2º O que acontece (Narre ao parceiro):** Passando o feixe da coroa solar por um cristal de lustre, vocês descobrem uma frequência luminosa que afasta o esquecimento. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Fotografe um reflexo de luz em qualquer vidro ou superfície brilhante perto de você.<br><br>**2º Desfecho na Regra:** Luz restauradora (♦): Desvira ambas as Damas (Q) e limpa o Valete de Olhos de Cinza (J♠). | *"Depois do violeta existe uma oitava cor que só aparece quando o sol se despede."* |
-| **`9♦`** | **⚡ Trilhos de Cobre da Torre Tesla**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao colocar o celular para carregar ou ver uma tomada/interruptor.<br><br>**2º O que acontece (Narre ao parceiro):** As bobinas de cobre captam a própria carga estática do eclipse para alimentar os aquecedores e luzes do refúgio. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Conecte ou toque num cabo/carregador e confirme que a reserva de energia da dupla está em 100%.<br><br>**2º Desfecho na Regra:** Desvira sua Dama (Q) e concede vantagem automática na próxima carta do Deck do Mundo. | *"Usamos a própria tempestade que veio nos apagar para manter as lâmpadas acesas."* |
+| **`9♦`** | **⚡ Trilhos de Cobre da Torre Tesla**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao colocar o celular para carregar ou ver uma tomada/interruptor.<br><br>**2º O que acontece (Narre ao parceiro):** As bobinas de cobre captam a própria carga estática do eclipse para alimentar os aquecedores e luzes do refúgio. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Descreva como a equipe recarrega a reserva de energia usando um recurso seguro da história.<br><br>**2º Desfecho na Regra:** Desvira sua Dama (Q) e concede vantagem automática na próxima carta do Deck do Mundo. | *"Usamos a própria tempestade que veio nos apagar para manter as lâmpadas acesas."* |
 | **`10♦`** | **🚀 A Arca da Linha do Horizonte**<br>*(Jornada · Ouros (Fenda & Bússola))* | **1º Gatilho Real:** 👁 Ao olhar para o horizonte distante, uma janela ampla ou estrada.<br><br>**2º O que acontece (Narre ao parceiro):** No cais onde o mar encontra o céu invertido, a embarcação blindada aguarda com as coordenadas completas da Fenda. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Trace a coordenada final com o parceiro: para qual novo mundo ou amanhecer vocês apontam o leme?<br><br>**2º Desfecho na Regra:** Clímax de ♦: Rota de salvação descoberta! Desvira todas as Damas (Q) e limpa qualquer Valete (J). | *"Quando o mar e o céu se tornam um só oceano, qualquer barco vira uma nave estelar."* |
 | **`A♣`** | **🌑 Sussurro da Coroa Solar**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao notar o silêncio de uma sala ou sentir uma vibração grave.<br><br>**2º O que acontece (Narre ao parceiro):** O eclipse emite um acorde harmônico subaudível. Quem escuta com atenção percebe que a estrela está tentando dizer algo. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Traduza em uma frase curta e misteriosa o que o sol murmurou antes de fechar o anel negro.<br><br>**2º Desfecho na Regra:** Se for ♣ Paus, você compreende o presságio e desvira sua Dama (Q). Outros naipes sentem o assombro cósmico. | *"O sol nunca foi mudo; nós é que fazíamos barulho demais durante o dia para ouvi-lo."* |
 | **`2♣`** | **⏳ Déjà Vu de Três Segundos**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao repetir um gesto cotidiano (abrir porta, pegar copo, olhar celular).<br><br>**2º O que acontece (Narre ao parceiro):** O tempo soluça: uma xícara que cai volta para a mesa inteira, e você tem certeza absoluta de que já viveu este minuto. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Envie duas vezes seguidas a mesma frase curta para o parceiro, mudando apenas a última palavra na segunda vez.<br><br>**2º Desfecho na Regra:** Domina o loop temporal! Permite evitar a ativação de qualquer Valete (J) nesta rodada. | *"Na primeira vez nós erramos o caminho; desta vez você segurou meu braço na esquina certa."* |
 | **`3♣`** | **🌀 Nuvens em Espiral de Fibonacci**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao olhar para as nuvens, fumaça de café ou espuma na xícara.<br><br>**2º O que acontece (Narre ao parceiro):** As nuvens acima da cidade giram em uma espiral matemática perfeita centrada exatamente sobre o telhado onde vocês estão. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Desenhe uma espiral com o dedo ou mande uma foto do céu/teto descrevendo o centro do redemoinho.<br><br>**2º Desfecho na Regra:** Alinha a dupla com o olho do furacão (calmaria total no próximo turno). | *"No centro exato do ciclone não venta; há apenas o silêncio de um jardim suspenso."* |
-| **`4♣`** | **👥 Visita do Seu Eu de Outro Mundo**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ver seu reflexo num vidro ou cruzar com um desconhecido parecido.<br><br>**2º O que acontece (Narre ao parceiro):** Pela fenda da penumbra, você vê outra versão sua e do seu parceiro caminhando do outro lado da rua sob um dia ensolarado. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Acene discretamente e conte ao parceiro o que as versões de vocês daquele outro mundo pareciam estar conversando.<br><br>**2º Desfecho na Regra:** Cura o Valete de Eco de Outra Vida (J♣) e inspira coragem na dupla. | *"Eles olharam para nós através da chuva, sorriram e desejaram boa sorte na travessia."* |
+| **`4♣`** | **👥 Visita do Seu Eu de Outro Mundo**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ver seu reflexo num vidro ou cruzar com um desconhecido parecido.<br><br>**2º O que acontece (Narre ao parceiro):** Pela fenda da penumbra, você vê outra versão sua e do seu parceiro caminhando do outro lado da rua sob um dia ensolarado. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Conte ao parceiro o que as versões de vocês daquele outro mundo pareciam estar conversando.<br><br>**2º Desfecho na Regra:** Cura o Valete de Eco de Outra Vida (J♣) e inspira coragem na dupla. | *"Eles olharam para nós através da chuva, sorriram e desejaram boa sorte na travessia."* |
 | **`5♣`** | **✨ Constelações ao Meio-Dia**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ver pontos de luz no teto, LEDs ou estrelas no céu.<br><br>**2º O que acontece (Narre ao parceiro):** Com o sol encoberto em pleno dia, constelações que não pertencem ao nosso hemisfério brilham intensamente sobre os prédios. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Aponte três pontos de luz no seu ambiente e dê um nome para a nova constelação que guia a dupla.<br><br>**2º Desfecho na Regra:** Bênção astral: se uma Dama (Q) estiver virada, ela pode ser desvirada no início do próximo turno. | *"Quando a luz grande se apaga, descobrimos que o céu sempre esteve cheio de pequenas fogueiras."* |
-| **`6♣`** | **🔔 Sinos que Tocam Sem Vento**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ouvir um sino, notificação metálica, talher batendo ou som de vidro.<br><br>**2º O que acontece (Narre ao parceiro):** Todos os sinos e cristais da cidade vibram na mesma nota lá menor, anunciando que metade do disco solar já foi coberta. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Faça soar um som leve (bater num copo ou metal) ou descreva a nota que ressoa onde você está.<br><br>**2º Desfecho na Regra:** Harmoniza a frequência e protege contra o Valete (J) da rodada. | *"O bronze reconhece o fim de uma era antes mesmo dos astrônomos."* |
-| **`7♣`** | **🕊️ Pássaros Brancos Pousados no Asfalto**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ver aves, animais ou folhas paradas no chão.<br><br>**2º O que acontece (Narre ao parceiro):** Uma revoada inteira pousou em silêncio absoluto no cruzamento, esperando o segundo do Anel de Diamante. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Fique em silêncio por alguns segundos e envie apenas uma frase curta de respeito ao presságio da natureza.<br><br>**2º Desfecho na Regra:** Jogadores de ♣ ou ♥ purificam qualquer tensão acumulada na mesa. | *"Eles não estão com medo; estão apenas esperando o sinal para voar através da aurora."* |
+| **`6♣`** | **🔔 Sinos que Tocam Sem Vento**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ouvir um sino, notificação metálica, talher batendo ou som de vidro.<br><br>**2º O que acontece (Narre ao parceiro):** Todos os sinos e cristais da cidade vibram na mesma nota lá menor, anunciando que metade do disco solar já foi coberta. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Descreva ou escreva a nota que ressoa na cena.<br><br>**2º Desfecho na Regra:** Harmoniza a frequência e protege contra o Valete (J) da rodada. | *"O bronze reconhece o fim de uma era antes mesmo dos astrônomos."* |
+| **`7♣`** | **🕊️ Pássaros Brancos Pousados no Asfalto**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ver aves, animais ou folhas paradas no chão.<br><br>**2º O que acontece (Narre ao parceiro):** Uma revoada inteira pousou em silêncio absoluto no cruzamento, esperando o segundo do Anel de Diamante. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Envie uma frase curta de respeito ao presságio da natureza; não é necessário interromper o que estiver fazendo.<br><br>**2º Desfecho na Regra:** Jogadores de ♣ ou ♥ purificam qualquer tensão acumulada na mesa. | *"Eles não estão com medo; estão apenas esperando o sinal para voar através da aurora."* |
 | **`8♣`** | **💧 Chuva que Para no Meio da Queda**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ver água, vidro, gelo ou gotas na janela.<br><br>**2º O que acontece (Narre ao parceiro):** O tempo congela por um instante: as gotas de chuva ficam paradas na altura dos olhos como um cortinado de diamantes. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Descreva o que você faz enquanto caminha entre as gotas paradas no ar ao lado do seu parceiro.<br><br>**2º Desfecho na Regra:** Instante eterno: permite resolver o turno sem gastar recursos nem virar Damas (Q). | *"Toquei uma gota suspensa e vi dentro dela o reflexo de todas as manhãs da minha vida."* |
 | **`9♣`** | **🚪 A Porta de Luz Branca no Horizonte**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ver uma porta iluminada, corredor claro ou saída de prédio.<br><br>**2º O que acontece (Narre ao parceiro):** No fim da avenida escura, uma fenda vertical de luz morna se abre, convidando os que mantiveram a memória intacta. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Chame o parceiro pela mão em sua mensagem e confirme que nenhum dos dois ficará para trás.<br><br>**2º Desfecho na Regra:** Prepara a travessia final: limpa qualquer Valete (J) ativo na dupla. | *"O fim de um mundo é apenas o batente da porta para o próximo."* |
 | **`10♣`** | **💍 O Segundo do Anel de Diamante**<br>*(Jornada · Paus (Presságio & Estrela Negra))* | **1º Gatilho Real:** 👁 Ao ver um brilho intenso de luz, sol na janela ou reflexo dourado.<br><br>**2º O que acontece (Narre ao parceiro):** Na borda da lua negra, uma única gota de fogo solar explode como um diamante celeste sobre vocês dois. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Diga qual é o último desejo ou visão que vocês cravam juntos no instante exato da Totalidade.<br><br>**2º Desfecho na Regra:** Clímax de ♣: Transcendência completa! Todas as Damas (Q) desviram e a crônica atinge a iluminação. | *"Um único segundo de luz verdadeira basta para justificar a existência do universo inteiro."* |
 | **`★`** | **☀️ O Segundo Sol — O Despertar da Aurora**<br>*(Coringa Claro — Presságio Raro)* | **1º Gatilho Real:** 👁 Ao sentir calor do sol, ver luz dourada ou um sorriso inesperado.<br><br>**2º O que acontece (Narre ao parceiro):** Contra todos os cálculos dos profetas, a lua negra começa a se afastar! Um feixe quente de ouro novo toca o rosto de vocês. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Comemorem o novo amanhecer: enviem uma mensagem dizendo qual é a primeira coisa que farão agora que o mundo ganhou mais um dia.<br><br>**2º Desfecho na Regra:** Presságio Claro (★): Milagre Solar! Ambos desviram suas Damas (Q) e removem todos os Valetes (J) imediatamente. | *"Abrimos as janelas do farol e choramos vendo a grama voltar a ser verde sob a manhã."* |
 | **`💀`** | **🕳️ Totalidade Eterna — O Colapso da Gravidade**<br>*(Coringa Escuro — Cataclismo)* | **1º Gatilho Real:** 👁 Ao apagar a luz de um cômodo ou olhar para a noite fechada.<br><br>**2º O que acontece (Narre ao parceiro):** O anel do eclipse se fecha por completo. O chão desaparece sob os pés e apenas aquilo que vocês segurarem juntos continuará existindo. | **1º Ação Prática (Responda à cena do Vigia):** ⚡ Ato final de sacrifício: um de vocês entrega sua última âncora temporal (Dama Q + Valete J) para manter a memória da dupla viva.<br><br>**2º Desfecho na Regra:** Cataclismo (💀): Um jogador deve virar sua Dama (Q ⟳) E revelar seu Valete (J) para ancorar a existência do parceiro. | *"Quando as estrelas se apagaram, segurei sua mão tão forte que nos tornamos nossa própria constelação."* |
 
+
+---
+
+# Apêndice A — Estrutura do produto e próximos testes
+
+## A.1. Composição do conteúdo
+
+O projeto contém três universos narrativos. Cada universo apresenta:
+- **12 cartas de personagem** (Rei, Dama e Valete em quatro naipes);
+- **40 cartas numeradas** do Deck do Mundo;
+- **2 coringas**.
+
+Isso corresponde a **54 cartas por universo** e **162 cartas de conteúdo** somando os três universos. Em uma partida, o jogador escolhe apenas um universo por vez e utiliza o conjunto correspondente.
+
+O baralho comum de 54 cartas serve como suporte físico para consultar o conteúdo deste manual. As cartas temáticas impressas podem substituir essa consulta, mas não são obrigatórias.
+
+## A.2. Identidade e posicionamento
+
+- **Nome do jogo:** **LIMIAR** (*anteriormente nome de trabalho: Sinaleiro*)
+- **Slogan oficial:** *"O Jogo que Ultrapassa a Mesa — O jogo que acontece na sua realidade."*
+- **Descrição curta:** Um RPG narrativo cooperativo em que sinais do cotidiano disparam cenas de uma aventura compartilhada. Um jogador observa e narra; o outro reage. A história continua entre uma rodada e outra, dentro do ritmo normal da vida.
+
+## A.3. O que deve ser validado antes de produzir
+
+1. **Clareza:** novos jogadores entendem as regras sem explicação longa?
+2. **Ritmo:** os gatilhos acontecem com frequência suficiente?
+3. **Equilíbrio:** os quatro naipes têm utilidade comparável?
+4. **Agência:** as escolhas dos jogadores mudam de fato o resultado?
+5. **Rejogabilidade:** as combinações de cartas geram cenas diferentes?
+6. **Segurança:** todas as ações podem ser substituídas por narração sem quebrar a partida?
+7. **Duração:** a campanha tem um encerramento satisfatório?
+
+## A.4. Resumo rápido para ensinar em cinco minutos
+
+1. Escolha um universo e um naipe.
+2. Pegue seu Rei, Dama e Valete daquele naipe.
+3. Monte o Deck do Mundo com 40 cartas numeradas e 2 coringas.
+4. O **Vigia** compra do topo e lê a parte do topo.
+5. Quando o gatilho acontecer, narra a cena ao parceiro.
+6. O **Eco** compra do fundo, lê a parte do fundo e responde à cena.
+7. Resolva o efeito usando o Rei, a Dama e o Valete.
+8. Na rodada seguinte, troquem os papéis.
+9. Se algo não for seguro ou conveniente, adaptem ou pulem sem penalidade.
+10. Joguem seis rodadas e conversem sobre o que funcionou.
+
+---
+
+> *Nota editorial:* esta é uma revisão de design e clareza (Edição 1.1), não uma certificação de equilíbrio. As tabelas originais dos três universos foram preservadas sempre que possível, com ajustes pontuais de segurança e nomenclatura. As cartas ainda devem passar por testes de mesa antes de uma edição comercial.

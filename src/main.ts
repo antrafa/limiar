@@ -146,8 +146,8 @@ export function mountSinaleiroApp(root: HTMLElement): void {
           <div class="brand-block">
             <div class="brand-emblem" aria-hidden="true">♠</div>
             <div>
-              <h1 class="brand-title">Sinaleiro</h1>
-              <div class="brand-subtitle">RPG de Vida Real · Baralho de 54 Cartas · Formato 63×88mm</div>
+              <h1 class="brand-title">Limiar</h1>
+              <div class="brand-subtitle">O Jogo que Ultrapassa a Mesa · RPG na Vida Real · 54 Cartas (63×88mm)</div>
             </div>
           </div>
 

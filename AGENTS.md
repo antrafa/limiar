@@ -1,24 +1,24 @@
-# AGENTS.md — Guia de Arquitetura e Convenções do Projeto Sinaleiro
+# AGENTS.md — Guia de Arquitetura e Convenções do Projeto Limiar (Sinaleiro v1.1)
 
-Este documento descreve a arquitetura, regras de negócio, estrutura de arquivos e padrões técnicos do projeto **Sinaleiro**. Agentes de IA e pessoas desenvolvedoras devem seguir estas diretrizes ao modificar o repositório.
+Este documento descreve a arquitetura, regras de negócio (Edição Revisada 1.1), estrutura de arquivos e padrões técnicos do projeto **Limiar — O Jogo que Ultrapassa a Mesa** (*anteriormente nome de trabalho: Sinaleiro*). Agentes de IA e pessoas desenvolvedoras devem seguir estas diretrizes ao modificar o repositório.
 
 ---
 
 ## 1. Visão Geral do Domínio
 
-**Sinaleiro** é um RPG de cartas na vida real (*pervasive tabletop card game*) baseado em um baralho de **54 cartas** no formato padrão de Magic/Poker (`63mm × 88mm`).
+**Limiar** é um RPG narrativo cooperativo de cartas na vida real (*pervasive tabletop card game*) baseado em um baralho de **54 cartas** no formato padrão de Magic/Poker (`63mm × 88mm`).
 
-### Invariantes do Sistema de Jogo ("Trio de Bolso & Dupla Câmara")
-1. **54 Cartas por Tema (`ThemeDeck`):**
+### Invariantes do Sistema de Jogo ("Trio de Bolso & Dupla Câmara" — Edição Revisada 1.1)
+1. **54 Cartas por Tema (`ThemeDeck` — 3 Universos / 162 Cartas no total):**
    - **12 Figuras de Bolso (`K, Q, J` de `♠, ♥, ♦, ♣`):**
-     - `K` (`archetype_king`): Sempre aberto; define a **Passiva na Vida Real** (`figurePassiveOrRule`) e a **Sinergia de Naipe** (`figureSpecialOrTaboo`).
-     - `Q` (`trump_queen`): Começa em pé; pode ser virada em 90° (`⟳ Tap`, `figurePassiveOrRule`) para anular falhas/custos e recarrega via condição real (`Untap`, `figureSpecialOrTaboo`).
-     - `J` (`scar_jack`): Começa virado para baixo; entra em jogo ao falhar sem Dama disponível (`figurePassiveOrRule`) e impõe um **Tabu na Vida Real** (`figureSpecialOrTaboo`).
+     - `K` (`archetype_king`): Sempre aberto; define o **Convite Narrativo na Vida Real** (`figurePassiveOrRule`, não obrigatório) e a **Sinergia de Naipe** (`figureSpecialOrTaboo`).
+     - `Q` (`trump_queen`): Começa aberta e pronta; pode ser virada em 90° (`⟳ Tap`, `figurePassiveOrRule`) para ativar seu efeito ou evitar consequências e recarrega ao cumprir qualquer carta de `♦ Ouros` (`A♦` a `10♦`) ou condição específica (`Untap`, `figureSpecialOrTaboo`).
+     - `J` (`scar_jack`): Começa fechado (face para baixo); entra em jogo ao sofrer falha grave sem Dama pronta (`figurePassiveOrRule`) e ativa um **Tabu somente dentro das interações do jogo** (`figureSpecialOrTaboo`). Nova falha grave com Valete ativo e Dama esgotada leva ao **Colapso** (evitável pela Dama pronta do parceiro).
    - **40 Cartas de Jornada (`A` a `10` de `♠, ♥, ♦, ♣`, `kind: 'journey'`) + 2 Coringas (`★` e `💀`, `kind: 'joker'`):**
      - Formam o **Deck do Mundo (42 cartas)**.
      - Cada carta do Deck do Mundo possui **Dupla Câmara**:
-       - `topWatcherTrigger` + `topWatcherEvent`: Lidos apenas por quem saca do **TOPO (`☀ Vigia`)**.
-       - `bottomEchoPrompt` + `bottomEchoEffect`: Lidos apenas por quem saca do **FUNDO (`☾ Eco`)**.
+       - `topWatcherTrigger` + `topWatcherEvent`: Lidos apenas por quem saca do **TOPO (`☀ Vigia`)**, com prazo de espera de até 2 horas (ou gatilho substituto seguro / adiamento sem penalidade).
+       - `bottomEchoPrompt` + `bottomEchoEffect`: Lidos apenas por quem saca do **FUNDO (`☾ Eco`)**. Toda ação física sugerida (foto, áudio, toque, deslocamento) é opcional e pode ser substituída por narração/decisão.
 2. **Cifra do Dia (`applyDailyCipher`):**
    - Deve ser **100% determinística e sem dependências externas**: a mesma lista de 42 cartas e a mesma string de data (`YYYY-MM-DD` ou `DD/MM`) devem produzir exatamente a mesma permutação e os mesmos cortes (`dayCut` de `1..31` em 3 montes; `monthCut` de `1..12` em 2 montes).
 

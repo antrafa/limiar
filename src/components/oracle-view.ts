@@ -96,10 +96,10 @@ export function renderOracleGuideHtml(deck: ThemeDeck, dateSeed: string): string
   return `
     <div class="oracle-guide-container">
       <header class="oracle-hero">
-        <h2>📖 Guia de Oráculo Didático — ${escapeHtml(deck.name)}</h2>
+        <h2>📖 Guia de Oráculo Didático (Limiar v1.1) — ${escapeHtml(deck.name)}</h2>
         <p>${escapeHtml(deck.tagline)}</p>
         <p class="oracle-hero-helper">
-          Use esta página para jogar com <strong>qualquer baralho comum de 54 cartas</strong> (52 cartas + 2 Coringas) sem precisar imprimir nada. Basta procurar abaixo a carta que você tirou na mão e seguir as instruções numeradas.
+          Use esta página para jogar <strong>Limiar</strong> com <strong>qualquer baralho comum de 54 cartas</strong> (52 cartas + 2 Coringas) sem precisar imprimir nada. Basta procurar abaixo a carta que você tirou na mão e seguir as instruções numeradas. <strong>Lembre-se da regra de ouro (Edição 1.1):</strong> toda ação física, foto, áudio ou toque é opcional e pode ser substituído por uma simples narração ou decisão em texto, e qualquer jogador pode dizer <em>"pausa"</em> ou <em>"passo"</em> sem penalidade.
         </p>
       </header>
 

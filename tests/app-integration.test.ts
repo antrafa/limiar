@@ -20,6 +20,10 @@ describe('Studio Gallery & Synchronized Playtest Table views', () => {
     expect(html).toContain('Qual a importância do Rei (K)?');
     expect(html).toContain('Qual é o efeito da Dama (Q)?');
     expect(html).toContain('Qual é o efeito do Valete (J)?');
+    expect(html).toContain('/limiar-banner.png');
+    expect(html).toContain('1.5. Ordem de Prioridade na Resolução');
+    expect(html).toContain('1.9. Duração da Campanha, Marcos e Encerramento');
+    expect(html).toContain('1.8. Segurança, Privacidade e Acessibilidade');
     expect(html).toContain('data-goto-tab="playtest"');
   });
 

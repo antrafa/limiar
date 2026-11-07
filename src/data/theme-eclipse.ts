@@ -452,7 +452,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Os semáforos piscam em amarelo intermitente na avenida deserta. Não há mais pressa para chegar a lugar nenhum.',
         bottomEchoPrompt:
-          'Pare por 10 segundos onde estiver, feche os olhos e mande uma mensagem convidando o parceiro para essa última valsa.',
+          'Imagine a última valsa e mande uma mensagem convidando o parceiro para ela.',
         bottomEchoEffect:
           'Remove qualquer Valete (J) ativo na mesa e sincroniza os corações da dupla.',
         flavorText: 'O mundo inteiro parou o trânsito só para que tivéssemos salão suficiente.',
@@ -484,7 +484,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Na cúpula astronômica, as lentes de cristal revelam uma coordenada segura onde a gravidade permanecerá estável.',
         bottomEchoPrompt:
-          'Enquadre algo redondo numa foto ou descreva a vista da sua janela para calibrar o telescópio da dupla.',
+          'Descreva um objeto redondo ou uma paisagem imaginária para calibrar o telescópio da dupla.',
         bottomEchoEffect:
           'Sucesso de ♦ Ouros: Desvira a Dama (Q) de ambos os jogadores imediatamente!',
         flavorText: 'A matemática não mente, mesmo quando o céu decide dobrar sobre si mesmo.',
@@ -559,7 +559,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Abrindo a porta do armário da esquina no segundo exato, ela dá diretamente para a praia a cinquenta quilômetros dali.',
         bottomEchoPrompt:
-          'Toque no batente de uma porta perto de você e diga para qual lugar do mundo você abriria essa passagem com o parceiro.',
+          'Imagine uma porta e diga para qual lugar do mundo você abriria essa passagem com o parceiro.',
         bottomEchoEffect:
           'Teletransporte poético concluído! Desvira a Dama (Q) da dupla.',
         flavorText: 'Se você dobrar o mapa até os dois pontos se tocarem, não precisa caminhar a linha entre eles.',
@@ -574,7 +574,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O grande pêndulo de bronze do museu parou no ponto mais alto da oscilação, provando que o planeta prendeu a respiração.',
         bottomEchoPrompt:
-          'Balance levemente um objeto pendurado (ou sua mão) e avise o parceiro que você devolveu o movimento à sala.',
+          'Narre como seu personagem devolve o movimento à sala.',
         bottomEchoEffect:
           'Recarrega (Untap) sua Dama (Q) e impede qualquer atraso temporal neste turno.',
         flavorText: 'Por quatro segundos inteiros, o planeta esqueceu para que lado costumava girar.',
@@ -604,7 +604,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'As bobinas de cobre captam a própria carga estática do eclipse para alimentar os aquecedores e luzes do refúgio.',
         bottomEchoPrompt:
-          'Conecte ou toque num cabo/carregador e confirme que a reserva de energia da dupla está em 100%.',
+          'Descreva como a equipe recarrega a reserva de energia usando um recurso seguro da história.',
         bottomEchoEffect:
           'Desvira sua Dama (Q) e concede vantagem automática na próxima carta do Deck do Mundo.',
         flavorText: 'Usamos a própria tempestade que veio nos apagar para manter as lâmpadas acesas.',
@@ -681,7 +681,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Pela fenda da penumbra, você vê outra versão sua e do seu parceiro caminhando do outro lado da rua sob um dia ensolarado.',
         bottomEchoPrompt:
-          'Acene discretamente e conte ao parceiro o que as versões de vocês daquele outro mundo pareciam estar conversando.',
+          'Conte ao parceiro o que as versões de vocês daquele outro mundo pareciam estar conversando.',
         bottomEchoEffect:
           'Cura o Valete de Eco de Outra Vida (J♣) e inspira coragem na dupla.',
         flavorText: 'Eles olharam para nós através da chuva, sorriram e desejaram boa sorte na travessia.',
@@ -711,7 +711,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Todos os sinos e cristais da cidade vibram na mesma nota lá menor, anunciando que metade do disco solar já foi coberta.',
         bottomEchoPrompt:
-          'Faça soar um som leve (bater num copo ou metal) ou descreva a nota que ressoa onde você está.',
+          'Descreva ou escreva a nota que ressoa na cena.',
         bottomEchoEffect:
           'Harmoniza a frequência e protege contra o Valete (J) da rodada.',
         flavorText: 'O bronze reconhece o fim de uma era antes mesmo dos astrônomos.',
@@ -726,7 +726,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Uma revoada inteira pousou em silêncio absoluto no cruzamento, esperando o segundo do Anel de Diamante.',
         bottomEchoPrompt:
-          'Fique em silêncio por alguns segundos e envie apenas uma frase curta de respeito ao presságio da natureza.',
+          'Envie uma frase curta de respeito ao presságio da natureza; não é necessário interromper o que estiver fazendo.',
         bottomEchoEffect:
           'Jogadores de ♣ ou ♥ purificam qualquer tensão acumulada na mesa.',
         flavorText: 'Eles não estão com medo; estão apenas esperando o sinal para voar através da aurora.',
