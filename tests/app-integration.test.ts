@@ -12,7 +12,8 @@ describe('Studio Gallery & Synchronized Playtest Table views', () => {
     expect(html).toContain('1. Escolha seu Material');
     expect(html).toContain('2. Separe seu Trio de Bolso');
     expect(html).toContain('3. Combine o Ritmo e a Cifra');
-    expect(html).toContain('4. Exemplo Real de 1 Rodada');
+    expect(html).toContain('4. Topo (Cena) vs. Fundo (Reação Imprevisível)');
+    expect(html).not.toContain('Relógio da dupla');
     expect(html).toContain('Como essa rodada acontece na vida real (Em Dupla)');
     expect(html).toContain('E como funciona no Modo Solo');
     expect(html).toContain('Como o Rei (K), a Dama (Q) e o Valete (J) entram em ação');

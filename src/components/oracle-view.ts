@@ -137,10 +137,10 @@ export function renderOracleGuideHtml(deck: ThemeDeck, dateSeed: string): string
             </li>
             <li>
               <strong>Se for a sua vez de responder (☾ Papel de Eco):</strong>
-              Quando o Vigia falar com você, puxe a <strong>última carta de BAIXO</strong> do maço. Procure-a na tabela e leia <strong>SOMENTE a coluna "☾ FUNDO · O ECO"</strong>:
+              Quando o Vigia falar com você, puxe a <strong>última carta de BAIXO</strong> do maço (assim o Vigia nunca sabe qual reação vai sair!). Procure-a na tabela e leia <strong>SOMENTE a coluna "☾ FUNDO · O ECO"</strong>:
               <ul>
-                <li>Execute na vida real o item <strong>1º O que você deve fazer agora</strong>.</li>
-                <li>Aplique o item <strong>2º Regra de desfecho</strong>.</li>
+                <li>Conecte a manobra do item <strong>1º O que você deve fazer agora</strong> diretamente à cena que o Vigia acabou de narrar.</li>
+                <li>Aplique o item <strong>2º Regra de desfecho</strong> usando seu Rei (K), Dama (Q ⟳) ou Valete (J).</li>
               </ul>
             </li>
             <li>

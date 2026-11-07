@@ -8,7 +8,7 @@ Este documento descreve a arquitetura, regras de negócio, estrutura de arquivos
 
 **Sinaleiro** é um RPG de cartas na vida real (*pervasive tabletop card game*) baseado em um baralho de **54 cartas** no formato padrão de Magic/Poker (`63mm × 88mm`).
 
-### Invariantes do Sistema de Jogo ("Sinaleiro & Relógio")
+### Invariantes do Sistema de Jogo ("Trio de Bolso & Dupla Câmara")
 1. **54 Cartas por Tema (`ThemeDeck`):**
    - **12 Figuras de Bolso (`K, Q, J` de `♠, ♥, ♦, ♣`):**
      - `K` (`archetype_king`): Sempre aberto; define a **Passiva na Vida Real** (`figurePassiveOrRule`) e a **Sinergia de Naipe** (`figureSpecialOrTaboo`).

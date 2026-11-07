@@ -101,22 +101,22 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
 
         <article class="quickstart-step-card">
           <div class="step-number">Passo 4</div>
-          <h3>4. Exemplo Real de 1 Rodada</h3>
+          <h3>4. Topo (Cena) vs. Fundo (Reação Imprevisível)</h3>
           <p>
-            Para que os dois jogadores nunca leiam o mesmo texto mesmo tendo baralhos idênticos, um puxa de cima e o outro puxa de baixo:
+            Para que o <strong>☀ Vigia</strong> nunca saiba de antemão qual será a reação ou o teste do parceiro, vocês puxam de <strong>pontas opostas</strong> do baralho:
           </p>
           <div class="turn-roles-summary">
             <div class="role-box role-box-vigia">
-              <strong>☀ Jogador A: O Vigia (Saca a 1ª do TOPO)</strong>
-              <p>Lê apenas a caixa <strong>☀ TOPO · VIGIA</strong> da carta que tirou. Espera o gatilho real acontecer ao seu redor e inicia a interação (pessoalmente ou mandando mensagem/foto).</p>
+              <strong>☀ Jogador A: O Vigia (Saca a 1ª do TOPO — Define a CENA)</strong>
+              <p>Lê apenas a caixa <strong>☀ TOPO · VIGIA</strong> da carta de cima. Espera o gatilho real acontecer ao seu redor e narra o perigo ao parceiro — sem saber qual carta está lá no fundo!</p>
             </div>
             <div class="role-box role-box-eco">
-              <strong>☾ Jogador B: O Eco (Saca a última do FUNDO)</strong>
-              <p>Lê apenas a caixa <strong>☾ FUNDO · ECO</strong> da carta de baixo do maço. Responde ao parceiro cumprindo a ação proposta e aplica o efeito da rodada.</p>
+              <strong>☾ Jogador B: O Eco (Saca a última do FUNDO — Define a REAÇÃO)</strong>
+              <p>Lê apenas a caixa <strong>☾ FUNDO · ECO</strong> da carta de baixo. Aplica a manobra/improviso dessa carta diretamente para resolver a cena que o Vigia acabou de contar!</p>
             </div>
           </div>
           <p class="quickstart-note">
-            Na rodada seguinte (próxima hora ou próximo turno do dia), vocês <strong>invertem os papéis</strong>: quem foi Vigia vira Eco!
+            Na rodada seguinte (próxima hora ou próximo turno do dia), vocês <strong>invertem os papéis</strong> (quem foi Vigia vira Eco) puxando a 2ª carta do topo e a penúltima do fundo!
           </p>
         </article>
       </section>
@@ -175,10 +175,10 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
                 <strong>O sinal acontece na rotina:</strong> A carta pede o gatilho: <em>"${escapeHtml(sampleTopCard.topWatcherTrigger ?? '')}"</em>. Assim que você notar isso acontecendo onde você está (no trabalho, na rua, num café ou em casa), você puxa assunto ou manda um áudio/mensagem para o Jogador B incorporando o local real à cena: <em>"${escapeHtml(sampleTopCard.topWatcherEvent ?? '')}"</em>.
               </li>
               <li>
-                <strong>A resposta do parceiro:</strong> Ao receber seu aviso, o Jogador B age como <strong>☾ Eco</strong>: ele puxa a última carta de baixo do baralho dele (<strong>${escapeHtml(sampleBottomCard.playingCardCode)} — ${escapeHtml(sampleBottomCard.title)}</strong>) e lê apenas a caixa <strong>☾ FUNDO</strong>. Para ajudar você na história, ele cumpre na vida real a tarefa: <em>"${escapeHtml(sampleBottomCard.bottomEchoPrompt ?? '')}"</em>.
+                <strong>A resposta imprevisível do parceiro (Carta do Fundo):</strong> Ao receber seu aviso, o Jogador B age como <strong>☾ Eco</strong>: ele puxa a última carta de baixo do baralho dele (<strong>${escapeHtml(sampleBottomCard.playingCardCode)} — ${escapeHtml(sampleBottomCard.title)}</strong>) e lê apenas a caixa <strong>☾ FUNDO</strong>. Como ela veio do fundo, <strong>você (Vigia) não sabe qual reação saiu para ele!</strong> Para resolver a cena que você acabou de contar, ele adapta a manobra dessa carta na vida real: <em>"${escapeHtml(sampleBottomCard.bottomEchoPrompt ?? '')}"</em>.
               </li>
               <li>
-                <strong>Desfecho, Trio de Bolso e troca de papéis:</strong> Vocês conferem a resolução: <em>"${escapeHtml(sampleBottomCard.bottomEchoEffect ?? '')}"</em>. Se a carta for do naipe do seu <strong>Rei (K)</strong>, você ganha o bônus dele na hora. Se alguém não pôde cumprir a interação na rotina real, pode girar a <strong>Dama (Q ⟳)</strong> em 90° como salva-vidas ou, se a Dama já estiver gasta, virar o <strong>Valete (J)</strong> para cima e assumir seu Tabu (veja o detalhamento logo abaixo!). No próximo horário, o Jogador B será o Vigia e você será o Eco!
+                <strong>Desfecho, Trio de Bolso e troca de papéis:</strong> Vocês conferem a resolução: <em>"${escapeHtml(sampleBottomCard.bottomEchoEffect ?? '')}"</em>. Se a carta for do naipe do seu <strong>Rei (K)</strong>, você ganha o bônus dele na hora. Se alguém não pôde cumprir a interação na rotina real, pode girar a <strong>Dama (Q ⟳)</strong> em 90° como salva-vidas ou, se a Dama já estiver gasta, virar o <strong>Valete (J)</strong> para cima e assumir seu Tabu (veja o detalhamento logo abaixo!). No próximo horário, o Jogador B será o Vigia (puxando a 2ª carta do topo) e você será o Eco (puxando a penúltima do fundo)!
               </li>
             </ol>
           </article>
@@ -187,13 +187,13 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
             <h4>E como funciona no Modo Solo (Diário / Oráculo)?</h4>
             <ol class="narrative-timeline">
               <li>
-                <strong>Saque duplo num único movimento:</strong> Jogando sozinho, você usa um único baralho (físico ou na aba <em>Mesa</em> clicando no botão <strong>Modo Solo</strong>). No horário que você escolheu para o seu turno, você puxa <strong>1 carta do TOPO</strong> e <strong>1 carta do FUNDO</strong> ao mesmo tempo.
+                <strong>Saque duplo (Topo + Fundo):</strong> Jogando sozinho, você usa um único baralho (físico ou na aba <em>Mesa</em> clicando no botão <strong>Modo Solo</strong>). No seu turno, você puxa <strong>1 carta do TOPO</strong> (que define <em>o que aconteceu no mundo</em>) e, quando o gatilho acontecer, puxa <strong>1 carta do FUNDO</strong> (que define <em>como você precisará reagir</em>).
               </li>
               <li>
                 <strong>A Carta do Topo é o Mundo ao seu redor:</strong> Você lê o bloco <strong>☀ TOPO</strong> da carta de cima (<strong>${escapeHtml(sampleTopCard.playingCardCode)}</strong>). Quando o gatilho real (<em>"${escapeHtml(sampleTopCard.topWatcherTrigger ?? '')}"</em>) acontecer diante de você hoje, o evento ficcional se instala no seu caminho.
               </li>
               <li>
-                <strong>A Carta do Fundo é o seu Desafio Pessoal:</strong> Em vez de esperar outra pessoa, você mesmo lê o bloco <strong>☾ FUNDO</strong> da carta de baixo (<strong>${escapeHtml(sampleBottomCard.playingCardCode)}</strong>) como a reação que seu personagem precisa executar sozinho.
+                <strong>A Carta do Fundo é o seu Desafio Imprevisível:</strong> Só depois que o evento do Topo acontecer, você olha o bloco <strong>☾ FUNDO</strong> da carta de baixo (<strong>${escapeHtml(sampleBottomCard.playingCardCode)}</strong>) para descobrir qual manobra prática seu personagem precisa executar para sair daquela cena.
               </li>
               <li>
                 <strong>Registro de Sobrevivente:</strong> Quando a interação pedir para "enviar ao parceiro" (uma foto, áudio ou decisão), no Modo Solo você registra isso como seu <strong>Diário de Campanha</strong> — tirando a foto no celular, gravando uma nota de voz de 15 segundos ou anotando duas linhas num bloco de notas. Se não conseguir realizar antes do próximo turno, você gira sua <strong>Dama (Q ⟳)</strong> ou ativa seu <strong>Valete (J)</strong>!
@@ -206,7 +206,7 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
           <div class="figures-explainer-header">
             <h4>Como o Rei (K), a Dama (Q) e o Valete (J) entram em ação nessa rodada?</h4>
             <p class="subtitle">
-              Enquanto as cartas de cima e de baixo contam o que acontece no mundo, as <strong>3 Figuras do seu Naipe</strong> ficam sempre com você e funcionam como sua ficha viva de personagem, seu equipamento de emergência e sua barra de ferimentos (clique em qualquer uma para ampliar):
+              Você <strong>não precisa de papel, dados ou marcadores de pontos</strong>: enquanto as cartas de cima e de baixo contam o que acontece no mundo, as <strong>3 Figuras do seu Naipe</strong> ficam sempre com você e funcionam como sua ficha viva, seu escudo de emergência e seu medidor de ferimentos (clique em qualquer uma para ampliar):
             </p>
           </div>
 
@@ -257,7 +257,7 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
               <div class="figure-role-badge badge-jack">Valete (J) · Começa Virado para Baixo</div>
               <h5>Qual é o efeito do Valete (J)?</h5>
               <p class="figure-role-lead">
-                O Valete é a sua <strong>Cicatriz (penalidade)</strong>. Ele começa <strong>fechado (inativo)</strong>, e o seu objetivo é evitar que ele vire para cima!
+                O Valete é a sua <strong>Cicatriz (ferimento/penalidade)</strong>. Ele começa <strong>fechado (inativo)</strong>, e o seu objetivo é evitar que ele vire para cima!
               </p>
               <ul class="figure-role-points">
                 <li>
@@ -265,7 +265,7 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
                   <span class="figure-example-quote">Gatilho (${escapeHtml(sampleJack.playingCardCode)} — ${escapeHtml(sampleJack.title)}): "${escapeHtml(sampleJack.figurePassiveOrRule ?? '')}"</span>
                 </li>
                 <li>
-                  <strong>2. O Tabu na Vida Real:</strong> Enquanto o Valete estiver virado para cima, seu personagem está ferido ou traumatizado. Você passa a ter uma <strong>proibição real de fala ou comportamento</strong> em todas as interações com o parceiro (ou no seu diário solo)! Se você esquecer e quebrar o Tabu, ou se falhar de novo com o Valete já aberto, o Relógio da dupla perde <strong>-1 ponto</strong>.
+                  <strong>2. O Tabu na Vida Real e Limite de Colapso:</strong> Enquanto o Valete estiver virado para cima, seu personagem está ferido/marcado e você passa a ter uma <strong>proibição real de fala ou comportamento</strong> em todas as interações! Se você quebrar o Tabu ou falhar de novo quando sua Dama já está deitada e o Valete já está aberto, seu personagem entra em <strong>Colapso</strong> — só escapando se o parceiro gastar a <strong>Dama (Q ⟳)</strong> dele para te socorrer!
                   <span class="figure-example-quote">Tabu Real: "${escapeHtml(sampleJack.figureSpecialOrTaboo ?? '')}"</span>
                 </li>
               </ul>

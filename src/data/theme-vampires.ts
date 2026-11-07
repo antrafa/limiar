@@ -195,9 +195,9 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Um ancilla rival da corte desafia sua coterie pelo direito de caça no território central da cidade.',
         bottomEchoPrompt:
-          'Segure um objeto metálico na mão, mande foto ou descreva sua guarda e diga qual é a primeira estocada.',
+          'Segure um objeto metálico na mão, mande foto ou descreva sua guarda e diga como você intimida ou ataca a ameaça narrada pelo Vigia.',
         bottomEchoEffect:
-          'Vence o duelo e impõe respeito na Corte. Se hesitar por mais de 15 minutos, vire sua Dama (Q ⟳).',
+          'Vence o confronto e impõe respeito na Corte. Se hesitar ou demorar, vire sua Dama (Q ⟳).',
         flavorText: 'Entre imortais, a educação termina exatamente onde a lâmina toca a clavícula.',
       },
       {
@@ -210,9 +210,9 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Um mortal gravou um vampiro saltando do terceiro andar sem se ferir. O Xerife deu vinte minutos para sumirem com a prova.',
         bottomEchoPrompt:
-          'Mande uma mensagem rápida explicando como vocês confiscam o aparelho ou plantam a versão de que era um efeito de cinema.',
+          'Para encobrir a cena que o Vigia narrou sem quebrar a Máscara, explique em uma mensagem rápida que versão falsa vocês plantam para as testemunhas.',
         bottomEchoEffect:
-          'Apaga o rastro digital. Se falhar, o Príncipe impõe o Valete (J) sobre o Vigia da rodada.',
+          'Apaga qualquer rastro mortal! Se falhar, revele seu Valete (J).',
         flavorText: 'No século XXI, o maior inimigo dos filhos de Caim tem câmera tripla e conexão 5G.',
       },
       {
@@ -225,9 +225,9 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O servo mortal que guardava o refúgio diurno foi subornado por um clã rival e destrancou as janelas voltadas para o leste.',
         bottomEchoPrompt:
-          'Feche uma janela/porta ou apague uma luz perto de você agora e mande o veredito do traidor para o parceiro.',
+          'Feche uma janela/porta ou apague uma luz perto de você agora e diga ao parceiro como você pune o responsável pelo problema que o Vigia narrou.',
         bottomEchoEffect:
-          'Neutraliza a traição a tempo. Jogadores de ♠ ou ♣ interrogam o servo e descobrem quem pagou.',
+          'Neutraliza a ameaça a tempo! Se seu Rei for de ♠ ou ♣, você também desvira sua Dama (Q).',
         flavorText: 'Dar seu sangue a um mortal cria um escravo leal, até o dia em que a inveja supera o vício.',
       },
       {
@@ -240,9 +240,9 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Metamorfos territoriais farejaram vitae vampírico nos limites da reserva ecológica e iniciaram uma caçada implacável.',
         bottomEchoPrompt:
-          'Envie um áudio curto com voz firme e controlada ordenando recuo imediato para o concreto iluminado da cidade.',
+          'Envie um áudio curto com voz firme ordenando recuo tático imediato da cena que o Vigia narrou para um local seguro.',
         bottomEchoEffect:
-          'Apenas o aço de ♠ ou virar uma Dama (Q ⟳) detém a fúria lupina sem deixar Cicatrizes (Valete J).',
+          'Se seu Rei for de ♠ Espadas, recuam sem custo; outros naipes devem virar a Dama (Q ⟳) ou revelar o Valete (J).',
         flavorText: 'Contra garras que rasgam blindagem, a única sabedoria de um vampiro é correr para o trânsito.',
       },
       {
@@ -255,9 +255,9 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'A Harpia da corte acusa sua dupla de invadir o domínio de um Primógeno durante a caçada da noite passada.',
         bottomEchoPrompt:
-          'Escreva uma defesa curta e impecavelmente formal de duas linhas transferindo a culpa para um inimigo em comum.',
+          'Diante do problema narrado pelo Vigia, escreva uma justificativa curta e elegante de duas linhas transferindo a culpa para um clã rival.',
         bottomEchoEffect:
-          'Se a defesa for convincente (ou tiver apoio de ♥/♠), o Príncipe absolve vocês; senão, ative o Valete (J).',
+          'A manobra política funciona (se seu Rei for ♥ ou ♠, desvira sua Dama Q); se recusar, revele o Valete (J).',
         flavorText: 'Na corte de veludo, uma frase mal colocada corta mais fundo que uma guilhotina.',
       },
       {
@@ -270,9 +270,9 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Anarquistas incendiaram carros na saída do clube subterrâneo. O pavor ancestral do fogo ameaça fazer a Fera assumir o controle.',
         bottomEchoPrompt:
-          'Respire fundo e descreva algo frio (pedra, gelo, metal, vento noturno) que você toca agora para dominar o pânico.',
+          'Para manter o sangue-frio na cena do Vigia, toque em algo frio (pedra, vidro, metal) agora e descreva a sensação ao parceiro.',
         bottomEchoEffect:
-          'Domina o Rötschreck. Se o Eco já estiver com Valete (J) ativo, deve virar a Dama (Q ⟳) para não fugir em fúria.',
+          'Domina a Fera interior! Se você estiver com o Valete (J) aberto, precisa virar a Dama (Q ⟳) para manter o controle.',
         flavorText: 'Mesmo após trezentos anos, uma simples faísca lembra à carne morta que ela é feita de cinzas secas.',
       },
       {
@@ -285,9 +285,9 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Os sinos da meia-noite tocaram três vezes: uma Caçada de Sangue foi aberta contra um aliado próximo de vocês.',
         bottomEchoPrompt:
-          'Decida com o parceiro: vocês escondem o fugitivo no próprio refúgio ou entregam a localização dele ao Carrasco?',
+          'Diante do perigo que o Vigia narrou, decida: você enfrenta a situação de frente para proteger seus aliados ou sacrifica um peão para escapar?',
         bottomEchoEffect:
-          'Esconder exige coragem (teste de ♠/♥ ou virar Q ⟳); entregar garante segurança imediata mas pesa na alma.',
+          'Se enfrentar: Rei de ♠ ou ♥ vence sem custo; outros viram a Dama (Q ⟳). Se sacrificar um peão: escapam sem custo, mas na próxima falha revelam o Valete (J).',
         flavorText: 'Quando o Príncipe vira a ampulheta vermelha, toda a cidade ganha permissão para beber sua alma.',
       },
       {
@@ -300,9 +300,9 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Para recuperar a relíquia roubada, vocês precisam invadir o ático vigiado por gárgulas e guardas armados.',
         bottomEchoPrompt:
-          'Mande uma mensagem coordenando a entrada: quem distrai os guardas na porta e quem quebra a claraboia?',
+          'Mande uma mensagem coordenando uma ação furtiva com o Vigia: quem cria a distração principal e quem executa o bote?',
         bottomEchoEffect:
-          'Ação sincronizada garante a relíquia e limpa um Valete (J) de combate.',
+          'Ação sincronizada resolve a cena e vira para baixo (cura) um Valete (J) ativo!',
         flavorText: 'O vento no quadragésimo andar cheira a ozônio, champanhe caro e pólvora.',
       },
       {
@@ -315,9 +315,9 @@ export const VAMPIRES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O comandante da célula de caçadores atraiu vocês para uma armadilha de luz ultravioleta no altar principal.',
         bottomEchoPrompt:
-          'Grave um áudio curto ou escreva seu golpe final declarando por que a noite pertence à sua coterie.',
+          'Grave um áudio curto ou escreva seu golpe de mestre declarando como sua coterie triunfa sobre a cena narrada pelo Vigia.',
         bottomEchoEffect:
-          'Clímax de ♠: Vitória épica sobre os caçadores! Desvira a Dama (Q) da dupla para o desfecho da crônica.',
+          'Clímax de ♠: Vitória épica! Desvira a Dama (Q) de ambos os jogadores.',
         flavorText: 'Ele rezava pela alvorada, mas o relógio da torre ainda marcava três da manhã.',
       },
     ],
