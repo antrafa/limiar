@@ -8,7 +8,7 @@ import { renderPlaytestTableHtml } from './components/playtest-view';
 import { type PrintFilterMode, renderPrintSheetsHtml } from './components/print-view';
 import { renderQuickstartGuideHtml } from './components/quickstart-view';
 import { renderStudioGalleryHtml } from './components/studio-view';
-import { applyDailyCipher } from './core/cipher';
+import { generateShuffledOrder, resolveWorldDeckOrder } from './core/cipher';
 import {
   exportThemeJson,
   getDefaultPlaySession,
@@ -129,7 +129,7 @@ export function mountSinaleiroApp(root: HTMLElement): void {
 
     let tabBodyHtml = '';
     if (state.activeTab === 'quickstart') {
-      tabBodyHtml = renderQuickstartGuideHtml(deck, state.session.dateSeed);
+      tabBodyHtml = renderQuickstartGuideHtml(deck);
     } else if (state.activeTab === 'studio') {
       tabBodyHtml = renderStudioGalleryHtml(deck, selectedCard, state.suitFilter);
     } else if (state.activeTab === 'playtest') {
@@ -137,7 +137,7 @@ export function mountSinaleiroApp(root: HTMLElement): void {
     } else if (state.activeTab === 'print') {
       tabBodyHtml = renderPrintSheetsHtml(deck, state.printFilter);
     } else {
-      tabBodyHtml = renderOracleGuideHtml(deck, state.session.dateSeed);
+      tabBodyHtml = renderOracleGuideHtml(deck);
     }
 
     root.innerHTML = `
@@ -162,7 +162,7 @@ export function mountSinaleiroApp(root: HTMLElement): void {
             Como Começar
           </button>
           <button type="button" class="tab-nav-btn ${state.activeTab === 'playtest' ? 'is-active' : ''}" data-tab="playtest">
-            Mesa &amp; Cifra do Dia
+            Mesa de Jogo
           </button>
           <button type="button" class="tab-nav-btn ${state.activeTab === 'studio' ? 'is-active' : ''}" data-tab="studio">
             Galeria &amp; Editor (54 Cartas)
@@ -348,22 +348,20 @@ export function mountSinaleiroApp(root: HTMLElement): void {
     // 4. Playtest Table Events
     if (state.activeTab === 'playtest') {
       const { worldDeck } = splitPocketAndWorld(deck);
-      const cipher = applyDailyCipher(worldDeck, state.session.dateSeed);
+      const activeWorldCards = resolveWorldDeckOrder(worldDeck, state.session.deckOrder);
 
-      const btnApplyCipher = root.querySelector<HTMLButtonElement>('#btn-apply-cipher');
-      const inputCipherDate = root.querySelector<HTMLInputElement>('#input-cipher-date');
-      btnApplyCipher?.addEventListener('click', () => {
-        const nextSeed = inputCipherDate?.value.trim() || state.session.dateSeed;
+      const btnShuffleDeck = root.querySelector<HTMLButtonElement>('#btn-shuffle-deck');
+      btnShuffleDeck?.addEventListener('click', () => {
         state.session = {
           ...state.session,
-          dateSeed: nextSeed,
+          deckOrder: generateShuffledOrder(worldDeck.length),
           topIndex: 0,
-          bottomIndex: 41,
+          bottomIndex: worldDeck.length - 1,
           turnCount: 0,
           history: [],
         };
         savePlaySession(state.session);
-        showToast(`Cifra do Dia aplicada (${nextSeed})!`);
+        showToast('Baralho de 42 cartas embaralhado livremente!');
       });
 
       root.querySelectorAll<HTMLButtonElement>('[data-choose-suit]').forEach((btn) => {
@@ -393,7 +391,7 @@ export function mountSinaleiroApp(root: HTMLElement): void {
       const btnDrawTop = root.querySelector<HTMLButtonElement>('#btn-draw-top');
       btnDrawTop?.addEventListener('click', () => {
         if (state.session.topIndex > state.session.bottomIndex) return;
-        const card = cipher.cards[state.session.topIndex];
+        const card = activeWorldCards[state.session.topIndex];
         const nextTurn = state.session.turnCount + 1;
         state.session = {
           ...state.session,
@@ -416,7 +414,7 @@ export function mountSinaleiroApp(root: HTMLElement): void {
       const btnDrawBottom = root.querySelector<HTMLButtonElement>('#btn-draw-bottom');
       btnDrawBottom?.addEventListener('click', () => {
         if (state.session.topIndex > state.session.bottomIndex) return;
-        const card = cipher.cards[state.session.bottomIndex];
+        const card = activeWorldCards[state.session.bottomIndex];
         const nextTurn = state.session.turnCount + 1;
         state.session = {
           ...state.session,
@@ -439,8 +437,8 @@ export function mountSinaleiroApp(root: HTMLElement): void {
       const btnDrawSolo = root.querySelector<HTMLButtonElement>('#btn-draw-solo');
       btnDrawSolo?.addEventListener('click', () => {
         if (state.session.bottomIndex - state.session.topIndex + 1 < 2) return;
-        const topCard = cipher.cards[state.session.topIndex];
-        const bottomCard = cipher.cards[state.session.bottomIndex];
+        const topCard = activeWorldCards[state.session.topIndex];
+        const bottomCard = activeWorldCards[state.session.bottomIndex];
         const nextTurn = state.session.turnCount + 1;
         const now = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
@@ -463,6 +461,7 @@ export function mountSinaleiroApp(root: HTMLElement): void {
       btnResetSession?.addEventListener('click', () => {
         state.session = {
           ...state.session,
+          deckOrder: generateShuffledOrder(worldDeck.length),
           topIndex: 0,
           bottomIndex: 41,
           turnCount: 0,
@@ -471,7 +470,7 @@ export function mountSinaleiroApp(root: HTMLElement): void {
           history: [],
         };
         savePlaySession(state.session);
-        showToast('Mesa reiniciada!');
+        showToast('Mesa reiniciada e maço reembaralhado!');
       });
     }
 

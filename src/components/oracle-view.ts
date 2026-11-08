@@ -1,4 +1,3 @@
-import { applyDailyCipher } from '../core/cipher';
 import { splitPocketAndWorld } from '../data/engine-deck';
 import type { GameCard, ThemeDeck } from '../types/card';
 import { escapeHtml } from './card-renderer';
@@ -86,9 +85,8 @@ function renderWorldRow(c: GameCard): string {
   `;
 }
 
-export function renderOracleGuideHtml(deck: ThemeDeck, dateSeed: string): string {
+export function renderOracleGuideHtml(deck: ThemeDeck): string {
   const { figures, worldDeck } = splitPocketAndWorld(deck);
-  const cipher = applyDailyCipher(worldDeck, dateSeed);
 
   const figureRows = figures.map(renderFigureRow).join('');
   const worldRows = worldDeck.map(renderWorldRow).join('');
@@ -162,13 +160,14 @@ export function renderOracleGuideHtml(deck: ThemeDeck, dateSeed: string): string
         </div>
 
         <div class="oracle-rule-box">
-          <h3>4. Cifra do Dia (${escapeHtml(cipher.dateLabel)}) — Sincronia à Distância</h3>
-          <p>Sincroniza a ordem inicial de dois baralhos independentes (cada jogador retira de uma extremidade diferente conforme os turnos):</p>
+          <h3>4. Embaralhamento Livre (Presencial ou à Distância)</h3>
+          <p>Não é necessário sincronizar baralhos nem fazer cortes por data. Basta embaralhar livremente:</p>
           <ol class="oracle-didactic-list">
-            ${cipher.steps.map((s) => `<li>${escapeHtml(s)}</li>`).join('')}
+            <li><strong>Partida presencial:</strong> Embaralhem as 42 cartas do Deck do Mundo e coloquem um único maço no centro da mesa.</li>
+            <li><strong>Partida à distância:</strong> Cada jogador embaralha normalmente o seu próprio maço de 42 cartas. Quando for <strong>☀ Vigia</strong>, você saca uma carta do seu baralho para criar a cena; quando o parceiro for <strong>☾ Eco</strong>, ele saca uma carta do baralho dele para reagir!</li>
           </ol>
           <p class="cipher-preview">
-            <strong>Conferência rápida:</strong> Após a Cifra de hoje, a 1ª carta de cima (☀ Vigia) será <strong>${escapeHtml(cipher.cards[0].playingCardCode)} (${escapeHtml(cipher.cards[0].title)})</strong> e a última de baixo (☾ Eco) será <strong>${escapeHtml(cipher.cards[cipher.cards.length - 1].playingCardCode)} (${escapeHtml(cipher.cards[cipher.cards.length - 1].title)})</strong>.
+            <strong>Vantagem:</strong> Zero preparo matemático antes da partida e 100% de imprevisibilidade a cada saque.
           </p>
         </div>
       </section>

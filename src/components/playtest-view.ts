@@ -1,4 +1,3 @@
-import { applyDailyCipher } from '../core/cipher';
 import { splitPocketAndWorld } from '../data/engine-deck';
 import type { PlaySessionState, Suit, ThemeDeck } from '../types/card';
 import { escapeHtml, renderMagicCardHtml } from './card-renderer';
@@ -6,8 +5,7 @@ import { escapeHtml, renderMagicCardHtml } from './card-renderer';
 const PLAYABLE_SUITS: Array<Exclude<Suit, 'joker'>> = ['spades', 'hearts', 'diamonds', 'clubs'];
 
 export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionState): string {
-  const { figures, worldDeck } = splitPocketAndWorld(deck);
-  const cipher = applyDailyCipher(worldDeck, session.dateSeed);
+  const { figures } = splitPocketAndWorld(deck);
 
   const suitFigures = figures.filter((c) => c.suit === session.chosenSuit);
   const kingCard = suitFigures.find((c) => c.rank === 'K') ?? figures[0];
@@ -37,7 +35,7 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
 
   let spotlightHtml = `
     <div class="spotlight-empty">
-      <p>O Deck do Mundo de <strong>42 cartas</strong> está embaralhado pela Cifra do Dia (<strong>${escapeHtml(cipher.dateLabel)}</strong>).</p>
+      <p>O Deck do Mundo de <strong>42 cartas</strong> está embaralhado livremente e pronto para a sessão.</p>
       <p>Clique em <strong>Sacar do TOPO (☀ Vigia)</strong> ou <strong>Sacar do FUNDO (☾ Eco)</strong> para iniciar o turno.</p>
     </div>
   `;
@@ -106,33 +104,7 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
 
   return `
     <div class="playtest-container">
-      <!-- 1. Cifra do Dia -->
-      <section class="cipher-panel">
-        <div class="cipher-header">
-          <div>
-            <h2>🔐 Cifra do Dia — Sincronia Determinística (${escapeHtml(cipher.dateLabel)})</h2>
-            <p class="subtitle">Ambos os jogadores aplicam a mesma data para gerar exatamente a mesma pilha de 42 cartas sem precisar estar no mesmo lugar.</p>
-          </div>
-          <div class="cipher-seed-controls">
-            <label for="input-cipher-date">Data / Semente (AAAA-MM-DD ou DD/MM):</label>
-            <div class="seed-input-row">
-              <input
-                id="input-cipher-date"
-                type="text"
-                value="${escapeHtml(session.dateSeed)}"
-                placeholder="2026-11-06"
-              />
-              <button type="button" id="btn-apply-cipher" class="btn-primary">Aplicar Cifra</button>
-            </div>
-          </div>
-        </div>
-
-        <ol class="cipher-steps-list">
-          ${cipher.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join('')}
-        </ol>
-      </section>
-
-      <!-- 2. Seu Trio de Bolso (K, Q, J) -->
+      <!-- 1. Seu Trio de Bolso (K, Q, J) -->
       <section class="pocket-trio-panel">
         <header class="pocket-header">
           <div>
@@ -233,6 +205,9 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
                 ${remainingCards < 2 ? 'disabled' : ''}
               >
                 🎭 Modo Solo (Sacar Topo + Fundo)
+              </button>
+              <button type="button" id="btn-shuffle-deck" class="btn-secondary">
+                🔀 Embaralhar Novo Maço (42 Cartas)
               </button>
               <button type="button" id="btn-reset-session" class="btn-ghost">
                 ↺ Reiniciar Partida

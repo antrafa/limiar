@@ -19,8 +19,8 @@ Este documento descreve a arquitetura, regras de negócio (Edição Revisada 1.1
      - Cada carta do Deck do Mundo possui **Dupla Câmara**:
        - `topWatcherTrigger` + `topWatcherEvent`: Lidos apenas por quem saca do **TOPO (`☀ Vigia`)**, com prazo de espera de até 2 horas (ou gatilho substituto seguro / adiamento sem penalidade).
        - `bottomEchoPrompt` + `bottomEchoEffect`: Lidos apenas por quem saca do **FUNDO (`☾ Eco`)**. Toda ação física sugerida (foto, áudio, toque, deslocamento) é opcional e pode ser substituída por narração/decisão.
-2. **Cifra do Dia (`applyDailyCipher`):**
-   - Deve ser **100% determinística e sem dependências externas**: a mesma lista de 42 cartas e a mesma string de data (`YYYY-MM-DD` ou `DD/MM`) devem produzir exatamente a mesma permutação e os mesmos cortes (`dayCut` de `1..31` em 3 montes; `monthCut` de `1..12` em 2 montes).
+2. **Embaralhamento do Deck do Mundo (`shuffleWorldDeck` / `generateShuffledOrder`):**
+   - O Deck do Mundo de 42 cartas usa **Embaralhamento Livre** (Fisher-Yates em `src/core/cipher.ts`), persistindo `deckOrder` na sessão (`PlaySessionState`). `applyDailyCipher` permanece disponível apenas como utilitário legado/determinístico.
 
 ---
 
@@ -31,7 +31,7 @@ src/
 ├── types/
 │   └── card.ts                # Tipos centrais (GameCard, ThemeDeck, PlaySessionState, CipherResult)
 ├── core/
-│   ├── cipher.ts              # Algoritmo determinístico da Cifra do Dia (3 passos)
+│   ├── cipher.ts              # Embaralhamento livre do Deck do Mundo (Fisher-Yates) e utilitários de ordenação
 │   └── storage.ts             # Persistência localStorage (overrides de cartas, sessão, JSON import/export)
 ├── data/
 │   ├── engine-deck.ts         # Construtor de baralho de 54 cartas + splitPocketAndWorld()
@@ -42,7 +42,7 @@ src/
 ├── components/
 │   ├── card-renderer.ts       # Renderizador da carta 63×88mm + conteúdo do modal ampliado
 │   ├── quickstart-view.ts     # Aba "Como Começar" (passo a passo + simulação Dupla/Solo + K/Q/J)
-│   ├── playtest-view.ts       # Aba "Mesa & Cifra do Dia" (Trio de Bolso, Topo vs. Fundo, Modo Solo)
+│   ├── playtest-view.ts       # Aba "Mesa de Jogo" (Trio de Bolso, Embaralhamento Livre, Topo vs. Fundo, Modo Solo)
 │   ├── studio-view.ts         # Aba "Estúdio & Editor" (galeria de 54 cartas + form ao vivo)
 │   ├── oracle-view.ts         # Aba "Guia de Oráculo" (tabelas didáticas para baralho comum)
 │   └── print-view.ts          # Aba "Print & Play A4" (paginação em folhas de 9 cartas 3×3)
@@ -52,7 +52,7 @@ src/
 │   └── print.css              # Regras @media print para corte exato em folha A4
 └── main.ts                    # Estado da aplicação, eventos de UI e controle do <dialog> de zoom
 tests/
-├── cipher.test.ts             # Testes unitários da Cifra do Dia
+├── cipher.test.ts             # Testes unitários do embaralhamento e ordenação do Deck do Mundo
 ├── deck.test.ts               # Validação estrutural das 54 cartas nos 3 temas
 ├── storage.test.ts            # Testes de customização, reset e exportação/importação JSON
 ├── renderer.test.ts           # Testes de renderização de cartas, modal, paginação A4 e Oráculo

@@ -37,10 +37,11 @@ describe('Magic (63x88mm) Card Renderer, Print Sheets & Oracle Guide', () => {
     expect(pageMatches).toHaveLength(6); // 54 / 9 = 6 pages
   });
 
-  it('renders the didactic Oracle Guide with clear step-by-step action labels', () => {
-    const oracleHtml = renderOracleGuideHtml(deck, '2026-11-06');
+  it('renders the didactic Oracle Guide with clear step-by-step action labels and free shuffle rules', () => {
+    const oracleHtml = renderOracleGuideHtml(deck);
     expect(oracleHtml).toContain('Guia de Oráculo');
-    expect(oracleHtml).toContain('Cifra do Dia');
+    expect(oracleHtml).toContain('Embaralhamento Livre');
+    expect(oracleHtml).not.toContain('Cifra do Dia');
     expect(oracleHtml).toContain('1º Observe na rotina:');
     expect(oracleHtml).toContain('1º O que você deve fazer agora:');
     expect(oracleHtml).toContain('7♠');

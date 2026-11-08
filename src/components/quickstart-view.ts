@@ -1,14 +1,12 @@
-import { applyDailyCipher } from '../core/cipher';
 import { splitPocketAndWorld } from '../data/engine-deck';
 import type { ThemeDeck } from '../types/card';
 import { escapeHtml, renderMagicCardHtml } from './card-renderer';
 
-export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): string {
+export function renderQuickstartGuideHtml(deck: ThemeDeck): string {
   const { figures, worldDeck } = splitPocketAndWorld(deck);
-  const cipher = applyDailyCipher(worldDeck, dateSeed);
 
-  const sampleTopCard = cipher.cards[0];
-  const sampleBottomCard = cipher.cards[cipher.cards.length - 1];
+  const sampleTopCard = worldDeck.find((c) => c.playingCardCode === '6♣') ?? worldDeck[0];
+  const sampleBottomCard = worldDeck.find((c) => c.playingCardCode === '7♠') ?? worldDeck[worldDeck.length - 1];
   const sampleKing = figures.find((c) => c.rank === 'K' && c.suit === 'spades') ?? figures[0];
   const sampleQueen = figures.find((c) => c.rank === 'Q' && c.suit === 'spades') ?? figures[1];
   const sampleJack = figures.find((c) => c.rank === 'J' && c.suit === 'spades') ?? figures[2];
@@ -63,7 +61,7 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
               <strong>2. Cartas impressas (63×88mm):</strong> Imprima as 6 páginas da aba <em>Print &amp; Play A4</em> no tamanho padrão de pôquer/Magic, com frente temática e identificação clara do naipe e valor.
             </li>
             <li>
-              <strong>3. Digital (Web):</strong> Use a aba <em>Mesa &amp; Cifra do Dia</em> direto no celular ou computador. Para partida em dupla à distância, cada participante usa seu próprio baralho de 42 cartas sincronizado na mesma ordem inicial.
+              <strong>3. Digital (Web):</strong> Use a aba <em>Mesa de Jogo</em> direto no celular ou computador.
             </li>
           </ul>
         </article>
@@ -91,21 +89,19 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
 
         <article class="quickstart-step-card">
           <div class="step-number">Passo 3</div>
-          <h3>3. Combine o Ritmo e a Cifra</h3>
+          <h3>3. Embaralhe o Deck do Mundo</h3>
           <p>
             As <strong>42 cartas restantes</strong> (Ás a 10 dos quatro naipes + Coringa Claro ★ e Coringa Escuro 💀) formam o <strong>Deck do Mundo</strong>. As 12 figuras não entram nesse deck.
           </p>
           <ul class="quickstart-list">
             <li>
-              <strong>Partida presencial:</strong> Embaralhem as 42 cartas e coloquem o baralho no centro. Um único baralho é suficiente.
+              <strong>Partida presencial:</strong> Embaralhem livremente as 42 cartas e coloquem o maço no centro da mesa. Um único baralho é suficiente.
             </li>
             <li>
-              <strong>Partida à distância — Cifra do Dia (${escapeHtml(cipher.dateLabel)}):</strong> Sincroniza a ordem inicial de dois baralhos independentes sem aplicativo ou chamada de vídeo:
-              <ol class="quickstart-mini-ol">
-                <li><strong>Ordem-base:</strong> Ás a 10 de ♠, Ás a 10 de ♥, Ás a 10 de ♦, Ás a 10 de ♣, Coringa Claro (★) e Coringa Escuro (💀).</li>
-                <li><strong>Corte do dia (${cipher.dayCut}):</strong> Separem do topo ${cipher.dayCut} cartas e coloquem no fundo sem inverter. Distribuam as cartas uma a uma em 3 montes (Esquerda, Centro, Direita) e reúnam: Centro sobre Esquerda, e esse conjunto sobre Direita.</li>
-                <li><strong>Corte do mês (${cipher.monthCut}):</strong> Separem do topo ${cipher.monthCut} cartas e coloquem no fundo. Distribuam alternando em 2 montes (Esquerda e Direita) e coloquem Esquerda sobre Direita.</li>
-              </ol>
+              <strong>Partida à distância (Baralhos Livres):</strong> Não é preciso sincronizar a ordem das cartas! Cada jogador simplesmente <strong>embaralha normalmente o seu próprio maço de 42 cartas</strong> (ou clica em <em>Embaralhar Novo Maço</em> na Mesa).
+            </li>
+            <li>
+              <strong>Ritmo combinado:</strong> Combinem de jogar 1 rodada a cada hora durante um passeio, ou 1 a 3 rodadas ao longo do dia por mensagem/áudio.
             </li>
           </ul>
         </article>
@@ -114,20 +110,20 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
           <div class="step-number">Passo 4</div>
           <h3>4. Topo (Cena) vs. Fundo (Reação Imprevisível)</h3>
           <p>
-            Em dupla, cada rodada combina <strong>duas cartas diferentes</strong> (uma de cada extremidade do baralho sincronizado) para criar uma cena e uma resposta imprevisível:
+            Em dupla, cada rodada combina <strong>duas cartas diferentes</strong> (uma para abrir a cena e outra para definir a reação) garantindo 100% de surpresa:
           </p>
           <div class="turn-roles-summary">
             <div class="role-box role-box-vigia">
               <strong>☀ Primeiro Papel: Vigia (Topo — A Cena)</strong>
-              <p>Retira a carta do topo do próprio baralho e lê somente a coluna <strong>☀ TOPO</strong>. Aguarda o gatilho por <strong>até 2 horas</strong> (ou usa um gatilho substituto simples e seguro) e envia ao parceiro uma mensagem curta narrando o evento ficcional, sem consultar a carta do fundo.</p>
+              <p>Retira uma carta do topo e lê somente a coluna <strong>☀ TOPO</strong>. Aguarda o gatilho por <strong>até 2 horas</strong> (ou usa um gatilho substituto simples e seguro) e envia ao parceiro uma mensagem curta narrando o evento ficcional.</p>
             </div>
             <div class="role-box role-box-eco">
               <strong>☾ Segundo Papel: Eco (Fundo — A Reação)</strong>
-              <p>Depois de receber a cena, retira a carta disponível no fundo do próprio baralho e lê somente a coluna <strong>☾ FUNDO</strong>. Aplica a ação sugerida à cena narrada pelo Vigia (toda ação física pode ser substituída por narração/decisão).</p>
+              <p>Depois de receber a cena, retira uma carta do fundo e lê somente a coluna <strong>☾ FUNDO</strong>. Aplica a ação sugerida à cena narrada pelo Vigia (toda ação física pode ser substituída por narração/decisão).</p>
             </div>
           </div>
           <p class="quickstart-note">
-            <strong>Alternância:</strong> Na rodada seguinte, os papéis se invertem (quem foi Vigia vira Eco e retira do fundo; quem foi Eco vira Vigia e retira do topo).
+            <strong>Alternância:</strong> Na rodada seguinte, os papéis se invertem (quem foi Vigia vira Eco; quem foi Eco vira Vigia).
           </p>
         </article>
       </section>
@@ -135,9 +131,9 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck, dateSeed: string): st
       <section class="quickstart-walkthrough">
         <div class="walkthrough-header">
           <div>
-            <h3>Simulação Prática: Como seria a 1ª Rodada de Hoje (${escapeHtml(cipher.dateLabel)})</h3>
+            <h3>Simulação Prática: Exemplo de Rodada em ${escapeHtml(deck.name)}</h3>
             <p class="subtitle">
-              Veja as duas cartas que saem no topo e no fundo hoje no tema <strong>${escapeHtml(deck.name)}</strong> (clique em qualquer carta para ampliar a leitura):
+              Veja como duas cartas sorteadas livremente no tema <strong>${escapeHtml(deck.name)}</strong> se conectam na prática (clique em qualquer carta para ampliar a leitura):
             </p>
           </div>
           <button type="button" class="btn-primary" data-goto-tab="playtest">

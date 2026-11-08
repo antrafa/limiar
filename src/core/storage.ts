@@ -1,3 +1,4 @@
+import { generateShuffledOrder } from './cipher';
 import { getDefaultTheme } from '../data/index';
 import type { GameCard, PlaySessionState, ThemeDeck, ThemeId } from '../types/card';
 
@@ -75,6 +76,7 @@ export function getDefaultPlaySession(themeId: ThemeId = 'zombies'): PlaySession
   return {
     themeId,
     dateSeed: today,
+    deckOrder: generateShuffledOrder(42),
     chosenSuit: 'spades',
     queenTapped: false,
     jackActive: false,

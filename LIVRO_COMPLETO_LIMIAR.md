@@ -21,7 +21,7 @@ Este manual reúne as regras-base, exemplos de partida e três universos narrati
 2. **Cartas impressas:** cartas no tamanho padrão de pôquer (`63 × 88 mm`), com frente temática e identificação clara do naipe e valor.
 3. **Digital:** uma versão web ou aplicativo, quando disponível. O aplicativo é opcional; as regras não dependem dele.
 
-Para uma partida em dupla à distância, cada participante precisa de um baralho próprio, com as mesmas 42 cartas do Deck do Mundo e na mesma ordem inicial. As 12 figuras ficam separadas para formar os Trios de Bolso.
+Para uma partida em dupla à distância, cada participante precisa de um baralho próprio com as 42 cartas do Deck do Mundo embaralhadas livremente. As 12 figuras ficam separadas para formar os Trios de Bolso.
 
 ---
 
@@ -78,29 +78,10 @@ O Deck do Mundo contém:
 As 12 figuras do Trio de Bolso não entram nesse deck.
 
 ### Partida presencial
-Embaralhem as 42 cartas e coloquem o baralho no centro. Um único baralho é suficiente.
+Embaralhem livremente as 42 cartas e coloquem o baralho no centro da mesa. Um único baralho é suficiente: quem age como **Vigia (`☀ Topo`)** compra de cima e quem age como **Eco (`☾ Fundo`)** compra de baixo.
 
-### Partida à distância: Cifra do Dia
-A Cifra do Dia permite que dois baralhos independentes comecem na mesma ordem, sem aplicativo ou chamada de vídeo. Os dois participantes devem usar a mesma data local e executar os passos exatamente da mesma maneira.
-
-- **Ordem-base:** organizem as cartas nesta sequência: Ás a 10 de Espadas (`♠`), Ás a 10 de Copas (`♥`), Ás a 10 de Ouros (`♦`), Ás a 10 de Paus (`♣`), Coringa Claro (`★`) e Coringa Escuro (`💀`).
-- **Corte do dia:**
-  1. Separem do topo um bloco com a quantidade de cartas igual ao dia do mês.
-  2. Coloquem esse bloco inteiro no fundo, sem inverter sua ordem.
-  3. Distribuam as cartas restantes, uma por vez, em três montes: Esquerda, Centro e Direita, repetindo sempre essa sequência.
-  4. Ao distribuir, cada carta nova deve ser colocada sobre o monte correspondente.
-  5. Reúnam os montes nesta ordem: coloquem o monte Centro sobre o monte Esquerda; depois coloquem esse conjunto sobre o monte Direita.
-- **Corte do mês:**
-  1. Separem do topo um bloco com a quantidade de cartas igual ao número do mês.
-  2. Coloquem esse bloco inteiro no fundo, sem inverter sua ordem.
-  3. Distribuam as cartas, uma por vez, alternando entre dois montes: Esquerda e Direita.
-  4. Coloquem o monte Esquerda sobre o monte Direita.
-
-Os dois participantes devem manter a orientação do baralho e a ordem de recolhimento idênticas. Não embaralhem depois da Cifra do Dia.
-
-*Exemplo:* em 7 de novembro, o corte do dia usa 7 cartas e o corte do mês usa 11 cartas.
-
-> **Nota importante:** A Cifra do Dia sincroniza a ordem inicial. Ela não significa que os dois jogadores terão o mesmo estado de baralho depois de começarem a retirar cartas: cada um retira cartas de uma extremidade diferente, conforme a sequência de turnos.
+### Partida à distância (Embaralhamento Livre)
+Cada participante separa as 12 figuras (`K, Q, J`) e **embaralha livremente o próprio maço de 42 cartas**. Não é necessário sincronizar a ordem dos baralhos: cada jogador compra do próprio maço (do topo quando for Vigia, do fundo quando for Eco), garantindo surpresa total em ambos os lados.
 
 ---
 
@@ -109,13 +90,13 @@ Os dois participantes devem manter a orientação do baralho e a ordem de recolh
 Em dupla, cada rodada combina duas cartas diferentes para criar uma cena e uma resposta.
 
 ### Primeiro papel: Vigia (`☀ Topo`)
-1. O Vigia retira a carta disponível no topo do próprio baralho.
+1. O Vigia retira a carta disponível no topo do baralho.
 2. Lê somente a coluna **☀ Se tirar do topo**.
 3. Aguarda o gatilho indicado. Quando ele acontecer, ou quando usar um gatilho substituto permitido, envia ao parceiro uma mensagem curta narrando o evento ficcional.
 4. O Vigia não revela nem consulta a carta que está no fundo.
 
 ### Segundo papel: Eco (`☾ Fundo`)
-1. Depois de receber a cena, o Eco retira a carta disponível no fundo do próprio baralho.
+1. Depois de receber a cena, o Eco retira a carta disponível no fundo do baralho.
 2. Lê somente a coluna **☾ Se tirar do fundo**.
 3. Aplica a ação sugerida à cena narrada pelo Vigia.
 4. Os jogadores resolvem o resultado usando a regra da carta e seus Trios de Bolso.
@@ -125,7 +106,7 @@ Na rodada seguinte, os papéis se invertem:
 - quem foi Vigia passa a retirar do fundo e será Eco;
 - quem foi Eco passa a retirar do topo e será Vigia.
 
-Cada jogador usa seu próprio baralho sincronizado. Não se deve retirar duas cartas do mesmo baralho compartilhado em uma partida remota.
+Em uma partida remota, cada jogador usa seu próprio baralho embaralhado livremente.
 
 ### Prazo dos gatilhos
 Para evitar que a campanha fique parada:
@@ -266,15 +247,15 @@ Não se deve declarar o jogo "balanceado" antes desses testes. Os efeitos das ca
 
 ---
 
-## 2.2. Exemplo de Rodada Sincronizada neste Tema (Data de Exemplo: `07/11`)
+## 2.2. Exemplo de Rodada neste Tema (Embaralhamento Livre)
 
-Após executar a **Cifra do Dia `07/11`** (Cortar `7` cartas em 3 montes + Cortar `11` cartas em 2 montes):
-- **1ª Carta de Cima (`☀ Vigia`):** **`💀` — Bombardeio Termobárico ("Protocolo Tabula Rasa")**
-  - **1º Gatilho na Rotina:** *Ao ouvir um avião passando no céu, um estrondo ou ver o pôr do sol vermelho.*
-  - **2º Evento que o Vigia narra:** *"O alto comando desistiu da cidade. Sirenes de ataque aéreo anunciam a incineração total da Zona de Quarentena em minutos."*
-- **Última Carta de Baixo (`☾ Eco`):** **`9♣` — Mutação Alfa: O Colosso da Avenida**
-  - **1º Como o Eco reage à cena do Vigia:** *Imagine e descreva uma armadilha fictícia para deter a ameaça. Não use eletricidade, fogo, altura ou objetos reais.*
-  - **2º Resolução na Regra:** *Exige virar a Dama (Q ⟳) de um dos jogadores (ou ter Rei de ♠ ou ♣) para vencer sem revelar o Valete (J).*
+Após embaralhar livremente as 42 cartas do **Deck do Mundo**:
+- **1ª Carta de Cima (`☀ Vigia`):** **`A♠` — Sirene do Bloqueio Militar**
+  - **1º Gatilho na Rotina:** *Ao ouvir qualquer sirene, buzina prolongada ou alarme de carro/celular no seu dia.*
+  - **2º Evento que o Vigia narra:** *"O perímetro do exército caiu a três quadras daqui. Corredores infectados avançam em disparada pelo viaduto."*
+- **Última Carta de Baixo (`☾ Eco`):** **`💀` — Bombardeio Termobárico ("Protocolo Tabula Rasa")**
+  - **1º Como o Eco reage à cena do Vigia:** *Decisão imediata de sacrifício: um de vocês precisa trancar a comporta do bunker pelo lado de fora ou gastar seu último recurso.*
+  - **2º Resolução na Regra:** *Cataclismo (💀): Um dos jogadores deve virar sua Dama (Q ⟳) E revelar seu Valete (J) para salvar o parceiro da onda de choque.*
 
 ---
 
@@ -369,15 +350,15 @@ As **42 cartas abaixo** formam o **Deck do Mundo**.
 
 ---
 
-## 3.2. Exemplo de Rodada Sincronizada neste Tema (Data de Exemplo: `07/11`)
+## 3.2. Exemplo de Rodada neste Tema (Embaralhamento Livre)
 
-Após executar a **Cifra do Dia `07/11`** (Cortar `7` cartas em 3 montes + Cortar `11` cartas em 2 montes):
-- **1ª Carta de Cima (`☀ Vigia`):** **`💀` — Gehenna — A Noite da Lua de Sangue**
-  - **1º Gatilho na Rotina:** *Ao ver o céu totalmente escuro, uma nuvem vermelha ou ouvir trovão/vento forte.*
-  - **2º Evento que o Vigia narra:** *"A Lua fica cor de rubi sobre os arranha-céus. Os fundadores milenares acordaram sob a terra e o sangue de todos os vampiros os chama."*
-- **Última Carta de Baixo (`☾ Eco`):** **`9♣` — Toque do Torpor Ancestral**
-  - **1º Como o Eco reage à cena do Vigia:** *Peça ao parceiro que chame seu nome e lembre pelo que vocês dois estão lutando nesta noite.*
-  - **2º Resolução na Regra:** *O chamado do parceiro impede o torpor! Se não houver resposta, o Valete (J) se revela.*
+Após embaralhar livremente as 42 cartas do **Deck do Mundo**:
+- **1ª Carta de Cima (`☀ Vigia`):** **`A♠` — Emboscada da Segunda Inquisição**
+  - **1º Gatilho na Rotina:** *Ao ver uma viatura, carro preto, câmera de segurança ou guarda.*
+  - **2º Evento que o Vigia narra:** *"Agentes caçadores com munição incendiária fecharam as duas pontes do quarteirão procurando por assinaturas térmicas frias."*
+- **Última Carta de Baixo (`☾ Eco`):** **`💀` — Gehenna — A Noite da Lua de Sangue**
+  - **1º Como o Eco reage à cena do Vigia:** *Escolha dramática: quem de vocês oferece o próprio vitae ou segredo supremo para proteger o parceiro do julgamento final?*
+  - **2º Resolução na Regra:** *Cataclismo (💀): Um jogador deve virar sua Dama (Q ⟳) E revelar seu Valete (J) para que a dupla sobreviva à Gehenna.*
 
 ---
 
@@ -472,15 +453,15 @@ As **42 cartas abaixo** formam o **Deck do Mundo**.
 
 ---
 
-## 4.2. Exemplo de Rodada Sincronizada neste Tema (Data de Exemplo: `07/11`)
+## 4.2. Exemplo de Rodada neste Tema (Embaralhamento Livre)
 
-Após executar a **Cifra do Dia `07/11`** (Cortar `7` cartas em 3 montes + Cortar `11` cartas em 2 montes):
-- **1ª Carta de Cima (`☀ Vigia`):** **`💀` — Totalidade Eterna — O Colapso da Gravidade**
-  - **1º Gatilho na Rotina:** *Ao apagar a luz de um cômodo ou olhar para a noite fechada.*
-  - **2º Evento que o Vigia narra:** *"O anel do eclipse se fecha por completo. O chão desaparece sob os pés e apenas aquilo que vocês segurarem juntos continuará existindo."*
-- **Última Carta de Baixo (`☾ Eco`):** **`9♣` — A Porta de Luz Branca no Horizonte**
-  - **1º Como o Eco reage à cena do Vigia:** *Chame o parceiro pela mão em sua mensagem e confirme que nenhum dos dois ficará para trás.*
-  - **2º Resolução na Regra:** *Prepara a travessia final: limpa qualquer Valete (J) ativo na dupla.*
+Após embaralhar livremente as 42 cartas do **Deck do Mundo**:
+- **1ª Carta de Cima (`☀ Vigia`):** **`A♠` — O Primeiro Anel da Coroa Negra**
+  - **1º Gatilho na Rotina:** *Ao olhar para o céu, para uma lâmpada circular ou para o reflexo da luz numa lente.*
+  - **2º Evento que o Vigia narra:** *"A temperatura cai dez graus em um minuto. As sombras das árvores ficam nítidas como lâminas de obsidiana no chão."*
+- **Última Carta de Baixo (`☾ Eco`):** **`💀` — Totalidade Eterna — O Colapso da Gravidade**
+  - **1º Como o Eco reage à cena do Vigia:** *Ato final de sacrifício: um de vocês entrega sua última âncora temporal (Dama Q + Valete J) para manter a memória da dupla viva.*
+  - **2º Resolução na Regra:** *Cataclismo (💀): Um jogador deve virar sua Dama (Q ⟳) E revelar seu Valete (J) para ancorar a existência do parceiro.*
 
 ---
 

@@ -81,6 +81,7 @@ export interface DrawnLogItem {
 export interface PlaySessionState {
   themeId: ThemeId;
   dateSeed: string;
+  deckOrder?: number[];
   chosenSuit: Exclude<Suit, 'joker'>;
   queenTapped: boolean;
   jackActive: boolean;

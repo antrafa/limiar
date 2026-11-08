@@ -94,6 +94,38 @@ export function applyDailyCipher<T>(orderedWorldCards: readonly T[], dateInput: 
   };
 }
 
+export function shuffleWorldDeck<T>(
+  cards: readonly T[],
+  rng: () => number = Math.random,
+): T[] {
+  const copy = [...cards];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    const tmp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = tmp;
+  }
+  return copy;
+}
+
+export function generateShuffledOrder(
+  length = 42,
+  rng: () => number = Math.random,
+): number[] {
+  const indices = Array.from({ length }, (_, idx) => idx);
+  return shuffleWorldDeck(indices, rng);
+}
+
+export function resolveWorldDeckOrder<T>(
+  cards: readonly T[],
+  deckOrder?: readonly number[],
+): T[] {
+  if (!deckOrder || deckOrder.length !== cards.length) {
+    return [...cards];
+  }
+  return deckOrder.map((idx) => cards[idx] ?? cards[0]);
+}
+
 export function drawNextTurn<T>(
   deck: readonly T[],
   topIndex: number,

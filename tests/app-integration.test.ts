@@ -7,12 +7,13 @@ import { renderQuickstartGuideHtml } from '../src/components/quickstart-view';
 describe('Studio Gallery & Synchronized Playtest Table views', () => {
   it('renders the Quickstart Guide ("Como Começar a Jogar") with step-by-step instructions and real turn example', () => {
     const deck = loadThemeWithOverrides('zombies');
-    const html = renderQuickstartGuideHtml(deck, '2026-11-06');
+    const html = renderQuickstartGuideHtml(deck);
     expect(html).toContain('Como Começar a Jogar');
     expect(html).toContain('1. Escolha seu Material');
     expect(html).toContain('2. Separe seu Trio de Bolso');
-    expect(html).toContain('3. Combine o Ritmo e a Cifra');
+    expect(html).toContain('3. Embaralhe o Deck do Mundo');
     expect(html).toContain('4. Topo (Cena) vs. Fundo (Reação Imprevisível)');
+    expect(html).not.toContain('Cifra do Dia');
     expect(html).not.toContain('Relógio da dupla');
     expect(html).toContain('Como essa rodada acontece na vida real (Em Dupla)');
     expect(html).toContain('E como funciona no Modo Solo');
@@ -43,12 +44,14 @@ describe('Studio Gallery & Synchronized Playtest Table views', () => {
     expect(html).toContain(journeyCard.title);
   });
 
-  it('renders the Playtest Table with Pocket Trio (K, Q, J) and Top vs Bottom deck controls', () => {
+  it('renders the Playtest Table with Pocket Trio (K, Q, J), free shuffle button, and Top vs Bottom deck controls', () => {
     const deck = loadThemeWithOverrides('vampires');
     const session = getDefaultPlaySession('vampires');
     const html = renderPlaytestTableHtml(deck, session);
     expect(html).toContain('Sacar do TOPO (☀ Vigia)');
     expect(html).toContain('Sacar do FUNDO (☾ Eco)');
+    expect(html).toContain('Embaralhar Novo Maço');
+    expect(html).not.toContain('Cifra do Dia');
     expect(html).toContain('Seu Trio de Bolso');
   });
 

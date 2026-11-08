@@ -2,7 +2,7 @@
 
 ![Limiar — O Jogo que Ultrapassa a Mesa](./public/limiar-banner.png)
 
-**Limiar** (*anteriormente nome de trabalho: Sinaleiro*) é um RPG narrativo cooperativo na vida real (*pervasive tabletop card game*) em que sinais do cotidiano disparam cenas de uma aventura compartilhada. Um jogador observa e narra (**☀ Vigia**); o outro reage (**☾ Eco**). A história continua entre uma rodada e outra, dentro do ritmo normal da vida — usando qualquer baralho de **54 cartas** (52 tradicionais + 2 Coringas) ou cartas impressas no tamanho padrão de Magic/Poker (**63mm × 88mm**), acompanhado de um **Estúdio Web, Mesa Digital Sincronizada, Guia de Oráculo e Gerador Print & Play A4**.
+**Limiar** (*anteriormente nome de trabalho: Sinaleiro*) é um RPG narrativo cooperativo na vida real (*pervasive tabletop card game*) em que sinais do cotidiano disparam cenas de uma aventura compartilhada. Um jogador observa e narra (**☀ Vigia**); o outro reage (**☾ Eco**). A história continua entre uma rodada e outra, dentro do ritmo normal da vida — usando qualquer baralho de **54 cartas** (52 tradicionais + 2 Coringas) ou cartas impressas no tamanho padrão de Magic/Poker (**63mm × 88mm**), acompanhado de um **Estúdio Web, Mesa de Jogo Digital, Guia de Oráculo e Gerador Print & Play A4**.
 
 > 📖 **Quer o manual completo (Edição Revisada 1.1) em um único arquivo?** Consulte [**LIVRO_COMPLETO_LIMIAR.md**](./LIVRO_COMPLETO_LIMIAR.md) (ou [**LIVRO_COMPLETO_SINALEIRO.md**](./LIVRO_COMPLETO_SINALEIRO.md)) — com todas as regras revisadas 1.1, ordem de prioridade de 7 passos, segurança na vida real, marcos de campanha e os **3 Oráculos Completos (162 cartas)**.
 
@@ -21,7 +21,7 @@ Cada jogador escolhe um naipe que define sua vocação (`♠ Espadas`, `♥ Copa
 ### 2. O Deck do Mundo (42 Cartas: `Ás` a `10` + 2 Coringas)
 As 40 cartas numeradas e os 2 Coringas (`★ Coringa Claro` e `💀 Coringa Escuro`) formam o baralho de eventos.
 
-- **Partida à Distância (Cifra do Dia `DD/MM`):** Sincroniza a ordem inicial de dois baralhos independentes em 3 passos (Ordem-base → Corte do Dia em 3 montes → Corte do Mês em 2 montes) sem precisar de aplicativo ou chamada de vídeo.
+- **Embaralhamento Livre (Presencial ou à Distância):** Presencialmente, embaralhem um único maço de 42 cartas na mesa. À distância, cada jogador embaralha livremente o próprio maço de 42 cartas sem precisar sincronizar a ordem.
 - **Dupla Câmara (`☀ Topo · Vigia` vs. `☾ Fundo · Eco`):**
   - **☀ Primeiro Papel — Vigia (Topo):** Retira a carta do topo do próprio baralho e lê apenas a coluna **☀ Topo**. Aguarda o gatilho por **até 2 horas** (ou usa um gatilho substituto simples e seguro; ou adia sem penalidade) e narra o evento ficcional ao parceiro.
   - **☾ Segundo Papel — Eco (Fundo):** Retira a carta disponível no fundo do próprio baralho e lê apenas a coluna **☾ Fundo**. Aplica a reação sugerida à cena narrada pelo Vigia.
@@ -42,8 +42,8 @@ Todas as 54 cartas de cada tema podem ser editadas ao vivo no **Estúdio**, salv
 
 ## Funcionalidades da Aplicação Web
 
-- **Como Começar (Manual v1.1 + Guia Rápido):** Arte oficial de **Limiar**, passo a passo de início, simulação prática com as cartas do dia (Em Dupla e Modo Solo), explicação detalhada de `K`, `Q` e `J`, Ordem de Prioridade (7 passos), Duração de Campanha (6, 12 ou 18 rodadas) e Regras de Segurança.
-- **Mesa & Cifra do Dia:** Simulador sincronizado para jogar pelo celular/computador (em dupla ou solo), com controle de virar Dama (`Q ⟳`), ativar Valete (`J`), sacar do Topo/Fundo e histórico de turnos.
+- **Como Começar (Manual v1.1 + Guia Rápido):** Arte oficial de **Limiar**, passo a passo de início, simulação prática de rodada (Em Dupla e Modo Solo), explicação detalhada de `K`, `Q` e `J`, Ordem de Prioridade (7 passos), Duração de Campanha (6, 12 ou 18 rodadas) e Regras de Segurança.
+- **Mesa de Jogo:** Simulador de mesa para jogar pelo celular/computador (em dupla ou solo), com embaralhamento livre das 42 cartas, controle de virar Dama (`Q ⟳`), ativar Valete (`J`), sacar do Topo/Fundo e histórico de turnos.
 - **Estúdio & Editor (63×88mm):** Galeria das 54 cartas com filtro por naipe e editor ao vivo. Clicar em qualquer carta selecionada abre o **Modal de Leitura Ampliada**.
 - **Guia de Oráculo (Baralho Comum):** Tabelas didáticas passo a passo para jogar usando qualquer baralho físico tradicional de 54 cartas.
 - **Print & Play A4:** Paginação automática em grades `3 × 3` (9 cartas por folha A4, 6 páginas no total) nas medidas exatas `63mm × 88mm` com marcas de corte para impressão (`Ctrl+P` / `Cmd+P`).
