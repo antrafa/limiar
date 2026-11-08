@@ -141,7 +141,7 @@ export function renderCardModalContentHtml(card: GameCard): string {
 
     const label1 =
       card.kind === 'archetype_king'
-        ? 'Como interpretar seu personagem hoje (Passiva na Vida Real)'
+        ? 'Como interpretar seu personagem hoje (Convite Narrativo — não obrigatório)'
         : card.kind === 'trump_queen'
           ? 'O que acontece quando você gira esta carta 90° (⟳ Virar / Tap)'
           : 'Quando esta Cicatriz é revelada (Gatilho de Entrada)';
@@ -150,8 +150,8 @@ export function renderCardModalContentHtml(card: GameCard): string {
       card.kind === 'archetype_king'
         ? 'Sua vantagem especial (Sinergia quando sai uma carta do seu naipe)'
         : card.kind === 'trump_queen'
-          ? 'Como recuperar este recurso (Desvirar / Recarga)'
-          : 'Restrição que você deve cumprir na rotina (Tabu na Vida Real)';
+          ? 'Como recuperar este recurso (Regra-base: cumprir qualquer carta de ♦ Ouros A–10)'
+          : 'Tabu enquanto aberto (somente dentro das interações do jogo)';
 
     detailBlocksHtml = `
       <div class="zoom-reading-section">
@@ -172,7 +172,7 @@ export function renderCardModalContentHtml(card: GameCard): string {
       <div class="zoom-reading-section">
         <div class="zoom-detail-box zoom-box-vigia">
           <div class="zoom-role-kicker">Se você tirou esta carta do TOPO (☀ Vigia)</div>
-          <h4>1º Observe este sinal no mundo real:</h4>
+          <h4>1º Observe este sinal no mundo real (Prazo de até 2h, gatilho substituto seguro ou adiar sem penalidade):</h4>
           <p class="zoom-trigger-text">👁 ${escapeHtml(card.topWatcherTrigger ?? '')}</p>
           <h4>2º O que acontece na história (conte ao parceiro ou registre no diário):</h4>
           <p>${escapeHtml(card.topWatcherEvent ?? '')}</p>
@@ -180,9 +180,9 @@ export function renderCardModalContentHtml(card: GameCard): string {
 
         <div class="zoom-detail-box zoom-box-eco">
           <div class="zoom-role-kicker">Se você tirou esta carta do FUNDO (☾ Eco)</div>
-          <h4>1º O que você deve fazer na prática para responder:</h4>
+          <h4>1º O que você deve fazer na prática para responder (toda ação física/foto/áudio é opcional e pode ser narrada):</h4>
           <p class="zoom-trigger-text">⚡ ${escapeHtml(card.bottomEchoPrompt ?? '')}</p>
-          <h4>2º Como resolver na regra (Sucesso ou Custo):</h4>
+          <h4>2º Como resolver na regra (Ordem: 1. Segurança → 2. Ação → 3. Efeito → 4. Rei → 5. Dama → 6. Falha → 7. Valete/Colapso):</h4>
           <p>${escapeHtml(card.bottomEchoEffect ?? '')}</p>
         </div>
 

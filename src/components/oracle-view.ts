@@ -13,17 +13,17 @@ function renderFigureRow(c: GameCard): string {
 
   const labelPrimary =
     c.kind === 'archetype_king'
-      ? 'Como agir hoje na rotina (Hábito Real):'
+      ? 'Convite narrativo na rotina (não obrigatório):'
       : c.kind === 'trump_queen'
-        ? 'Quando girar esta carta 90° (Usar Trunfo ⟳):'
-        : 'Quando virar esta carta para cima (Entra em jogo):';
+        ? 'Quando girar esta carta 90° (Ativar Dama ⟳):'
+        : 'Quando revelar esta carta (Gatilho de Entrada):';
 
   const labelSecondary =
     c.kind === 'archetype_king'
-      ? 'Sua vantagem quando sair carta deste naipe:'
+      ? 'Sinergia quando sair carta deste naipe:'
       : c.kind === 'trump_queen'
-        ? 'Como desvirar para usar de novo (Recarga):'
-        : 'Restrição obrigatória enquanto estiver ativa (Tabu Real):';
+        ? 'Como recarregar para usar de novo (Regra-base: ♦ Ouros A–10):'
+        : 'Tabu enquanto aberto (somente nas interações do jogo):';
 
   return `
     <tr>
@@ -105,74 +105,70 @@ export function renderOracleGuideHtml(deck: ThemeDeck, dateSeed: string): string
 
       <section class="oracle-rules-grid">
         <div class="oracle-rule-box">
-          <h3>Passo 1: O que separar antes de começar</h3>
+          <h3>1. Preparação: Seu Trio de Bolso (K, Q, J)</h3>
           <ol class="oracle-didactic-list">
             <li>
-              <strong>Escolha sua Vocação (Naipe):</strong> Cada jogador escolhe um naipe (♠ Espadas, ♥ Copas, ♦ Ouros ou ♣ Paus) e retira do baralho o <strong>Rei (K)</strong>, a <strong>Dama (Q)</strong> e o <strong>Valete (J)</strong> daquele naipe.
+              <strong>Escolha sua Vocação (Naipe):</strong> Retire as 12 figuras do baralho. Cada jogador escolhe um naipe (♠ Espadas, ♥ Copas, ♦ Ouros ou ♣ Paus) e recebe o <strong>Rei (K)</strong>, a <strong>Dama (Q)</strong> e o <strong>Valete (J)</strong> daquele naipe.
             </li>
             <li>
-              <strong>Como guardar suas 3 cartas no bolso/mesa:</strong>
+              <strong>Como funcionam as 3 figuras (Edição 1.1):</strong>
               <ul>
-                <li>Deixe o <strong>Rei (K)</strong> de pé e visível (é o seu personagem).</li>
-                <li>Deixe a <strong>Dama (Q)</strong> de pé ao lado dele (é o seu recurso de emergência).</li>
-                <li>Deixe o <strong>Valete (J)</strong> virado para baixo (você começa saudável, sem cicatriz).</li>
+                <li><strong>Rei (K) — Identidade:</strong> Fica aberto durante toda a campanha. As atitudes de rotina sugeridas são <em>convites narrativos, não obrigações</em>, e concede a sinergia de naipe.</li>
+                <li><strong>Dama (Q ⟳) — Proteção:</strong> Começa aberta e pronta. Gire-a 90° para ativar seu efeito ou evitar uma consequência quando permitido. Recarrega ao cumprir com sucesso qualquer carta de <strong>♦ Ouros (Ás a 10)</strong>.</li>
+                <li><strong>Valete (J) — Cicatriz:</strong> Começa fechado (face para baixo). Quando revelado por falha grave sem Dama pronta, ativa o tabu <em>somente dentro das interações do jogo</em> até ser curado.</li>
               </ul>
             </li>
             <li>
-              <strong>O Maço do Mundo (42 cartas):</strong> Junte todas as cartas de <strong>Ás (A) até 10</strong> dos quatro naipes + os <strong>2 Coringas</strong>. Esse é o baralho de onde vocês vão puxar as cenas.
+              <strong>Deck do Mundo (42 cartas):</strong> As 40 cartas numeradas (Ás a 10) + 1 Coringa Claro (★) + 1 Coringa Escuro (💀).
             </li>
           </ol>
         </div>
 
         <div class="oracle-rule-box">
-          <h3>Passo 2: Quem lê o quê na hora do turno?</h3>
+          <h3>2. Rodada (Vigia &amp; Eco) e Prazo dos Gatilhos</h3>
           <ol class="oracle-didactic-list">
             <li>
-              <strong>Se for a sua vez de abrir a cena (☀ Papel de Vigia):</strong>
-              Puxe a <strong>1ª carta de CIMA</strong> do maço. Procure essa carta na tabela abaixo e leia <strong>SOMENTE a coluna "☀ TOPO · O VIGIA"</strong>:
+              <strong>Primeiro papel — ☀ Vigia (Topo):</strong>
+              Retira a carta disponível no <strong>topo</strong> do próprio baralho e lê <strong>somente a coluna "☀ TOPO · O VIGIA"</strong>:
               <ul>
-                <li>Espere acontecer o item <strong>1º Observe na rotina</strong> perto de você.</li>
-                <li>Quando acontecer, mande mensagem/áudio (ou fale) ao parceiro contando o item <strong>2º Narre ao parceiro</strong>.</li>
+                <li><strong>Prazo de até 2 horas:</strong> Aguarde o gatilho do item <strong>1º Observe na rotina</strong> por até 2h. Se não acontecer, escolha um <em>gatilho substituto simples e seguro</em> ou <em>adie a carta sem penalidade</em>.</li>
+                <li>Quando ativar, envie uma mensagem curta narrando o evento do item <strong>2º Narre ao parceiro</strong> (sem consultar a carta do fundo).</li>
               </ul>
             </li>
             <li>
-              <strong>Se for a sua vez de responder (☾ Papel de Eco):</strong>
-              Quando o Vigia falar com você, puxe a <strong>última carta de BAIXO</strong> do maço (assim o Vigia nunca sabe qual reação vai sair!). Procure-a na tabela e leia <strong>SOMENTE a coluna "☾ FUNDO · O ECO"</strong>:
+              <strong>Segundo papel — ☾ Eco (Fundo):</strong>
+              Depois de receber a cena, retira a carta disponível no <strong>fundo</strong> do próprio baralho e lê <strong>somente a coluna "☾ FUNDO · O ECO"</strong>:
               <ul>
-                <li>Conecte a manobra do item <strong>1º O que você deve fazer agora</strong> diretamente à cena que o Vigia acabou de narrar.</li>
-                <li>Aplique o item <strong>2º Regra de desfecho</strong> usando seu Rei (K), Dama (Q ⟳) ou Valete (J).</li>
+                <li>Aplica a reação do item <strong>1º O que você deve fazer agora</strong> à cena do Vigia. <em>Toda ação física (foto, áudio, toque, deslocamento) é opcional e pode ser substituída por uma descrição ou escolha narrada.</em></li>
+                <li>Na rodada seguinte, os papéis se invertem.</li>
               </ul>
             </li>
             <li>
-              <strong>Se estiver jogando SOZINHO (Modo Solo):</strong>
-              Puxe 1 carta de cima (leia o ☀ TOPO como o problema que surgiu) e 1 carta de baixo (leia o ☾ FUNDO como a tarefa que você mesmo deve fazer e registrar no celular/diário).
+              <strong>Modo Solo:</strong>
+              Retire 1 carta do topo (aguarde o gatilho até 2h ou use substituto seguro) e, quando ativar, retire 1 carta do fundo, respondendo em voz, texto ou diário.
             </li>
           </ol>
         </div>
 
         <div class="oracle-rule-box">
-          <h3>Passo 3: Como funcionam os Custos, a Dama (Q) e o Valete (J)?</h3>
-          <ul class="oracle-didactic-list">
-            <li>
-              <strong>"Cumpriu a ação?":</strong> Se vocês realizaram a interação pedida no tempo/forma da carta, a cena termina em sucesso!
-            </li>
-            <li>
-              <strong>"Girar a Dama (Q ⟳)":</strong> Sempre que uma carta disser <em>"vire sua Dama (Q ⟳)"</em> (ou quando você não puder cumprir a ação real da carta), gire sua carta de Dama deitada em 90°. Enquanto ela estiver deitada, você não pode usá-la de novo até cumprir a condição de <em>Recarga</em> dela.
-            </li>
-            <li>
-              <strong>"Revelar o Valete (J)":</strong> Se você falhar numa cena e sua Dama (Q) já estiver deitada (ou se preferir guardar a Dama), você vira seu <strong>Valete (J)</strong> para cima. A partir desse momento, você é obrigado a respeitar o <em>Tabu Real</em> descrito no seu Valete!
-            </li>
-          </ul>
+          <h3>3. Ordem de Prioridade (7 Passos), Colapso e Campanha</h3>
+          <ol class="oracle-didactic-list">
+            <li><strong>1º Segurança e limites reais:</strong> Qualquer jogador pode dizer <em>"pausa"</em> ou <em>"passo"</em>, adaptar ou substituir qualquer ação insegura/inconveniente sem penalidade.</li>
+            <li><strong>2º Ação do Eco</strong> → <strong>3º Efeito específico da carta</strong> (Sucesso, Sucesso com custo, Falha ou Escolha narrativa).</li>
+            <li><strong>4º Sinergia do Rei (K)</strong> → <strong>5º Dama (Q ⟳)</strong> → <strong>6º Consequência</strong> → <strong>7º Valete (J) e Colapso</strong>.</li>
+            <li><strong>Colapso:</strong> Ocorre quando uma nova falha exigiria revelar/agravar um Valete já ativo e sua Dama está esgotada. O parceiro pode evitar o Colapso gastando a própria Dama pronta (se ela permitir).</li>
+            <li><strong>Campanha e Marcos:</strong> Curta (<strong>6 rodadas</strong> → título), Padrão (<strong>12 rodadas</strong> → habilidade narrativa única) ou Longa (<strong>18 rodadas</strong> → epílogo/carta de memória).</li>
+          </ol>
         </div>
 
         <div class="oracle-rule-box">
-          <h3>Passo 4: Cifra do Dia (${escapeHtml(cipher.dateLabel)}) — Para jogar à distância</h3>
-          <p>Se cada jogador estiver em sua casa com seu próprio baralho, façam estes 3 passos antes do 1º turno para deixar os dois maços exatamente na mesma ordem:</p>
+          <h3>4. Cifra do Dia (${escapeHtml(cipher.dateLabel)}) — Sincronia à Distância</h3>
+          <p>Sincroniza a ordem inicial de dois baralhos independentes (cada jogador retira de uma extremidade diferente conforme os turnos):</p>
           <ol class="oracle-didactic-list">
             ${cipher.steps.map((s) => `<li>${escapeHtml(s)}</li>`).join('')}
           </ol>
           <p class="cipher-preview">
-            <strong>Conferência rápida:</strong> Após embaralhar hoje, a 1ª carta de cima (☀ Vigia) será <strong>${escapeHtml(cipher.cards[0].playingCardCode)} (${escapeHtml(cipher.cards[0].title)})</strong> e a última de baixo (☾ Eco) será <strong>${escapeHtml(cipher.cards[cipher.cards.length - 1].playingCardCode)} (${escapeHtml(cipher.cards[cipher.cards.length - 1].title)})</strong>.
+            <strong>Conferência rápida:</strong> Após a Cifra de hoje, a 1ª carta de cima (☀ Vigia) será <strong>${escapeHtml(cipher.cards[0].playingCardCode)} (${escapeHtml(cipher.cards[0].title)})</strong> e a última de baixo (☾ Eco) será <strong>${escapeHtml(cipher.cards[cipher.cards.length - 1].playingCardCode)} (${escapeHtml(cipher.cards[cipher.cards.length - 1].title)})</strong>.
           </p>
         </div>
       </section>

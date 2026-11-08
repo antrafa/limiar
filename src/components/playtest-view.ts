@@ -136,8 +136,12 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
       <section class="pocket-trio-panel">
         <header class="pocket-header">
           <div>
-            <h3>👑 Seu Trio de Bolso (K, Q, J na Carteira)</h3>
-            <p class="subtitle">Escolha seu naipe de vocação. Gire a Dama (Q ⟳) quando usar seu trunfo ou revele o Valete (J) se sofrer uma Cicatriz.</p>
+            <h3>👑 Seu Trio de Bolso (K, Q, J — Regras Revisadas v1.1)</h3>
+            <p class="subtitle">
+              <strong>Rei (K):</strong> Convite narrativo (não obrigatório) + Sinergia de naipe ·
+              <strong>Dama (Q ⟳):</strong> Proteção individual (recarrega ao cumprir qualquer carta de ♦ Ouros A–10) ·
+              <strong>Valete (J):</strong> Revelado em falha grave sem Dama pronta (Tabu vale somente dentro do jogo; nova falha com Valete ativo e Dama esgotada gera <strong>Colapso</strong>).
+            </p>
           </div>
           <div class="suit-selector-bar">
             ${suitTabsHtml}
@@ -240,6 +244,14 @@ export function renderPlaytestTableHtml(deck: ThemeDeck, session: PlaySessionSta
         <div class="world-spotlight-column">
           <h3>Carta(s) em Foco na Mesa</h3>
           ${spotlightHtml}
+          <div class="v11-table-cheat-sheet">
+            <strong>⚖️ Lembrete Rápido (Edição Revisada 1.1):</strong>
+            <ul>
+              <li><strong>Prazo do Gatilho (☀ Vigia):</strong> Até <strong>2 horas</strong>. Se não acontecer, escolha um <em>gatilho substituto simples e seguro</em> ou <em>adie a carta sem penalidade</em>.</li>
+              <li><strong>Ficção em 1º lugar (☾ Eco):</strong> Toda ação física (foto, áudio, toque, deslocamento) é opcional e pode ser substituída por uma descrição ou escolha narrada. Qualquer jogador pode dizer <em>"pausa"</em> ou <em>"passo"</em> sem punição.</li>
+              <li><strong>Ordem de Prioridade (7 Passos):</strong> 1. Segurança e limites reais → 2. Ação do Eco → 3. Efeito específico da carta → 4. Sinergia do Rei (K) → 5. Dama (Q ⟳) → 6. Consequência → 7. Valete (J) e Colapso.</li>
+            </ul>
+          </div>
         </div>
       </section>
 

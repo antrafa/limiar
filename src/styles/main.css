@@ -358,6 +358,28 @@ button:focus-visible {
   font-size: 0.86rem;
 }
 
+.v11-table-cheat-sheet {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background-color: var(--bg-muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.v11-table-cheat-sheet strong {
+  color: var(--text-primary);
+}
+
+.v11-table-cheat-sheet ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .quickstart-kicker {
   display: inline-block;
   font-size: 0.78rem;
