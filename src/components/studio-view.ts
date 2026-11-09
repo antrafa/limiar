@@ -131,7 +131,7 @@ export function renderStudioGalleryHtml(
 
             <div class="editor-field">
               <label for="edit-artUrl">Arte / Ilustração (URL ou caminho opcional)</label>
-              <input id="edit-artUrl" name="artUrl" type="text" placeholder="Ex.: /limiar-banner.png ou https://..." value="${escapeHtml(selectedCard.artUrl ?? '')}" />
+              <input id="edit-artUrl" name="artUrl" type="text" placeholder="Ex.: ./limiar-banner.png ou https://..." value="${escapeHtml(selectedCard.artUrl ?? '')}" />
             </div>
 
             ${dynamicFieldsHtml}

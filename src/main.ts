@@ -63,7 +63,7 @@ export function mountLimiarApp(root: HTMLElement): void {
   const partida = loadPartida();
 
   const state: AppState = {
-    activeTab: partida ? 'playtest' : 'quickstart',
+    activeTab: 'quickstart',
     activeThemeId: initialThemeId,
     suitFilter: 'all',
     impressao: configDeImpressaoPadrao(),

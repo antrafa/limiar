@@ -66,7 +66,7 @@ export function renderQuickstartGuideHtml(deck: ThemeDeck): string {
           </div>
         </div>
         <figure class="hero-art">
-          <img src="/limiar-banner.png" alt="Arte de Limiar: um portal dourado sobre uma mesa com cartas" loading="eager" />
+          <img src="./limiar-banner.png" alt="Arte de Limiar: um portal dourado sobre uma mesa com cartas" loading="eager" />
         </figure>
       </section>
 
