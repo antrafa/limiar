@@ -1,4 +1,4 @@
-import type { GameCard, Rank, Suit, SuitMeta, ThemeDeck, ThemeId } from '../types/card';
+import type { GameCard, Rank, Suit, SuitMeta, ThemeBoss, ThemeDeck, ThemeId } from '../types/card';
 
 export interface JourneySeed {
   rank: Exclude<Rank, 'J' | 'Q' | 'K' | 'JOKER_LIGHT' | 'JOKER_DARK'>;
@@ -9,6 +9,7 @@ export interface JourneySeed {
   topWatcherEvent: string;
   bottomEchoPrompt: string;
   bottomEchoEffect: string;
+  dailyIdea: string;
   flavorText: string;
 }
 
@@ -55,6 +56,8 @@ export interface ThemeBlueprint {
   name: string;
   subtitle: string;
   tagline: string;
+  tom: string;
+  chefe: ThemeBoss;
   accentColor: string;
   secondaryColor: string;
   suits: Record<Exclude<Suit, 'joker'>, SuitMeta>;
@@ -150,6 +153,7 @@ export function buildThemeDeck(blueprint: ThemeBlueprint): ThemeDeck {
         topWatcherEvent: item.topWatcherEvent,
         bottomEchoPrompt: item.bottomEchoPrompt,
         bottomEchoEffect: item.bottomEchoEffect,
+        dailyIdea: item.dailyIdea,
         flavorText: item.flavorText,
       });
     }
@@ -199,6 +203,8 @@ export function buildThemeDeck(blueprint: ThemeBlueprint): ThemeDeck {
     name: blueprint.name,
     subtitle: blueprint.subtitle,
     tagline: blueprint.tagline,
+    tom: blueprint.tom,
+    chefe: blueprint.chefe,
     accentColor: blueprint.accentColor,
     secondaryColor: blueprint.secondaryColor,
     suits: blueprint.suits,

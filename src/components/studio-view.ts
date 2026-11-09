@@ -1,13 +1,9 @@
 import type { GameCard, ThemeDeck } from '../types/card';
-import { escapeHtml, renderMagicCardHtml } from './card-renderer';
+import { escapeHtml, isFigure, renderMagicCardHtml } from './card-renderer';
 
 export function filterStudioCards(deck: ThemeDeck, suitFilter: string): GameCard[] {
   if (!suitFilter || suitFilter === 'all') return deck.cards;
-  if (suitFilter === 'figures') {
-    return deck.cards.filter(
-      (c) => c.kind === 'archetype_king' || c.kind === 'trump_queen' || c.kind === 'scar_jack',
-    );
-  }
+  if (suitFilter === 'figures') return deck.cards.filter(isFigure);
   return deck.cards.filter((c) => c.suit === suitFilter);
 }
 
@@ -17,19 +13,16 @@ export function renderStudioGalleryHtml(
   suitFilter: string = 'all',
 ): string {
   const filteredCards = filterStudioCards(deck, suitFilter);
-  const isFigure =
-    selectedCard.kind === 'archetype_king' ||
-    selectedCard.kind === 'trump_queen' ||
-    selectedCard.kind === 'scar_jack';
+  const figure = isFigure(selectedCard);
 
   const filterPills: Array<{ id: string; label: string }> = [
     { id: 'all', label: 'Todas (54)' },
-    { id: 'figures', label: '👑 Trio de Bolso K/Q/J (12)' },
-    { id: 'spades', label: `♠ Espadas · ${deck.suits.spades.vocationName}` },
-    { id: 'hearts', label: `♥ Copas · ${deck.suits.hearts.vocationName}` },
-    { id: 'diamonds', label: `♦ Ouros · ${deck.suits.diamonds.vocationName}` },
-    { id: 'clubs', label: `♣ Paus · ${deck.suits.clubs.vocationName}` },
-    { id: 'joker', label: '★/💀 Coringas (2)' },
+    { id: 'figures', label: 'Trio K/Q/J (12)' },
+    { id: 'spades', label: '♠ Confronto' },
+    { id: 'hearts', label: '♥ Vínculo' },
+    { id: 'diamonds', label: '♦ Recurso' },
+    { id: 'clubs', label: '♣ Mistério' },
+    { id: 'joker', label: '★ 💀 Coringas' },
   ];
 
   const filterHtml = filterPills
@@ -55,33 +48,25 @@ export function renderStudioGalleryHtml(
     )
     .join('');
 
-  const dynamicFieldsHtml = isFigure
-    ? `
-      <div class="editor-field">
-        <label for="edit-figurePassiveOrRule">Passiva / Efeito Virar (⟳) / Gatilho</label>
-        <textarea id="edit-figurePassiveOrRule" name="figurePassiveOrRule" rows="3">${escapeHtml(selectedCard.figurePassiveOrRule ?? '')}</textarea>
-      </div>
-      <div class="editor-field">
-        <label for="edit-figureSpecialOrTaboo">Sinergia / Recarga / Tabu na Vida Real</label>
-        <textarea id="edit-figureSpecialOrTaboo" name="figureSpecialOrTaboo" rows="3">${escapeHtml(selectedCard.figureSpecialOrTaboo ?? '')}</textarea>
-      </div>
-    `
+  const dynamicFieldsHtml = figure
+    ? `<p class="muted">A regra do Rei, da Dama e do Valete é a mesma em todos os temas; aqui você muda só o nome e a ambientação.</p>`
     : `
+      <p class="muted">Escreva para servir a qualquer pessoa, sozinha ou em grupo: sem falar de parceiro, dupla ou "vocês".</p>
       <div class="editor-field">
-        <label for="edit-topWatcherTrigger">☀ Topo (Vigia) — Gatilho Real</label>
-        <input id="edit-topWatcherTrigger" name="topWatcherTrigger" type="text" value="${escapeHtml(selectedCard.topWatcherTrigger ?? '')}" />
+        <label for="edit-dailyIdea">Ideia (o que esta cena pode ser no dia)</label>
+        <textarea id="edit-dailyIdea" name="dailyIdea" rows="2">${escapeHtml(selectedCard.dailyIdea ?? '')}</textarea>
       </div>
       <div class="editor-field">
-        <label for="edit-topWatcherEvent">☀ Topo (Vigia) — Evento Ficcional</label>
-        <textarea id="edit-topWatcherEvent" name="topWatcherEvent" rows="2">${escapeHtml(selectedCard.topWatcherEvent ?? '')}</textarea>
+        <label for="edit-topWatcherEvent">História (o Eco lê e liga à cena da vida real)</label>
+        <textarea id="edit-topWatcherEvent" name="topWatcherEvent" rows="3">${escapeHtml(selectedCard.topWatcherEvent ?? '')}</textarea>
       </div>
       <div class="editor-field">
-        <label for="edit-bottomEchoPrompt">☾ Fundo (Eco) — Interação Real</label>
-        <input id="edit-bottomEchoPrompt" name="bottomEchoPrompt" type="text" value="${escapeHtml(selectedCard.bottomEchoPrompt ?? '')}" />
+        <label for="edit-topWatcherTrigger">Sinal (o que pode aparecer no dia)</label>
+        <textarea id="edit-topWatcherTrigger" name="topWatcherTrigger" rows="2">${escapeHtml(selectedCard.topWatcherTrigger ?? '')}</textarea>
       </div>
       <div class="editor-field">
-        <label for="edit-bottomEchoEffect">☾ Fundo (Eco) — Resolução Mecânica</label>
-        <textarea id="edit-bottomEchoEffect" name="bottomEchoEffect" rows="2">${escapeHtml(selectedCard.bottomEchoEffect ?? '')}</textarea>
+        <label for="edit-bottomEchoPrompt">Gesto (pequeno, seguro e opcional)</label>
+        <textarea id="edit-bottomEchoPrompt" name="bottomEchoPrompt" rows="2">${escapeHtml(selectedCard.bottomEchoPrompt ?? '')}</textarea>
       </div>
     `;
 
@@ -90,14 +75,15 @@ export function renderStudioGalleryHtml(
       <div class="studio-gallery-column">
         <section class="theme-banner">
           <div>
-            <h2>${escapeHtml(deck.name)} <span class="badge-pill">${escapeHtml(deck.subtitle)}</span></h2>
-            <p class="subtitle">${escapeHtml(deck.tagline)} — <em>Dica: clique numa carta para selecioná-la, e clique novamente na carta selecionada para abrir em tela cheia.</em></p>
+            <span class="eyebrow">${escapeHtml(deck.subtitle)}</span>
+            <h2>${escapeHtml(deck.name)}</h2>
+            <p class="lede">${escapeHtml(deck.tagline)} Clique numa carta para editar; clique de novo para ampliar.</p>
           </div>
           <div class="deck-io-actions">
-            <button type="button" id="btn-export-json" class="btn-secondary">⬇ Exportar Deck (.json)</button>
-            <button type="button" id="btn-import-json" class="btn-secondary">⬆ Importar JSON</button>
+            <button type="button" id="btn-export-json" class="btn-secondary">Exportar JSON</button>
+            <button type="button" id="btn-import-json" class="btn-secondary">Importar JSON</button>
             <input type="file" id="input-import-json" accept="application/json" style="display: none;" />
-            <button type="button" id="btn-reset-theme" class="btn-ghost">↺ Restaurar Padrão</button>
+            <button type="button" id="btn-reset-theme" class="btn-ghost">Restaurar padrão</button>
           </div>
         </section>
 
@@ -114,11 +100,11 @@ export function renderStudioGalleryHtml(
         <div class="editor-panel">
           <header class="editor-header">
             <div>
-              <h3>Editor de Carta (63×88mm)</h3>
+              <h3>Editor de carta</h3>
               <span class="editor-card-code">${escapeHtml(selectedCard.playingCardCode)} · #${String(selectedCard.collectorNumber).padStart(2, '0')}</span>
             </div>
             <button type="button" class="btn-secondary btn-sm" data-zoom-card-id="${escapeHtml(selectedCard.id)}">
-              🔍 Ampliar Leitura
+              Ampliar
             </button>
           </header>
 
@@ -128,7 +114,7 @@ export function renderStudioGalleryHtml(
 
           <form id="card-editor-form" class="editor-form" data-editing-card-id="${escapeHtml(selectedCard.id)}">
             <div class="editor-field">
-              <label for="edit-title">Título da Carta</label>
+              <label for="edit-title">Título</label>
               <input id="edit-title" name="title" type="text" value="${escapeHtml(selectedCard.title)}" required />
             </div>
 
@@ -146,12 +132,12 @@ export function renderStudioGalleryHtml(
             ${dynamicFieldsHtml}
 
             <div class="editor-field">
-              <label for="edit-flavorText">Texto de Sabor (Flavor Text)</label>
+              <label for="edit-flavorText">Frase de ambientação</label>
               <input id="edit-flavorText" name="flavorText" type="text" value="${escapeHtml(selectedCard.flavorText)}" />
             </div>
 
             <div class="editor-actions">
-              <button type="submit" id="btn-save-card" class="btn-primary">💾 Salvar Carta no Estúdio</button>
+              <button type="submit" id="btn-save-card" class="btn-primary">Salvar carta</button>
             </div>
           </form>
         </div>

@@ -6,6 +6,11 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
   name: 'Zona de Quarentena',
   subtitle: 'Apocalipse Zumbi — Sobrevivência Urbana',
   tagline: 'Cada ruído na rua pode atrair a horda. Cada silêncio esconde uma mordida.',
+  tom: 'sobrevivência, tenso',
+  chefe: {
+    nome: 'O Paciente Zero',
+    descricao: 'O primeiro infectado ainda pensa. Ele guia a horda até vocês.',
+  },
   accentColor: '#84cc16',
   secondaryColor: '#dc2626',
   suits: {
@@ -180,9 +185,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O perímetro do exército caiu a três quadras daqui. Corredores infectados avançam em disparada pelo viaduto.',
         bottomEchoPrompt:
-          'Descreva, sem revelar sua localização, um tipo de abrigo fictício que protegeria a dupla do perigo narrado pelo Vigia.',
+          'Descreva, sem revelar onde você está, um abrigo fictício que protegeria você do perigo.',
         bottomEchoEffect:
           'Sucesso se responder em menos de 10 minutos (ou se seu Rei for ♠). Caso contrário, vire sua Dama (Q ⟳) para conter o avanço.',
+        dailyIdea: 'Pode ser o despertador, um alarme de prazo ou uma notificação urgente do trabalho.',
         flavorText: 'Quando a sirene para de tocar, não significa que o perigo passou — significa que o operador morreu.',
       },
       {
@@ -195,9 +201,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Alguém quebrou a vitrine da farmácia abaixo do esconderijo. Dois estaladores farejam o chão coberto de cacos.',
         bottomEchoPrompt:
-          'Para tirar a dupla da cena do Vigia em silêncio, escreva uma instrução tática curta, como se estivesse sussurrando para a equipe.',
+          'Escreva uma instrução tática curta, como se sussurrasse o caminho para sair em silêncio.',
         bottomEchoEffect:
           'Se o áudio tiver ruído alto ou hesitação, revele seu Valete (J). Se seu Rei for ♠ ou ♣, você passa invisível.',
+        dailyIdea: 'Pode ser um copo quebrado, um barulho no prédio ou um imprevisto logo cedo.',
         flavorText: 'Um único fragmento de cristal sob a bota vale mais que um tiro de escopeta no silêncio.',
       },
       {
@@ -210,9 +217,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O alarme de uma caminhonete abandonada dispara sozinho, atraindo silhuetas trôpegas entre as colunas de concreto.',
         bottomEchoPrompt:
-          'Descreva um obstáculo fictício que serviria de cobertura na cena narrada pelo Vigia.',
+          'Descreva um obstáculo fictício que serviria de cobertura nesta cena.',
         bottomEchoEffect:
           'Vire sua Dama (Q ⟳) para neutralizar o perigo sem ser visto (se seu Rei for ♠ Espadas, você resolve sem precisar virar a Dama).',
+        dailyIdea: 'Pode ser achar vaga, uma garagem mal iluminada ou a volta pelo estacionamento do mercado.',
         flavorText: 'Nunca entre num carro sem antes olhar o banco de trás.',
       },
       {
@@ -223,11 +231,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver o topo de um prédio alto, janela no andar superior ou poste de câmera.',
         topWatcherEvent:
-          'Um sobrevivente hostil controla o cruzamento com um rifle de caça e exige pedágio para deixar vocês passarem.',
+          'Um sobrevivente hostil controla o cruzamento com um rifle de caça e exige pedágio de quem quiser passar.',
         bottomEchoPrompt:
-          'Aponte ou fotografe qual objeto perto de você jogaria longe como isca para distrair a ameaça narrada pelo Vigia.',
+          'Aponte ou fotografe o objeto perto de você que jogaria longe como isca para distrair a ameaça.',
         bottomEchoEffect:
           'Se seu Rei for de ♠ ou ♦, a distração funciona sem custo. Outros naipes precisam virar a Dama (Q ⟳) ou revelar o Valete (J).',
+        dailyIdea: 'Pode ser uma avaliação, uma revisão do seu trabalho ou um prazo que vigia você de longe.',
         flavorText: 'Os vivos aprenderam a ser piores que os mortos na segunda semana do surto.',
       },
       {
@@ -240,9 +249,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O peso de vinte infectados está entortando o cadeado principal do refúgio. Os parafusos estão cedendo.',
         bottomEchoPrompt:
-          'Mande uma mensagem rápida dizendo qual móvel ou estrutura pesada perto de você usaria como barricada contra o perigo narrado pelo Vigia.',
+          'Diga qual móvel pesado perto de você usaria como barricada contra o perigo.',
         bottomEchoEffect:
           'Se responder rápido, a barricada segura a cena. Se demorar ou recusar, vire sua Dama (Q ⟳) ou revele seu Valete (J).',
+        dailyIdea: 'Pode ser a porta de um lugar lotado, a catraca do metrô ou a fila do caixa.',
         flavorText: 'Eles não sentem dor nos dedos quebrados; só empurram até o ferro chorar.',
       },
       {
@@ -253,11 +263,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao olhar para uma placa de rua, tela de GPS, mapa ou letreiro de direção.',
         topWatcherEvent:
-          'O posto avançado para onde vocês caminhavam foi marcado com o símbolo de "Bio-Perigo Total — Fogo Artilheiro".',
+          'O posto avançado que era o destino da caminhada foi marcado com o símbolo de "Bio-Perigo Total — Fogo Artilheiro".',
         bottomEchoPrompt:
-          'Para contornar o problema que o Vigia narrou, escolha uma direção nova (Norte, Sul, Leste ou Oeste) ou uma rua real próxima e avise o parceiro.',
+          'Escolha uma direção nova, Norte, Sul, Leste ou Oeste, para contornar o perigo e diga-a em voz alta ou por escrito.',
         bottomEchoEffect:
           'Muda a rota com segurança. Se o Eco estiver com o Valete (J) aberto, o esforço extra exige virar a Dama (Q ⟳).',
+        dailyIdea: 'Pode ser um plano que mudou, um desvio no caminho ou uma agenda que precisa ser refeita.',
         flavorText: 'A ponte segura de ontem é o abatedouro de hoje.',
       },
       {
@@ -270,9 +281,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Um cão magro rosna fixamente para a porta do porão. Há algo rastejando no duto de ventilação.',
         bottomEchoPrompt:
-          'Diante da cena que o Vigia acabou de narrar, decida em uma frase curta: você parte para o confronto direto agora ou tranca/isola a passagem para ganhar tempo?',
+          'Decida em uma frase curta: você parte para o confronto direto ou tranca a passagem para ganhar tempo?',
         bottomEchoEffect:
           'Se confrontar: Rei de ♠ vence sem custo; outros naipes viram a Dama (Q ⟳). Se isolar e recuar: escapam agora, mas na próxima falha você vira a Dama (Q ⟳) e o Valete (J).',
+        dailyIdea: 'Pode ser o cachorro do vizinho, um barulho de obra ou um aviso que você quase ignora.',
         flavorText: 'Os animais sabem distinguir quem ainda tem alma a cinquenta metros de distância.',
       },
       {
@@ -285,9 +297,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'A passarela metálica emperrou a meio caminho enquanto a maré de infectados sobe pela rampa inferior.',
         bottomEchoPrompt:
-          'Faça uma pausa física de 15 segundos onde estiver, segure algo firme para dar cobertura ao Vigia e mande o sinal: "Segurei a passagem, corre agora!".',
+          'Segure algo firme por alguns segundos onde estiver e diga: "Segurei a passagem".',
         bottomEchoEffect:
           'Libera a fuga da dupla! Se o seu Rei for de ♠ Espadas, você também pode desvirar a Dama (Q) do seu parceiro.',
+        dailyIdea: 'Pode ser um portão que não abre, uma porta emperrada ou um elevador que demora.',
         flavorText: 'Engrenagens cobertas de ferrugem e graxa exigem músculos que a fome já consumiu.',
       },
       {
@@ -300,9 +313,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Soldados renegados em trajes hazmat estão queimando quarteirões inteiros sem checar se há sobreviventes saudáveis.',
         bottomEchoPrompt:
-          'Fotografe uma sombra ou canto escondido onde vocês dois caberiam agachados até o perigo narrado pelo Vigia passar.',
+          'Fotografe ou aponte um canto escondido onde você caberia agachado até o perigo passar.',
         bottomEchoEffect:
           'Exige discrição: se você estiver com o Valete (J) aberto, precisa virar sua Dama (Q ⟳) para não denunciar o esconderijo.',
+        dailyIdea: 'Pode ser uma faxina geral, uma revisão rigorosa ou uma reunião de cobrança.',
         flavorText: 'Para o protocolo Cinza, qualquer um fora da muralha já consta como baixa biológica.',
       },
       {
@@ -313,11 +327,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver uma antena, torre, poste de alta tensão ou o ponto mais alto do horizonte.',
         topWatcherEvent:
-          'Centenas de infectados cercam a base da antena enquanto vocês tentam enviar o sinal de resgate para o helicóptero.',
+          'Centenas de infectados cercam a base da antena enquanto o sinal de resgate tenta chegar ao helicóptero.',
         bottomEchoPrompt:
-          'Grave um áudio de 10 segundos (ou mensagem urgente) como se fosse sua transmissão de rádio coordenando o resgate da cena do Vigia.',
+          'Diga ou escreva, em dez segundos, a transmissão de rádio que coordena o resgate.',
         bottomEchoEffect:
           'Clímax de ♠: Vire sua Dama (Q ⟳) (ou use a sinergia do Rei de ♠) para garantir extração limpa; senão, revele seu Valete (J).',
+        dailyIdea: 'Pode ser um dia sem sinal, a última ligação antes de a bateria acabar ou a entrega final.',
         flavorText: 'Suba mais um degrau. Se cairmos, que seja vendo o sol acima da fumaça.',
       },
     ],
@@ -330,11 +345,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao lavar as mãos, olhar no espelho ou ver um foco de luz direta.',
         topWatcherEvent:
-          'O arranhão no ombro do seu parceiro parece inflamado. Vocês precisam conferir se o vírus entrou na corrente sanguínea.',
+          'O arranhão no ombro parece inflamado. É preciso conferir se o vírus entrou na corrente sanguínea.',
         bottomEchoPrompt:
-          'Mostre a palma da mão ou o pulso em uma foto (ou descreva sua pulsação agora) provando que você ainda está limpo.',
+          'Olhe a palma da mão ou sinta a pulsação no pulso e descreva-a, provando que você ainda está limpo.',
         bottomEchoEffect:
           'Se o Eco tiver um Valete (J) ativo, um jogador de ♥ Copas pode limpá-lo agora virando sua Dama (Q ⟳).',
+        dailyIdea: 'Pode ser um exame de rotina, a espera de um resultado ou uma consulta marcada.',
         flavorText: 'Olhe nos meus olhos sob a lanterna. Se a pupila contrair, eu não aperto o gatilho.',
       },
       {
@@ -345,11 +361,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao segurar uma xícara quente, acender uma luz morna ou sentar para descansar.',
         topWatcherEvent:
-          'A chuva ácida lá fora dá uma trégua. Pela primeira vez em três dias vocês conseguem secar as botas em segurança.',
+          'A chuva ácida lá fora dá uma trégua. Pela primeira vez em três dias as botas secam em segurança.',
         bottomEchoPrompt:
-          'Conte ao parceiro uma lembrança real boa de antes da "quarentena" que mantém seu personagem lutando.',
+          'Diga ou escreva uma lembrança boa de antes da "quarentena" que mantém seu personagem lutando.',
         bottomEchoEffect:
           'Restaura a esperança: se algum dos dois estava com Valete (J) ativo, o fardo do tabu é suspenso pelo próximo turno.',
+        dailyIdea: 'Pode ser um café quentinho com alguém, uma pausa no trabalho ou um papo rápido no corredor.',
         flavorText: 'Não é o calor do fogo que impede o congelamento, é ter alguém para dividir a lata de pêssego.',
       },
       {
@@ -360,11 +377,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver um brinquedo, desenho, escola ou ouvir vozes jovens ao longe.',
         topWatcherEvent:
-          'Uma sobrevivente mirim está encurralada no depósito de alimentos, mas resgatá-la vai atrasar a fuga da dupla.',
+          'Uma sobrevivente mirim está encurralada no depósito de alimentos, mas resgatá-la vai atrasar a fuga.',
         bottomEchoPrompt:
-          'Diga imediatamente o que você entrega das suas mãos ou mesa para acalmar alguém em pânico na cena do Vigia sem fazer barulho.',
+          'Diga o que você entregaria das suas mãos ou da mesa para acalmar alguém em pânico sem fazer barulho.',
         bottomEchoEffect:
           'Se ajudar (Rei de ♥ resolve sem custo), outros naipes viram a Dama (Q ⟳); se recusar ajudar, revele seu Valete (J) imediatamente.',
+        dailyIdea: 'Pode ser uma ida ao mercado, ajudar alguém a achar algo ou a ligação de quem precisa de você.',
         flavorText: 'Salvar uma vida custa munição; abandonar uma vida custa quem você era.',
       },
       {
@@ -375,11 +393,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao tocar em tecido, roupa dobrada, guarda-chuva ou bolsa.',
         topWatcherEvent:
-          'Estilhaços da última corrida cortaram o braço de um de vocês. O cheiro de sangue fresco viaja rápido pelo vento.',
+          'Estilhaços da última corrida cortaram um braço. O cheiro de sangue fresco viaja rápido pelo vento.',
         bottomEchoPrompt:
-          'Descreva a cor da peça de roupa que você está usando agora e que rasgaria para improvisar uma proteção ou curativo na cena do Vigia.',
+          'Descreva a cor da roupa que você está usando e que rasgaria para improvisar um curativo.',
         bottomEchoEffect:
           'Protege a dupla! Se o seu Rei for de ♥ Copas, você também desvira sua Dama (Q).',
+        dailyIdea: 'Pode ser um curativo, cuidar de alguém doente ou uma palavra de apoio a quem precisa.',
         flavorText: 'Aperte o nó até doer. Se está doendo, é porque o coração ainda bate.',
       },
       {
@@ -390,11 +409,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver papel impresso, caderno, livro, recibo ou envelope.',
         topWatcherEvent:
-          'Vocês encontram uma mala postal caída com dezenas de cartas escritas no dia em que os telefones pararam.',
+          'Uma mala postal caída guarda dezenas de cartas escritas no dia em que os telefones pararam.',
         bottomEchoPrompt:
-          'Escreva uma mensagem curta de duas linhas que seu personagem deixaria gravada no local da cena do Vigia caso vocês se separassem hoje.',
+          'Escreva duas linhas que seu personagem deixaria gravadas no balcão, para quem passar depois.',
         bottomEchoEffect:
           'Fortalece o vínculo da dupla: desvira a Dama (Q) de um dos jogadores.',
+        dailyIdea: 'Pode ser uma mensagem que você não mandou, um e-mail de despedida ou um cartão para alguém.',
         flavorText: 'Prometemos nos encontrar na praça da matriz quando tudo acabar. A praça não existe mais.',
       },
       {
@@ -407,9 +427,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O filtro portátil quebrou e o cantil tem apenas quatro dedos de água potável para atravessar a zona industrial.',
         bottomEchoPrompt:
-          'Beba um gole de água agora na vida real e mande uma mensagem dividindo seu suprimento para recuperar o fôlego na cena do Vigia.',
+          'Beba um gole de água agora e descreva como você raciona o suprimento que resta.',
         bottomEchoEffect:
           'Se beber água e confirmar, qualquer Valete (J) aberto tem seu Tabu suspenso durante esta rodada.',
+        dailyIdea: 'Pode ser dividir um lanche, um almoço com colegas ou a última fatia do bolo.',
         flavorText: 'A sede transforma amigos em estranhos, ou estranhos em irmãos de sangue.',
       },
       {
@@ -420,11 +441,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao sentir sono, bocejar ou olhar para uma janela quando a luz muda.',
         topWatcherEvent:
-          'A privação de sono faz um de vocês jurar que viu um antigo amigo caminhando no meio da horda lá embaixo.',
+          'A privação de sono faz jurar ter visto um antigo amigo caminhando no meio da horda lá embaixo.',
         bottomEchoPrompt:
-          'Chame o parceiro pelo nome e faça uma pergunta simples de ancoragem ("Onde você está agora?") para mantê-lo focado diante do perigo do Vigia.',
+          'Diga seu próprio nome e responda, em voz alta ou por escrito: "Onde estou agora?".',
         bottomEchoEffect:
           'Ancora a mente e resolve a cena. Se demorar ou falhar, revele seu Valete (J).',
+        dailyIdea: 'Pode ser uma noite mal dormida, um plantão ou conversar com alguém que também está acordado.',
         flavorText: 'Não olhe para os rostos deles. A pessoa que você conhecia já saiu daquele corpo há semanas.',
       },
       {
@@ -435,11 +457,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver uma planta, árvore, jardim, vaso de flor ou praça.',
         topWatcherEvent:
-          'Vocês encontram o túmulo improvisado do antigo líder do abrigo, junto com o caderno de anotações médicas dele.',
+          'No jardim está o túmulo improvisado do antigo líder do abrigo, junto com o caderno de anotações médicas dele.',
         bottomEchoPrompt:
-          'Mande a foto de uma folha, planta ou objeto calmo perto de você para restaurar a serenidade da dupla após o alerta do Vigia.',
+          'Olhe ou fotografe uma folha, planta ou objeto calmo perto de você e respire fundo uma vez.',
         bottomEchoEffect:
           'Se seu Rei for de ♥ Copas, desvire sua Dama (Q); outros naipes resolvem a cena sem custo.',
+        dailyIdea: 'Pode ser lembrar de alguém que se foi, uma despedida no trabalho ou uma mudança de casa.',
         flavorText: 'Onde as flores nascem sobre o concreto, a terra ainda lembra como curar.',
       },
       {
@@ -450,11 +473,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao olhar para o relógio, pulseira, anel ou para as próprias mãos.',
         topWatcherEvent:
-          'Encurralados no vagão de metrô, vocês precisam renovar a promessa mais dura do apocalipse: não deixar o outro virar um deles.',
+          'Encurralados no vagão de metrô, os sobreviventes renovam a promessa mais dura do apocalipse: não deixar ninguém virar um deles.',
         bottomEchoPrompt:
-          'Envie uma mensagem curta cravando a promessa do seu personagem na cena do Vigia: qual é a senha secreta para saber que você ainda é você?',
+          'Invente a senha secreta que provaria que você ainda é você.',
         bottomEchoEffect:
           'Cria um escudo emocional: permite virar um Valete (J) aberto de volta para baixo (curado) se você virar sua Dama (Q ⟳).',
+        dailyIdea: 'Pode ser uma promessa a alguém, um combinado em casa ou um compromisso que você renova.',
         flavorText: 'Se eu esquecer a música que cantávamos na chuva, não hesite.',
       },
       {
@@ -465,11 +489,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver uma farmácia, consultório, caixa de remédios ou corredor branco.',
         topWatcherEvent:
-          'Vocês alcançam o centro cirúrgico intacto da Cruz Vermelha, mas as portas magnéticas vão travar em três minutos.',
+          'O centro cirúrgico da Cruz Vermelha está intacto, mas as portas magnéticas vão travar em três minutos.',
         bottomEchoPrompt:
-          'Para socorrer a dupla na cena do Vigia, diga qual recurso vital você prioriza pegar (antibióticos, plasma ou dossiê médico) e por quê.',
+          'Diga qual recurso vital você pega primeiro (antibióticos, plasma ou prontuário) e por quê.',
         bottomEchoEffect:
           'Clímax de ♥: Vira para baixo (cura) o Valete (J) de ambos os jogadores se cumprirem a cena!',
+        dailyIdea: 'Pode ser visitar alguém doente, uma farmácia de plantão ou um dia cuidando de quem precisa.',
         flavorText: 'Entre macas reviradas, uma única geladeira ainda zumbe com a esperança de um continente.',
       },
     ],
@@ -484,9 +509,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Atrás do balcão blindado há uma caixa lacrada de suprimentos táticos e baterias de lítio.',
         bottomEchoPrompt:
-          'Para destravar uma porta ou equipamento na cena do Vigia, envie agora os 3 últimos dígitos do horário ou da bateria do seu celular.',
+          'Diga os três últimos dígitos do horário ou da bateria do seu celular: é a combinação do cofre.',
         bottomEchoEffect:
           'Sucesso de ♦ Ouros! Ambos os jogadores podem desvirar suas Damas (Q) imediatamente.',
+        dailyIdea: 'Pode ser comprar um remédio, lembrar uma senha ou organizar a caixa de medicamentos.',
         flavorText: 'O gerente levou a senha para o túmulo, mas deixou a data de aniversário no calendário de parede.',
       },
       {
@@ -499,9 +525,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'A energia do abrigo está caindo no meio da noite. Sem luz nos holofotes, os sensores de perímetro apagam.',
         bottomEchoPrompt:
-          'Fotografe qualquer cabo, tomada, carregador ou interruptor perto de você para improvisar energia na cena do Vigia.',
+          'Aponte ou fotografe um cabo, carregador ou interruptor perto de você para improvisar energia.',
         bottomEchoEffect:
           'Desvira a sua Dama (Q)! Se falhar ou ignorar, você precisa virar sua Dama (Q ⟳) ou revelar o Valete (J).',
+        dailyIdea: 'Pode ser um eletrodoméstico com defeito, um carro que não pega ou uma impressora teimosa.',
         flavorText: 'Duas voltas de fita isolante e uma prece mecânica mantêm os monstros do lado de fora.',
       },
       {
@@ -514,9 +541,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Um pacote de suprimentos lançado por drone ficou preso a quatro metros do chão, bem sobre uma poça de óleo.',
         bottomEchoPrompt:
-          'Diga qual ferramenta ou objeto longo do seu ambiente você usaria para resolver a cena do Vigia à distância, sem se expor.',
+          'Diga qual objeto longo do seu ambiente você usaria para alcançar a mochila à distância, sem se expor.',
         bottomEchoEffect:
           'Resolve a cena e desvira sua Dama (Q)!',
+        dailyIdea: 'Pode ser algo guardado num lugar alto, uma encomenda atrasada ou arrumar a mochila.',
         flavorText: 'O paraquedista não teve sorte, mas as rações MRE dele vão nos manter vivos até domingo.',
       },
       {
@@ -529,9 +557,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'A rua principal está tomada por centenas de vagantes. A única saída é rastejar pelo sistema de ar do shopping.',
         bottomEchoPrompt:
-          'Crie uma saída alternativa para a cena do Vigia: confirme em uma mensagem curta que você abriu uma passagem lateral e puxou a mochila do parceiro.',
+          'Descreva, em uma frase, a passagem lateral que você abre pelos dutos.',
         bottomEchoEffect:
           'Evita qualquer dano neste turno e desvira sua Dama (Q)!',
+        dailyIdea: 'Pode ser um atalho no caminho, um parafuso solto para apertar ou um jeito mais rápido de fazer a tarefa.',
         flavorText: 'Não olhe para baixo pelas grelhas; eles sentem o calor da nossa pele.',
       },
       {
@@ -544,9 +573,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Um contrabandista solitário abre a janela gradeada da van: ele tem munição e antibióticos, mas quer algo útil da velha era.',
         bottomEchoPrompt:
-          'Tire foto ou descreva o objeto mais curioso na sua mesa/bolso agora e diga como o usa como suborno ou ferramenta na cena do Vigia.',
+          'Fotografe ou descreva o objeto mais curioso da sua mesa ou bolso e diga como o usaria na troca.',
         bottomEchoEffect:
           'O improviso funciona: desvire a Dama (Q) de qualquer um dos dois jogadores!',
+        dailyIdea: 'Pode ser uma troca com um vizinho, a venda de algo usado ou um favor trocado por outro.',
         flavorText: 'Dinheiro de papel só serve para acender fogueira; pilhas alcalinas valem ouro puro.',
       },
       {
@@ -559,9 +589,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Os saqueadores instalaram pranchas de andaime ligando dois telhados. O vento balança a madeira a cada passo.',
         bottomEchoPrompt:
-          'Caminhe cinco passos em linha reta onde você estiver agora e avise o parceiro que abriu caminho seguro para saírem da cena do Vigia.',
+          'Dê cinco passos em linha reta onde estiver, ou imagine-os, como quem atravessa uma tábua estreita.',
         bottomEchoEffect:
           'A travessia recarrega (desvira) tanto a sua Dama (Q) quanto a Dama do Vigia!',
+        dailyIdea: 'Pode ser uma escada de mão, uma passarela no caminho ou dar conta de dois compromissos colados.',
         flavorText: 'Olhe apenas para os ombros de quem vai à sua frente.',
       },
       {
@@ -572,11 +603,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao usar uma caneta, ferramenta, teclado ou utensílio de metal.',
         topWatcherEvent:
-          'Vocês encontram uma garagem trancada por dentro com prensas manuais, ferramentas intactas e lanternas táticas.',
+          'Uma garagem trancada por dentro guarda prensas manuais, ferramentas intactas e lanternas táticas.',
         bottomEchoPrompt:
-          'Para enfrentar a cena do Vigia, escolha melhorar na hora o equipamento de ataque (♠) ou o kit médico (♥) da dupla e avise o parceiro.',
+          'Diga se você melhora agora a arma ou o kit médico, e com qual peça.',
         bottomEchoEffect:
           'Desvira a Dama (Q) de ambos os jogadores!',
+        dailyIdea: 'Pode ser carregar o celular, reabastecer a despensa ou preparar as marmitas da semana.',
         flavorText: 'Quem sabe consertar o que quebrou nunca fica sem aliados na quarentena.',
       },
       {
@@ -589,9 +621,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Um trem logístico tombou nos trilhos. O contêiner azul ainda tem o lacre de chumbo original, mas o barulho ao abrir será alto.',
         bottomEchoPrompt:
-          'Para forçar uma saída ou caixa de recursos na cena do Vigia, bata duas vezes na mesa (ou mande dois emojis de ferramenta) em sincronia com o parceiro.',
+          'Bata duas vezes na mesa, como quem força a porta do contêiner.',
         bottomEchoEffect:
           'Vocês abrem caminho a tempo: desvire sua Dama (Q)!',
+        dailyIdea: 'Pode ser uma entrega que chegou errada, uma caixa para abrir ou uma encomenda presa no correio.',
         flavorText: 'Dentro havia trinta caixas de filtros de água e um rádio militar na caixa original.',
       },
       {
@@ -604,9 +637,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'As placas fotovoltaicas do prédio vizinho ainda funcionam, mas os cabos foram roídos por corvos e ratos.',
         bottomEchoPrompt:
-          'Diga em quantos por cento está a bateria do seu celular agora: você usa essa carga para alimentar o equipamento da dupla na cena do Vigia.',
+          'Diga em quantos por cento está a bateria do seu celular: é a carga que sobra no painel solar.',
         bottomEchoEffect:
           'Se a bateria estiver acima de 30% (ou Rei de ♦), desvira sua Dama (Q) e vira seu Valete (J) para baixo! Se <30%, apenas desvira a Dama (Q).',
+        dailyIdea: 'Pode ser estender roupa no sol, regar as plantas ou subir ao terraço para pegar algo.',
         flavorText: 'O sol ainda nasce igual todos os dias, indiferente às cidades apagadas.',
       },
       {
@@ -617,11 +651,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao olhar para o céu aberto ou ouvir o som de avião/helicóptero/vento forte.',
         topWatcherEvent:
-          'Vocês descobrem o plano de fuga definitivo no topo do edifício corporativo, mas o rotor precisa de um reparo hidráulico rápido.',
+          'O plano de fuga definitivo está no topo do edifício corporativo, mas o rotor precisa de um reparo hidráulico rápido.',
         bottomEchoPrompt:
-          'Descreva em três passos rápidos como sua dupla divide a tarefa entre segurar a ameaça do Vigia e acionar o veículo de fuga.',
+          'Descreva em três passos rápidos como você segura a ameaça e liga o helicóptero.',
         bottomEchoEffect:
           'Clímax de ♦: Desvira as Damas (Q) dos dois jogadores e garante fuga limpa da cena!',
+        dailyIdea: 'Pode ser abastecer o carro, comprar uma passagem ou deixar tudo pronto para uma viagem.',
         flavorText: 'Quando as hélices girarem, toda a zona sul vai olhar para cima.',
       },
     ],
@@ -636,9 +671,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'A cepa fúngica do vírus tomou as paredes da estação. Respirar fundo sem máscara provoca visões da mente coletiva.',
         bottomEchoPrompt:
-          'Prenda a respiração por 5 segundos antes de enviar um áudio curto guiando o parceiro para fora do perigo narrado pelo Vigia.',
+          'Prenda a respiração por três segundos, como quem atravessa a nuvem de esporos.',
         bottomEchoEffect:
           'Rei de ♣ Paus atravessa sem custo. Outros naipes devem virar a Dama (Q ⟳) ou revelar o Valete (J).',
+        dailyIdea: 'Pode ser uma garagem no subsolo, um cheiro de mofo ou um armário que ninguém abre há tempos.',
         flavorText: 'O vírus não quer apenas matar o hospedeiro; ele quer reescrever a floresta dentro dos pulmões.',
       },
       {
@@ -651,9 +687,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Mesmo sem pilha, o comunicador sobre a mesa transmite uma contagem regressiva sussurrada por dezenas de vozes.',
         bottomEchoPrompt:
-          'Para coordenar a reação sem alertar os inimigos da cena do Vigia, envie um código de três palavras que só seu parceiro entenderia.',
+          'Invente um código de três palavras que avise do perigo sem alertar os inimigos.',
         bottomEchoEffect:
           'Se o parceiro entender o plano, escapam ilesos; se não, vire a Dama (Q ⟳) ou revele o Valete (J).',
+        dailyIdea: 'Pode ser um aparelho que liga sozinho, um áudio estranho ou um chiado no fone.',
         flavorText: 'Eles aprenderam a usar nossas próprias torres de repetição para chamar os que têm febre.',
       },
       {
@@ -664,11 +701,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao passar no meio de várias pessoas ou ver uma rua movimentada.',
         topWatcherEvent:
-          'Não há como contornar a avenida. Para atravessar o quarteirão, vocês precisam andar devagar e imitar o vazio da horda.',
+          'Não há como contornar a avenida. Para atravessar o quarteirão, é preciso andar devagar e imitar o vazio da horda.',
         bottomEchoPrompt:
-          'Para passar despercebido pelo perigo que o Vigia narrou, mande uma foto da sua sombra ou expressão séria sem nenhuma palavra, apenas o ícone ♣.',
+          'Fotografe sua sombra ou faça uma expressão séria por um instante, sem dizer nada.',
         bottomEchoEffect:
           'Vocês passam invisíveis! Se alguém quebrar o silêncio mandando texto longo, precisa virar a Dama (Q ⟳).',
+        dailyIdea: 'Pode ser uma estação lotada, um evento onde você não conhece ninguém ou um dia de passar despercebido.',
         flavorText: 'Não respire rápido, não olhe nos olhos e deixe os ombros caírem como se o mundo já tivesse vencido.',
       },
       {
@@ -679,11 +717,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver garrafas de vidro, produtos de limpeza, cozinha ou telas de computador.',
         topWatcherEvent:
-          'Vocês encontram a sala onde o surto começou. Há uma gravação no computador mostrando que a mutação tinha um propósito.',
+          'Esta é a sala onde o surto começou. Há uma gravação no computador mostrando que a mutação tinha um propósito.',
         bottomEchoPrompt:
-          'Analise friamente o perigo que o Vigia narrou e revele uma suspeita secreta do seu personagem sobre o que realmente está por trás disso.',
+          'Diga uma suspeita secreta do seu personagem sobre o que realmente está por trás deste perigo.',
         bottomEchoEffect:
           'Sangue-frio resolve a cena: se seu Rei for de ♣, você também desvira sua Dama (Q).',
+        dailyIdea: 'Pode ser uma gaveta de papéis antigos, uma sala fechada no trabalho ou uma receita difícil de ler.',
         flavorText: 'No quadro branco, uma única frase escrita a marcador vermelho: "Eles não estão doentes, estão acordando".',
       },
       {
@@ -696,9 +735,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Algo imenso e fundido se move nas galerias pluviais sob os seus pés, fazendo o asfalto tremer levemente.',
         bottomEchoPrompt:
-          'Fotografe o chão onde você está pisando agora e avise o parceiro para correr imediatamente da cena do Vigia.',
+          'Fotografe o chão onde você está pisando e diga para que lado você correria.',
         bottomEchoEffect:
           'Se responder rápido, vocês saem do raio de alcance. Se demorar, vire a Dama (Q ⟳) ou revele o Valete (J).',
+        dailyIdea: 'Pode ser um bueiro no caminho, um barulho no forro ou o lixo que precisa sair hoje.',
         flavorText: 'Quando mil famintos dividem o mesmo túnel estreito, a carne esquece onde termina um e começa o outro.',
       },
       {
@@ -709,11 +749,12 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao tocar numa maçaneta, corrimão, interruptor ou porta de entrada.',
         topWatcherEvent:
-          'Um grupo de sobreviventes fanáticos que adoram a horda marcou a porta do esconderijo de vocês com tinta fosforescente.',
+          'Um grupo de sobreviventes fanáticos que adoram a horda marcou a porta do esconderijo com tinta fosforescente.',
         bottomEchoPrompt:
-          'Para despistar a ameaça que o Vigia narrou, diga como você apaga seus rastros ou que pista falsa deixa no local.',
+          'Diga como você apaga seus rastros ou que pista falsa deixa para trás.',
         bottomEchoEffect:
           'Despista o perigo com sucesso! Se você estiver com o Valete (J) aberto, precisa virar sua Dama (Q ⟳) para não deixar vestígios.',
+        dailyIdea: 'Pode ser um aviso colado na porta, uma marca na parede ou um recado do condomínio.',
         flavorText: 'Eles pintam os dentes de preto e abrem as trancas dos abrigos durante a madrugada.',
       },
       {
@@ -726,9 +767,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O céu escurece ao meio-dia com a fuligem dos fornos da quarentena. Os infectados ficam agitados e mais velozes na penumbra.',
         bottomEchoPrompt:
-          'Cubra a boca/nariz com a gola ou mão por um instante e mande uma mensagem curta descrevendo o ar para guiar o Vigia pela fumaça.',
+          'Cubra a boca com a mão por um instante e descreva o ar em uma frase.',
         bottomEchoEffect:
           'Evita a contaminação e resolve a cena. Se seu Rei for de ♣ Paus, você também desvira a Dama (Q) do parceiro.',
+        dailyIdea: 'Pode ser um dia nublado, poeira na janela ou um céu fechado no fim da tarde.',
         flavorText: 'A neve que cai em novembro não derrete na língua; ela tem gosto de ferro e despedida.',
       },
       {
@@ -741,9 +783,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Ao lavar o rosto, você percebe pelo reflexo trincado que uma figura parada no canto do banheiro não estava morta de verdade.',
         bottomEchoPrompt:
-          'Reflexo de sobrevivência para salvar o Vigia: sem olhar para trás onde você está agora, mande uma mensagem instantânea dizendo: "Saia daí agora!".',
+          'Sem olhar para trás, diga em voz alta ou por escrito: "Saia daí agora!".',
         bottomEchoEffect:
           'Reflexo rápido salva o Vigia sem custo! Se demorar a responder, vire a Dama (Q ⟳) ou revele o Valete (J).',
+        dailyIdea: 'Pode ser o banheiro de um restaurante, o espelho do elevador ou a pia antes de dormir.',
         flavorText: 'Os mais perigosos são os que ficam imóveis por dias esperando alguém abaixar a guarda.',
       },
       {
@@ -756,9 +799,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Uma variante blindada do vírus derruba um poste de luz inteiro bloqueando a rua. Balas comuns ricocheteiam nele.',
         bottomEchoPrompt:
-          'Imagine e descreva uma armadilha fictícia para deter a ameaça. Não use eletricidade, fogo, altura ou objetos reais.',
+          'Imagine e descreva uma armadilha fictícia para deter o colosso, sem usar objetos reais.',
         bottomEchoEffect:
           'Exige virar a Dama (Q ⟳) de um dos jogadores (ou ter Rei de ♠ ou ♣) para vencer sem revelar o Valete (J).',
+        dailyIdea: 'Pode ser um caminhão no trânsito, uma obra enorme no caminho ou um problema maior do que parece.',
         flavorText: 'A evolução levou milhões de anos para nos erguer, e seis semanas para criar nosso substituto.',
       },
       {
@@ -771,9 +815,10 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Milhares de infectados estão parados em círculo perfeito dentro da catedral destelhada, olhando para uma flor que cresce no altar.',
         bottomEchoPrompt:
-          'Diante da cena do Vigia, vocês descobrem um segredo da infecção: envie um áudio ou texto dizendo se vocês guardam essa prova ou se queimam tudo.',
+          'Diga se você guarda a prova do segredo da infecção ou queima tudo.',
         bottomEchoEffect:
           'Clímax de ♣: Revela a verdade da Zona de Quarentena e vira para baixo (cura) qualquer Valete (J) ativo!',
+        dailyIdea: 'Pode ser um lugar cheio e calado, uma biblioteca ou a noite em que a casa toda já dorme.',
         flavorText: 'Não era o fim da vida na Terra; era o nascimento doloroso de outra coisa.',
       },
     ],
@@ -788,7 +833,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
       topWatcherEvent:
         'Um foguete sinalizador verde corta o céu! Uma zona segura flutuante no porto abriu corredor humanitário por uma hora.',
       bottomEchoPrompt:
-        'Celebre com o parceiro: mandem juntos uma mensagem confirmando que alcançaram o píer e o que levaram da velha vida.',
+        'Celebre: diga ou escreva o que você levou da velha vida até o píer.',
       bottomEchoEffect:
         'Presságio Claro (★): Ambos os jogadores desviram suas Damas (Q) e ocultam seus Valetes (J) imediatamente!',
       flavorText: 'O navio-hospital apitou três vezes na baía. Pela primeira vez em meses, o mar parecia infinito.',
@@ -802,7 +847,7 @@ export const ZOMBIES_BLUEPRINT: ThemeBlueprint = {
       topWatcherEvent:
         'O alto comando desistiu da cidade. Sirenes de ataque aéreo anunciam a incineração total da Zona de Quarentena em minutos.',
       bottomEchoPrompt:
-        'Decisão imediata de sacrifício: um de vocês precisa trancar a comporta do bunker pelo lado de fora ou gastar seu último recurso.',
+        'Diga, em voz alta ou por escrito, o que você aceitaria perder para trancar a comporta do bunker.',
       bottomEchoEffect:
         'Cataclismo (💀): Um dos jogadores deve virar sua Dama (Q ⟳) E revelar seu Valete (J) para salvar o parceiro da onda de choque.',
       flavorText: 'Quando o horizonte inteiro virou ouro incandescente, seguramos a porta do abrigo até o aço derreter.',

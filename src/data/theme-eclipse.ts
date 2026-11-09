@@ -6,6 +6,11 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
   name: 'O Último Eclipse',
   subtitle: 'Fim do Mundo — Crônica da Coroa Solar',
   tagline: 'O sol está sendo engolido pela coroa negra. As leis da gravidade e da memória começam a falhar.',
+  tom: 'fim do mundo, melancólico',
+  chefe: {
+    nome: 'O Devorador do Sol',
+    descricao: 'A coroa negra ganhou forma e fome. Quando terminar o sol, virá a terra.',
+  },
   accentColor: '#f59e0b',
   secondaryColor: '#38bdf8',
   suits: {
@@ -176,13 +181,14 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         artGlyph: '🌑',
         artSubtitle: 'O Sol Diminui para um Fio de Ouro',
         topWatcherTrigger:
-          'Ao olhar para o céu, para uma lâmpada circular ou para o reflexo da luz numa lente.',
+          'O céu, uma lâmpada circular ou o reflexo da luz numa lente.',
         topWatcherEvent:
           'A temperatura cai dez graus em um minuto. As sombras das árvores ficam nítidas como lâminas de obsidiana no chão.',
         bottomEchoPrompt:
-          'Acenda uma luz perto de você (ou fotografe a fonte de luz mais próxima) para manter a penumbra afastada da dupla.',
+          'Acenda uma luz perto de você, ou fotografe a fonte de luz mais próxima.',
         bottomEchoEffect:
           'Se for ♠ Espadas, sua vigília mantém o calor. Caso contrário, responda rápido ou vire a Dama (Q ⟳).',
+        dailyIdea: 'Pode ser uma noite de estudo, um prazo apertado ou a última tarefa antes de dormir.',
         flavorText: 'Os pássaros pararam de cantar às duas da tarde, confusos com a noite que chegou sem crepúsculo.',
       },
       {
@@ -195,9 +201,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O alinhamento gravitacional puxou o oceano para dentro dos bueiros da cidade. Uma lâmina de água espelhada cobre o asfalto.',
         bottomEchoPrompt:
-          'Suba um degrau ou coloque os pés fora do chão por um instante e avise o parceiro para buscar terreno alto.',
+          'Suba um degrau ou tire os pés do chão por um instante, buscando terreno alto.',
         bottomEchoEffect:
           'Evita ser arrastado pela maré astral. Se tiver Valete (J) ativo, precisa do apoio do parceiro.',
+        dailyIdea: 'Pode ser uma chuva no caminho, uma rua cheia ou uma pilha de louça que não para de crescer.',
         flavorText: 'O mar subiu as escadas do metrô procurando pela lua que o hipnotizou.',
       },
       {
@@ -210,9 +217,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'As sombras projetadas pelos postes de luz se descolaram dos objetos e rondam a calçada como cães famintos por calor.',
         bottomEchoPrompt:
-          'Elimine uma sombra perto de você iluminando-a com a tela do celular e mande o aviso: "Caminho limpo".',
+          'Ilumine uma sombra perto de você com a tela do celular até ela sumir.',
         bottomEchoEffect:
           'Dissipa as silhuetas. Jogadores de ♠ ou ♣ ganham vantagem no próximo turno.',
+        dailyIdea: 'Pode ser uma pendência que te persegue, uma mensagem sem resposta ou um cansaço que não larga.',
         flavorText: 'Enquanto houver uma vela acesa entre nós dois, elas não podem tocar nossos calcanhares.',
       },
       {
@@ -225,9 +233,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Uma tempestade geomagnética faz os postes da rua cantarem como harpas de alta tensão. O ar cheira a ozônio puro.',
         bottomEchoPrompt:
-          'Toque em algo de madeira ou tecido (isolante) e diga ao parceiro como você protege os equipamentos da dupla.',
+          'Toque em algo de madeira ou tecido e descreva, em uma frase, como você protege seus equipamentos da estática.',
         bottomEchoEffect:
           'Protege o rádio e a lanterna. Se falhar, sua Dama (Q) vira (⟳) pela sobrecarga magnética.',
+        dailyIdea: 'Pode ser a internet caindo, um computador travado ou uma chamada de vídeo cheia de falhas.',
         flavorText: 'As auroras boreais desceram até a linha do equador para assistir ao fim do espetáculo.',
       },
       {
@@ -238,11 +247,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver pessoas apressadas na rua, agasalhos pesados ou portas trancadas.',
         topWatcherEvent:
-          'Um grupo em pânico tenta forçar a entrada do observatório onde vocês se abrigam do frio cósmico.',
+          'Um grupo em pânico tenta forçar a entrada do observatório que serve de abrigo contra o frio cósmico.',
         bottomEchoPrompt:
-          'Escolha: você impõe respeito na porta (♠) ou divide parte do seu calor com eles (♥)? Diga ao parceiro.',
+          'Diga, em voz alta ou por escrito, se você impõe respeito na porta ou divide parte do seu calor com os saqueadores.',
         bottomEchoEffect:
           'Ambos os caminhos resolvem a crise sem violência se o Eco responder com convicção.',
+        dailyIdea: 'Pode ser uma fila no mercado, o último lugar no ônibus ou a bateria do celular acabando.',
         flavorText: 'Não há vilões no último dia do mundo, apenas pessoas com medo de ficar no escuro sozinhas.',
       },
       {
@@ -255,9 +265,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Quem encarou o núcleo aberto do eclipse ficou paralisado no tempo como escultura de cinza branca.',
         bottomEchoPrompt:
-          'Olhe apenas para baixo ou para as mãos por 5 segundos e lembre o parceiro de manter o visor abaixado.',
+          'Olhe apenas para as suas mãos por cinco segundos, com o visor abaixado.',
         bottomEchoEffect:
           'Evita o Valete de Olhos de Cinza (J♠). Se já estiver ativo, um jogador de ♥ pode aliviá-lo.',
+        dailyIdea: 'Pode ser uma tela que prende seu olhar, uma espera parada ou uma tarefa que paralisa.',
         flavorText: 'Eles parecem em paz, apontando para o céu como se tivessem visto o rosto de Deus.',
       },
       {
@@ -266,13 +277,14 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         artGlyph: '🌉',
         artSubtitle: 'Blocos de Concreto Flutuando no Ar',
         topWatcherTrigger:
-          'Ao ver uma escada, corredor comprido, viaduto ou divisão no piso.',
+          'Uma escada, um corredor comprido, um viaduto ou uma divisão no piso.',
         topWatcherEvent:
           'A gravidade falhou no vão central da ponte: carros e pedaços de asfalto flutuam imóveis a três metros do chão.',
         bottomEchoPrompt:
-          'Descreva como vocês saltam de pedra em pedra flutuante segurando a mão um do outro.',
+          'Descreva, em uma frase, como a travessia é feita de pedra em pedra.',
         bottomEchoEffect:
           'Travessia surreal concluída! Se for ♠ ou ♦, você desvira a Dama (Q) do parceiro no salto.',
+        dailyIdea: 'Pode ser uma reunião tensa, uma conversa que pode desandar ou uma travessia demorada no trânsito.',
         flavorText: 'Caminhar no ar é fácil; o difícil é convencer o coração de que não vamos cair.',
       },
       {
@@ -285,9 +297,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Uma composição inteira passa pelos trilhos vazios com as luzes acesas, repetindo em loop a última viagem de ontem.',
         bottomEchoPrompt:
-          'Diga ao parceiro se vocês embarcam no trem temporal para ganhar distância ou se seguem a pé pelos trilhos.',
+          'Diga, em voz alta ou por escrito, se você embarca no trem temporal ou segue a pé pelos trilhos.',
         bottomEchoEffect:
           'Embarcar avança a jornada rapidamente, mas exige que uma Dama (Q) esteja de pé para ancorar a descida.',
+        dailyIdea: 'Pode ser o ônibus ou o metrô da volta, o horário de pico ou uma condução que atrasa.',
         flavorText: 'Os passageiros lá dentro leem o jornal de terça-feira sem saber que a quarta-feira nunca veio.',
       },
       {
@@ -300,9 +313,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Do anel do eclipse começa a cair uma neve silenciosa e morna que apaga os sons da rua em um raio de cem metros.',
         bottomEchoPrompt:
-          'Mande um áudio falando bem perto do microfone para que sua voz alcance o parceiro através da nevasca.',
+          'Diga ou escreva a frase que sua voz levaria através da nevasca.',
         bottomEchoEffect:
           'Mantém o contato da dupla intacto e limpa penalidades de isolamento.',
+        dailyIdea: 'Pode ser uma faxina pesada, uma caixa de entrada lotada ou uma pilha de papéis acumulados.',
         flavorText: 'Peguei um floco na luva: não era gelo, era poeira de ouro gasto.',
       },
       {
@@ -313,11 +327,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao chegar ao lugar mais alto do seu dia ou acender a luz principal da sala.',
         topWatcherEvent:
-          'Vocês alcançam a lanterna mestra do penhasco. Ativar o espelho parabólico enviará o sinal para todos os sobreviventes do hemisfério.',
+          'A lanterna mestra do penhasco está ao alcance. Ativar o espelho parabólico enviará o sinal para todos os sobreviventes do hemisfério.',
         bottomEchoPrompt:
-          'Envie a mensagem luminosa final que o farol de vocês transmite para o mundo que escurece.',
+          'Escreva, em uma frase, a mensagem final que o farol transmite para o mundo que escurece.',
         bottomEchoEffect:
           'Clímax de ♠: O farol brilha contra o eclipse! Desvira todas as Damas (Q) e dissipa qualquer Valete (J).',
+        dailyIdea: 'Pode ser uma prova, uma entrega importante ou a apresentação que fecha a semana.',
         flavorText: 'Não acendemos a luz para salvar o sol; acendemos para que o sol saiba onde estávamos.',
       },
     ],
@@ -332,9 +347,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O eclipse está devorando os registros visuais primeiro. As fotos antigas na mochila estão ficando brancas pelas bordas.',
         bottomEchoPrompt:
-          'Descreva em palavras uma foto ou imagem real que você ama, gravando-a na memória do parceiro antes que suma.',
+          'Descreva em palavras uma foto real que você ama, guardando-a na memória antes que suma.',
         bottomEchoEffect:
           'Salva a memória! Se for ♥ Copas, desvira sua Dama (Q) e remove o Valete de Esquecimento (J♥).',
+        dailyIdea: 'Pode ser uma visita a alguém mais velho, uma foto antiga no celular ou uma conversa de lembranças.',
         flavorText: 'O papel pode ficar em branco, mas ninguém apaga o que eu decorei de olhos fechados.',
       },
       {
@@ -347,9 +363,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'A última estação de rádio no ar coloca uma canção antiga para tocar em repetição antes de o transmissor desligar.',
         bottomEchoPrompt:
-          'Diga ao parceiro qual música real está tocando (ou qual você colocaria para tocar nos últimos cinco minutos da Terra).',
+          'Diga qual música está tocando agora, ou qual você poria para tocar nos últimos cinco minutos da Terra.',
         bottomEchoEffect:
           'Acalma o coração da dupla: qualquer Valete (J) ativo perde sua penalidade durante este turno.',
+        dailyIdea: 'Pode ser uma música no caminho, uma playlist com alguém ou um áudio que você recebe.',
         flavorText: '"Obrigado pela companhia nestes sessenta anos no ar. Fiquem perto de quem vocês amam."',
       },
       {
@@ -362,9 +379,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Um orelhão desconectado na esquina toca. Do outro lado da linha está a sua própria voz gravada num dia feliz do passado.',
         bottomEchoPrompt:
-          'Atenda o chamado: mande uma mensagem dizendo que conselho você daria ao seu "eu" de cinco anos atrás.',
+          'Atenda o chamado: diga ou escreva o conselho que você daria a si mesmo de cinco anos atrás.',
         bottomEchoEffect:
           'Reconcilia o passado e o presente, fortalecendo o escudo emocional da dupla.',
+        dailyIdea: 'Pode ser uma ligação inesperada, uma mensagem de alguém sumido ou um contato antigo que reaparece.',
         flavorText: 'A linha cruzou com uma tarde de domingo em que a única preocupação era a chuva.',
       },
       {
@@ -373,13 +391,14 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         artGlyph: '🕯️',
         artSubtitle: 'Mesa Posta Enquanto o Céu Gira',
         topWatcherTrigger:
-          'Ao fazer uma refeição, lanche ou tomar café durante o dia.',
+          'Uma refeição, um lanche ou um café durante o dia.',
         topWatcherEvent:
           'Um restaurante pequeno abriu as portas de graça, servindo os melhores pratos que restavam na despensa sob luz de velas.',
         bottomEchoPrompt:
-          'Fotografe ou descreva o que você está comendo/bebendo agora e faça um brinde com o parceiro pela jornada.',
+          'Fotografe ou descreva o que você está comendo ou bebendo e faça um brinde à jornada.',
         bottomEchoEffect:
           'Desvira a Dama (Q) se você for ♥ Copas e remove a exaustão da caminhada.',
+        dailyIdea: 'Pode ser uma refeição de hoje, um café com alguém ou um lanche no meio da tarde.',
         flavorText: 'O vinho nunca teve um sabor tão doce quanto na véspera do infinito.',
       },
       {
@@ -390,11 +409,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver uma janela de vidro, espelho ou tela.',
         topWatcherEvent:
-          'O frio da coroa solar embaça todas as vidraças da rua. Se você não escrever o nome do parceiro, a névoa pode fazê-lo esquecer.',
+          'O frio da coroa solar embaça todas as vidraças da rua. Nome que não for escrito no vidro, a névoa apaga da memória.',
         bottomEchoPrompt:
-          'Escreva o nome ou apelido do seu parceiro numa mensagem acompanhada de três palavras que definem a parceria de vocês.',
+          'Escreva com o dedo, num vidro ou numa tela, o nome de alguém que você não quer esquecer.',
         bottomEchoEffect:
           'Ancora a identidade de ambos: anula imediatamente o Valete de Esquecimento (J♥) ou Eco de Outra Vida (J♣).',
+        dailyIdea: 'Pode ser um bilhete deixado em casa, um recado na geladeira ou um bom-dia a quem você vê sempre.',
         flavorText: 'Enquanto uma única pessoa lembrar do seu nome, você ainda existe no universo.',
       },
       {
@@ -407,9 +427,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'As pessoas da cidade deixaram bilhetes sinceros nas portas e bancos de praça dizendo tudo o que calaram a vida inteira.',
         bottomEchoPrompt:
-          'Conte ao parceiro uma coisa sincera e bonita que seu personagem sempre quis dizer desde o começo da jornada.',
+          'Diga ou escreva uma coisa sincera e bonita que seu personagem sempre quis dizer desde o começo da jornada.',
         bottomEchoEffect:
           'A verdade liberta: desvira uma Dama (Q) virada de qualquer um dos dois jogadores.',
+        dailyIdea: 'Pode ser um desabafo, uma conversa franca ou uma mensagem que você vem adiando.',
         flavorText: 'No fim do mundo, a timidez parece a maior perda de tempo da história humana.',
       },
       {
@@ -425,6 +446,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
           'Aponte um detalhe pequeno de beleza ou leveza que você consegue ver ao seu redor agora mesmo.',
         bottomEchoEffect:
           'Protege a esperança da dupla contra qualquer efeito de desespero na próxima carta.',
+        dailyIdea: 'Pode ser uma brincadeira com uma criança, um passeio no parque ou um momento leve com alguém.',
         flavorText: 'Mesmo quando os planetas saem dos trilhos, alguém ainda lembra como brincar.',
       },
       {
@@ -435,11 +457,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver terra, jardim, vaso de planta ou chão de pedra.',
         topWatcherEvent:
-          'Vocês encontram uma caixa de metal hermética pronta para ser lacrada nas raízes de uma figueira centenária.',
+          'Uma caixa de metal hermética espera, pronta para ser lacrada nas raízes de uma figueira centenária.',
         bottomEchoPrompt:
           'Escolha um objeto real que está com você agora para deixar dentro da cápsula como testemunho da humanidade.',
         bottomEchoEffect:
           'O legado está salvo! Jogadores de ♥ ou ♦ desviram sua Dama (Q).',
+        dailyIdea: 'Pode ser arrumar lembranças, plantar uma muda ou guardar um presente para alguém.',
         flavorText: 'Colocamos um relógio de pulso, duas moedas, uma fita cassete e a foto de nós dois.',
       },
       {
@@ -452,9 +475,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Os semáforos piscam em amarelo intermitente na avenida deserta. Não há mais pressa para chegar a lugar nenhum.',
         bottomEchoPrompt:
-          'Imagine a última valsa e mande uma mensagem convidando o parceiro para ela.',
+          'Imagine a última valsa e descreva, em uma frase, a música que tocaria nela.',
         bottomEchoEffect:
           'Remove qualquer Valete (J) ativo na mesa e sincroniza os corações da dupla.',
+        dailyIdea: 'Pode ser uma caminhada com alguém, uma música dividida ou o fim de tarde com quem você gosta.',
         flavorText: 'O mundo inteiro parou o trânsito só para que tivéssemos salão suficiente.',
       },
       {
@@ -465,11 +489,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver uma estante de livros, caderno aberto ou tela cheia de texto.',
         topWatcherEvent:
-          'Vocês depositam a Fita Cassete com a crônica completa no cofre de quartzo do observatório antes que a coroa se feche.',
+          'A Fita Cassete com a crônica completa precisa chegar ao cofre de quartzo do observatório antes que a coroa se feche.',
         bottomEchoPrompt:
-          'Dê um título poético para o livro que conta a história de vocês dois neste jogo.',
+          'Dê um título poético para o livro que conta a sua história nesta jornada.',
         bottomEchoEffect:
           'Clímax de ♥: Amor e memória vencem o apagamento! Restaura todas as Damas (Q) e Valetes (J).',
+        dailyIdea: 'Pode ser um almoço em família, uma conversa longa ou uma visita a quem conta boas histórias.',
         flavorText: 'As estrelas podem apagar uma por uma; nossa história já foi escrita fora do tempo.',
       },
     ],
@@ -484,9 +509,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Na cúpula astronômica, as lentes de cristal revelam uma coordenada segura onde a gravidade permanecerá estável.',
         bottomEchoPrompt:
-          'Descreva um objeto redondo ou uma paisagem imaginária para calibrar o telescópio da dupla.',
+          'Descreva um objeto redondo perto de você como se calibrasse um telescópio.',
         bottomEchoEffect:
           'Sucesso de ♦ Ouros: Desvira a Dama (Q) de ambos os jogadores imediatamente!',
+        dailyIdea: 'Pode ser medir algo para uma compra, ajustar um horário ou planejar o caminho do dia.',
         flavorText: 'A matemática não mente, mesmo quando o céu decide dobrar sobre si mesmo.',
       },
       {
@@ -502,6 +528,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
           'Fotografe ou toque em um objeto prateado/metálico perto de você para seguir a trilha magnética.',
         bottomEchoEffect:
           'Desvira a Dama (Q) do jogador Eco e estabiliza o caminho do turno.',
+        dailyIdea: 'Pode ser medir a febre, tomar um remédio na hora ou conferir a temperatura do forno.',
         flavorText: 'Quando o chumbo aprende a voar, basta seguir a direção para onde ele sobe.',
       },
       {
@@ -514,9 +541,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O segundo andar do prédio dobrou espacialmente: quem sobe a escada norte sai caminhando de cabeça para baixo no salão sul.',
         bottomEchoPrompt:
-          'Gire o celular ou mande uma foto com ângulo inclinado/invertido para guiar o parceiro pelo labirinto espacial.',
+          'Gire o celular ou incline a cabeça e descreva como o ambiente fica de lado, como num labirinto.',
         bottomEchoEffect:
           'Vocês decifram a dobra! Desvira a Dama (Q) do Vigia e remove o Valete de Vertigem (J♦).',
+        dailyIdea: 'Pode ser um formulário sem fim, um sistema confuso ou subir escadas com sacolas pesadas.',
         flavorText: '"Embaixo" e "em cima" são apenas convenções sociais que o eclipse cancelou.',
       },
       {
@@ -527,11 +555,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao usar fones de ouvido, caixa de som ou microfone.',
         topWatcherEvent:
-          'Um receptor artesanal feito com fio de cobre e pedra galena consegue furar a interferência solar para conectar vocês dois.',
+          'Um receptor artesanal feito com fio de cobre e pedra galena consegue furar a interferência solar e captar vozes distantes.',
         bottomEchoPrompt:
-          'Mande um áudio curto batendo duas vezes no microfone antes de falar: "Câmbio, frequência estabilizada".',
+          'Bata duas vezes na mesa e diga: "Câmbio, frequência estabilizada".',
         bottomEchoEffect:
           'Reconexão perfeita (♦): Desvira sua Dama (Q) na hora.',
+        dailyIdea: 'Pode ser consertar um fone, achar o carregador ou ajustar o wi-fi de casa.',
         flavorText: 'Quando os satélites caem, a velha física dos anos 1920 volta a salvar o mundo.',
       },
       {
@@ -542,11 +571,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao pegar suas chaves, abrir uma tranca ou ver uma porta reforçada.',
         topWatcherEvent:
-          'Vocês encontram o cartão perfurado de acesso ao abrigo científico construído para suportar a inversão dos polos.',
+          'Um cartão perfurado dá acesso ao abrigo científico construído para suportar a inversão dos polos.',
         bottomEchoPrompt:
-          'Mostre uma chave ou cartão real e confirme o código de abertura com o parceiro.',
+          'Segure uma chave ou cartão real e invente o código de abertura do bunker.',
         bottomEchoEffect:
           'Desvira a Dama (Q) de qualquer jogador que estiver virada.',
+        dailyIdea: 'Pode ser uma chave perdida, uma senha esquecida ou trancar a casa antes de sair.',
         flavorText: 'Três metros de chumbo e granito separam esta porta do silêncio cósmico.',
       },
       {
@@ -559,9 +589,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Abrindo a porta do armário da esquina no segundo exato, ela dá diretamente para a praia a cinquenta quilômetros dali.',
         bottomEchoPrompt:
-          'Imagine uma porta e diga para qual lugar do mundo você abriria essa passagem com o parceiro.',
+          'Imagine uma porta e diga para qual lugar do mundo você abriria essa passagem.',
         bottomEchoEffect:
           'Teletransporte poético concluído! Desvira a Dama (Q) da dupla.',
+        dailyIdea: 'Pode ser um aplicativo de mapas, um atalho no caminho ou resolver duas tarefas de uma vez.',
         flavorText: 'Se você dobrar o mapa até os dois pontos se tocarem, não precisa caminhar a linha entre eles.',
       },
       {
@@ -577,6 +608,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
           'Narre como seu personagem devolve o movimento à sala.',
         bottomEchoEffect:
           'Recarrega (Untap) sua Dama (Q) e impede qualquer atraso temporal neste turno.',
+        dailyIdea: 'Pode ser um relógio que atrasou, uma fila de banco ou um processo que não anda.',
         flavorText: 'Por quatro segundos inteiros, o planeta esqueceu para que lado costumava girar.',
       },
       {
@@ -587,11 +619,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver um reflexo colorido em vidro, água, tela ou óculos.',
         topWatcherEvent:
-          'Passando o feixe da coroa solar por um cristal de lustre, vocês descobrem uma frequência luminosa que afasta o esquecimento.',
+          'Passando o feixe da coroa solar por um cristal de lustre, surge uma frequência luminosa que afasta o esquecimento.',
         bottomEchoPrompt:
           'Fotografe um reflexo de luz em qualquer vidro ou superfície brilhante perto de você.',
         bottomEchoEffect:
           'Luz restauradora (♦): Desvira ambas as Damas (Q) e limpa o Valete de Olhos de Cinza (J♠).',
+        dailyIdea: 'Pode ser escolher uma roupa, separar o lixo reciclável ou organizar algo por cor.',
         flavorText: 'Depois do violeta existe uma oitava cor que só aparece quando o sol se despede.',
       },
       {
@@ -604,9 +637,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'As bobinas de cobre captam a própria carga estática do eclipse para alimentar os aquecedores e luzes do refúgio.',
         bottomEchoPrompt:
-          'Descreva como a equipe recarrega a reserva de energia usando um recurso seguro da história.',
+          'Descreva, em uma frase, como você recarrega a reserva de energia com um recurso seguro da história.',
         bottomEchoEffect:
           'Desvira sua Dama (Q) e concede vantagem automática na próxima carta do Deck do Mundo.',
+        dailyIdea: 'Pode ser uma conta de luz, um aparelho para ligar na tomada ou trocar uma lâmpada.',
         flavorText: 'Usamos a própria tempestade que veio nos apagar para manter as lâmpadas acesas.',
       },
       {
@@ -619,9 +653,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'No cais onde o mar encontra o céu invertido, a embarcação blindada aguarda com as coordenadas completas da Fenda.',
         bottomEchoPrompt:
-          'Trace a coordenada final com o parceiro: para qual novo mundo ou amanhecer vocês apontam o leme?',
+          'Trace a coordenada final: diga para qual novo mundo ou amanhecer você aponta o leme.',
         bottomEchoEffect:
           'Clímax de ♦: Rota de salvação descoberta! Desvira todas as Damas (Q) e limpa qualquer Valete (J).',
+        dailyIdea: 'Pode ser a compra do mês, fazer uma mala ou guardar tudo que importa num só lugar.',
         flavorText: 'Quando o mar e o céu se tornam um só oceano, qualquer barco vira uma nave estelar.',
       },
     ],
@@ -639,6 +674,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
           'Traduza em uma frase curta e misteriosa o que o sol murmurou antes de fechar o anel negro.',
         bottomEchoEffect:
           'Se for ♣ Paus, você compreende o presságio e desvira sua Dama (Q). Outros naipes sentem o assombro cósmico.',
+        dailyIdea: 'Pode ser um barulho estranho em casa, o silêncio da madrugada ou uma intuição que não sai da cabeça.',
         flavorText: 'O sol nunca foi mudo; nós é que fazíamos barulho demais durante o dia para ouvi-lo.',
       },
       {
@@ -651,9 +687,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O tempo soluça: uma xícara que cai volta para a mesa inteira, e você tem certeza absoluta de que já viveu este minuto.',
         bottomEchoPrompt:
-          'Envie duas vezes seguidas a mesma frase curta para o parceiro, mudando apenas a última palavra na segunda vez.',
+          'Diga ou escreva duas vezes a mesma frase curta, mudando só a última palavra na segunda vez.',
         bottomEchoEffect:
           'Domina o loop temporal! Permite evitar a ativação de qualquer Valete (J) nesta rodada.',
+        dailyIdea: 'Pode ser uma rotina repetida, o caminho de sempre ou uma conversa que parece já ter acontecido.',
         flavorText: 'Na primeira vez nós erramos o caminho; desta vez você segurou meu braço na esquina certa.',
       },
       {
@@ -664,11 +701,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao olhar para as nuvens, fumaça de café ou espuma na xícara.',
         topWatcherEvent:
-          'As nuvens acima da cidade giram em uma espiral matemática perfeita centrada exatamente sobre o telhado onde vocês estão.',
+          'As nuvens acima da cidade giram em uma espiral matemática perfeita, centrada exatamente sobre o telhado mais próximo.',
         bottomEchoPrompt:
-          'Desenhe uma espiral com o dedo ou mande uma foto do céu/teto descrevendo o centro do redemoinho.',
+          'Desenhe uma espiral no ar com o dedo e descreva o que haveria no centro do redemoinho.',
         bottomEchoEffect:
           'Alinha a dupla com o olho do furacão (calmaria total no próximo turno).',
+        dailyIdea: 'Pode ser o céu do fim da tarde, uma janela com vista ou uma pausa olhando para longe.',
         flavorText: 'No centro exato do ciclone não venta; há apenas o silêncio de um jardim suspenso.',
       },
       {
@@ -679,11 +717,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver seu reflexo num vidro ou cruzar com um desconhecido parecido.',
         topWatcherEvent:
-          'Pela fenda da penumbra, você vê outra versão sua e do seu parceiro caminhando do outro lado da rua sob um dia ensolarado.',
+          'Pela fenda da penumbra, outra versão sua caminha do outro lado da rua, sob um dia ensolarado.',
         bottomEchoPrompt:
-          'Conte ao parceiro o que as versões de vocês daquele outro mundo pareciam estar conversando.',
+          'Descreva o que sua versão daquele outro mundo parecia estar dizendo.',
         bottomEchoEffect:
           'Cura o Valete de Eco de Outra Vida (J♣) e inspira coragem na dupla.',
+        dailyIdea: 'Pode ser seu reflexo numa vitrine, uma foto sua antiga ou um momento sozinho pensando na vida.',
         flavorText: 'Eles olharam para nós através da chuva, sorriram e desejaram boa sorte na travessia.',
       },
       {
@@ -696,9 +735,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Com o sol encoberto em pleno dia, constelações que não pertencem ao nosso hemisfério brilham intensamente sobre os prédios.',
         bottomEchoPrompt:
-          'Aponte três pontos de luz no seu ambiente e dê um nome para a nova constelação que guia a dupla.',
+          'Aponte três pontos de luz no seu ambiente e dê um nome à nova constelação que guia você.',
         bottomEchoEffect:
           'Bênção astral: se uma Dama (Q) estiver virada, ela pode ser desvirada no início do próximo turno.',
+        dailyIdea: 'Pode ser um dia nublado, um cômodo escuro ao meio-dia ou uma ideia que surge do nada.',
         flavorText: 'Quando a luz grande se apaga, descobrimos que o céu sempre esteve cheio de pequenas fogueiras.',
       },
       {
@@ -714,6 +754,7 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
           'Descreva ou escreva a nota que ressoa na cena.',
         bottomEchoEffect:
           'Harmoniza a frequência e protege contra o Valete (J) da rodada.',
+        dailyIdea: 'Pode ser um alarme que toca, uma campainha inesperada ou o sino de uma igreja no caminho.',
         flavorText: 'O bronze reconhece o fim de uma era antes mesmo dos astrônomos.',
       },
       {
@@ -726,9 +767,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'Uma revoada inteira pousou em silêncio absoluto no cruzamento, esperando o segundo do Anel de Diamante.',
         bottomEchoPrompt:
-          'Envie uma frase curta de respeito ao presságio da natureza; não é necessário interromper o que estiver fazendo.',
+          'Diga ou escreva uma frase curta de respeito ao presságio da natureza.',
         bottomEchoEffect:
           'Jogadores de ♣ ou ♥ purificam qualquer tensão acumulada na mesa.',
+        dailyIdea: 'Pode ser uma praça com pombos, um parque no caminho ou um quintal ao amanhecer.',
         flavorText: 'Eles não estão com medo; estão apenas esperando o sinal para voar através da aurora.',
       },
       {
@@ -741,9 +783,10 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherEvent:
           'O tempo congela por um instante: as gotas de chuva ficam paradas na altura dos olhos como um cortinado de diamantes.',
         bottomEchoPrompt:
-          'Descreva o que você faz enquanto caminha entre as gotas paradas no ar ao lado do seu parceiro.',
+          'Descreva o que você faz enquanto caminha entre as gotas paradas no ar.',
         bottomEchoEffect:
           'Instante eterno: permite resolver o turno sem gastar recursos nem virar Damas (Q).',
+        dailyIdea: 'Pode ser uma pausa no meio da tarefa, uma chuva que você espera passar ou um minuto de silêncio.',
         flavorText: 'Toquei uma gota suspensa e vi dentro dela o reflexo de todas as manhãs da minha vida.',
       },
       {
@@ -752,13 +795,14 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         artGlyph: '🚪',
         artSubtitle: 'Onde o Espaço e o Tempo se Encontram',
         topWatcherTrigger:
-          'Ao ver uma porta iluminada, corredor claro ou saída de prédio.',
+          'Uma porta iluminada, um corredor claro ou a saída de um prédio.',
         topWatcherEvent:
           'No fim da avenida escura, uma fenda vertical de luz morna se abre, convidando os que mantiveram a memória intacta.',
         bottomEchoPrompt:
-          'Chame o parceiro pela mão em sua mensagem e confirme que nenhum dos dois ficará para trás.',
+          'Diga, em voz alta ou por escrito, quem você não deixaria para trás.',
         bottomEchoEffect:
           'Prepara a travessia final: limpa qualquer Valete (J) ativo na dupla.',
+        dailyIdea: 'Pode ser uma consulta, uma resposta que você espera ou a saída de um lugar onde passou o dia.',
         flavorText: 'O fim de um mundo é apenas o batente da porta para o próximo.',
       },
       {
@@ -769,11 +813,12 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
         topWatcherTrigger:
           'Ao ver um brilho intenso de luz, sol na janela ou reflexo dourado.',
         topWatcherEvent:
-          'Na borda da lua negra, uma única gota de fogo solar explode como um diamante celeste sobre vocês dois.',
+          'Na borda da lua negra, uma única gota de fogo solar explode como um diamante celeste sobre quem ainda resiste.',
         bottomEchoPrompt:
-          'Diga qual é o último desejo ou visão que vocês cravam juntos no instante exato da Totalidade.',
+          'Diga qual é o último desejo ou visão que você crava no instante exato da Totalidade.',
         bottomEchoEffect:
           'Clímax de ♣: Transcendência completa! Todas as Damas (Q) desviram e a crônica atinge a iluminação.',
+        dailyIdea: 'Pode ser o último minuto do dia, a hora de apagar a luz ou o momento antes de uma notícia.',
         flavorText: 'Um único segundo de luz verdadeira basta para justificar a existência do universo inteiro.',
       },
     ],
@@ -786,9 +831,9 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
       topWatcherTrigger:
         'Ao sentir calor do sol, ver luz dourada ou um sorriso inesperado.',
       topWatcherEvent:
-        'Contra todos os cálculos dos profetas, a lua negra começa a se afastar! Um feixe quente de ouro novo toca o rosto de vocês.',
+        'Contra todos os cálculos dos profetas, a lua negra começa a se afastar! Um feixe quente de ouro novo toca o rosto dos sobreviventes.',
       bottomEchoPrompt:
-        'Comemorem o novo amanhecer: enviem uma mensagem dizendo qual é a primeira coisa que farão agora que o mundo ganhou mais um dia.',
+        'Comemore o novo amanhecer: diga ou escreva a primeira coisa que fará agora que o mundo ganhou mais um dia.',
       bottomEchoEffect:
         'Presságio Claro (★): Milagre Solar! Ambos desviram suas Damas (Q) e removem todos os Valetes (J) imediatamente.',
       flavorText: 'Abrimos as janelas do farol e choramos vendo a grama voltar a ser verde sob a manhã.',
@@ -800,9 +845,9 @@ export const ECLIPSE_BLUEPRINT: ThemeBlueprint = {
       topWatcherTrigger:
         'Ao apagar a luz de um cômodo ou olhar para a noite fechada.',
       topWatcherEvent:
-        'O anel do eclipse se fecha por completo. O chão desaparece sob os pés e apenas aquilo que vocês segurarem juntos continuará existindo.',
+        'O anel do eclipse se fecha por completo. O chão desaparece sob os pés e apenas aquilo que for segurado com força continuará existindo.',
       bottomEchoPrompt:
-        'Ato final de sacrifício: um de vocês entrega sua última âncora temporal (Dama Q + Valete J) para manter a memória da dupla viva.',
+        'Feche os olhos por um instante e diga, em voz alta ou por escrito, a lembrança que você guardaria se tudo mais se apagasse.',
       bottomEchoEffect:
         'Cataclismo (💀): Um jogador deve virar sua Dama (Q ⟳) E revelar seu Valete (J) para ancorar a existência do parceiro.',
       flavorText: 'Quando as estrelas se apagaram, segurei sua mão tão forte que nos tornamos nossa própria constelação.',

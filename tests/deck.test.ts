@@ -1,10 +1,25 @@
 import { describe, expect, it } from 'vitest';
-import { getDefaultTheme, THEMES } from '../src/data/index';
+import { ALL_THEME_IDS, getDefaultTheme, THEMES } from '../src/data/index';
 import { splitPocketAndWorld } from '../src/data/engine-deck';
 import type { ThemeId } from '../src/types/card';
 
-describe('3 Complete 54-Card Themes (Zumbis, Vampiros, Eclipse)', () => {
-  const themeIds: ThemeId[] = ['zombies', 'vampires', 'eclipse'];
+describe('Temas completos de 54 cartas', () => {
+  const themeIds: ThemeId[] = ALL_THEME_IDS;
+
+  it('tem os 11 temas registrados, com o Último Eclipse primeiro', () => {
+    expect(themeIds).toHaveLength(11);
+    expect(themeIds[0]).toBe('eclipse');
+    expect(new Set(themeIds).size).toBe(11);
+  });
+
+  it.each(themeIds)('o texto das cenas de "%s" serve para qualquer número de pessoas', (themeId) => {
+    const cenas = getDefaultTheme(themeId).cards.filter((c) => c.kind === 'journey');
+    for (const c of cenas) {
+      const texto = [c.dailyIdea, c.topWatcherEvent, c.topWatcherTrigger, c.bottomEchoPrompt].join(' ');
+      expect(texto, c.playingCardCode).not.toMatch(/parceir|vocês|dupla/i);
+      expect(c.dailyIdea?.startsWith('Pode ser'), c.playingCardCode).toBe(true);
+    }
+  });
 
   it.each(themeIds)('builds exactly 54 valid cards for theme "%s"', (themeId) => {
     const deck = getDefaultTheme(themeId);

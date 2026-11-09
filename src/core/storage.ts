@@ -1,9 +1,9 @@
-import { generateShuffledOrder } from './cipher';
 import { getDefaultTheme } from '../data/index';
-import type { GameCard, PlaySessionState, ThemeDeck, ThemeId } from '../types/card';
+import type { Partida } from './partida';
+import type { GameCard, ThemeDeck, ThemeId } from '../types/card';
 
 const OVERRIDES_KEY_PREFIX = 'sinaleiro_overrides_v1_';
-const SESSION_KEY = 'sinaleiro_session_v1';
+const PARTIDA_KEY = 'limiar_partida_v2';
 
 function getStorage(): Storage | null {
   try {
@@ -71,36 +71,33 @@ export function importThemeJson(jsonStr: string): ThemeDeck {
   return parsed;
 }
 
-export function getDefaultPlaySession(themeId: ThemeId = 'zombies'): PlaySessionState {
-  const today = new Date().toISOString().slice(0, 10);
-  return {
-    themeId,
-    dateSeed: today,
-    deckOrder: generateShuffledOrder(42),
-    chosenSuit: 'spades',
-    queenTapped: false,
-    jackActive: false,
-    topIndex: 0,
-    bottomIndex: 41,
-    turnCount: 0,
-    history: [],
-  };
-}
-
-export function loadPlaySession(): PlaySessionState {
+export function loadPartida(): Partida | null {
   const store = getStorage();
-  if (!store) return getDefaultPlaySession();
-  const raw = store.getItem(SESSION_KEY);
-  if (!raw) return getDefaultPlaySession();
+  const raw = store?.getItem(PARTIDA_KEY);
+  if (!raw) return null;
   try {
-    return { ...getDefaultPlaySession(), ...(JSON.parse(raw) as Partial<PlaySessionState>) };
+    const partida = JSON.parse(raw) as Partida;
+    // campanhas salvas pela regra anterior (mão de cartas) não têm `pessoas`: descarta em vez de quebrar a Mesa
+    const valida = Array.isArray(partida.pessoas) && partida.pessoas.every((p) => Array.isArray(p.baralho) && typeof p.folego === 'number');
+    return valida ? partida : null;
   } catch {
-    return getDefaultPlaySession();
+    return null;
   }
 }
 
-export function savePlaySession(state: PlaySessionState): void {
+export function savePartida(partida: Partida | null): void {
   const store = getStorage();
   if (!store) return;
-  store.setItem(SESSION_KEY, JSON.stringify(state));
+  if (partida) store.setItem(PARTIDA_KEY, JSON.stringify(partida));
+  else store.removeItem(PARTIDA_KEY);
+}
+
+const THEME_KEY = 'limiar_tema';
+
+export function loadThemeId(): ThemeId | null {
+  return (getStorage()?.getItem(THEME_KEY) as ThemeId | null) ?? null;
+}
+
+export function saveThemeId(themeId: ThemeId): void {
+  getStorage()?.setItem(THEME_KEY, themeId);
 }

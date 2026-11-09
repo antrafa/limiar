@@ -1,81 +1,107 @@
 import { describe, expect, it } from 'vitest';
-import { getDefaultPlaySession, loadThemeWithOverrides } from '../src/core/storage';
+import { loadThemeWithOverrides } from '../src/core/storage';
+import { agir, criarPartida } from '../src/core/partida';
 import { renderStudioGalleryHtml } from '../src/components/studio-view';
-import { renderPlaytestTableHtml } from '../src/components/playtest-view';
+import { preparacaoPadrao, renderPlaytestTableHtml } from '../src/components/playtest-view';
 import { renderQuickstartGuideHtml } from '../src/components/quickstart-view';
+import { renderOracleGuideHtml } from '../src/components/oracle-view';
+import { renderTemasHtml } from '../src/components/temas-view';
+import { ALL_THEME_IDS } from '../src/data/index';
 
-describe('Studio Gallery & Synchronized Playtest Table views', () => {
-  it('renders the Quickstart Guide ("Como Começar a Jogar") with step-by-step instructions and real turn example', () => {
+describe('Telas do app', () => {
+  it('Como jogar explica a cena, os dois papéis e leva à mesa', () => {
     const deck = loadThemeWithOverrides('zombies');
     const html = renderQuickstartGuideHtml(deck);
-    expect(html).toContain('Como Começar a Jogar');
-    expect(html).toContain('1. Escolha seu Material');
-    expect(html).toContain('2. Separe seu Trio de Bolso');
-    expect(html).toContain('3. Embaralhe o Deck do Mundo');
-    expect(html).toContain('4. Topo (Cena) vs. Fundo (Reação Imprevisível)');
-    expect(html).not.toContain('Cifra do Dia');
-    expect(html).not.toContain('Relógio da dupla');
-    expect(html).toContain('Como essa rodada acontece na vida real (Em Dupla)');
-    expect(html).toContain('E como funciona no Modo Solo');
-    expect(html).toContain('Como o Rei (K), a Dama (Q) e o Valete (J) entram em ação');
-    expect(html).toContain('Qual a importância do Rei (K)?');
-    expect(html).toContain('Qual é o efeito da Dama (Q)?');
-    expect(html).toContain('Qual é o efeito do Valete (J)?');
-    expect(html).toContain('/limiar-banner.png');
-    expect(html).toContain('1.5. Ordem de Prioridade na Resolução');
-    expect(html).toContain('1.9. Duração da Campanha, Marcos e Encerramento');
-    expect(html).toContain('1.8. Segurança, Privacidade e Acessibilidade');
+    expect(html).toContain('O seu dia é a aventura.');
+    expect(html).toContain('Uma cena, em sete passos');
+    expect(html).toContain('O Eco faz a leitura');
+    expect(html).toContain('Sozinho, em dupla ou em grupo');
+    expect(html).not.toMatch(/irmão/i);
+    expect(html).toContain(deck.chefe.nome);
     expect(html).toContain('data-goto-tab="playtest"');
   });
 
-  it('renders the Studio Gallery with live editor form for the selected card', () => {
-    const deck = loadThemeWithOverrides('zombies');
-    const html = renderStudioGalleryHtml(deck, deck.cards[0], 'all');
-    expect(html).toContain('Editor de Carta (63×88mm)');
-    expect(html).toContain(deck.cards[0].title);
+  it('a Referência rápida traz desfecho, número de pessoas e as cenas com sinal e gesto', () => {
+    const deck = loadThemeWithOverrides('eclipse');
+    const html = renderOracleGuideHtml(deck);
+    expect(html).toContain('Quantas pessoas');
+    expect(html).toContain('Vitória com custo');
+    const cena = deck.cards.find((c) => c.kind === 'journey' && c.suit === 'spades' && c.rank === '7')!;
+    expect(html).toContain(cena.title);
   });
 
-  it('renders Journey card dual-chamber fields when a Journey card is selected in the Studio', () => {
+  it('o editor tem História, Sinal e Gesto nas cenas', () => {
     const deck = loadThemeWithOverrides('eclipse');
-    const journeyCard = deck.cards.find((c) => c.kind === 'journey')!;
-    const html = renderStudioGalleryHtml(deck, journeyCard, 'spades');
+    const cena = deck.cards.find((c) => c.kind === 'journey')!;
+    const html = renderStudioGalleryHtml(deck, cena, 'spades');
+    expect(html).toContain('edit-topWatcherEvent');
     expect(html).toContain('edit-topWatcherTrigger');
     expect(html).toContain('edit-bottomEchoPrompt');
-    expect(html).toContain(journeyCard.title);
+    expect(html).toContain('edit-dailyIdea');
   });
 
-  it('renders the Playtest Table with Pocket Trio (K, Q, J), free shuffle button, and Top vs Bottom deck controls', () => {
+  it('a preparação permite de 1 a 4 pessoas com classes', () => {
     const deck = loadThemeWithOverrides('vampires');
-    const session = getDefaultPlaySession('vampires');
-    const html = renderPlaytestTableHtml(deck, session);
-    expect(html).toContain('Sacar do TOPO (☀ Vigia)');
-    expect(html).toContain('Sacar do FUNDO (☾ Eco)');
-    expect(html).toContain('Embaralhar Novo Maço');
-    expect(html).not.toContain('Cifra do Dia');
-    expect(html).toContain('Seu Trio de Bolso');
+    const html = renderPlaytestTableHtml(deck, null, preparacaoPadrao());
+    expect(html).toContain('data-acao-mesa="maisPessoa"');
+    expect(html).toContain('Guardião');
+    expect(html).toContain('Embaralhar e começar');
   });
 
-  it('reflects tapped Queen (Q ⟳), active Scar Jack (J), and drawn history in Playtest Table', () => {
+  it('a cena aberta mostra a carta do tema e pede primeiro a frase de quem vive', () => {
     const deck = loadThemeWithOverrides('zombies');
-    const session = getDefaultPlaySession('zombies');
-    const journeyCard = deck.cards.find((c) => c.kind === 'journey')!;
-    session.queenTapped = true;
-    session.jackActive = true;
-    session.topIndex = 1;
-    session.turnCount = 1;
-    session.history = [
-      {
-        turn: 1,
-        role: 'vigia',
-        card: journeyCard,
-        timestamp: '14:00',
-      },
-    ];
+    let partida = criarPartida({
+      jogadores: [
+        { nome: '<b>Jogador 1</b>', classe: 'spades' },
+        { nome: 'Jogador 2', classe: 'clubs' },
+      ],
+    });
+    partida.pessoas[0].baralho = [{ valor: 7, naipe: 'spades' }, { valor: 3, naipe: 'hearts' }];
+    partida = agir(partida, { tipo: 'abrir', quem: 0 });
+    const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao());
+    const tema = deck.cards.find((c) => c.suit === 'spades' && c.rank === '7')!;
+    expect(html.match(/class="front /g)).toHaveLength(2);
+    expect(html).toContain(tema.title);
+    expect(html).toContain('data-acao="declarar"');
+    expect(html).not.toContain('data-acao="virarFundo"');
+    expect(html).toContain('&lt;b&gt;Jogador 1&lt;/b&gt;');
+    expect(html).not.toContain('<b>Jogador 1</b>');
+  });
 
-    const html = renderPlaytestTableHtml(deck, session);
-    expect(html).toContain('is-tapped');
-    expect(html).toContain('scar-active');
-    expect(html).toContain('41 / 42');
-    expect(html).toContain(journeyCard.title);
+  it('depois da leitura, a cena oferece sinal, gesto, ajuda e o desfecho', () => {
+    const deck = loadThemeWithOverrides('eclipse');
+    let partida = criarPartida({
+      jogadores: [
+        { nome: 'A', classe: 'spades' },
+        { nome: 'B', classe: 'hearts' },
+      ],
+    });
+    partida = agir(partida, { tipo: 'abrir', quem: 0 });
+    partida = agir(partida, { tipo: 'declarar', quem: 0, texto: 'a reunião' });
+    partida = agir(partida, { tipo: 'ler', quem: 0, texto: 'a ponte' });
+    const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao());
+    expect(html).toContain('data-acao="sinal"');
+    expect(html).toContain('data-acao="gesto"');
+    expect(html).toContain('data-acao="ajudar"');
+    expect(html).toContain('data-acao="virarFundo"');
+    expect(html).toContain('data-linha-status');
+  });
+
+  it('sozinho, a pessoa é o próprio Eco', () => {
+    const deck = loadThemeWithOverrides('eclipse');
+    const partida = criarPartida({ jogadores: [{ nome: 'Ana', classe: 'hearts' }] });
+    const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao());
+    expect(html).toContain('Você é o próprio Eco.');
+    expect(html).toContain('Campanha solo');
+    expect(html).not.toContain('Mandar um sinal');
+  });
+
+  it('a página de Temas mostra todos os temas, marca o atual e oferece a troca', () => {
+    const temas = ALL_THEME_IDS.map((id) => loadThemeWithOverrides(id));
+    const html = renderTemasHtml(temas, 'noir');
+    expect(html.match(/class="theme-tile/g)).toHaveLength(ALL_THEME_IDS.length);
+    expect(html.match(/Tema atual/g)).toHaveLength(1);
+    expect(html).toContain('data-switch-theme="arcana"');
+    for (const t of temas) expect(html).toContain(t.chefe.nome.replace(/&/g, '&amp;'));
   });
 });

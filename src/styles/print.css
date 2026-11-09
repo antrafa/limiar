@@ -1,90 +1,263 @@
-/* Print & Play A4 3x3 (63mm x 88mm Official Magic / Poker Size) */
+/* Impressão A4: grade 3×3 de cartas 63 × 88 mm encostadas, 16 marcas de corte contínuas e régua de calibração. */
 
 .print-studio-wrapper {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 24px;
 }
 
 .print-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
+  display: grid;
+  gap: 18px;
+  padding: 20px 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 12px;
-  padding: 18px 22px;
 }
 
-.print-actions {
+.print-options {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.print-options .check {
+  display: inline-flex;
   align-items: center;
+  gap: 8px;
+  padding-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.print-backs {
+  display: grid;
+  gap: 10px;
+}
+
+.estampas {
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+}
+
+.estampa {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 180px);
+  grid-template-rows: auto 1fr;
+  column-gap: 12px;
+  align-items: start;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: left;
+  font: inherit;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.estampa.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.estampa-amostra {
+  grid-row: span 2;
+  width: 72px;
+  aspect-ratio: 63 / 88;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .print-sheets-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 28px;
 }
 
-.print-a4-sheet {
+/* ---------- Folha A4 ---------- */
+
+.folha-a4 {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  flex-shrink: 0;
+  overflow: hidden;
   background: #ffffff;
   color: #18181b;
-  width: 210mm;
-  min-height: 297mm;
-  padding: 8mm 6mm;
-  box-sizing: border-box;
-  border-radius: 6px;
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  box-shadow: 0 6px 20px rgb(24 24 27 / 0.12);
 }
 
-.print-sheet-header {
-  width: 189mm;
+.folha-grade {
+  position: absolute;
+  display: grid;
+}
+
+.folha-slot {
+  position: relative;
+  overflow: hidden;
+}
+
+.folha-slot .mtg-card {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 2.5mm;
+  box-shadow:
+    inset 0 0 0 1mm var(--card-paper),
+    inset 0 0 0 1.25mm var(--card-line);
+  transform: none !important;
+}
+
+.folha-marcas {
+  position: absolute;
+  pointer-events: none;
+}
+
+.marca {
+  position: absolute;
+  background: #52525b;
+}
+
+.marca--topo,
+.marca--base {
+  width: 0.25mm;
+  height: 4mm;
+  transform: translateX(-50%);
+}
+
+.marca--topo {
+  top: -5mm;
+}
+
+.marca--base {
+  bottom: -5mm;
+}
+
+.marca--esq,
+.marca--dir {
+  width: 4mm;
+  height: 0.25mm;
+  transform: translateY(-50%);
+}
+
+.marca--esq {
+  left: -5mm;
+}
+
+.marca--dir {
+  right: -5mm;
+}
+
+.folha-info {
+  position: absolute;
+  top: 3mm;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 7pt;
+  font-weight: 600;
+  color: #71717a;
+}
+
+.folha-regua {
+  position: absolute;
+  bottom: 2.5mm;
+  left: 12mm;
+  right: 12mm;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 9pt;
-  color: #334155;
-  border-bottom: 0.3mm solid #cbd5e1;
-  padding-bottom: 2mm;
-  margin-bottom: 3mm;
+  align-items: flex-end;
+  gap: 8mm;
+  font-size: 6pt;
+  font-weight: 700;
+  color: #52525b;
 }
 
-.print-grid-3x3 {
-  display: grid;
-  grid-template-columns: repeat(3, 63mm);
-  grid-auto-rows: 88mm;
-  gap: 0;
-  justify-content: center;
-}
-
-.print-slot {
-  width: 63mm;
-  height: 88mm;
-  box-sizing: border-box;
-  outline: 0.2mm dashed #94a3b8;
-  position: relative;
+.regua {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  height: 2.6mm;
+  padding: 0 0.3mm;
+  border: 0.3mm solid #27272a;
+  border-top: 0;
+  font-size: 5pt;
+  line-height: 1;
+  background: repeating-linear-gradient(to right, transparent 0 calc(20% - 0.2mm), #71717a calc(20% - 0.2mm) 20%);
 }
 
-.print-slot .mtg-card {
-  width: 63mm !important;
-  height: 88mm !important;
-  border-radius: 3mm;
-  box-shadow: none;
-  margin: 0 !important;
-  transform: none !important;
+/* ---------- Fundo das cartas ---------- */
+
+.verso {
+  container-type: size;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  --verso-fundo: #1c1917;
+  --verso-tinta: #c8a464;
+  --verso-linha: rgb(200 164 100 / 0.35);
+  --verso-trama: rgb(200 164 100 / 0.1);
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 30cqw, var(--verso-linha) 30cqw calc(30cqw + 0.6cqw), transparent calc(30cqw + 0.6cqw)),
+    repeating-linear-gradient(45deg, transparent 0 2.4cqw, var(--verso-trama) 2.4cqw 2.6cqw),
+    repeating-linear-gradient(-45deg, transparent 0 2.4cqw, var(--verso-trama) 2.4cqw 2.6cqw),
+    var(--verso-fundo);
+}
+
+.verso--tema {
+  --verso-fundo: var(--tema, #8a5d14);
+  --verso-tinta: #ffffff;
+  --verso-linha: rgb(255 255 255 / 0.28);
+  --verso-trama: rgb(255 255 255 / 0.1);
+}
+
+.verso--papel {
+  --verso-fundo: #faf9f5;
+  --verso-tinta: #3f3f46;
+  --verso-linha: rgb(63 63 70 / 0.22);
+  --verso-trama: rgb(63 63 70 / 0.07);
+}
+
+.verso-moldura {
+  width: 84%;
+  height: 88%;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 4cqh;
+  border: 0.8cqw solid var(--verso-tinta);
+  border-radius: 4cqw;
+  outline: 0.5cqw solid var(--verso-linha);
+  outline-offset: 2cqw;
+  color: var(--verso-tinta);
+  text-align: center;
+}
+
+.verso-portal {
+  width: 40cqw;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1.2cqw solid var(--verso-tinta);
+  border-radius: 50% 50% 8cqw 8cqw;
+  font-family: var(--font-display, serif);
+  font-size: 20cqw;
+  line-height: 1;
+}
+
+.verso-marca {
+  font-family: var(--font-display, serif);
+  font-size: 9cqw;
+  letter-spacing: 1.5cqw;
+}
+
+.verso-tema {
+  max-width: 80%;
+  font-size: 5.5cqw;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 @page {
@@ -96,7 +269,6 @@
   html,
   body {
     background: #ffffff !important;
-    color: #000000 !important;
     margin: 0 !important;
     padding: 0 !important;
     -webkit-print-color-adjust: exact !important;
@@ -104,55 +276,32 @@
   }
 
   .no-print,
-  .studio-topbar,
-  .studio-tabs-nav,
-  .studio-footer {
+  .topbar,
+  .tabs {
     display: none !important;
   }
 
-  .app-shell,
-  .studio-main-content,
+  .app,
+  .content,
   .print-studio-wrapper,
   .print-sheets-container {
+    display: block !important;
     margin: 0 !important;
     padding: 0 !important;
     gap: 0 !important;
-    width: 100% !important;
+    width: auto !important;
     max-width: none !important;
   }
 
-  .print-a4-sheet {
-    width: 210mm !important;
-    height: 297mm !important;
-    margin: 0 auto !important;
-    padding: 8mm 6mm !important;
+  .folha-a4 {
+    margin: 0 !important;
     box-shadow: none !important;
-    border-radius: 0 !important;
-    page-break-after: always;
     break-after: page;
+    page-break-after: always;
   }
 
-  .print-a4-sheet:last-child {
-    page-break-after: auto;
+  .folha-a4:last-child {
     break-after: auto;
-  }
-
-  .print-grid-3x3 {
-    display: grid;
-    grid-template-columns: repeat(3, 63mm);
-    grid-auto-rows: 88mm;
-    gap: 0;
-    justify-content: center;
-  }
-
-  .print-slot {
-    width: 63mm !important;
-    height: 88mm !important;
-    outline: 0.15mm dashed #64748b;
-  }
-
-  .print-slot .mtg-card {
-    width: 63mm !important;
-    height: 88mm !important;
+    page-break-after: auto;
   }
 }

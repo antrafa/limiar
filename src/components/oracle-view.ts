@@ -1,207 +1,119 @@
-import { splitPocketAndWorld } from '../data/engine-deck';
-import type { GameCard, ThemeDeck } from '../types/card';
+import {
+  CLASSES,
+  GESTO_DO_NAIPE,
+  NAIPES,
+  REGRA,
+  REGRA_DA_CAVEIRA,
+  REGRA_DA_DAMA,
+  REGRA_DA_ESTRELA,
+  REGRA_DO_GESTO,
+  REGRA_DO_REI,
+  REGRA_DO_SINAL,
+  REGRA_DO_VALETE,
+  SIMBOLO,
+  SINAL_DO_NAIPE,
+  VIRA_NO_DIA,
+} from '../core/partida';
+import type { ThemeDeck } from '../types/card';
 import { escapeHtml } from './card-renderer';
 
-function renderFigureRow(c: GameCard): string {
-  const roleBadge =
-    c.kind === 'archetype_king'
-      ? '1/3 · Rei (K) — Quem você é (Fica visível no bolso)'
-      : c.kind === 'trump_queen'
-        ? '2/3 · Dama (Q) — Recurso de emergência (Começa em pé)'
-        : '3/3 · Valete (J) — Cicatriz / Consequência (Começa virado para baixo)';
+const VALORES = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-  const labelPrimary =
-    c.kind === 'archetype_king'
-      ? 'Convite narrativo na rotina (não obrigatório):'
-      : c.kind === 'trump_queen'
-        ? 'Quando girar esta carta 90° (Ativar Dama ⟳):'
-        : 'Quando revelar esta carta (Gatilho de Entrada):';
+const DESFECHOS: Array<[string, string]> = [
+  ['Passou do topo', 'Vitória. O topo vira troféu.'],
+  [`Igualou, ou até ${REGRA.folgaDoCusto} abaixo`, 'Vitória com custo. O topo vira troféu e a Ameaça sobe 1.'],
+  [`${REGRA.folgaDoCusto + 1} ou mais abaixo`, 'A cena venceu. Quem vive perde 1 de Fôlego, a Ameaça sobe 1 e o topo é descartado.'],
+];
 
-  const labelSecondary =
-    c.kind === 'archetype_king'
-      ? 'Sinergia quando sair carta deste naipe:'
-      : c.kind === 'trump_queen'
-        ? 'Como recarregar para usar de novo (Regra-base: ♦ Ouros A–10):'
-        : 'Tabu enquanto aberto (somente nas interações do jogo):';
-
-  return `
-    <tr>
-      <td class="oracle-code">
-        <strong>${escapeHtml(c.playingCardCode)}</strong>
-        <button type="button" class="btn-ghost btn-sm oracle-zoom-btn" data-zoom-card-id="${escapeHtml(c.id)}">
-          🔍 Ampliar
-        </button>
-      </td>
-      <td>
-        <strong>${escapeHtml(c.title)}</strong>
-        <div class="oracle-subrole">${escapeHtml(roleBadge)}</div>
-      </td>
-      <td>
-        <span class="oracle-step-label">${escapeHtml(labelPrimary)}</span>
-        <div>${escapeHtml(c.figurePassiveOrRule ?? '')}</div>
-      </td>
-      <td>
-        <span class="oracle-step-label">${escapeHtml(labelSecondary)}</span>
-        <div>${escapeHtml(c.figureSpecialOrTaboo ?? '')}</div>
-      </td>
-    </tr>
-  `;
-}
-
-function renderWorldRow(c: GameCard): string {
-  return `
-    <tr>
-      <td class="oracle-code">
-        <strong>${escapeHtml(c.playingCardCode)}</strong>
-        <button type="button" class="btn-ghost btn-sm oracle-zoom-btn" data-zoom-card-id="${escapeHtml(c.id)}">
-          🔍 Ampliar
-        </button>
-      </td>
-      <td>
-        <strong>${escapeHtml(c.title)}</strong>
-        <div class="oracle-subrole">${escapeHtml(c.typeLine)}</div>
-      </td>
-      <td>
-        <div class="oracle-step-block">
-          <span class="oracle-step-label">1º Observe na rotina:</span>
-          <span class="oracle-trigger">👁 ${escapeHtml(c.topWatcherTrigger ?? '')}</span>
-        </div>
-        <div class="oracle-step-block">
-          <span class="oracle-step-label">2º Narre ao parceiro (Evento):</span>
-          <div>${escapeHtml(c.topWatcherEvent ?? '')}</div>
-        </div>
-      </td>
-      <td>
-        <div class="oracle-step-block">
-          <span class="oracle-step-label">1º O que você deve fazer agora:</span>
-          <span class="oracle-trigger">⚡ ${escapeHtml(c.bottomEchoPrompt ?? '')}</span>
-        </div>
-        <div class="oracle-step-block">
-          <span class="oracle-step-label">2º Regra de desfecho (Sucesso ou Custo):</span>
-          <div>${escapeHtml(c.bottomEchoEffect ?? '')}</div>
-        </div>
-      </td>
-    </tr>
-  `;
-}
+const PESSOAS = [1, 2, 3, 4];
 
 export function renderOracleGuideHtml(deck: ThemeDeck): string {
-  const { figures, worldDeck } = splitPocketAndWorld(deck);
-
-  const figureRows = figures.map(renderFigureRow).join('');
-  const worldRows = worldDeck.map(renderWorldRow).join('');
+  const naipes = NAIPES.map((naipe) => {
+    const cenas = VALORES.map((rank) => deck.cards.find((c) => c.kind === 'journey' && c.suit === naipe && c.rank === rank))
+      .filter((c) => c !== undefined)
+      .map(
+        (c) => `
+          <li>
+            <button type="button" class="threat-row" data-zoom-card-id="${escapeHtml(c.id)}">
+              <span class="num threat-row-code">${escapeHtml(c.playingCardCode)}</span>
+              <span><strong>${escapeHtml(c.title)}</strong>${c.dailyIdea ? ` <span class="muted">· ${escapeHtml(c.dailyIdea)}</span>` : ''}<br />
+                <span class="threat-row-story">${escapeHtml(c.topWatcherEvent ?? '')}</span><br />
+                <span class="muted">Sinal: ${escapeHtml(c.topWatcherTrigger ?? '')} · Gesto: ${escapeHtml(c.bottomEchoPrompt ?? '')}</span></span>
+            </button>
+          </li>`,
+      )
+      .join('');
+    return `
+      <details class="suit-group">
+        <summary>
+          <span class="suit-${naipe} big-suit">${SIMBOLO[naipe]}</span>
+          <span><strong>${VIRA_NO_DIA[naipe].tipo}</strong> <span class="muted">· classe ${CLASSES[naipe].nome}, ${escapeHtml(deck.suits[naipe].vocationName)}</span></span>
+          <span class="muted count">10 cenas</span>
+        </summary>
+        <ul class="threat-list">${cenas}</ul>
+      </details>`;
+  }).join('');
 
   return `
-    <div class="oracle-guide-container">
-      <header class="oracle-hero">
-        <h2>📖 Guia de Oráculo Didático (Limiar v1.1) — ${escapeHtml(deck.name)}</h2>
-        <p>${escapeHtml(deck.tagline)}</p>
-        <p class="oracle-hero-helper">
-          Use esta página para jogar <strong>Limiar</strong> com <strong>qualquer baralho comum de 54 cartas</strong> (52 cartas + 2 Coringas) sem precisar imprimir nada. Basta procurar abaixo a carta que você tirou na mão e seguir as instruções numeradas. <strong>Lembre-se da regra de ouro (Edição 1.1):</strong> toda ação física, foto, áudio ou toque é opcional e pode ser substituído por uma simples narração ou decisão em texto, e qualquer jogador pode dizer <em>"pausa"</em> ou <em>"passo"</em> sem penalidade.
-        </p>
+    <div class="reference">
+      <header class="section-head">
+        <span class="eyebrow">Referência rápida · ${escapeHtml(deck.name)}</span>
+        <h2>Tudo o que se consulta durante a campanha</h2>
+        <p class="lede">Para jogar com baralho comum, sem abrir a Mesa: o desfecho, os bônus, o que cada naipe vira no dia e o texto de cada cena deste tema.</p>
       </header>
 
-      <section class="oracle-rules-grid">
-        <div class="oracle-rule-box">
-          <h3>1. Preparação: Seu Trio de Bolso (K, Q, J)</h3>
-          <ol class="oracle-didactic-list">
-            <li>
-              <strong>Escolha sua Vocação (Naipe):</strong> Retire as 12 figuras do baralho. Cada jogador escolhe um naipe (♠ Espadas, ♥ Copas, ♦ Ouros ou ♣ Paus) e recebe o <strong>Rei (K)</strong>, a <strong>Dama (Q)</strong> e o <strong>Valete (J)</strong> daquele naipe.
-            </li>
-            <li>
-              <strong>Como funcionam as 3 figuras (Edição 1.1):</strong>
-              <ul>
-                <li><strong>Rei (K) — Identidade:</strong> Fica aberto durante toda a campanha. As atitudes de rotina sugeridas são <em>convites narrativos, não obrigações</em>, e concede a sinergia de naipe.</li>
-                <li><strong>Dama (Q ⟳) — Proteção:</strong> Começa aberta e pronta. Gire-a 90° para ativar seu efeito ou evitar uma consequência quando permitido. Recarrega ao cumprir com sucesso qualquer carta de <strong>♦ Ouros (Ás a 10)</strong>.</li>
-                <li><strong>Valete (J) — Cicatriz:</strong> Começa fechado (face para baixo). Quando revelado por falha grave sem Dama pronta, ativa o tabu <em>somente dentro das interações do jogo</em> até ser curado.</li>
-              </ul>
-            </li>
-            <li>
-              <strong>Deck do Mundo (42 cartas):</strong> As 40 cartas numeradas (Ás a 10) + 1 Coringa Claro (★) + 1 Coringa Escuro (💀).
-            </li>
-          </ol>
-        </div>
+      <div class="ref-grid">
+        <section class="ref-block">
+          <h3>Desfecho</h3>
+          <p class="muted">O Eco vira o fundo do baralho dele. Fundo + bônus, contra o topo. O Ás vale ${REGRA.valorAs}.</p>
+          <dl class="glossary">${DESFECHOS.map(([t, d]) => `<dt>${t}</dt><dd>${d}</dd>`).join('')}</dl>
 
-        <div class="oracle-rule-box">
-          <h3>2. Rodada (Vigia &amp; Eco) e Prazo dos Gatilhos</h3>
-          <ol class="oracle-didactic-list">
-            <li>
-              <strong>Primeiro papel — ☀ Vigia (Topo):</strong>
-              Retira a carta disponível no <strong>topo</strong> do próprio baralho e lê <strong>somente a coluna "☀ TOPO · O VIGIA"</strong>:
-              <ul>
-                <li><strong>Prazo de até 2 horas:</strong> Aguarde o gatilho do item <strong>1º Observe na rotina</strong> por até 2h. Se não acontecer, escolha um <em>gatilho substituto simples e seguro</em> ou <em>adie a carta sem penalidade</em>.</li>
-                <li>Quando ativar, envie uma mensagem curta narrando o evento do item <strong>2º Narre ao parceiro</strong> (sem consultar a carta do fundo).</li>
-              </ul>
-            </li>
-            <li>
-              <strong>Segundo papel — ☾ Eco (Fundo):</strong>
-              Depois de receber a cena, retira a carta disponível no <strong>fundo</strong> do próprio baralho e lê <strong>somente a coluna "☾ FUNDO · O ECO"</strong>:
-              <ul>
-                <li>Aplica a reação do item <strong>1º O que você deve fazer agora</strong> à cena do Vigia. <em>Toda ação física (foto, áudio, toque, deslocamento) é opcional e pode ser substituída por uma descrição ou escolha narrada.</em></li>
-                <li>Na rodada seguinte, os papéis se invertem.</li>
-              </ul>
-            </li>
-            <li>
-              <strong>Modo Solo:</strong>
-              Retire 1 carta do topo (aguarde o gatilho até 2h ou use substituto seguro) e, quando ativar, retire 1 carta do fundo, respondendo em voz, texto ou diário.
-            </li>
-          </ol>
-        </div>
+          <h3 class="spaced">Bônus</h3>
+          <dl class="glossary">
+            <dt>Sinal +${REGRA.bonusSinal}</dt><dd>${REGRA_DO_SINAL}</dd>
+            <dt>Gesto +${REGRA.bonusGesto}</dt><dd>${REGRA_DO_GESTO}</dd>
+            <dt>Ajuda +${REGRA.bonusAjuda}</dt><dd>Outra pessoa perde 1 de Fôlego. Uma ajuda por cena.</dd>
+          </dl>
 
-        <div class="oracle-rule-box">
-          <h3>3. Ordem de Prioridade (7 Passos), Colapso e Campanha</h3>
-          <ol class="oracle-didactic-list">
-            <li><strong>1º Segurança e limites reais:</strong> Qualquer jogador pode dizer <em>"pausa"</em> ou <em>"passo"</em>, adaptar ou substituir qualquer ação insegura/inconveniente sem penalidade.</li>
-            <li><strong>2º Ação do Eco</strong> → <strong>3º Efeito específico da carta</strong> (Sucesso, Sucesso com custo, Falha ou Escolha narrativa).</li>
-            <li><strong>4º Sinergia do Rei (K)</strong> → <strong>5º Dama (Q ⟳)</strong> → <strong>6º Consequência</strong> → <strong>7º Valete (J) e Colapso</strong>.</li>
-            <li><strong>Colapso:</strong> Ocorre quando uma nova falha exigiria revelar/agravar um Valete já ativo e sua Dama está esgotada. O parceiro pode evitar o Colapso gastando a própria Dama pronta (se ela permitir).</li>
-            <li><strong>Campanha e Marcos:</strong> Curta (<strong>6 rodadas</strong> → título), Padrão (<strong>12 rodadas</strong> → habilidade narrativa única) ou Longa (<strong>18 rodadas</strong> → epílogo/carta de memória).</li>
-          </ol>
-        </div>
+          <h3 class="spaced">Quantas pessoas</h3>
+          <table class="data-table">
+            <thead><tr><th>Pessoas</th><th>Troféus para o chefe</th><th>Derrota com Ameaça</th><th>Vida do chefe</th></tr></thead>
+            <tbody>${PESSOAS.map((n) => `<tr><th scope="row" class="num">${n}</th><td class="num">${REGRA.trofeusPorPessoa * n}</td><td class="num">${REGRA.ameacaPorPessoa * n}</td><td class="num">${REGRA.chefeVidaBase + n}</td></tr>`).join('')}</tbody>
+          </table>
+        </section>
 
-        <div class="oracle-rule-box">
-          <h3>4. Embaralhamento Livre (Presencial ou à Distância)</h3>
-          <p>Não é necessário sincronizar baralhos nem fazer cortes por data. Basta embaralhar livremente:</p>
-          <ol class="oracle-didactic-list">
-            <li><strong>Partida presencial:</strong> Embaralhem as 42 cartas do Deck do Mundo e coloquem um único maço no centro da mesa.</li>
-            <li><strong>Partida à distância:</strong> Cada jogador embaralha normalmente o seu próprio maço de 42 cartas. Quando for <strong>☀ Vigia</strong>, você saca uma carta do seu baralho para criar a cena; quando o parceiro for <strong>☾ Eco</strong>, ele saca uma carta do baralho dele para reagir!</li>
-          </ol>
-          <p class="cipher-preview">
-            <strong>Vantagem:</strong> Zero preparo matemático antes da partida e 100% de imprevisibilidade a cada saque.
-          </p>
-        </div>
-      </section>
+        <section class="ref-block">
+          <h3>O que cada naipe vira no dia</h3>
+          <table class="data-table">
+            <thead><tr><th>Naipe</th><th>Vira</th><th>Sinal sem tema</th><th>Gesto sem tema</th></tr></thead>
+            <tbody>
+              ${NAIPES.map((n) => `<tr><th scope="row" class="suit-${n} big-suit">${SIMBOLO[n]}</th><td><strong>${VIRA_NO_DIA[n].tipo}:</strong> ${VIRA_NO_DIA[n].vira}</td><td>${SINAL_DO_NAIPE[n]}</td><td>${GESTO_DO_NAIPE[n]}</td></tr>`).join('')}
+            </tbody>
+          </table>
 
-      <section class="oracle-table-section">
-        <h3>Tabela 1: Trio de Personagem no Bolso (12 Figuras: K, Q, J)</h3>
-        <p class="subtitle">Consulte aqui as 3 cartas do naipe que você escolheu guardar com você:</p>
-        <table class="oracle-table">
-          <thead>
-            <tr>
-              <th>Carta</th>
-              <th>Nome &amp; Papel no Bolso</th>
-              <th>Instrução Principal (Como usar / O que faz)</th>
-              <th>Vantagem de Naipe / Como Recarregar / Tabu Obrigatório</th>
-            </tr>
-          </thead>
-          <tbody>${figureRows}</tbody>
-        </table>
-      </section>
+          <h3 class="spaced">Classes</h3>
+          <p class="muted">${REGRA_DO_REI}</p>
+          <table class="data-table">
+            <tbody>
+              ${NAIPES.map((n) => `<tr><th scope="row" class="suit-${n} big-suit">${SIMBOLO[n]}</th><td><strong>${CLASSES[n].nome}</strong></td><td>${CLASSES[n].descricao}</td></tr>`).join('')}
+            </tbody>
+          </table>
 
-      <section class="oracle-table-section">
-        <h3>Tabela 2: Oráculo do Mundo (40 Cartas de Jornada A–10 + 2 Coringas)</h3>
-        <p class="subtitle">Consulte aqui a carta que você puxou de CIMA (leia apenas a coluna ☀ TOPO) ou de BAIXO (leia apenas a coluna ☾ FUNDO):</p>
-        <table class="oracle-table">
-          <thead>
-            <tr>
-              <th>Carta</th>
-              <th>Título da Cena</th>
-              <th>☀ TOPO · O VIGIA (Para quem puxou de CIMA do baralho)</th>
-              <th>☾ FUNDO · O ECO (Para quem puxou de BAIXO do baralho)</th>
-            </tr>
-          </thead>
-          <tbody>${worldRows}</tbody>
-        </table>
+          <h3 class="spaced">Cartas especiais</h3>
+          <dl class="glossary">
+            <dt>Dama</dt><dd>${REGRA_DA_DAMA}</dd>
+            <dt>Valete</dt><dd>${REGRA_DO_VALETE}</dd>
+            <dt>★</dt><dd>${REGRA_DA_ESTRELA}</dd>
+            <dt>💀</dt><dd>${REGRA_DA_CAVEIRA}</dd>
+            <dt>Chefe</dt><dd><strong>${escapeHtml(deck.chefe.nome)}</strong>. Cada pessoa o enfrenta como uma cena, contra o valor ${REGRA.chefeValor}. O Rei não vale contra ele. Vitória, com ou sem custo, tira 1 de vida.</dd>
+          </dl>
+        </section>
+      </div>
+
+      <section class="ref-block">
+        <h3>As cenas deste tema</h3>
+        <p class="muted">Abra um naipe e clique numa cena para ver a carta inteira.</p>
+        ${naipes}
       </section>
     </div>
   `;

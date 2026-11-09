@@ -1,54 +1,34 @@
-# LIMIAR — O Jogo que Ultrapassa a Mesa (Edição Revisada 1.1 · 63×88mm)
+# Limiar
 
-![Limiar — O Jogo que Ultrapassa a Mesa](./public/limiar-banner.png)
+![Limiar](./public/limiar-banner.png)
 
-**Limiar** (*anteriormente nome de trabalho: Sinaleiro*) é um RPG narrativo cooperativo na vida real (*pervasive tabletop card game*) em que sinais do cotidiano disparam cenas de uma aventura compartilhada. Um jogador observa e narra (**☀ Vigia**); o outro reage (**☾ Eco**). A história continua entre uma rodada e outra, dentro do ritmo normal da vida — usando qualquer baralho de **54 cartas** (52 tradicionais + 2 Coringas) ou cartas impressas no tamanho padrão de Magic/Poker (**63mm × 88mm**), acompanhado de um **Estúdio Web, Mesa de Jogo Digital, Guia de Oráculo e Gerador Print & Play A4**.
+**Limiar** é um RPG cooperativo de cartas jogado dentro da rotina. O seu dia é a aventura: você vira uma carta, escolhe o que do seu dia ela vai ser (a reunião, o trânsito, o jantar) e vive normalmente. Quando aquilo acaba, uma carta diz como a história terminou. Sozinho, em dupla ou em grupo de até 4, juntos ou a distância, sem hora marcada.
 
-> 📖 **Quer o manual completo (Edição Revisada 1.1) em um único arquivo?** Consulte [**LIVRO_COMPLETO_LIMIAR.md**](./LIVRO_COMPLETO_LIMIAR.md) (ou [**LIVRO_COMPLETO_SINALEIRO.md**](./LIVRO_COMPLETO_SINALEIRO.md)) — com todas as regras revisadas 1.1, ordem de prioridade de 7 passos, segurança na vida real, marcos de campanha e os **3 Oráculos Completos (162 cartas)**.
+A regra completa: [**Limiar_Regra_de_Bolso.md**](./Limiar_Regra_de_Bolso.md) (v0.4), com um dia de exemplo.
 
----
+## Como se joga, em resumo
 
-## Como o Jogo Funciona (Edição Revisada 1.1)
+1. **Um baralho comum por pessoa.** O Rei, a Dama e o Valete do naipe da sua classe são o Trio de Bolso; Ás a 10 e os 2 Coringas são o seu baralho.
+2. **Toda cena tem dois papéis:** quem **vive** e o **Eco** (em dupla, a outra pessoa; em grupo, quem responder primeiro; sozinho, você mesmo). Com duas pessoas ou mais, nada se resolve sozinho.
+3. **Abra uma cena quando quiser:** vire o topo e diga o que do seu dia ela é. O Eco lê a História da carta e liga à sua situação (a leitura).
+4. **Viva:** o sinal da carta vale +2 quando o Eco confirma; o gesto vale +1. Os dois são convites, nunca tarefas.
+5. **Desfecho:** quando aquilo acaba, o Eco vira o fundo do baralho dele. Fundo + bônus contra o topo: vitória, vitória com custo ou a cena vence. O Eco narra.
+6. **Campanha:** 30 troféus por pessoa chamam o chefe do tema; 5 de Ameaça por pessoa é derrota.
 
-O baralho de 54 cartas é dividido antes da partida em duas partes:
+Os números foram calibrados com `docs/simulacao_regra_de_bolso.py`: quando sinal e gesto aparecem em metade das cenas, o grupo vence cerca de 6 em cada 10 campanhas, com qualquer número de pessoas.
 
-### 1. Seu Trio de Bolso (12 Figuras: `K`, `Q`, `J`)
-Cada jogador escolhe um naipe que define sua vocação (`♠ Espadas`, `♥ Copas`, `♦ Ouros` ou `♣ Paus`) e separa as **3 Figuras daquele naipe** para levar consigo:
-- **Rei (`K`) — Identidade (Sempre aberto):** Fica aberto durante toda a campanha. Oferece uma interpretação temática para a rotina (**convite narrativo, não obrigação**) e concede a **Sinergia de Naipe** descrita na carta.
-- **Dama (`Q ⟳`) — Proteção (Começa aberta e pronta):** Recurso individual e limitado. Gire-a 90° (`⟳ Tap`) para ativar seu efeito ou evitar uma consequência quando permitido. Uma Dama deitada está esgotada até ser recarregada — como regra-base, **cumprir com sucesso qualquer carta de `♦ Ouros` (de Ás a 10)** recarrega a Dama do jogador que realizou a ação.
-- **Valete (`J`) — Cicatriz e Colapso (Começa fechado):** Revelado ao sofrer uma falha grave sem Dama pronta (ou quando um efeito determinar). Quando aberto, ativa um **Tabu somente dentro das interações do jogo** até ser curado. Se uma nova falha exigir revelar/agravar um Valete já ativo enquanto sua Dama está esgotada, o personagem entra em **Colapso** (podendo ser salvo pela Dama pronta do parceiro em jogo cooperativo).
+## O app
 
-### 2. O Deck do Mundo (42 Cartas: `Ás` a `10` + 2 Coringas)
-As 40 cartas numeradas e os 2 Coringas (`★ Coringa Claro` e `💀 Coringa Escuro`) formam o baralho de eventos.
+- **Como jogar:** a regra explicada a partir de uma cena.
+- **Temas:** os 11 mundos, com tom, naipes, chefe e uma cena de amostra; escolha um para jogar.
+- **Primeira partida:** tutorial de 5 minutos, cola de bolso e uma segunda-feira inteira de exemplo, cena por cena (a carta, a conversa e o desfecho), encenada pelo motor do jogo.
+- **Mesa de jogo:** campanha de 1 a 4 pessoas. Cada cena avança passo a passo (declarar, leitura, sinal confirmado, gesto, ajuda, desfecho, narração), com diário e linha de status para colar na conversa.
+- **Referência rápida:** desfecho, bônus, número de pessoas, classes e as 40 cenas do tema, para jogar com baralho comum.
+- **Cartas e editor:** as 54 cartas do tema, com editor de nome, História, Sinal, Gesto e ambientação.
+- **Imprimir:** folhas A4 com 9 cartas de 63 × 88 mm encostadas, 16 marcas de corte contínuas, régua de 5 cm para conferir a escala e calibração +3,63% para impressoras que reduzem. Fundo das cartas em 3 estampas (Portal, Cor do tema, Papel) e modo frente e verso, com a folha de fundos espelhada. Cada carta pode levar um código QR para o escaneador.
+- **Escanear carta** (botão no topo): a câmera lê o código da carta impressa e abre a carta no tema ativo. Usa o leitor nativo do navegador (Chrome no Android, em endereço https); sem ele, um teclado de valor e naipe faz o mesmo.
 
-- **Embaralhamento Livre (Presencial ou à Distância):** Presencialmente, embaralhem um único maço de 42 cartas na mesa. À distância, cada jogador embaralha livremente o próprio maço de 42 cartas sem precisar sincronizar a ordem.
-- **Dupla Câmara (`☀ Topo · Vigia` vs. `☾ Fundo · Eco`):**
-  - **☀ Primeiro Papel — Vigia (Topo):** Retira a carta do topo do próprio baralho e lê apenas a coluna **☀ Topo**. Aguarda o gatilho por **até 2 horas** (ou usa um gatilho substituto simples e seguro; ou adia sem penalidade) e narra o evento ficcional ao parceiro.
-  - **☾ Segundo Papel — Eco (Fundo):** Retira a carta disponível no fundo do próprio baralho e lê apenas a coluna **☾ Fundo**. Aplica a reação sugerida à cena narrada pelo Vigia.
-  - **Ficção em 1º Lugar & Segurança:** Toda ação física (foto, áudio, toque, deslocamento) é opcional de ambientação e pode ser substituída por uma descrição ou escolha narrada. Qualquer jogador pode dizer **"pausa"** ou **"passo"** a qualquer momento sem penalidade.
-  - **Alternância:** Na rodada seguinte, os papéis se invertem.
-
----
-
-## Três Universos Inclusos (162 Cartas em Português)
-
-1. **Zona de Quarentena (`zombies`):** Apocalipse Zumbi — Sobrevivência Urbana (54 cartas).
-2. **Sangue & Néon (`vampires`):** Vampiros — Crônica da Noite Eterna (54 cartas).
-3. **O Último Eclipse (`eclipse`):** Fim do Mundo — Crônica da Coroa Solar (54 cartas).
-
-Todas as 54 cartas de cada tema podem ser editadas ao vivo no **Estúdio**, salvas automaticamente no navegador (`localStorage`) e exportadas/importadas em JSON.
-
----
-
-## Funcionalidades da Aplicação Web
-
-- **Como Começar (Manual v1.1 + Guia Rápido):** Arte oficial de **Limiar**, passo a passo de início, simulação prática de rodada (Em Dupla e Modo Solo), explicação detalhada de `K`, `Q` e `J`, Ordem de Prioridade (7 passos), Duração de Campanha (6, 12 ou 18 rodadas) e Regras de Segurança.
-- **Mesa de Jogo:** Simulador de mesa para jogar pelo celular/computador (em dupla ou solo), com embaralhamento livre das 42 cartas, controle de virar Dama (`Q ⟳`), ativar Valete (`J`), sacar do Topo/Fundo e histórico de turnos.
-- **Estúdio & Editor (63×88mm):** Galeria das 54 cartas com filtro por naipe e editor ao vivo. Clicar em qualquer carta selecionada abre o **Modal de Leitura Ampliada**.
-- **Guia de Oráculo (Baralho Comum):** Tabelas didáticas passo a passo para jogar usando qualquer baralho físico tradicional de 54 cartas.
-- **Print & Play A4:** Paginação automática em grades `3 × 3` (9 cartas por folha A4, 6 páginas no total) nas medidas exatas `63mm × 88mm` com marcas de corte para impressão (`Ctrl+P` / `Cmd+P`).
-
----
+Onze temas vêm prontos, escolhidos na página **Temas**: O Último Eclipse (fim do mundo, o padrão), Zona de Quarentena (zumbis), Sangue & Néon (vampiros), Expedição ao Desconhecido, Noir de Cidade Chuvosa, Estação Orbital, Academia de Artes Arcanas, Mar de Corsários, Kaiju na Cidade, Contos da Floresta Antiga e Neon e Silício. Um tema só dá nome às coisas: o motor conhece naipes e números.
 
 ## Desenvolvimento
 

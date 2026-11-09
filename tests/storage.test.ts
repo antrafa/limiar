@@ -57,3 +57,23 @@ describe('Studio Storage & Custom Card Overrides', () => {
     expect(parsed.cards).toHaveLength(54);
   });
 });
+
+describe('Partida salva', () => {
+  beforeEach(() => {
+    globalThis.localStorage = new MemoryStorage();
+  });
+
+  it('guarda e recupera a partida em andamento', async () => {
+    const { criarPartida } = await import('../src/core/partida');
+    const { loadPartida, savePartida } = await import('../src/core/storage');
+    const partida = criarPartida({ jogadores: [{ nome: 'Jogador 1', classe: 'spades' }] });
+    savePartida(partida);
+    expect(loadPartida()?.pessoas[0].nome).toBe('Jogador 1');
+  });
+
+  it('descarta campanha salva pela regra anterior, com mão de cartas', async () => {
+    const { loadPartida } = await import('../src/core/storage');
+    localStorage.setItem('limiar_partida_v2', JSON.stringify({ modo: 'ao-vivo', frentes: [{ nome: 'x', mao: [], turnos: 2 }] }));
+    expect(loadPartida()).toBeNull();
+  });
+});

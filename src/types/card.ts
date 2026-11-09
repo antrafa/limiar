@@ -19,7 +19,18 @@ export type Rank =
 
 export type CardKind = 'journey' | 'archetype_king' | 'trump_queen' | 'scar_jack' | 'joker';
 
-export type ThemeId = 'zombies' | 'vampires' | 'eclipse';
+export type ThemeId =
+  | 'eclipse'
+  | 'zombies'
+  | 'vampires'
+  | 'expedicao'
+  | 'noir'
+  | 'orbital'
+  | 'arcana'
+  | 'corsarios'
+  | 'kaiju'
+  | 'floresta'
+  | 'neon';
 
 export interface SuitMeta {
   suit: Exclude<Suit, 'joker'>;
@@ -46,10 +57,16 @@ export interface GameCard {
   topWatcherEvent?: string;   // Evento Ficcional (☀ Topo)
   bottomEchoPrompt?: string;  // Interação Real (☾ Fundo)
   bottomEchoEffect?: string;  // Resolução Mecânica (☾ Fundo)
+  dailyIdea?: string;         // Ideia: o que a cena pode ser no dia de quem vive
   // For Pocket Trio (K, Q, J):
   figurePassiveOrRule?: string;
   figureSpecialOrTaboo?: string;
   flavorText: string;
+}
+
+export interface ThemeBoss {
+  nome: string;
+  descricao: string;
 }
 
 export interface ThemeDeck {
@@ -57,36 +74,10 @@ export interface ThemeDeck {
   name: string;
   subtitle: string;
   tagline: string;
+  tom: string; // tom em poucas palavras, para a página de temas
+  chefe: ThemeBoss;
   accentColor: string;
   secondaryColor: string;
   suits: Record<Exclude<Suit, 'joker'>, SuitMeta>;
   cards: GameCard[];
-}
-
-export interface CipherResult<T> {
-  dateLabel: string;
-  dayCut: number;
-  monthCut: number;
-  steps: string[];
-  cards: T[];
-}
-
-export interface DrawnLogItem {
-  turn: number;
-  role: 'vigia' | 'eco';
-  card: GameCard;
-  timestamp: string;
-}
-
-export interface PlaySessionState {
-  themeId: ThemeId;
-  dateSeed: string;
-  deckOrder?: number[];
-  chosenSuit: Exclude<Suit, 'joker'>;
-  queenTapped: boolean;
-  jackActive: boolean;
-  topIndex: number;
-  bottomIndex: number;
-  turnCount: number;
-  history: DrawnLogItem[];
 }
