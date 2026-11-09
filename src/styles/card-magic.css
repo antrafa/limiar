@@ -1,4 +1,4 @@
-/* Carta 63 × 88 mm (252 × 352 px na tela). Marfim, moldura fosca, tinta grafite. */
+/* Carta Poker (63 × 88 mm) e Bridge (57 × 87 mm). Tarô editorial de bolso com acento cromático por tema e suporte a arte. */
 
 :root {
   --card-w: 252px;
@@ -13,19 +13,22 @@
 }
 
 .mtg-card {
+  --card-accent: var(--accent, #8a5d14);
+  --card-accent-soft: #f6eddb;
+  --card-accent-line: #dec89a;
   width: var(--card-w);
   height: var(--card-h);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 9px;
+  padding: 9px 10px 8px;
   background: var(--card-paper);
   border: 1px solid var(--card-frame);
   border-radius: 11px;
   box-shadow:
-    inset 0 0 0 4px var(--card-paper),
-    inset 0 0 0 5px var(--card-line),
+    inset 0 0 0 3.5px var(--card-paper),
+    inset 0 0 0 4.5px var(--card-accent-line),
     0 1px 2px rgb(24 24 27 / 0.08);
   color: #1c1917;
   font-family: 'Inter', system-ui, sans-serif;
@@ -36,6 +39,74 @@
     box-shadow 0.18s ease;
 }
 
+/* Paleta de destaque calibrada por tema (contraste editorial sobre papel marfim) */
+
+.mtg-card.theme-eclipse {
+  --card-accent: #b4690e;
+  --card-accent-soft: #fbf0d9;
+  --card-accent-line: #e4c384;
+}
+
+.mtg-card.theme-zombies {
+  --card-accent: #4d7c0f;
+  --card-accent-soft: #eef6e0;
+  --card-accent-line: #bdd694;
+}
+
+.mtg-card.theme-vampires {
+  --card-accent: #be123c;
+  --card-accent-soft: #fce8ed;
+  --card-accent-line: #e8a9b8;
+}
+
+.mtg-card.theme-expedicao {
+  --card-accent: #24633e;
+  --card-accent-soft: #e6f2eb;
+  --card-accent-line: #a3cbb2;
+}
+
+.mtg-card.theme-noir {
+  --card-accent: #9a4708;
+  --card-accent-soft: #f8ece1;
+  --card-accent-line: #dcba9c;
+}
+
+.mtg-card.theme-orbital {
+  --card-accent: #0e647d;
+  --card-accent-soft: #e4f2f6;
+  --card-accent-line: #9ec8d5;
+}
+
+.mtg-card.theme-arcana {
+  --card-accent: #5846a3;
+  --card-accent-soft: #eeebf9;
+  --card-accent-line: #bdb4e3;
+}
+
+.mtg-card.theme-corsarios {
+  --card-accent: #0c637a;
+  --card-accent-soft: #e5f2f5;
+  --card-accent-line: #9bc6d1;
+}
+
+.mtg-card.theme-kaiju {
+  --card-accent: #0f6760;
+  --card-accent-soft: #e4f3f1;
+  --card-accent-line: #99ccc7;
+}
+
+.mtg-card.theme-floresta {
+  --card-accent: #3f680c;
+  --card-accent-soft: #ebf3e1;
+  --card-accent-line: #b4ce94;
+}
+
+.mtg-card.theme-neon {
+  --card-accent: #077694;
+  --card-accent-soft: #e3f3f8;
+  --card-accent-line: #98cde0;
+}
+
 .mtg-card.is-interactive {
   cursor: pointer;
 }
@@ -43,16 +114,16 @@
 .mtg-card.is-interactive:hover {
   transform: translateY(-3px);
   box-shadow:
-    inset 0 0 0 4px var(--card-paper),
-    inset 0 0 0 5px var(--card-line),
+    inset 0 0 0 3.5px var(--card-paper),
+    inset 0 0 0 4.5px var(--card-accent-line),
     0 10px 24px rgb(24 24 27 / 0.14);
 }
 
 .mtg-card.is-selected {
   box-shadow:
-    inset 0 0 0 4px var(--card-paper),
-    inset 0 0 0 5px var(--card-line),
-    0 0 0 3px var(--accent, #9a6a1c),
+    inset 0 0 0 3.5px var(--card-paper),
+    inset 0 0 0 4.5px var(--card-accent),
+    0 0 0 3px var(--card-accent),
     0 10px 24px rgb(24 24 27 / 0.14);
 }
 
@@ -60,29 +131,33 @@
   transform: rotate(90deg);
 }
 
-.mtg-titlebar {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 2px 2px 4px;
-  border-bottom: 1px solid var(--card-line);
-}
+/* ---------- Cabeçalho: índice de baralho + tipo + título + selo/QR ---------- */
 
-.mtg-card-title {
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.mtg-titlebar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--card-accent-line);
 }
 
 .mtg-mana-pip {
   flex-shrink: 0;
-  font-size: 13px;
-  font-weight: 800;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  border: 1px solid var(--card-accent-line);
+  border-top: 2.5px solid var(--card-accent);
+  border-radius: 5px;
+  font-family: var(--font-display, 'Cinzel', Georgia, serif);
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1;
   font-variant-numeric: tabular-nums;
   color: var(--suit-black);
 }
@@ -96,66 +171,191 @@
   color: var(--suit-joker);
 }
 
-.mtg-art-box {
-  flex-shrink: 0;
-  height: 78px;
+.mtg-heading {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  background:
-    radial-gradient(circle at 50% 46%, rgb(255 255 255 / 0.9) 0 26px, transparent 27px),
-    repeating-linear-gradient(135deg, var(--card-soft) 0 6px, #ece8de 6px 7px);
-  border: 1px solid var(--card-line);
-  border-radius: 5px;
-  text-align: center;
-}
-
-.mtg-art-glyph {
-  font-size: 26px;
-  line-height: 1;
-}
-
-.mtg-art-subtitle {
-  max-width: 92%;
-  font-size: 8.5px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: #57534e;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  gap: 1.5px;
 }
 
 .mtg-typeline {
-  flex-shrink: 0;
-  font-size: 9px;
+  font-size: 7.5px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #57534e;
+  line-height: 1.15;
+  color: var(--card-accent);
 }
 
-.suit-hearts .mtg-typeline,
-.suit-diamonds .mtg-typeline {
-  color: var(--suit-red);
+.mtg-card-title {
+  font-size: 10.8px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.18;
+  color: #18181b;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
-.suit-joker .mtg-typeline {
-  color: var(--suit-joker);
+/* Selo discreto dessaturado na tela; QR Code contrastado na impressão */
+
+.mtg-art-glyph {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card-accent-soft);
+  border: 1px solid var(--card-accent-line);
+  border-radius: 5px;
+  font-size: 13px;
+  line-height: 1;
+  filter: grayscale(0.8) contrast(1.05);
+  opacity: 0.85;
 }
+
+.mtg-art-qr {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  padding: 1px;
+  background: #ffffff;
+  border: 1px solid var(--card-line);
+  border-radius: 3px;
+}
+
+.mtg-art-qr svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Quadro de arte (Figuras e Cenas com artUrl) + Faixa de contexto ---------- */
+
+.mtg-art-frame {
+  position: relative;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--card-accent-soft);
+  border: 1px solid var(--card-accent-line);
+  border-radius: 5px;
+}
+
+.mtg-art-frame--figure {
+  height: 72px;
+}
+
+.mtg-art-frame--scene {
+  height: 40px;
+}
+
+.mtg-art-frame--engraved {
+  background:
+    radial-gradient(circle at 50% 50%, #ffffff 0%, var(--card-accent-soft) 72%),
+    var(--card-accent-soft);
+  color: var(--card-accent);
+}
+
+.mtg-art-engraving {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.mtg-art-medallion {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: 0;
+  font-size: 18px;
+  line-height: 1;
+  filter: grayscale(0.65) contrast(1.05);
+}
+
+.mtg-art-frame--figure .mtg-art-medallion {
+  font-size: 21px;
+}
+
+.mtg-art-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mtg-card.kind-journey {
+  gap: 3.5px;
+}
+
+.mtg-card.kind-journey .mtg-narration {
+  font-size: 8.4px;
+  line-height: 1.26;
+}
+
+.mtg-card.kind-journey .mtg-rule p {
+  font-size: 8px;
+  line-height: 1.24;
+}
+
+.mtg-art-box {
+  flex-shrink: 0;
+  padding: 4px 7px;
+  background: var(--card-accent-soft);
+  border: 1px solid var(--card-accent-line);
+  border-radius: 4px;
+}
+
+.kind-journey .mtg-art-box {
+  border: 0;
+  border-left: 2.5px solid var(--card-accent);
+  border-radius: 2px 4px 4px 2px;
+  padding: 4px 7px;
+}
+
+.mtg-art-subtitle {
+  display: block;
+  font-size: 8.2px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.25;
+  color: var(--card-accent);
+}
+
+.mtg-art-idea {
+  display: block;
+  font-size: 8.2px;
+  line-height: 1.26;
+  color: #292524;
+  text-align: left;
+}
+
+.mtg-art-idea strong {
+  margin-right: 3px;
+  font-size: 7px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--card-accent);
+}
+
+/* ---------- Corpo da carta: História, Regras (Sinal / Gesto) e Citação ---------- */
 
 .mtg-textbox {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 7px;
-  background: #ffffff;
-  border: 1px solid var(--card-line);
-  border-radius: 5px;
+  gap: 5px;
   overflow: hidden;
 }
 
@@ -189,117 +389,157 @@
   font-variant-numeric: tabular-nums;
 }
 
+.mtg-narration {
+  margin: 0;
+  padding: 1px 1px 0;
+  font-size: 9px;
+  line-height: 1.33;
+  color: #1c1917;
+}
+
+.mtg-rules {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px 7px;
+  background: #ffffff;
+  border: 1px solid var(--card-accent-line);
+  border-radius: 5px;
+}
+
+.kind-journey .mtg-rules {
+  margin-top: auto;
+  gap: 4px;
+  padding: 5px 6px;
+}
+
+.mtg-rule + .mtg-rule {
+  padding-top: 4px;
+  border-top: 1px dashed var(--card-accent-line);
+}
+
 .mtg-rule-label {
-  font-size: 7.5px;
+  display: inline-block;
+  font-size: 7.2px;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #78716c;
+  line-height: 1.2;
+  color: var(--card-accent);
 }
 
 .mtg-rule p {
-  margin: 1px 0 0;
-  font-size: 9.5px;
-  line-height: 1.35;
+  margin: 1.5px 0 0;
+  font-size: 9.2px;
+  line-height: 1.34;
+  color: #27272a;
 }
 
-.mtg-narration {
-  margin: 0;
-  font-size: 9.5px;
-  line-height: 1.38;
+.kind-journey .mtg-rule p {
+  font-size: 8.5px;
+  line-height: 1.28;
 }
 
 .mtg-flavor {
   margin-top: auto;
-  padding-top: 5px;
-  border-top: 1px solid var(--card-soft);
-  font-size: 8.5px;
+  padding: 5px 2px 0;
+  border-top: 1px solid var(--card-accent-line);
+  font-size: 8.4px;
   font-style: italic;
-  line-height: 1.35;
-  color: #78716c;
+  line-height: 1.34;
+  color: #57534e;
 }
+
+/* ---------- Rodapé ---------- */
 
 .mtg-collector-bar {
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 2px;
-  font-size: 7.5px;
-  font-weight: 600;
+  padding: 1px 2px 0;
+  font-size: 7px;
+  font-weight: 700;
   letter-spacing: 0.1em;
-  color: #a8a29e;
+  color: var(--card-accent);
+  opacity: 0.85;
 }
 
-/* Cena: História, Sinal e Gesto precisam caber em 63 × 88 mm. */
-.kind-journey .mtg-art-box {
-  height: 44px;
-  flex-direction: row;
-  gap: 6px;
-  background: repeating-linear-gradient(135deg, var(--card-soft) 0 6px, #ece8de 6px 7px);
-}
+/* ---------- Calibração tipográfica para o tamanho Bridge (57 × 87 mm) ---------- */
 
-.kind-journey .mtg-art-glyph {
-  font-size: 18px;
-}
-
-.kind-journey .mtg-art-subtitle {
-  max-width: 75%;
-}
-
-.mtg-art-idea {
-  font-size: 8px;
-  line-height: 1.25;
-  color: #44403c;
-  text-align: left;
-}
-
-.mtg-art-idea strong {
-  margin-right: 2px;
-  font-size: 7px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #78716c;
-}
-
-.kind-journey .mtg-art-box:has(.mtg-art-idea) {
-  height: auto;
-  min-height: 44px;
-  justify-content: flex-start;
-  padding: 4px 7px;
-  background: var(--card-soft);
-}
-
-.kind-journey .mtg-textbox {
+.tamanho-bridge .mtg-card {
+  padding: 8px 8px 7px;
   gap: 4px;
-  padding: 6px;
 }
 
-.kind-journey .mtg-narration,
-.kind-journey .mtg-rule p {
-  font-size: 8.6px;
-  line-height: 1.3;
+.tamanho-bridge .mtg-mana-pip {
+  min-width: 27px;
+  height: 27px;
+  font-size: 12.5px;
 }
 
-.kind-journey .mtg-rule-label {
+.tamanho-bridge .mtg-typeline {
   font-size: 7px;
 }
 
-/* Código para o escaneador, no lugar do ícone da arte (só na impressão). */
-.mtg-art-qr {
-  flex-shrink: 0;
-  width: 36px;
-  height: 36px;
-  padding: 1px;
-  background: #ffffff;
-  border-radius: 2px;
+.tamanho-bridge .mtg-card-title {
+  font-size: 9.8px;
+  line-height: 1.16;
 }
 
-.mtg-art-qr svg {
-  display: block;
-  width: 100%;
-  height: 100%;
+.tamanho-bridge .mtg-art-glyph {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
 }
 
-.kind-journey .mtg-art-qr {
-  width: 34px;
-  height: 34px;
+.tamanho-bridge .mtg-art-qr {
+  width: 30px;
+  height: 30px;
+}
+
+.tamanho-bridge .mtg-art-frame--figure {
+  height: 62px;
+}
+
+.tamanho-bridge .mtg-art-frame--scene {
+  height: 32px;
+}
+
+.tamanho-bridge .mtg-art-box {
+  padding: 3px 5.5px;
+}
+
+.tamanho-bridge .mtg-art-idea,
+.tamanho-bridge .mtg-art-subtitle {
+  font-size: 7.4px;
+  line-height: 1.2;
+}
+
+.tamanho-bridge .mtg-narration {
+  font-size: 7.9px;
+  line-height: 1.25;
+}
+
+.tamanho-bridge .mtg-rules {
+  padding: 4px 5px;
+  gap: 3px;
+}
+
+.tamanho-bridge .mtg-rule-label {
+  font-size: 6.6px;
+}
+
+.tamanho-bridge .mtg-rule p {
+  font-size: 8.2px;
+  line-height: 1.26;
+}
+
+.tamanho-bridge .kind-journey .mtg-rule p {
+  font-size: 7.5px;
+  line-height: 1.22;
+}
+
+.tamanho-bridge .mtg-flavor {
+  font-size: 7.8px;
+  line-height: 1.28;
 }

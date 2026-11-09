@@ -90,17 +90,52 @@ export function regraDaCarta(card: GameCard): RegraDaCarta {
   };
 }
 
-function buildArt(card: GameCard, qr?: string): string {
-  // Na cena, a faixa da arte traz a ideia do que ela pode ser no dia; a legenda decorativa fica no modal.
-  const legenda = card.kind === 'journey' && card.dailyIdea
-    ? `<span class="mtg-art-idea"><strong>Ideia</strong> ${escapeHtml(card.dailyIdea)}</span>`
-    : `<span class="mtg-art-subtitle">${escapeHtml(card.artSubtitle)}</span>`;
+export function sanitizeArtUrl(url?: string): string {
+  const trimmed = (url ?? '').trim();
+  if (!trimmed) return '';
+  if (/^(https?:\/\/|\/|\.\.?\/|data:image\/(png|jpe?g|webp|gif|svg\+xml);base64,)/i.test(trimmed)) {
+    return escapeHtml(trimmed);
+  }
+  return '';
+}
+
+function buildSeal(qr?: string): string {
+  if (!qr) return '';
+  return `<span class="mtg-art-qr" aria-label="Código da carta">${qr}</span>`;
+}
+
+function buildArtFrame(card: GameCard): string {
+  const safeUrl = sanitizeArtUrl(card.artUrl);
+  const modifier = card.kind === 'journey' ? 'mtg-art-frame--scene' : 'mtg-art-frame--figure';
+  if (safeUrl) {
+    return `<div class="mtg-art-frame ${modifier}"><img src="${safeUrl}" alt="${escapeHtml(card.title)}" class="mtg-art-img" loading="lazy" /></div>`;
+  }
   return `
-    <div class="mtg-art-box">
-      ${qr ? `<span class="mtg-art-qr" aria-label="Código da carta">${qr}</span>` : `<span class="mtg-art-glyph">${escapeHtml(card.artGlyph)}</span>`}
-      ${legenda}
-    </div>
-  `;
+    <div class="mtg-art-frame ${modifier} mtg-art-frame--engraved" aria-hidden="true">
+      <svg class="mtg-art-engraving" viewBox="0 0 220 68" fill="none">
+        <line x1="10" y1="34" x2="74" y2="34" stroke="currentColor" stroke-opacity="0.35" stroke-width="0.8" />
+        <line x1="146" y1="34" x2="210" y2="34" stroke="currentColor" stroke-opacity="0.35" stroke-width="0.8" />
+        <path d="M74 34 78 30 82 34 78 38ZM138 34l4-4 4 4-4 4Z" fill="currentColor" fill-opacity="0.45" />
+        <circle cx="110" cy="34" r="24" stroke="currentColor" stroke-opacity="0.45" stroke-width="0.9" />
+        <circle cx="110" cy="34" r="20" stroke="currentColor" stroke-opacity="0.3" stroke-width="0.6" stroke-dasharray="1.5 2.5" />
+        <path d="M90 22c5-7.5 12-11 20-11s15 3.5 20 11c-5.5-5.5-12-8.2-20-8.2S95.5 16.5 90 22Z" fill="currentColor" fill-opacity="0.55" />
+      </svg>
+      <span class="mtg-art-glyph mtg-art-medallion">${escapeHtml(card.artGlyph)}</span>
+    </div>`;
+}
+
+function buildArtSection(card: GameCard): string {
+  const quadro = buildArtFrame(card);
+  if (card.kind === 'journey') {
+    const ideia = card.dailyIdea
+      ? `<div class="mtg-art-box"><span class="mtg-art-idea"><strong>Ideia</strong> ${escapeHtml(card.dailyIdea)}</span></div>`
+      : '';
+    return `${quadro}${ideia}`;
+  }
+  const subtitulo = card.artSubtitle
+    ? `<div class="mtg-art-box"><span class="mtg-art-subtitle">${escapeHtml(card.artSubtitle)}</span></div>`
+    : '';
+  return `${quadro}${subtitulo}`;
 }
 
 function numerosHtml(regra: RegraDaCarta): string {
@@ -115,11 +150,13 @@ function numerosHtml(regra: RegraDaCarta): string {
 }
 
 export function renderMagicCardHtml(card: GameCard, options: RenderCardOptions = {}): string {
+  const safeUrl = sanitizeArtUrl(card.artUrl);
   const classes = [
     'mtg-card',
     `suit-${card.suit}`,
     `kind-${card.kind}`,
     `theme-${card.themeId}`,
+    safeUrl ? 'has-art' : '',
     options.interactive ? 'is-interactive' : '',
     options.tapped ? 'is-tapped' : '',
     options.selected ? 'is-selected' : '',
@@ -142,15 +179,18 @@ export function renderMagicCardHtml(card: GameCard, options: RenderCardOptions =
   return `
     <article class="${classes}" data-card-id="${escapeHtml(card.id)}" title="Clique para ampliar">
       <header class="mtg-titlebar">
-        <span class="mtg-card-title">${escapeHtml(card.title)}</span>
         <span class="mtg-mana-pip">${escapeHtml(card.playingCardCode)}</span>
+        <div class="mtg-heading">
+          <div class="mtg-typeline">${escapeHtml(regra.tipo)}</div>
+          <span class="mtg-card-title">${escapeHtml(card.title)}</span>
+        </div>
+        ${buildSeal(options.qr)}
       </header>
-      ${buildArt(card, options.qr)}
-      <div class="mtg-typeline">${escapeHtml(regra.tipo)}</div>
+      ${buildArtSection(card)}
       <div class="mtg-textbox">
         ${numerosHtml(regra)}
         ${narracao}
-        ${blocos}
+        <div class="mtg-rules">${blocos}</div>
         ${card.kind === 'journey' ? '' : `<div class="mtg-flavor">${escapeHtml(card.flavorText)}</div>`}
       </div>
       <footer class="mtg-collector-bar">

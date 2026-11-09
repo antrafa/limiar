@@ -1,4 +1,4 @@
-/* Impressão A4: grade 3×3 de cartas 63 × 88 mm encostadas, 16 marcas de corte contínuas e régua de calibração. */
+/* Impressão A4 (3×3 rente ou c/ sangria de 2 mm) e PDF Card-a-Card (uma embaixo da outra), nos tamanhos Poker (63×88 mm) e Bridge (57×87 mm). */
 
 .print-studio-wrapper {
   display: grid;
@@ -69,11 +69,19 @@
   overflow: hidden;
 }
 
+.tamanho-bridge .estampa-amostra {
+  aspect-ratio: 57 / 87;
+}
+
 .print-sheets-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 28px;
+}
+
+.print-sheets-container.is-card-a-card {
+  gap: 18px;
 }
 
 /* ---------- Folha A4 ---------- */
@@ -97,6 +105,15 @@
 .folha-slot {
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
+}
+
+.folha-a4--frente .folha-slot.com-sangria:not(.is-vazio) {
+  background: var(--card-paper, #faf9f5);
+}
+
+.folha-a4--verso .folha-slot.com-sangria:not(.is-vazio) {
+  background: #151517;
 }
 
 .folha-slot .mtg-card {
@@ -104,8 +121,8 @@
   height: 100% !important;
   border-radius: 2.5mm;
   box-shadow:
-    inset 0 0 0 1mm var(--card-paper),
-    inset 0 0 0 1.25mm var(--card-line);
+    inset 0 0 0 0.9mm var(--card-paper),
+    inset 0 0 0 1.2mm var(--card-accent-line, var(--card-line));
   transform: none !important;
 }
 
@@ -149,20 +166,53 @@
   right: -5mm;
 }
 
+/* Guias com sangria de 2 mm (40 marcas: 24 sólidas de corte final + 16 tracejadas vermelhas de limite) */
+
+.marca--sangria {
+  background: #18181b;
+  z-index: 2;
+}
+
+.marca--sangria.marca--topo,
+.marca--sangria.marca--base {
+  width: 0.32mm;
+}
+
+.marca--sangria.marca--esq,
+.marca--sangria.marca--dir {
+  height: 0.32mm;
+}
+
+.marca--limite-sangria.marca--topo,
+.marca--limite-sangria.marca--base {
+  width: 0.22mm;
+  height: 3.2mm;
+  background: repeating-linear-gradient(to bottom, #c62828 0, #c62828 0.8mm, transparent 0.8mm, transparent 1.4mm);
+  opacity: 0.85;
+}
+
+.marca--limite-sangria.marca--esq,
+.marca--limite-sangria.marca--dir {
+  height: 0.22mm;
+  width: 3.2mm;
+  background: repeating-linear-gradient(to right, #c62828 0, #c62828 0.8mm, transparent 0.8mm, transparent 1.4mm);
+  opacity: 0.85;
+}
+
 .folha-info {
   position: absolute;
-  top: 3mm;
+  top: 2.2mm;
   left: 0;
   right: 0;
   text-align: center;
-  font-size: 7pt;
+  font-size: 6.5pt;
   font-weight: 600;
   color: #71717a;
 }
 
 .folha-regua {
   position: absolute;
-  bottom: 2.5mm;
+  bottom: 2mm;
   left: 12mm;
   right: 12mm;
   display: flex;
@@ -187,82 +237,85 @@
   background: repeating-linear-gradient(to right, transparent 0 calc(20% - 0.2mm), #71717a calc(20% - 0.2mm) 20%);
 }
 
+/* ---------- Página Individual Card-a-Card (uma embaixo da outra) ---------- */
+
+.folha-card-grafica {
+  position: relative;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: var(--card-paper, #faf9f5);
+  box-shadow: 0 4px 16px rgb(24 24 27 / 0.14);
+  border-radius: 3mm;
+}
+
+.folha-card-grafica--verso {
+  background: #151517;
+  padding: 0 !important;
+}
+
+.folha-card-grafica .mtg-card {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 2.5mm;
+  box-shadow:
+    inset 0 0 0 0.9mm var(--card-paper),
+    inset 0 0 0 1.2mm var(--card-accent-line, var(--card-line));
+  transform: none !important;
+}
+
 /* ---------- Fundo das cartas ---------- */
 
 .verso {
+  position: relative;
   container-type: size;
   width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
-  --verso-fundo: #1c1917;
+  --verso-fundo: #151517;
   --verso-tinta: #c8a464;
-  --verso-linha: rgb(200 164 100 / 0.35);
-  --verso-trama: rgb(200 164 100 / 0.1);
+  --verso-halo: rgb(200 164 100 / 0.14);
+  color: var(--verso-tinta);
   background:
-    radial-gradient(circle at 50% 50%, transparent 0 30cqw, var(--verso-linha) 30cqw calc(30cqw + 0.6cqw), transparent calc(30cqw + 0.6cqw)),
-    repeating-linear-gradient(45deg, transparent 0 2.4cqw, var(--verso-trama) 2.4cqw 2.6cqw),
-    repeating-linear-gradient(-45deg, transparent 0 2.4cqw, var(--verso-trama) 2.4cqw 2.6cqw),
+    radial-gradient(circle at 50% 50%, var(--verso-halo) 0%, transparent 62%),
     var(--verso-fundo);
 }
 
 .verso--tema {
   --verso-fundo: var(--tema, #8a5d14);
   --verso-tinta: #ffffff;
-  --verso-linha: rgb(255 255 255 / 0.28);
-  --verso-trama: rgb(255 255 255 / 0.1);
+  --verso-halo: rgb(255 255 255 / 0.16);
 }
 
 .verso--papel {
   --verso-fundo: #faf9f5;
-  --verso-tinta: #3f3f46;
-  --verso-linha: rgb(63 63 70 / 0.22);
-  --verso-trama: rgb(63 63 70 / 0.07);
+  --verso-tinta: #27272a;
+  --verso-halo: rgb(138 93 20 / 0.08);
 }
 
-.verso-moldura {
-  width: 84%;
-  height: 88%;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 4cqh;
-  border: 0.8cqw solid var(--verso-tinta);
-  border-radius: 4cqw;
-  outline: 0.5cqw solid var(--verso-linha);
-  outline-offset: 2cqw;
-  color: var(--verso-tinta);
-  text-align: center;
-}
-
-.verso-portal {
-  width: 40cqw;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border: 1.2cqw solid var(--verso-tinta);
-  border-radius: 50% 50% 8cqw 8cqw;
-  font-family: var(--font-display, serif);
-  font-size: 20cqw;
-  line-height: 1;
-}
-
-.verso-marca {
-  font-family: var(--font-display, serif);
-  font-size: 9cqw;
-  letter-spacing: 1.5cqw;
+.verso-arte {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .verso-tema {
-  max-width: 80%;
-  font-size: 5.5cqw;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-@page {
-  size: A4 portrait;
-  margin: 0;
+  position: absolute;
+  bottom: 13.5cqh;
+  padding: 0.8cqh 3cqw;
+  background: var(--verso-fundo);
+  border: 0.4cqw solid var(--verso-tinta);
+  border-radius: 999px;
+  font-size: 4.6cqw;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  max-width: 74%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media print {
@@ -293,14 +346,17 @@
     max-width: none !important;
   }
 
-  .folha-a4 {
+  .folha-a4,
+  .folha-card-grafica {
     margin: 0 !important;
+    border-radius: 0 !important;
     box-shadow: none !important;
     break-after: page;
     page-break-after: always;
   }
 
-  .folha-a4:last-child {
+  .folha-a4:last-child,
+  .folha-card-grafica:last-child {
     break-after: auto;
     page-break-after: auto;
   }

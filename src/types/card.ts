@@ -52,6 +52,7 @@ export interface GameCard {
   typeLine: string;
   artGlyph: string;
   artSubtitle: string;
+  artUrl?: string; // Ilustração opcional da carta (URL, caminho relativo ou data URI)
   // For Journey (A-10) & Jokers:
   topWatcherTrigger?: string; // Gatilho Real (☀ Topo)
   topWatcherEvent?: string;   // Evento Ficcional (☀ Topo)

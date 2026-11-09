@@ -10,8 +10,10 @@ import {
   type ConfigDeImpressao,
   configDeImpressaoPadrao,
   type EstampaDoVerso,
+  type FormatoDeImpressao,
   type PrintFilterMode,
   renderPrintSheetsHtml,
+  type TamanhoDaCarta,
 } from './components/print-view';
 import { renderQuickstartGuideHtml } from './components/quickstart-view';
 import { renderStudioGalleryHtml } from './components/studio-view';
@@ -95,6 +97,7 @@ export function mountLimiarApp(root: HTMLElement): void {
       title: campo('title', baseCard.title),
       artGlyph: campo('artGlyph', baseCard.artGlyph),
       artSubtitle: campo('artSubtitle', baseCard.artSubtitle),
+      artUrl: campo('artUrl', baseCard.artUrl).trim() || undefined,
       flavorText: campo('flavorText', baseCard.flavorText),
     };
     if (!isFigure(baseCard)) {
@@ -149,10 +152,23 @@ export function mountLimiarApp(root: HTMLElement): void {
       <div class="app">
         <header class="topbar no-print">
           <div class="brand">
-            <span class="brand-mark" aria-hidden="true">L</span>
-            <div>
-              <h1 class="brand-title">Limiar</h1>
-              <span class="brand-sub">RPG cooperativo de cartas jogado no seu dia</span>
+            <span class="brand-mark" aria-hidden="true">
+              <svg class="brand-emblem" viewBox="0 0 48 48" fill="none">
+                <path d="M10 41V21a14 14 0 0 1 28 0v20" stroke="currentColor" stroke-opacity="0.28" stroke-width="1.2" />
+                <path d="M9 24.5a15 15 0 0 1 30 0 15.8 13.2 0 0 0-30 0Z" fill="currentColor" />
+                <path d="M21.8 15h4.4l-.9 1.6v15.2L24 38.5l-1.3-6.7V16.6l-.9-1.6Z" fill="#fff7e0" />
+                <path d="M31.5 24.5 33 27l-1.5 2.5L30 27l1.5-2.5Zm-15 0L18 27l-1.5 2.5L15 27l1.5-2.5Z" fill="currentColor" fill-opacity="0.75" />
+                <path d="M7 41h13m8 0h13M24 39.2l1.8 1.8-1.8 1.8-1.8-1.8 1.8-1.8Z" stroke="currentColor" stroke-opacity="0.55" stroke-width="1.1" />
+              </svg>
+            </span>
+            <div class="brand-lockup">
+              <div class="brand-wordmark">
+                <svg class="brand-eclipse-arch" viewBox="0 0 120 22" fill="none" aria-hidden="true">
+                  <path d="M6 21C20 4.5 40 1 60 1s40 3.5 54 20c-15-12.5-34-16.2-54-16.2S21 8.5 6 21Z" fill="currentColor" />
+                </svg>
+                <h1 class="brand-title">LIM<span class="brand-blade">I</span><span class="brand-a">A</span>R</h1>
+              </div>
+              <span class="brand-sub">O jogo que ultrapassa a mesa · RPG cooperativo no seu dia</span>
             </div>
           </div>
           ${temaAtual}
@@ -445,6 +461,10 @@ export function mountLimiarApp(root: HTMLElement): void {
     };
     const conjunto = root.querySelector<HTMLSelectElement>('#print-filter-select');
     conjunto?.addEventListener('change', () => mudar({ conjunto: (conjunto.value as PrintFilterMode) || 'mission' }));
+    const tamanho = root.querySelector<HTMLSelectElement>('#print-tamanho-select');
+    tamanho?.addEventListener('change', () => mudar({ tamanho: (tamanho.value as TamanhoDaCarta) || 'poker' }));
+    const formato = root.querySelector<HTMLSelectElement>('#print-formato-select');
+    formato?.addEventListener('change', () => mudar({ formato: (formato.value as FormatoDeImpressao) || 'a4' }));
     const escala = root.querySelector<HTMLSelectElement>('#print-escala-select');
     escala?.addEventListener('change', () => mudar({ escala: Number(escala.value) || 1 }));
     const codigo = root.querySelector<HTMLInputElement>('#print-codigo');
