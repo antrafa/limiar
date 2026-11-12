@@ -52,10 +52,11 @@ export function renderPlaytestTableHtml(
   preparo: PreparacaoMesa,
   salaOnlineId: string | null = null,
   conectandoOnline: boolean = false,
+  parceiroOnline: boolean = false,
 ): string {
   return partida
-    ? renderPartida(deck, partida, salaOnlineId, conectandoOnline)
-    : renderPreparacao(deck, preparo, salaOnlineId, conectandoOnline);
+    ? renderPartida(deck, partida, salaOnlineId, conectandoOnline, parceiroOnline)
+    : renderPreparacao(deck, preparo, salaOnlineId, conectandoOnline, parceiroOnline);
 }
 
 // ---------- Preparação ----------
@@ -65,6 +66,7 @@ function renderPreparacao(
   preparo: PreparacaoMesa,
   salaOnlineId: string | null = null,
   conectandoOnline: boolean = false,
+  parceiroOnline: boolean = false,
 ): string {
   const n = preparo.jogadores.length;
   const jogadores = preparo.jogadores.map((j, i) => renderEscolhaDeJogador(deck, j, i)).join('');
@@ -126,16 +128,17 @@ function renderPreparacao(
         <div class="online-room-head">
           <span class="chip ${salaOnlineId ? 'chip-ok' : ''}">${salaOnlineId ? '● Sala Conectada' : 'Mesa Online'}</span>
           <strong>${salaOnlineId ? `Código: ${escapeHtml(salaOnlineId)}` : 'Jogar à distância com outra pessoa'}</strong>
+          ${salaOnlineId ? `<span class="chip ${parceiroOnline ? 'chip-ok' : 'chip-warn'}">${parceiroOnline ? 'Parceiro online' : 'Aguardando parceiro...'}</span>` : ''}
         </div>
         <p class="muted">Vocês verão as mesmas cartas e jogadas em tempo real sem precisar de servidor manual.</p>
         <div class="inline wrap">
           ${
             salaOnlineId
               ? `<button type="button" class="btn-secondary btn-sm" data-acao-online="copiarLink">Copiar link da mesa para o parceiro</button>
-                 <button type="button" class="btn-ghost btn-sm danger" data-acao-online="desconectar">Sair da sala online</button>`
+                 <button type="button" class="btn-ghost btn-sm danger" data-acao-online="desconectar">Sair da sala</button>`
               : `<button type="button" class="btn-secondary btn-sm" data-acao-online="criar" ${conectandoOnline ? 'disabled' : ''}>${conectandoOnline ? 'Criando sala...' : 'Criar sala online'}</button>
                  <div class="inline">
-                   <input type="text" maxlength="40" placeholder="Cole o código ou ID da sala" data-campo-sala aria-label="Código da sala" />
+                   <input type="text" maxlength="40" placeholder="Cole o código ou link da sala" data-campo-sala aria-label="Código da sala" />
                    <button type="button" class="btn-ghost btn-sm" data-acao-online="entrar" ${conectandoOnline ? 'disabled' : ''}>Entrar na sala</button>
                  </div>`
           }
@@ -183,15 +186,16 @@ function renderPartida(
   partida: Partida,
   salaOnlineId: string | null = null,
   conectandoOnline: boolean = false,
+  parceiroOnline: boolean = false,
 ): string {
   const pessoas = partida.pessoas.map((p, i) => renderPessoa(deck, partida, p, i)).join('');
   const barraOnline = salaOnlineId
     ? `<div class="online-sync-bar">
-         <span class="chip chip-ok">● Sincronizado online</span>
-         <span>Código da sala: <strong>${escapeHtml(salaOnlineId)}</strong></span>
+         <span class="chip chip-ok">● Sala conectada</span>
+         <span>Código: <strong>${escapeHtml(salaOnlineId)}</strong></span>
+         <span class="chip ${parceiroOnline ? 'chip-ok' : 'chip-warn'}">${parceiroOnline ? '● Parceiro online' : '○ Parceiro desconectado'}</span>
          <button type="button" class="btn-ghost btn-sm" data-acao-online="copiarLink">Copiar link da mesa</button>
-         <button type="button" class="btn-ghost btn-sm" data-acao-online="sincronizarAgora" title="Buscar atualizações">Atualizar agora</button>
-         <button type="button" class="btn-ghost btn-sm danger" data-acao-online="desconectar">Desconectar</button>
+         <button type="button" class="btn-ghost btn-sm danger" data-acao-online="desconectar">Sair da sala</button>
        </div>`
     : `<div class="online-sync-bar">
          <span>Mesa local.</span>

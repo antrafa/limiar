@@ -21,17 +21,19 @@ import { renderTemasHtml } from './components/temas-view';
 import { cartaPeloCodigo, iniciarEscaneador, renderEscaneadorHtml } from './components/scanner';
 import { type Acao, agir, criarPartida, type EscolhaDeMarco, linhaDeStatus, type Naipe, type Partida } from './core/partida';
 import {
-  conectarOuHospedarSala,
+  avisarSaidaDaSala,
+  avisarSalaEncerrada,
+  criarSalaHost,
   desconectarP2P,
+  entrarSalaCliente,
   enviarEstadoParaSala,
   gerarCodigoSalaAleatorio,
-  registrarCallbackMensagem,
+  registrarCallbacksP2P,
 } from './core/online-sync';
 import {
   exportThemeJson,
   importThemeJson,
   loadPartida,
-  loadSalaOnlineId,
   loadThemeId,
   loadThemeWithOverrides,
   resetThemeOverrides,
@@ -67,13 +69,21 @@ interface AppState {
   toastMessage: string | null;
   salaOnlineId: string | null;
   conectandoOnline: boolean;
+  parceiroOnline: boolean;
+  ehHostDaSala: boolean;
 }
 
 export function mountLimiarApp(root: HTMLElement): void {
   const savedTheme = loadThemeId();
   const initialThemeId: ThemeId = savedTheme && ALL_THEME_IDS.includes(savedTheme) ? savedTheme : DEFAULT_THEME_ID;
   const partida = loadPartida();
-  const salaOnlineId = loadSalaOnlineId();
+  const paramsIniciais = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+  const urlSalaId = paramsIniciais.get('sala');
+  // Se não houver ?sala= na URL, limpa qualquer resquício salvo para não criar conexões fantasmas
+  if (!urlSalaId) {
+    saveSalaOnlineId(null);
+  }
+  const salaOnlineId = urlSalaId ? urlSalaId.toUpperCase() : null;
 
   const state: AppState = {
     activeTab: 'quickstart',
@@ -86,28 +96,61 @@ export function mountLimiarApp(root: HTMLElement): void {
     toastMessage: null,
     salaOnlineId,
     conectandoOnline: false,
+    parceiroOnline: false,
+    ehHostDaSala: false,
   };
 
   // Conecta ao receptor P2P para sincronização em tempo real
-  registrarCallbackMensagem((msg) => {
-    if (msg.tipo === 'pedirSync') {
-      if (state.partida) {
-        enviarEstadoParaSala(state.activeThemeId, state.partida);
+  registrarCallbacksP2P(
+    (msg) => {
+      if (msg.tipo === 'pedirSync') {
+        if (state.partida) {
+          enviarEstadoParaSala(state.activeThemeId, state.partida);
+        }
+        return;
       }
-      return;
-    }
-    if (msg.tipo === 'sync' && msg.partida) {
-      if (msg.temaId && ALL_THEME_IDS.includes(msg.temaId)) {
-        state.activeThemeId = msg.temaId;
-        saveThemeId(msg.temaId);
+      if (msg.tipo === 'salaEncerrada') {
+        desconectarP2P();
+        state.salaOnlineId = null;
+        saveSalaOnlineId(null);
+        limparParametroUrlSala();
+        setPartida(null, false);
+        showToast('A sala foi encerrada pelo anfitrião.');
+        render();
+        return;
       }
-      setPartida(msg.partida, false);
-      showToast('Mesa atualizada em tempo real pelo parceiro!');
-    }
-  });
+      if (msg.tipo === 'parceiroSaiu') {
+        state.parceiroOnline = false;
+        showToast('O parceiro saiu da sala.');
+        render();
+        return;
+      }
+      if (msg.tipo === 'sync' && msg.partida) {
+        if (msg.temaId && ALL_THEME_IDS.includes(msg.temaId)) {
+          state.activeThemeId = msg.temaId;
+          saveThemeId(msg.temaId);
+        }
+        setPartida(msg.partida, false);
+        showToast('Mesa atualizada em tempo real pelo parceiro!');
+      }
+    },
+    (online) => {
+      state.parceiroOnline = online;
+      render();
+    },
+  );
 
-  // Se houver parâmetros de sala na URL (#mesa=... ou ?sala=...)
+  // Se houver parâmetros de sala na URL (?sala=...)
   verificarParametrosDaUrl();
+
+  function limparParametroUrlSala(): void {
+    if (typeof window === 'undefined' || !window.history?.replaceState) return;
+    const url = new URL(window.location.href);
+    if (url.searchParams.has('sala')) {
+      url.searchParams.delete('sala');
+      window.history.replaceState({}, '', `${url.pathname}${url.hash || '#playtest'}`);
+    }
+  }
 
   function verificarParametrosDaUrl(): void {
     if (typeof window === 'undefined') return;
@@ -116,17 +159,43 @@ export function mountLimiarApp(root: HTMLElement): void {
     const params = new URLSearchParams(window.location.search);
     const salaId = params.get('sala');
     if (salaId) {
-      conectarNaSala(salaId);
+      entrarNaSalaComoCliente(salaId);
     }
   }
 
-  function conectarNaSala(codigo: string): void {
+  function criarNovaSala(codigoSugerido: string, partidaInicial?: Partida): void {
     state.conectandoOnline = true;
     render();
-    conectarOuHospedarSala(
+    criarSalaHost(
+      codigoSugerido,
+      (codigoExibicao) => {
+        state.salaOnlineId = codigoExibicao;
+        state.ehHostDaSala = true;
+        saveSalaOnlineId(codigoExibicao);
+        state.conectandoOnline = false;
+        state.activeTab = 'playtest';
+        if (partidaInicial) {
+          setPartida(partidaInicial, false);
+        }
+        showToast(`Sala online ${codigoExibicao} criada! Convide seu parceiro.`);
+        render();
+      },
+      (erro) => {
+        state.conectandoOnline = false;
+        showToast(erro);
+        render();
+      },
+    );
+  }
+
+  function entrarNaSalaComoCliente(codigo: string): void {
+    state.conectandoOnline = true;
+    render();
+    entrarSalaCliente(
       codigo,
       (codigoExibicao) => {
         state.salaOnlineId = codigoExibicao;
+        state.ehHostDaSala = false;
         saveSalaOnlineId(codigoExibicao);
         state.conectandoOnline = false;
         state.activeTab = 'playtest';
@@ -192,7 +261,7 @@ export function mountLimiarApp(root: HTMLElement): void {
       case 'studio':
         return renderStudioGalleryHtml(deck, selectedCard, state.suitFilter);
       case 'playtest':
-        return renderPlaytestTableHtml(deck, state.partida, state.preparo, state.salaOnlineId, state.conectandoOnline);
+        return renderPlaytestTableHtml(deck, state.partida, state.preparo, state.salaOnlineId, state.conectandoOnline, state.parceiroOnline);
       case 'print':
         return renderPrintSheetsHtml(deck, state.impressao);
       default:
@@ -510,13 +579,28 @@ export function mountLimiarApp(root: HTMLElement): void {
       return;
     }
     if (nome === 'abandonar' || nome === 'encerrarMesa') {
+      if (state.salaOnlineId) {
+        if (state.ehHostDaSala) {
+          avisarSalaEncerrada();
+        } else {
+          avisarSaidaDaSala();
+        }
+        desconectarP2P();
+        state.salaOnlineId = null;
+        state.ehHostDaSala = false;
+        state.parceiroOnline = false;
+        saveSalaOnlineId(null);
+        limparParametroUrlSala();
+      }
       setPartida(null);
       showToast('Mesa encerrada. O histórico anterior permanece preservado.');
+      render();
       return;
     }
     if (nome === 'novaMesa') {
       const nomeados = state.preparo.jogadores.map((j, i) => ({ ...j, nome: j.nome.trim() || `Jogador ${i + 1}` }));
-      setPartida(criarPartida({ jogadores: nomeados, metaPorPessoa: state.preparo.metaPorPessoa }));
+      const nova = criarPartida({ jogadores: nomeados, metaPorPessoa: state.preparo.metaPorPessoa });
+      setPartida(nova, true);
       showToast('Nova mesa iniciada com sucesso!');
       return;
     }
@@ -531,9 +615,17 @@ export function mountLimiarApp(root: HTMLElement): void {
 
   async function acaoOnline(acao: string): Promise<void> {
     if (acao === 'desconectar') {
+      if (state.ehHostDaSala) {
+        avisarSalaEncerrada();
+      } else {
+        avisarSaidaDaSala();
+      }
       desconectarP2P();
       state.salaOnlineId = null;
+      state.ehHostDaSala = false;
+      state.parceiroOnline = false;
       saveSalaOnlineId(null);
+      limparParametroUrlSala();
       showToast('Desconectado da sala online.');
       render();
       return;
@@ -561,8 +653,7 @@ export function mountLimiarApp(root: HTMLElement): void {
       }
 
       const codigoSugerido = gerarCodigoSalaAleatorio();
-      conectarNaSala(codigoSugerido);
-      setPartida(partidaAtual, true);
+      criarNovaSala(codigoSugerido, partidaAtual);
       return;
     }
 
@@ -582,7 +673,7 @@ export function mountLimiarApp(root: HTMLElement): void {
         } catch {}
       }
 
-      conectarNaSala(id);
+      entrarNaSalaComoCliente(id);
       return;
     }
 

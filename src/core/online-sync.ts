@@ -3,7 +3,7 @@ import type { Partida } from './partida';
 import type { ThemeId } from '../types/card';
 
 export interface MensagemP2P {
-  tipo: 'sync' | 'pedirSync';
+  tipo: 'sync' | 'pedirSync' | 'salaEncerrada' | 'parceiroSaiu';
   temaId: ThemeId;
   partida: Partida | null;
   enviadoEm: number;
@@ -12,11 +12,11 @@ export interface MensagemP2P {
 let peerInstancia: Peer | null = null;
 const conexoesAtivas: Set<DataConnection> = new Set();
 let onReceberMensagemCallback: ((msg: MensagemP2P) => void) | null = null;
+let onStatusConexaoCallback: ((online: boolean) => void) | null = null;
 
 function gerarPrefixoSala(codigo: string): string {
-  // Padroniza um ID amigável sem caracteres especiais (ex: limiar-mesa-xyz123)
   const limpo = codigo.toLowerCase().replace(/[^a-z0-9]/g, '');
-  return `limiar-mesa-${limpo}`;
+  return `limiar-sala-${limpo}`;
 }
 
 export function gerarCodigoSalaAleatorio(): string {
@@ -28,13 +28,27 @@ export function gerarCodigoSalaAleatorio(): string {
   return res;
 }
 
-export function registrarCallbackMensagem(callback: (msg: MensagemP2P) => void): void {
-  onReceberMensagemCallback = callback;
+export function registrarCallbacksP2P(
+  onMsg: (msg: MensagemP2P) => void,
+  onStatus: (online: boolean) => void,
+): void {
+  onReceberMensagemCallback = onMsg;
+  onStatusConexaoCallback = onStatus;
 }
 
-export function conectarOuHospedarSala(
+export function temParceiroConectado(): boolean {
+  for (const conn of conexoesAtivas) {
+    if (conn.open) return true;
+  }
+  return false;
+}
+
+/**
+ * Cria a sala como HOST (proprietário).
+ */
+export function criarSalaHost(
   codigoSala: string,
-  onConectado: (codigoExibicao: string) => void,
+  onSucesso: (codigoExibicao: string) => void,
   onErro: (err: string) => void,
 ): void {
   desconectarP2P();
@@ -42,12 +56,11 @@ export function conectarOuHospedarSala(
   const idPeerAlvo = gerarPrefixoSala(codigoSala);
 
   try {
-    // 1. Tenta criar o Peer com o ID da sala (atuando como criador da sala)
     const peer = new Peer(idPeerAlvo);
     peerInstancia = peer;
 
     peer.on('open', () => {
-      onConectado(codigoSala.toUpperCase());
+      onSucesso(codigoSala.toUpperCase());
     });
 
     peer.on('connection', (conn) => {
@@ -55,75 +68,80 @@ export function conectarOuHospedarSala(
     });
 
     peer.on('error', (err: any) => {
-      // Se o ID já existir ('unavailable-id'), significa que a sala já foi criada pelo parceiro!
-      // Conecta como convidado na mesma sala:
-      if (err.type === 'unavailable-id') {
-        conectarComoCliente(idPeerAlvo, codigoSala, onConectado, onErro);
-      } else {
-        onErro(err.message || 'Erro de conexão online');
-      }
+      onErro(err.message || 'Não foi possível criar a sala.');
     });
   } catch (e: any) {
-    onErro(e?.message || 'Falha ao iniciar conexão online');
+    onErro(e?.message || 'Falha ao iniciar Peer.');
   }
 }
 
-function conectarComoCliente(
-  idPeerAlvo: string,
-  codigoSalaOriginal: string,
-  onConectado: (codigoExibicao: string) => void,
+/**
+ * Entra na sala como CLIENTE (convidado).
+ */
+export function entrarSalaCliente(
+  codigoSala: string,
+  onSucesso: (codigoExibicao: string) => void,
   onErro: (err: string) => void,
 ): void {
   desconectarP2P();
 
-  const peerCliente = new Peer();
-  peerInstancia = peerCliente;
+  const idPeerAlvo = gerarPrefixoSala(codigoSala);
+  let conectadoComSucesso = false;
 
-  peerCliente.on('open', () => {
-    const conn = peerCliente.connect(idPeerAlvo, { reliable: true });
+  try {
+    const peerCliente = new Peer();
+    peerInstancia = peerCliente;
 
-    conn.on('open', () => {
-      configurarConexao(conn);
-      onConectado(codigoSalaOriginal.toUpperCase());
-      // Pede o estado atual da mesa para o anfitrião
-      conn.send({ tipo: 'pedirSync' });
+    peerCliente.on('open', () => {
+      const conn = peerCliente.connect(idPeerAlvo, { reliable: true });
+
+      const timeout = setTimeout(() => {
+        if (!conectadoComSucesso) {
+          onErro('A sala não respondeu. Verifique se o código está correto e se o parceiro está com a mesa aberta.');
+          desconectarP2P();
+        }
+      }, 7000);
+
+      conn.on('open', () => {
+        conectadoComSucesso = true;
+        clearTimeout(timeout);
+        configurarConexao(conn);
+        onSucesso(codigoSala.toUpperCase());
+        // Pede imediatamente o estado da partida para o criador da sala
+        conn.send({ tipo: 'pedirSync' });
+      });
+
+      conn.on('error', () => {
+        clearTimeout(timeout);
+        onErro('Falha na conexão com a sala.');
+      });
     });
 
-    conn.on('error', () => {
-      onErro('Não foi possível conectar à sala informada.');
+    peerCliente.on('error', (err: any) => {
+      onErro(err.message || 'Erro ao conectar à rede P2P.');
     });
-  });
-
-  peerCliente.on('error', (e: any) => {
-    onErro(e?.message || 'Erro na conexão com a sala');
-  });
+  } catch (e: any) {
+    onErro(e?.message || 'Falha ao iniciar cliente P2P.');
+  }
 }
 
 function configurarConexao(conn: DataConnection): void {
   conexoesAtivas.add(conn);
+  onStatusConexaoCallback?.(temParceiroConectado());
 
   conn.on('data', (dados: any) => {
     if (!dados || typeof dados !== 'object') return;
-    if (dados.tipo === 'pedirSync') {
-      onReceberMensagemCallback?.({
-        tipo: 'pedirSync',
-        temaId: '' as any,
-        partida: null,
-        enviadoEm: Date.now(),
-      });
-      return;
-    }
-    if (dados.tipo === 'sync' && dados.partida) {
-      onReceberMensagemCallback?.(dados as MensagemP2P);
-    }
+    onReceberMensagemCallback?.(dados as MensagemP2P);
   });
 
   conn.on('close', () => {
     conexoesAtivas.delete(conn);
+    onStatusConexaoCallback?.(temParceiroConectado());
   });
 
   conn.on('error', () => {
     conexoesAtivas.delete(conn);
+    onStatusConexaoCallback?.(temParceiroConectado());
   });
 }
 
@@ -142,6 +160,40 @@ export function enviarEstadoParaSala(temaId: ThemeId, partida: Partida): void {
   }
 }
 
+export function avisarSalaEncerrada(): void {
+  const msg: MensagemP2P = {
+    tipo: 'salaEncerrada',
+    temaId: '' as any,
+    partida: null,
+    enviadoEm: Date.now(),
+  };
+
+  for (const conn of conexoesAtivas) {
+    if (conn.open) {
+      try {
+        conn.send(msg);
+      } catch {}
+    }
+  }
+}
+
+export function avisarSaidaDaSala(): void {
+  const msg: MensagemP2P = {
+    tipo: 'parceiroSaiu',
+    temaId: '' as any,
+    partida: null,
+    enviadoEm: Date.now(),
+  };
+
+  for (const conn of conexoesAtivas) {
+    if (conn.open) {
+      try {
+        conn.send(msg);
+      } catch {}
+    }
+  }
+}
+
 export function desconectarP2P(): void {
   for (const conn of conexoesAtivas) {
     try {
@@ -156,4 +208,5 @@ export function desconectarP2P(): void {
     } catch {}
     peerInstancia = null;
   }
+  onStatusConexaoCallback?.(false);
 }
