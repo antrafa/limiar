@@ -215,4 +215,36 @@ describe('campanha', () => {
     const p = jogar(dupla(baralho([]), baralho([])), { tipo: 'mandarSinal', de: 0, para: 1, texto: 'o primeiro cachorro' });
     expect(p.pessoas[1].sinalRecebido).toBe('o primeiro cachorro');
   });
+
+  it('permite escolher duração rápida (15 troféus/pessoa)', () => {
+    const rapida = criarPartida({
+      jogadores: [
+        { nome: 'Lia', classe: 'spades' },
+        { nome: 'Téo', classe: 'hearts' },
+      ],
+      metaPorPessoa: 15,
+    });
+    expect(linhaDeStatus(rapida)).toContain('troféus 0/30');
+  });
+
+  it('cartas 8, 9 e 10 ativam Desafio Master e dão bônus saudável de +2', () => {
+    let p = dupla(baralho([c(8, 'spades')]), baralho([], [c(6, 'diamonds')]));
+    p = jogar(
+      p,
+      ...comecar(0),
+      { tipo: 'desafioMaster', quem: 0, missao: 'Dar 200 passos seguidos' },
+    );
+    expect(bonusDaCena(p, 0).total).toBe(3); // Desafio Master (+2) + Rei spades (+1)
+    p = jogar(p, { tipo: 'virarFundo', quem: 0 });
+    expect(p.pessoas[0].cena?.desfecho).toBe('vitoria'); // 6 + 3 = 9 contra 8 -> vitória!
+  });
+
+  it('atingir marcos (33% e 66%) permite resgatar recompensas imediatas', () => {
+    let p = dupla(baralho([c(10, 'spades')]), baralho([], [c(10, 'diamonds')]));
+    p.trofeus = 20; // 33% de 60
+    p.ameaca = 2;
+    p = jogar(p, { tipo: 'resgatarMarco', marco: 1, escolha: 'ameaca' });
+    expect(p.ameaca).toBe(1);
+    expect(p.marcosResgatados).toEqual([1]);
+  });
 });

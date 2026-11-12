@@ -1,9 +1,25 @@
 import { getDefaultTheme } from '../data/index';
-import type { Partida } from './partida';
+import { type EstagioDeAmeaca, estagioDeAmeaca, limiteDeAmeaca, marcoAlcancado, metaDeTrofeus, type Partida } from './partida';
 import type { GameCard, ThemeDeck, ThemeId } from '../types/card';
 
 const OVERRIDES_KEY_PREFIX = 'sinaleiro_overrides_v1_';
 const PARTIDA_KEY = 'limiar_partida_v2';
+const ESTADO_MUNDO_KEY_PREFIX = 'limiar_estado_mundo_v1_';
+
+export interface EstadoDoMundo {
+  themeId: ThemeId;
+  estagio: EstagioDeAmeaca;
+  trofeus: number;
+  metaTrofeus: number;
+  ameaca: number;
+  limiteAmeaca: number;
+  cenasConcluidas: number;
+  desafiosMasterConcluidos: number;
+  marcosAlcancados: 0 | 1 | 2;
+  notaDoMundo: string;
+  ultimoEvento: string;
+  atualizadoEm: string;
+}
 
 function getStorage(): Storage | null {
   try {
@@ -100,4 +116,74 @@ export function loadThemeId(): ThemeId | null {
 
 export function saveThemeId(themeId: ThemeId): void {
   getStorage()?.setItem(THEME_KEY, themeId);
+}
+
+export function estadoDoMundoPadrao(themeId: ThemeId): EstadoDoMundo {
+  return {
+    themeId,
+    estagio: 'calmo',
+    trofeus: 0,
+    metaTrofeus: 60,
+    ameaca: 0,
+    limiteAmeaca: 10,
+    cenasConcluidas: 0,
+    desafiosMasterConcluidos: 0,
+    marcosAlcancados: 0,
+    notaDoMundo: '',
+    ultimoEvento: 'O mundo aguarda a primeira cena do dia.',
+    atualizadoEm: '',
+  };
+}
+
+export function loadEstadoDoMundo(themeId: ThemeId): EstadoDoMundo {
+  const base = estadoDoMundoPadrao(themeId);
+  const store = getStorage();
+  const raw = store?.getItem(`${ESTADO_MUNDO_KEY_PREFIX}${themeId}`);
+  if (!raw) return base;
+  try {
+    const parsed = JSON.parse(raw) as Partial<EstadoDoMundo>;
+    return { ...base, ...parsed, themeId };
+  } catch {
+    return base;
+  }
+}
+
+export function saveEstadoDoMundo(estado: EstadoDoMundo): void {
+  const store = getStorage();
+  if (!store) return;
+  store.setItem(`${ESTADO_MUNDO_KEY_PREFIX}${estado.themeId}`, JSON.stringify(estado));
+}
+
+export function syncEstadoDoMundo(themeId: ThemeId, partida: Partida | null, notaOpcional?: string): EstadoDoMundo {
+  const anterior = loadEstadoDoMundo(themeId);
+  const notaDoMundo = notaOpcional !== undefined ? notaOpcional : anterior.notaDoMundo;
+  if (!partida) {
+    const atualizado: EstadoDoMundo = {
+      ...anterior,
+      notaDoMundo,
+    };
+    saveEstadoDoMundo(atualizado);
+    return atualizado;
+  }
+
+  const cenasConcluidas = partida.diario.filter((l) => l.includes(' narra: ')).length;
+  const desafiosMasterConcluidos = partida.diario.filter((l) => l.includes('cumpriu o Desafio Master:')).length;
+  const ultimoEvento = partida.diario[partida.diario.length - 1] ?? anterior.ultimoEvento;
+
+  const atualizado: EstadoDoMundo = {
+    themeId,
+    estagio: estagioDeAmeaca(partida),
+    trofeus: partida.trofeus,
+    metaTrofeus: metaDeTrofeus(partida),
+    ameaca: partida.ameaca,
+    limiteAmeaca: limiteDeAmeaca(partida),
+    cenasConcluidas,
+    desafiosMasterConcluidos,
+    marcosAlcancados: marcoAlcancado(partida),
+    notaDoMundo,
+    ultimoEvento,
+    atualizadoEm: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+  };
+  saveEstadoDoMundo(atualizado);
+  return atualizado;
 }

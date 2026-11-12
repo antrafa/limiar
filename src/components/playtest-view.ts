@@ -5,10 +5,16 @@ import {
   cenaComecou,
   codigo,
   type Carta,
+  DESAFIOS_MASTER,
+  desafioMasterDaCarta,
+  ehDesafioMaster,
+  estagioDeAmeaca,
   GESTO_DO_NAIPE,
   jogaSozinho,
   limiteDeAmeaca,
   linhaDeStatus,
+  marcoAlcancado,
+  marcoPendente,
   metaDeTrofeus,
   NAIPES,
   type Naipe,
@@ -20,11 +26,14 @@ import {
   valorDe,
   VIRA_NO_DIA,
 } from '../core/partida';
+import { syncEstadoDoMundo } from '../core/storage';
 import type { ThemeDeck } from '../types/card';
 import { cartaDoTema, escapeHtml } from './card-renderer';
+import { NUANCES_DO_TEMA } from './temas-view';
 
 export interface PreparacaoMesa {
   jogadores: Array<{ nome: string; classe: Naipe }>;
+  metaPorPessoa?: number;
 }
 
 export function preparacaoPadrao(): PreparacaoMesa {
@@ -33,6 +42,7 @@ export function preparacaoPadrao(): PreparacaoMesa {
       { nome: 'Jogador 1', classe: 'spades' },
       { nome: 'Jogador 2', classe: 'hearts' },
     ],
+    metaPorPessoa: REGRA.trofeusPorPessoa,
   };
 }
 
@@ -46,20 +56,58 @@ function renderPreparacao(deck: ThemeDeck, preparo: PreparacaoMesa): string {
   const n = preparo.jogadores.length;
   const jogadores = preparo.jogadores.map((j, i) => renderEscolhaDeJogador(deck, j, i)).join('');
   const quem = n === 1 ? 'Você joga sozinho e faz os dois papéis: vive a cena e é o próprio Eco.' : 'Cada cena tem quem vive e um Eco, que lê a carta, confirma os sinais, vira o desfecho e narra.';
+  const nuance = NUANCES_DO_TEMA[deck.id] ?? NUANCES_DO_TEMA.eclipse;
+  const porPessoa = preparo.metaPorPessoa ?? REGRA.trofeusPorPessoa;
+  const metaTrofeus = porPessoa * n;
+  const vidaChefe = REGRA.chefeVidaBase + n;
+  const estadoSalvo = syncEstadoDoMundo(deck.id, null);
 
   return `
     <section class="setup">
       <header class="section-head">
         <span class="eyebrow">Nova campanha · ${escapeHtml(deck.name)}</span>
         <h2>Quem vai jogar?</h2>
-        <p class="lede">${quem} Juntem ${REGRA.trofeusPorPessoa * n} troféus, derrubem ${escapeHtml(deck.chefe.nome)} e não deixem a Ameaça chegar a ${REGRA.ameacaPorPessoa * n}.</p>
+        <p class="lede">${quem} Juntem ${metaTrofeus} troféus (${porPessoa} por pessoa), derrubem ${escapeHtml(deck.chefe.nome)} e não deixem a Ameaça chegar a ${REGRA.ameacaPorPessoa * n}.</p>
       </header>
 
-      <div class="setup-count">
-        <span>Pessoas: <strong class="num">${n}</strong></span>
-        <button type="button" class="btn-ghost btn-sm" data-acao-mesa="menosPessoa" ${n <= 1 ? 'disabled' : ''}>Remover</button>
-        <button type="button" class="btn-secondary btn-sm" data-acao-mesa="maisPessoa" ${n >= REGRA.maxPessoas ? 'disabled' : ''}>Mais uma pessoa</button>
+      <div class="setup-theme-brief">
+        <div>
+          <span class="field-label">Cenário e nuances · ${escapeHtml(deck.name)}</span>
+          <p>${escapeHtml(nuance.oQueEstaAcontecendo)}</p>
+          <p class="muted"><strong>Se a Ameaça subir (+1):</strong> ${escapeHtml(nuance.oQueEAmeaca)}</p>
+        </div>
+        <div>
+          <span class="field-label">Desafio aos ${metaTrofeus} pontos (${porPessoa} por pessoa) · ${escapeHtml(deck.chefe.nome)}</span>
+          <p><strong>Quem é:</strong> ${escapeHtml(deck.chefe.descricao)}</p>
+          <p class="muted"><strong>Como funciona:</strong> ao somar ${metaTrofeus} pontos em troféus, ${escapeHtml(deck.chefe.nome)} entra na mesa com <strong>valor ${REGRA.chefeValor}</strong> e <strong>vida ${vidaChefe}</strong>. No meio do baralho, as cartas <strong>8, 9 e 10</strong> trazem <strong>Desafios Master</strong> (missões saudáveis rápidas que dão +${REGRA.bonusDesafioMaster}).</p>
+        </div>
       </div>
+
+      <div class="setup-controls-bar">
+        <div class="setup-count">
+          <span>Pessoas: <strong class="num">${n}</strong></span>
+          <button type="button" class="btn-ghost btn-sm" data-acao-mesa="menosPessoa" ${n <= 1 ? 'disabled' : ''}>Remover</button>
+          <button type="button" class="btn-secondary btn-sm" data-acao-mesa="maisPessoa" ${n >= REGRA.maxPessoas ? 'disabled' : ''}>Mais uma pessoa</button>
+        </div>
+        <div class="setup-pace" role="group" aria-label="Duração da campanha">
+          <span class="field-label">Duração da partida:</span>
+          <button type="button" class="btn-sm ${porPessoa === REGRA.trofeusSprintPorPessoa ? 'btn-primary' : 'btn-ghost'}" data-ritmo-mesa="${REGRA.trofeusSprintPorPessoa}">
+            Partida Rápida (${REGRA.trofeusSprintPorPessoa} pts/pessoa · 1 dia)
+          </button>
+          <button type="button" class="btn-sm ${porPessoa === REGRA.trofeusPorPessoa ? 'btn-primary' : 'btn-ghost'}" data-ritmo-mesa="${REGRA.trofeusPorPessoa}">
+            Campanha Padrão (${REGRA.trofeusPorPessoa} pts/pessoa)
+          </button>
+        </div>
+      </div>
+
+      ${
+        estadoSalvo.notaDoMundo || estadoSalvo.cenasConcluidas > 0
+          ? `<div class="world-memory-banner">
+              <span class="field-label">Memória deste mundo salva no navegador · ${escapeHtml(deck.name)}</span>
+              <p class="muted">Último registro: ${escapeHtml(estadoSalvo.ultimoEvento)}${estadoSalvo.notaDoMundo ? ` · Nota do mundo: “${escapeHtml(estadoSalvo.notaDoMundo)}”` : ''}</p>
+            </div>`
+          : ''
+      }
 
       <div class="setup-players">${jogadores}</div>
 
@@ -118,29 +166,82 @@ function medidor(valor: number, total: number, classe = ''): string {
   return `<div class="meter ${classe}" aria-hidden="true"><span style="width:${pct}%"></span></div>`;
 }
 
+const ROTULO_ESTAGIO = {
+  calmo: 'Estágio 1 · Mundo Calmo',
+  atencao: 'Estágio 2 · Cerco Apertando',
+  critico: 'Estágio 3 · Alerta Crítico',
+  chefe: 'Estágio 4 · Chefe em Campo',
+} as const;
+
+function renderMarcoPendente(deck: ThemeDeck, partida: Partida): string {
+  const pendente = marcoPendente(partida);
+  if (!pendente || partida.resultado) return '';
+  const titulo =
+    pendente === 1
+      ? `Marco 1 alcançado (1/3 da meta) · Primeiro Presságio de ${escapeHtml(deck.chefe.nome)}`
+      : `Marco 2 alcançado (2/3 da meta) · A Sombra de ${escapeHtml(deck.chefe.nome)}`;
+  return `
+    <div class="milestone-banner" role="region" aria-label="Marco da campanha alcançado">
+      <div>
+        <span class="chip chip-ok">Marco desbloqueado!</span>
+        <strong>${titulo}</strong>
+        <p class="muted">Vocês avançaram firme na jornada! Escolham uma recompensa imediata para o grupo:</p>
+      </div>
+      <div class="inline wrap">
+        <button type="button" class="btn-primary btn-sm" data-acao="resgatarMarco" data-marco="${pendente}" data-escolha="folego">+1 Fôlego para todo o grupo</button>
+        <button type="button" class="btn-secondary btn-sm" data-acao="resgatarMarco" data-marco="${pendente}" data-escolha="dama">Recarregar 1 Dama deitada</button>
+        <button type="button" class="btn-secondary btn-sm" data-acao="resgatarMarco" data-marco="${pendente}" data-escolha="ameaca">Baixar Ameaça em 1</button>
+      </div>
+    </div>`;
+}
+
 function renderPlacar(deck: ThemeDeck, partida: Partida): string {
   const meta = metaDeTrofeus(partida);
+  const porPessoa = partida.metaPorPessoa ?? REGRA.trofeusPorPessoa;
   const limite = limiteDeAmeaca(partida);
+  const nuance = NUANCES_DO_TEMA[deck.id] ?? NUANCES_DO_TEMA.eclipse;
+  const estagio = estagioDeAmeaca(partida);
+  const alcancado = marcoAlcancado(partida);
+  const estadoMundo = syncEstadoDoMundo(deck.id, partida);
+  const marco1Pts = Math.ceil(meta / 3);
+  const marco2Pts = Math.ceil((meta * 2) / 3);
+
   const chefe = partida.chefe
-    ? `<strong>${escapeHtml(deck.chefe.nome)}</strong> em campo · vida <span class="num">${partida.chefe.vida}</span> · valor <span class="num">${partida.chefe.valor}</span>`
-    : `<strong>${escapeHtml(deck.chefe.nome)}</strong> aparece com ${meta} troféus`;
+    ? `<strong>${escapeHtml(deck.chefe.nome)}</strong> em campo · vida <span class="num">${partida.chefe.vida}</span> · valor <span class="num">${partida.chefe.valor}</span><br /><span class="muted">${escapeHtml(deck.chefe.descricao)}</span>`
+    : `<strong>${escapeHtml(deck.chefe.nome)}</strong> aparece com ${meta} troféus (${porPessoa} por pessoa)<br /><span class="muted">${escapeHtml(deck.chefe.descricao)}</span>`;
 
   return `
     <section class="scoreboard ${partida.chefe ? 'boss-phase' : ''}">
       <div class="score-main">
-        <span class="eyebrow">${jogaSozinho(partida) ? 'Campanha solo' : `Campanha com ${partida.pessoas.length} pessoas`} · ritmo livre</span>
+        <span class="eyebrow">${jogaSozinho(partida) ? 'Campanha solo' : `Campanha com ${partida.pessoas.length} pessoas`} · ${porPessoa === REGRA.trofeusSprintPorPessoa ? 'Partida Rápida' : 'Ritmo livre'}</span>
         <div class="score-line">
           <span class="num score-big">${partida.trofeus}</span><span class="score-of">/ ${meta} em troféus</span>
         </div>
         ${medidor(partida.trofeus, meta)}
+        <div class="score-milestones">
+          <span class="chip ${alcancado >= 1 ? 'chip-ok' : ''}">Marco 1: ${marco1Pts} pts (Presságio)</span>
+          <span class="chip ${alcancado >= 2 ? 'chip-ok' : ''}">Marco 2: ${marco2Pts} pts (Sombra)</span>
+          <span class="chip ${partida.chefe ? 'chip-warn' : ''}">Chefe: ${meta} pts</span>
+        </div>
         <div class="score-line score-threat">
           <span>Ameaça <strong class="num">${partida.ameaca}</strong> / ${limite}</span>
+          <span class="chip ${estagio === 'critico' || estagio === 'chefe' ? 'chip-warn' : estagio === 'calmo' ? 'chip-ok' : ''}">${ROTULO_ESTAGIO[estagio]}</span>
         </div>
         ${medidor(partida.ameaca, limite, 'is-danger')}
+        <p class="muted score-nuance">${escapeHtml(nuance.oQueEAmeaca)}</p>
+        ${renderMarcoPendente(deck, partida)}
       </div>
       <div class="score-side">
         <div class="score-item">${chefe}</div>
         <div class="score-item">💀 reveladas: <span class="num">${partida.caveiras}</span>${partida.caveiras ? ' · o chefe virá mais forte' : ''}</div>
+        <div class="score-item world-status-box" data-world-status>
+          <span class="field-label">Status do mundo atual (salvo no navegador)</span>
+          <p class="muted">Cenas narradas: <strong class="num">${estadoMundo.cenasConcluidas}</strong> · Desafios Master: <strong class="num">${estadoMundo.desafiosMasterConcluidos}</strong></p>
+          <div class="inline">
+            <input type="text" maxlength="140" value="${escapeHtml(estadoMundo.notaDoMundo)}" placeholder="Anote como está o mundo hoje (ex.: Setor norte sem luz)" data-nota-mundo aria-label="Nota do status do mundo" />
+            <button type="button" class="btn-ghost btn-sm" data-acao-mesa="salvarMundo">Salvar status</button>
+          </div>
+        </div>
         <div class="score-item"><button type="button" class="btn-ghost btn-sm" data-acao-mesa="abandonar">Nova campanha</button></div>
       </div>
     </section>
@@ -227,24 +328,41 @@ function renderCartaDaCena(deck: ThemeDeck, partida: Partida, cena: Cena): strin
   }
   const tema = cartaDoTema(deck.cards, cena.topo);
   const naipe = cena.topo.naipe;
+  const master = ehDesafioMaster(cena.topo);
   return `
-    <article class="threat-card suit-${naipe}" ${tema ? `data-zoom-card-id="${escapeHtml(tema.id)}"` : ''}>
-      <span class="threat-code">${codigo(cena.topo)} · ${VIRA_NO_DIA[naipe].tipo} · valor ${cena.alvo} · aberta às ${escapeHtml(cena.abertaEm)}</span>
+    <article class="threat-card suit-${naipe} ${master ? 'is-master-challenge' : ''}" ${tema ? `data-zoom-card-id="${escapeHtml(tema.id)}"` : ''}>
+      <span class="threat-code">${codigo(cena.topo)} · ${VIRA_NO_DIA[naipe].tipo} · valor ${cena.alvo}${master ? ' · ⚔ DESAFIO MASTER' : ''} · aberta às ${escapeHtml(cena.abertaEm)}</span>
       <h4>${escapeHtml(tema?.title ?? 'Cena')}</h4>
       <dl class="scene-card-text">
-        ${tema?.dailyIdea ? `<dt>Ideia</dt><dd>${escapeHtml(tema.dailyIdea)}</dd>` : ''}
-        <dt>História</dt><dd>${escapeHtml(tema?.topWatcherEvent ?? `Vira ${VIRA_NO_DIA[naipe].vira}.`)}</dd>
+        ${tema?.dailyIdea ? `<dt>Ideia · sugestão</dt><dd>${escapeHtml(tema.dailyIdea)}</dd>` : ''}
+        <dt>História · sugestão</dt><dd>${escapeHtml(tema?.topWatcherEvent ?? `Vira ${VIRA_NO_DIA[naipe].vira}.`)}</dd>
         <dt>Sinal +${REGRA.bonusSinal}</dt><dd>${escapeHtml(tema?.topWatcherTrigger || SINAL_DO_NAIPE[naipe])}</dd>
         <dt>Gesto +${REGRA.bonusGesto}</dt><dd>${escapeHtml(tema?.bottomEchoPrompt || GESTO_DO_NAIPE[naipe])}</dd>
+        ${master ? `<dt>Desafio Master +${REGRA.bonusDesafioMaster}</dt><dd><strong>Encontro intenso no baralho:</strong> ${escapeHtml(desafioMasterDaCarta(cena.topo))}</dd>` : ''}
       </dl>
     </article>`;
 }
 
-function campo(acao: string, quem: number, placeholder: string, botao: string, classe = 'btn-secondary'): string {
+function chipsDeSugestao(acao: string, quem: number, opcoes: string[]): string {
+  const validas = opcoes.map((o) => o.trim()).filter(Boolean);
+  if (!validas.length) return '';
+  const botoes = validas
+    .map(
+      (texto) =>
+        `<button type="button" class="quick-chip" data-sugestao-campo="${acao}" data-sugestao-quem="${quem}" data-sugestao-texto="${escapeHtml(texto)}">${escapeHtml(texto)}</button>`,
+    )
+    .join('');
+  return `<div class="quick-chips" aria-label="Sugestões rápidas para clicar"><span class="quick-chips-label">1 clique:</span>${botoes}</div>`;
+}
+
+function campo(acao: string, quem: number, placeholder: string, botao: string, classe = 'btn-secondary', sugestoes: string[] = []): string {
   return `
-    <div class="inline">
-      <input type="text" maxlength="240" placeholder="${escapeHtml(placeholder)}" data-campo="${acao}" data-quem="${quem}" aria-label="${escapeHtml(placeholder)}" />
-      <button type="button" class="${classe}" data-acao="${acao}" data-quem="${quem}">${botao}</button>
+    <div class="field-with-chips">
+      <div class="inline">
+        <input type="text" maxlength="240" placeholder="${escapeHtml(placeholder)}" data-campo="${acao}" data-quem="${quem}" aria-label="${escapeHtml(placeholder)}" />
+        <button type="button" class="${classe}" data-acao="${acao}" data-quem="${quem}">${botao}</button>
+      </div>
+      ${chipsDeSugestao(acao, quem, sugestoes)}
     </div>`;
 }
 
@@ -262,19 +380,51 @@ function renderCena(deck: ThemeDeck, partida: Partida, pessoa: Pessoa, cena: Cen
   const nomeDoEco = sozinho ? 'Você, como Eco' : escapeHtml(eco.nome);
   const comecou = cenaComecou(cena);
   const encerrada = !!partida.resultado;
-  const ideia = cena.topo ? cartaDoTema(deck.cards, cena.topo)?.dailyIdea : undefined;
+  const tema = cena.topo ? cartaDoTema(deck.cards, cena.topo) : undefined;
+  const ideia = tema?.dailyIdea;
+  const tituloCarta = tema?.title ?? deck.chefe.nome;
   const sugestao = !cena.topo
     ? 'Decidam juntos o que o chefe é na vida real.'
     : ideia
-      ? `Ideia da carta: ${escapeHtml(ideia)}`
+      ? `Sugestão da carta (opcional): ${escapeHtml(ideia)}`
       : `${SIMBOLO[cena.topo.naipe]} vira ${VIRA_NO_DIA[cena.topo.naipe].vira}: ${VIRA_NO_DIA[cena.topo.naipe].exemplos}.`;
+
+  const sugestoesDeclarar = !cena.topo
+    ? [`Resolver a principal pendência do dia é encarar ${deck.chefe.nome}`, `A tarefa mais difícil de hoje é o confronto contra ${deck.chefe.nome}`]
+    : [
+        `A tarefa de agora vira ${tituloCarta}`,
+        `Meu próximo compromisso do dia é ${tituloCarta}`,
+        `O trajeto / conversa de hoje vira ${tituloCarta}`,
+      ];
+
+  const sugestoesLer = [
+    `Na aventura, isso é ${tituloCarta}: precisamos atravessar com cuidado`,
+    tema?.topWatcherEvent ? tema.topWatcherEvent.slice(0, 140) : `O obstáculo surge diante do grupo como ${tituloCarta}`,
+    `Cada passo concluído hoje enfraquece o perigo ao redor de ${tituloCarta}`,
+  ];
+
+  const sugestoesNarrar =
+    cena.desfecho === 'vitoria'
+      ? [
+          `Superamos ${tituloCarta} com sucesso e garantimos o troféu!`,
+          `O grupo atravessou o obstáculo sem deixar rastros.`,
+        ]
+      : cena.desfecho === 'custo'
+        ? [
+            `Vencemos ${tituloCarta}, mas o esforço atraiu perigo (+1 Ameaça).`,
+            `Passamos no limite, deixando o cenário mais tenso.`,
+          ]
+        : [
+            `${tituloCarta} resistiu desta vez; recuamos para recuperar o fôlego.`,
+            `O obstáculo fechou o caminho e forçou uma retirada estratégica.`,
+          ];
 
   const declarar = cena.declaracao
     ? passo(`${escapeHtml(pessoa.nome)} diz o que é`, 'feito', fala(pessoa.nome, cena.declaracao))
     : passo(
         `${escapeHtml(pessoa.nome)} diz o que é`,
         'agora',
-        `<p class="muted">Em uma frase: o que do seu dia vira esta carta? ${sugestao}</p>${campo('declarar', quem, 'Ex.: a reunião das 14h é a ponte', 'Dizer')}`,
+        `<p class="muted">Em uma frase: o que do seu dia vira esta carta? ${sugestao}</p>${campo('declarar', quem, 'Ex.: a reunião das 14h é a ponte', 'Dizer', 'btn-secondary', sugestoesDeclarar)}`,
       );
 
   const ler = cena.leitura
@@ -283,7 +433,7 @@ function renderCena(deck: ThemeDeck, partida: Partida, pessoa: Pessoa, cena: Cen
         `Leitura · ${nomeDoEco}`,
         cena.declaracao ? 'agora' : 'depois',
         cena.declaracao
-          ? `<p class="muted">Leia a História da carta e diga, em uma frase, onde ela aparece nessa situação. A cena só começa depois disso.</p>${campo('ler', quem, 'Ex.: o vão central da ponte é a pauta do orçamento', 'Ler')}`
+          ? `<p class="muted">A <strong>História</strong> da carta é apenas uma sugestão de fantasia (não precisa repetir o texto igual). Use a ideia dela para dizer, em uma frase, o que essa situação do dia virou na aventura. A cena só começa depois disso.</p>${campo('ler', quem, 'Ex.: o vão central da ponte é a pauta do orçamento', 'Ler', 'btn-secondary', sugestoesLer)}`
           : '',
       );
 
@@ -293,24 +443,70 @@ function renderCena(deck: ThemeDeck, partida: Partida, pessoa: Pessoa, cena: Cen
       <ol class="scene-steps">
         ${declarar}
         ${ler}
-        ${passo('Viver o dia', cena.desfecho ? 'feito' : comecou ? 'agora' : 'depois', comecou ? renderViver(partida, pessoa, cena, quem, sozinho) : '')}
+        ${passo('Viver o dia', cena.desfecho ? 'feito' : comecou ? 'agora' : 'depois', comecou ? renderViver(deck, partida, pessoa, cena, quem, sozinho) : '')}
         ${passo(`Desfecho · ${nomeDoEco}`, cena.desfecho ? 'feito' : comecou ? 'agora' : 'depois', comecou ? renderDesfecho(partida, cena, quem, encerrada) : '')}
-        ${cena.desfecho && !cena.pendente ? passo(`Narração · ${nomeDoEco}`, 'agora', `<p class="muted">Em poucas frases: o que isso foi na história?</p>${campo('narrar', quem, 'Como terminou na história', 'Narrar e fechar a cena', 'btn-primary')}`) : ''}
+        ${cena.desfecho && !cena.pendente ? passo(`Narração · ${nomeDoEco}`, 'agora', `<p class="muted">Em poucas frases: o que isso foi na história?</p>${campo('narrar', quem, 'Como terminou na história', 'Narrar e fechar a cena', 'btn-primary', sugestoesNarrar)}`) : ''}
       </ol>
     </div>
   `;
 }
 
-function renderViver(partida: Partida, pessoa: Pessoa, cena: Cena, quem: number, sozinho: boolean): string {
+function renderDesafioMasterSub(pessoa: Pessoa, cena: Cena, quem: number, aberto: boolean): string {
+  const naipe = cena.topo?.naipe ?? pessoa.classe;
+  const master = ehDesafioMaster(cena.topo) || !cena.topo;
+  const missoes = DESAFIOS_MASTER[naipe];
+
+  if (cena.desafioMaster) {
+    return `
+      <div class="scene-sub master-challenge-sub is-done">
+        <span class="field-label">⚔ Desafio Master · missão cumprida</span>
+        ${fala(pessoa.nome, cena.desafioMaster)}
+        <span class="chip chip-ok">Desafio Master +${REGRA.bonusDesafioMaster}</span>
+      </div>`;
+  }
+
+  if (!aberto) return '';
+
+  const botoesMissoes = missoes
+    .map(
+      (m) =>
+        `<button type="button" class="btn-secondary btn-sm master-mission-btn" data-acao="desafioMaster" data-quem="${quem}" data-missao="${escapeHtml(m)}">✓ ${escapeHtml(m)} (+${REGRA.bonusDesafioMaster})</button>`,
+    )
+    .join('');
+
+  return `
+    <div class="scene-sub master-challenge-sub ${master ? 'is-featured' : ''}">
+      <span class="field-label">${master ? '⚔ Desafio Master da Carta (Encontro Intenso · +2 na cena)' : '⚔ Desafio Master opcional (+2 na cena)'}</span>
+      <p class="muted">${master ? 'Esta é uma carta alta de encontro! Cumpra 1 ação saudável e simples agora no seu dia para ganhar +2 no desfecho:' : 'Quer um impulso extra? Cumpra 1 micro-missão saudável no seu dia para somar +2:'}</p>
+      <div class="master-missions-grid">${botoesMissoes}</div>
+    </div>`;
+}
+
+function renderViver(deck: ThemeDeck, partida: Partida, pessoa: Pessoa, cena: Cena, quem: number, sozinho: boolean): string {
   const eco = partida.pessoas[cena.eco];
   const aberto = !cena.desfecho;
+  const tema = cena.topo ? cartaDoTema(deck.cards, cena.topo) : undefined;
   const recebido = pessoa.sinalRecebido ? `<p class="muted">Também vale o sinal que você recebeu: “${escapeHtml(pessoa.sinalRecebido)}”.</p>` : '';
+
+  const sugestoesSinal = [
+    ...(pessoa.sinalRecebido ? [pessoa.sinalRecebido] : []),
+    tema?.topWatcherTrigger ? `Vi no dia: ${tema.topWatcherTrigger}` : `Notei um sinal de ${SIMBOLO[cena.topo?.naipe ?? pessoa.classe]} no caminho`,
+    'Apareceu um detalhe inesperado bem na hora da tarefa',
+  ];
+  const sugestoesConfirmar = [
+    'Isso é um presságio abrindo caminho na cena',
+    'Na história, é a pista que faltava para avançarmos',
+  ];
+  const sugestoesGesto = [
+    tema?.bottomEchoPrompt ? `Fiz: ${tema.bottomEchoPrompt}` : GESTO_DO_NAIPE[cena.topo?.naipe ?? pessoa.classe],
+    'Respirei fundo três vezes e mantive a calma',
+  ];
 
   let sinal = '';
   if (!cena.sinal) {
-    sinal = aberto ? `${recebido}${campo('sinal', quem, 'O que você viu, em uma frase', 'Vi o sinal')}` : '<p class="muted">Sem sinal nesta cena.</p>';
+    sinal = aberto ? `${recebido}${campo('sinal', quem, 'O que você viu, em uma frase', 'Vi o sinal', 'btn-secondary', sugestoesSinal)}` : '<p class="muted">Sem sinal nesta cena.</p>';
   } else if (!cena.sinalConfirmado) {
-    sinal = `${fala(pessoa.nome, cena.sinal)}<p class="muted">${escapeHtml(eco.nome)} confirma dizendo o que isso é na história.</p>${aberto ? campo('confirmarSinal', quem, `${eco.nome}: o que isso é na história?`, 'Confirmar') : ''}`;
+    sinal = `${fala(pessoa.nome, cena.sinal)}<p class="muted">${escapeHtml(eco.nome)} confirma dizendo o que isso é na história.</p>${aberto ? campo('confirmarSinal', quem, `${eco.nome}: o que isso é na história?`, 'Confirmar', 'btn-secondary', sugestoesConfirmar) : ''}`;
   } else {
     sinal = `${fala(pessoa.nome, cena.sinal)}${sozinho ? '' : fala(eco.nome, cena.sinalConfirmado)}<span class="chip chip-ok">sinal +${REGRA.bonusSinal}</span>`;
   }
@@ -318,7 +514,7 @@ function renderViver(partida: Partida, pessoa: Pessoa, cena: Cena, quem: number,
   const gesto = cena.gesto
     ? `${fala(pessoa.nome, cena.gesto)}<span class="chip chip-ok">gesto +${REGRA.bonusGesto}</span>`
     : aberto
-      ? campo('gesto', quem, 'O gesto que você fez', 'Fiz o gesto', 'btn-ghost')
+      ? campo('gesto', quem, 'O gesto que você fez', 'Fiz o gesto', 'btn-ghost', sugestoesGesto)
       : '';
 
   const ajudantes = partida.pessoas
@@ -334,6 +530,7 @@ function renderViver(partida: Partida, pessoa: Pessoa, cena: Cena, quem: number,
     : '';
 
   return `
+    ${renderDesafioMasterSub(pessoa, cena, quem, aberto)}
     <div class="scene-sub"><span class="field-label">Sinal</span>${sinal}</div>
     <div class="scene-sub"><span class="field-label">Gesto</span>${gesto}</div>
     ${reforcos ? `<div class="inline wrap">${reforcos}</div>` : ''}
@@ -357,6 +554,10 @@ function renderDesfecho(partida: Partida, cena: Cena, quem: number, encerrada: b
   const ultimo = cena.fundos[cena.fundos.length - 1];
   const total = valorDe(ultimo) + bonus.total;
   const nomes = { vitoria: 'Vitória', custo: 'Vitória com custo', derrota: 'A cena venceu' } as const;
+  const facanha = cena.desfecho === 'vitoria' && (total - cena.alvo >= 4 || cena.alvo >= 8);
+  const badgeFacanha = facanha
+    ? `<span class="chip chip-ok">★ Façanha! Vitória brilhante${cena.topo ? ` (+${valorDe(cena.topo)} troféus)` : ''}</span>`
+    : '';
   const pendente = cena.pendente
     ? `<div class="inline wrap">
         <button type="button" class="btn-secondary" data-acao="deitarDama" data-quem="${quem}">Deitar a Dama e virar outro fundo</button>
@@ -370,7 +571,10 @@ function renderDesfecho(partida: Partida, cena: Cena, quem: number, encerrada: b
 
   return `
     <div class="scene-outcome">${fundos}
-      <p><span class="num">${valorDe(ultimo)} + ${bonus.total} = ${total}</span>, contra <span class="num">${cena.alvo}</span>: <strong class="outcome-${cena.desfecho}">${nomes[cena.desfecho]}</strong></p>
+      <div>
+        <p><span class="num">${valorDe(ultimo)} + ${bonus.total} = ${total}</span>, contra <span class="num">${cena.alvo}</span>: <strong class="outcome-${cena.desfecho}">${nomes[cena.desfecho]}</strong></p>
+        ${badgeFacanha}
+      </div>
     </div>
     ${pendente}${espiada}`;
 }

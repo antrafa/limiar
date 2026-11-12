@@ -1,5 +1,7 @@
 import {
   CLASSES,
+  desafioMasterDaCarta,
+  ehDesafioMaster,
   GESTO_DO_NAIPE,
   REGRA,
   REGRA_DA_CAVEIRA,
@@ -81,11 +83,15 @@ export function regraDaCarta(card: GameCard): RegraDaCarta {
     };
   }
   const carta = cartaDoMotor(card);
+  const master = ehDesafioMaster(carta);
   return {
-    tipo: `Cena · ${VIRA_NO_DIA[naipe]?.tipo ?? ''} · valor ${carta ? valorDe(carta) : 0}`,
+    tipo: `Cena${master ? ' · Desafio Master' : ''} · ${VIRA_NO_DIA[naipe]?.tipo ?? ''} · valor ${carta ? valorDe(carta) : 0}`,
     blocos: [
       { rotulo: `Sinal · +${REGRA.bonusSinal}`, texto: card.topWatcherTrigger || SINAL_DO_NAIPE[naipe] },
       { rotulo: `Gesto · +${REGRA.bonusGesto}`, texto: card.bottomEchoPrompt || GESTO_DO_NAIPE[naipe] },
+      ...(master && carta
+        ? [{ rotulo: `Desafio Master · +${REGRA.bonusDesafioMaster}`, texto: desafioMasterDaCarta(carta) }]
+        : []),
     ],
   };
 }
@@ -128,7 +134,7 @@ function buildArtSection(card: GameCard): string {
   const quadro = buildArtFrame(card);
   if (card.kind === 'journey') {
     const ideia = card.dailyIdea
-      ? `<div class="mtg-art-box"><span class="mtg-art-idea"><strong>Ideia</strong> ${escapeHtml(card.dailyIdea)}</span></div>`
+      ? `<div class="mtg-art-box"><span class="mtg-art-idea"><strong>Ideia · sugestão</strong> ${escapeHtml(card.dailyIdea)}</span></div>`
       : '';
     return `${quadro}${ideia}`;
   }
@@ -165,7 +171,10 @@ export function renderMagicCardHtml(card: GameCard, options: RenderCardOptions =
     .join(' ');
 
   const regra = regraDaCarta(card);
-  const narracao = !isFigure(card) && card.topWatcherEvent ? `<p class="mtg-narration">${escapeHtml(card.topWatcherEvent)}</p>` : '';
+  const narracao =
+    !isFigure(card) && card.topWatcherEvent
+      ? `<p class="mtg-narration"><strong>História · sugestão</strong> ${escapeHtml(card.topWatcherEvent)}</p>`
+      : '';
   const blocos = regra.blocos
     .map(
       (b) => `
@@ -205,10 +214,30 @@ export function renderCardModalContentHtml(card: GameCard): string {
   const regra = regraDaCarta(card);
   const narracao =
     !isFigure(card) && card.topWatcherEvent
-      ? `<div class="zoom-detail-box"><h4>História</h4><p>${escapeHtml(card.topWatcherEvent)}</p></div>`
+      ? `
+        <div class="zoom-detail-box">
+          <div class="zoom-detail-head">
+            <h4>História</h4>
+            <span class="chip">Sugestão para contar a história</span>
+          </div>
+          <p>${escapeHtml(card.topWatcherEvent)}</p>
+          <p class="zoom-usage-hint muted">
+            <strong>Como usar na partida:</strong> este texto é apenas uma <strong>sugestão de fantasia</strong>, não uma fala que deve ser repetida palavra por palavra. Depois que <strong>quem vive</strong> escolhe o momento do dia (ex.: uma reunião, um trajeto ou uma tarefa), <strong>o Eco</strong> usa esta ideia só como inspiração para ligar a aventura à situação real em uma frase simples — podendo usar os elementos daqui ou adaptar livremente.
+          </p>
+        </div>`
       : '';
   const ideia = card.dailyIdea
-    ? `<div class="zoom-detail-box"><h4>Ideia para o seu dia</h4><p>${escapeHtml(card.dailyIdea)}</p></div>`
+    ? `
+        <div class="zoom-detail-box">
+          <div class="zoom-detail-head">
+            <h4>Ideia para o seu dia</h4>
+            <span class="chip">Sugestão de rotina</span>
+          </div>
+          <p>${escapeHtml(card.dailyIdea)}</p>
+          <p class="zoom-usage-hint muted">
+            <strong>Como usar:</strong> são apenas exemplos caso <strong>quem vive</strong> fique em dúvida do que escolher hoje. Vale qualquer outro compromisso, conversa ou tarefa real do seu dia.
+          </p>
+        </div>`
     : '';
   const carta = cartaDoMotor(card);
   const sinalGenerico = carta

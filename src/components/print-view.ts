@@ -1,8 +1,10 @@
+import { DESAFIOS_MASTER, REGRA } from '../core/partida';
 import type { GameCard, ThemeDeck } from '../types/card';
 import { escapeHtml, isFigure, renderMagicCardHtml } from './card-renderer';
 import { qrDaCartaSvg } from './scanner';
+import { NUANCES_DO_TEMA } from './temas-view';
 
-export type PrintFilterMode = 'mission' | 'figures' | 'all';
+export type PrintFilterMode = 'mission' | 'figures' | 'dinamismo' | 'all';
 export type EstampaDoVerso = 'portal' | 'tema' | 'papel';
 export type TamanhoDaCarta = 'poker' | 'bridge';
 export type FormatoDeImpressao = 'a4' | 'a4-sangria' | 'card-intercalado' | 'card-lote';
@@ -55,6 +57,7 @@ const POR_FOLHA = 9;
 const CONJUNTOS: Array<{ id: PrintFilterMode; label: string }> = [
   { id: 'mission', label: 'Cenas e Coringas (42 cartas · 5 folhas)' },
   { id: 'figures', label: 'Trio de Bolso dos 4 naipes (12 cartas · 2 folhas)' },
+  { id: 'dinamismo', label: 'Kit de Dinamismo: Desafios Master, Marcos e Oráculo (9 cartas · 1 folha)' },
   { id: 'all', label: 'Tudo (54 cartas · 6 folhas)' },
 ];
 
@@ -76,9 +79,144 @@ const ESTAMPAS: Array<{ id: EstampaDoVerso; nome: string; descricao: string }> =
   { id: 'papel', nome: 'Papel', descricao: 'Marfim com traço fino de astrolábio. Economiza tinta.' },
 ];
 
+export function gerarCartasDeDinamismo(deck: ThemeDeck): GameCard[] {
+  const nuance = NUANCES_DO_TEMA[deck.id] ?? NUANCES_DO_TEMA.eclipse;
+  const base = (
+    idx: number,
+    code: string,
+    suit: GameCard['suit'],
+    title: string,
+    glyph: string,
+    idea: string,
+    historia: string,
+    sinal: string,
+    gesto: string,
+  ): GameCard => ({
+    id: `${deck.id}-din-${idx}`,
+    collectorNumber: 54 + idx,
+    themeId: deck.id,
+    suit,
+    rank: '8',
+    playingCardCode: code,
+    kind: 'journey',
+    typeLine: 'Cena · Dinamismo',
+    title,
+    artGlyph: glyph,
+    artSubtitle: 'Carta de Dinamismo',
+    flavorText: '',
+    dailyIdea: idea,
+    topWatcherEvent: historia,
+    topWatcherTrigger: sinal,
+    bottomEchoPrompt: gesto,
+  });
+
+  return [
+    base(
+      1,
+      '8♠',
+      'spades',
+      'Desafio Master · Corpo e Energia',
+      '⚔',
+      'Use nas cartas 8♠, 9♠ e 10♠ ou quando quiser destravar uma cena difícil (+2).',
+      `Encontro de Confronto em ${deck.name}. Escolha 1 missão saudável rápida para somar +${REGRA.bonusDesafioMaster} no desfecho:`,
+      `• ${DESAFIOS_MASTER.spades[0]} • ${DESAFIOS_MASTER.spades[1]}`,
+      `• ${DESAFIOS_MASTER.spades[2]} (vale +${REGRA.bonusDesafioMaster} na cena)`,
+    ),
+    base(
+      2,
+      '8♥',
+      'hearts',
+      'Desafio Master · Gentileza e Vínculo',
+      '♥',
+      'Use nas cartas 8♥, 9♥ e 10♥ ou para fortalecer o grupo no dia (+2).',
+      `Encontro de Vínculo em ${deck.name}. Escolha 1 missão leve de conexão humana para somar +${REGRA.bonusDesafioMaster}:`,
+      `• ${DESAFIOS_MASTER.hearts[0]} • ${DESAFIOS_MASTER.hearts[1]}`,
+      `• ${DESAFIOS_MASTER.hearts[2]} (vale +${REGRA.bonusDesafioMaster} na cena)`,
+    ),
+    base(
+      3,
+      '8♦',
+      'diamonds',
+      'Desafio Master · Hidratação e Ordem',
+      '♦',
+      'Use nas cartas 8♦, 9♦ e 10♦ ou como pausa revigorante (+2).',
+      `Encontro de Recurso em ${deck.name}. Escolha 1 missão saudável de cuidado prático para somar +${REGRA.bonusDesafioMaster}:`,
+      `• ${DESAFIOS_MASTER.diamonds[0]} • ${DESAFIOS_MASTER.diamonds[1]}`,
+      `• ${DESAFIOS_MASTER.diamonds[2]} (vale +${REGRA.bonusDesafioMaster} na cena)`,
+    ),
+    base(
+      4,
+      '8♣',
+      'clubs',
+      'Desafio Master · Respiração e Foco',
+      '♣',
+      'Use nas cartas 8♣, 9♣ e 10♣ ou quando o dia estiver corrido (+2).',
+      `Encontro de Mistério em ${deck.name}. Escolha 1 missão rápida de presença para somar +${REGRA.bonusDesafioMaster}:`,
+      `• ${DESAFIOS_MASTER.clubs[0]} • ${DESAFIOS_MASTER.clubs[1]}`,
+      `• ${DESAFIOS_MASTER.clubs[2]} (vale +${REGRA.bonusDesafioMaster} na cena)`,
+    ),
+    base(
+      5,
+      '2♠',
+      'spades',
+      'Oráculo Rápido · Quem Vive a Cena',
+      '💬',
+      'Sem tempo para inventar? Escolha uma frase pronta em 5 segundos:',
+      '1. “Esta reunião/tarefa de agora vira a carta.” 2. “O trajeto até lá é a travessia.” 3. “Resolver esta pendência é o obstáculo.”',
+      'Para o Sinal (+2): “Vi na rua um detalhe parecido com o da carta.”',
+      'Para o Gesto (+1): “Fiz a pausa/ação sugerida antes de terminar.”',
+    ),
+    base(
+      6,
+      '2♥',
+      'hearts',
+      'Oráculo Rápido · Leitura do Eco',
+      '🔮',
+      'Moldes prontos para o Eco conectar o dia ao tema sem travar:',
+      '1. “Na história, essa tarefa é a passagem vigiada do nosso cenário.” 2. “Cada etapa concluída afasta o perigo por mais uma hora.”',
+      'Vitória: “Passamos limpo e guardamos o troféu.”',
+      'Com custo / Derrota: “Conseguimos, mas o cerco apertou (+1 Ameaça).”',
+    ),
+    base(
+      7,
+      '3♦',
+      'diamonds',
+      'Marco 1 · Primeiro Presságio (33%)',
+      '⚑',
+      'Ative ao atingir 1/3 da meta de troféus (10 pts/pessoa na padrão ou 5 na rápida).',
+      `O mundo reage: os primeiros sinais de ${deck.chefe.nome} aparecem no horizonte.`,
+      'Recompensa do grupo (escolha 1): Todo mundo recupera +1 de Fôlego;',
+      'OU recarreguem 1 Dama deitada; OU reduzam a Ameaça em 1.',
+    ),
+    base(
+      8,
+      '6♦',
+      'diamonds',
+      'Marco 2 · Sombra do Chefe (66%)',
+      '⚡',
+      'Ative ao atingir 2/3 da meta de troféus (20 pts/pessoa na padrão ou 10 na rápida).',
+      `A presença de ${deck.chefe.nome} já domina o cenário: falta pouco para o confronto final!`,
+      'Recompensa do grupo (escolha 1): Reduzam a Ameaça em 1;',
+      'OU todo mundo recupera +1 de Fôlego; OU recarreguem 1 Dama.',
+    ),
+    base(
+      9,
+      'A♠',
+      'spades',
+      `Status do Mundo · ${deck.name}`,
+      '🌍',
+      'Use um clipe ou moeda na borda desta carta para marcar a tensão atual da campanha:',
+      `[1] Calmo (início) → [2] Atenção (40% da Ameaça) → [3] Crítico (a 2 do limite) → [4] Chefe: ${deck.chefe.nome}.`,
+      `Se a Ameaça subir: ${nuance.oQueEAmeaca}`,
+      `Chefe (Valor ${REGRA.chefeValor} · Vida ${REGRA.chefeVidaBase}+pessoas): ${deck.chefe.descricao}`,
+    ),
+  ];
+}
+
 export function filterCardsForPrint(deck: ThemeDeck, filterMode: PrintFilterMode): GameCard[] {
   if (filterMode === 'figures') return deck.cards.filter(isFigure);
   if (filterMode === 'mission') return deck.cards.filter((c) => !isFigure(c));
+  if (filterMode === 'dinamismo') return gerarCartasDeDinamismo(deck);
   return deck.cards;
 }
 

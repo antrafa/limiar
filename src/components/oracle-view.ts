@@ -105,7 +105,7 @@ export function renderOracleGuideHtml(deck: ThemeDeck): string {
             <dt>Valete</dt><dd>${REGRA_DO_VALETE}</dd>
             <dt>★</dt><dd>${REGRA_DA_ESTRELA}</dd>
             <dt>💀</dt><dd>${REGRA_DA_CAVEIRA}</dd>
-            <dt>Chefe</dt><dd><strong>${escapeHtml(deck.chefe.nome)}</strong>. Cada pessoa o enfrenta como uma cena, contra o valor ${REGRA.chefeValor}. O Rei não vale contra ele. Vitória, com ou sem custo, tira 1 de vida.</dd>
+            <dt>Chefe</dt><dd><strong>${escapeHtml(deck.chefe.nome)}</strong> (${escapeHtml(deck.chefe.descricao)}). Aparece ao somar ${REGRA.trofeusPorPessoa} troféus por pessoa. Cada pessoa o enfrenta como uma cena, contra o valor ${REGRA.chefeValor} (vida ${REGRA.chefeVidaBase} + número de pessoas). O Rei não vale contra ele. Vitória, com ou sem custo, tira 1 de vida.</dd>
           </dl>
         </section>
       </div>

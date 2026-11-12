@@ -29,12 +29,12 @@ function minutos(deck: ThemeDeck): Minuto[] {
     },
     {
       titulo: 'Abra a primeira cena',
-      faca: 'Vire o topo do seu baralho e diga, em uma frase, o que do seu dia aquela carta vai ser. O Eco lê a História da carta e diz onde ela aparece nessa situação: é a leitura.',
+      faca: 'Vire o topo do seu baralho e diga, em uma frase, o que do seu dia aquela carta vai ser. O Eco lê a História (sugestão) da carta e usa a ideia dela para dizer onde essa fantasia aparece na situação real: é a leitura.',
       pronto: 'uma coisa real do seu dia virou uma cena da história.',
     },
     {
       titulo: 'Viva e vire o desfecho',
-      faca: `Siga o dia. Viu o sinal? Conte ao Eco; quando ele disser o que aquilo é na história, vale +${REGRA.bonusSinal}. Fez o gesto? +${REGRA.bonusGesto}. Quando aquilo acabar, o Eco vira o fundo do baralho dele e narra como terminou. Com ${REGRA.trofeusPorPessoa} troféus por pessoa, ${escapeHtml(deck.chefe.nome)} aparece.`,
+      faca: `Siga o dia. Viu o sinal? Conte ao Eco; quando ele disser o que aquilo é na história, vale +${REGRA.bonusSinal}. Fez o gesto? +${REGRA.bonusGesto}. Quando aquilo acabar, o Eco vira o fundo do baralho dele e narra como terminou. Com ${REGRA.trofeusPorPessoa} troféus por pessoa, ${escapeHtml(deck.chefe.nome)} (${escapeHtml(deck.chefe.descricao)}) aparece para o confronto final.`,
       pronto: 'a campanha já está correndo, no ritmo de cada um.',
     },
   ];
@@ -85,8 +85,8 @@ function renderCarta(cena: CenaEncenada): string {
   const tema = cartaDoTema(THEMES.eclipse.cards, cena.topo);
   const linhas: Array<[string, string]> = [
     ['Nome', `<strong>${codigo(cena.topo)} ${escapeHtml(tema?.title ?? '')}</strong>${cena.topo.valor === 1 ? ` (o Ás vale ${REGRA.valorAs})` : ''}`],
-    ['Ideia', escapeHtml(tema?.dailyIdea ?? '')],
-    ['História', escapeHtml(tema?.topWatcherEvent ?? '')],
+    ['Ideia (sugestão)', escapeHtml(tema?.dailyIdea ?? '')],
+    ['História (sugestão)', `${escapeHtml(tema?.topWatcherEvent ?? '')} <span class="muted">(inspiração para o Eco criar a leitura; não precisa repetir igual)</span>`],
     ['Sinal', escapeHtml(tema?.topWatcherTrigger ?? '')],
     ['Gesto', escapeHtml(tema?.bottomEchoPrompt ?? '')],
   ];
@@ -151,9 +151,10 @@ function renderExemplo(): string {
         <p class="lede">Lia (♠ Guardião) e Téo (♥ Curandeiro) moram em cidades diferentes e jogam por mensagem. Cada desfecho abaixo foi calculado pelo motor do jogo.</p>
       </header>
       <div class="note">
-        <strong>Como ler —</strong> cada cena tem <strong>a carta</strong> (o que vem impresso nela; ninguém inventa isso),
+        <strong>Como ler —</strong> cada cena tem <strong>a carta</strong> (o que vem impresso nela; a <em>Ideia</em> e a <em>História</em> são apenas sugestões prontas para inspirar a dupla),
         <strong>a conversa</strong> (só as mensagens, com o nome de quem escreve; o que acontece fora do celular aparece entre colchetes, e em cinza o que aquela mensagem é na regra)
-        e <strong>o desfecho</strong> (a carta de baixo do baralho do Eco, e a conta). As cenas correm ao mesmo tempo: enquanto a de Lia está aberta, Téo abre a dele.
+        e <strong>o desfecho</strong> (a carta de baixo do baralho do Eco, e a conta).<br />
+        <strong>Entenda as nuances do tema (<em>O Último Eclipse</em>) neste exemplo:</strong> a <strong>Coroa Negra</strong> citada na Cena 2 é o anel de sombra do eclipse que engole o sol — sempre que a <strong>Ameaça sobe +1</strong> (como na vitória com custo), a sombra fica mais próxima na história. E quando a dupla juntar <strong>60 pontos em troféus</strong> (30 por pessoa), entra em campo o chefe do tema: <strong>O Devorador do Sol</strong> (a escuridão do eclipse que tomou forma de monstro cósmico, com valor 8 e vida 4).
       </div>
       ${exemplo.cenas.map(renderCena).join('')}
       <div class="example-end">

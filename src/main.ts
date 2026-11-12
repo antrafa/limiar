@@ -19,7 +19,7 @@ import { renderQuickstartGuideHtml } from './components/quickstart-view';
 import { renderStudioGalleryHtml } from './components/studio-view';
 import { renderTemasHtml } from './components/temas-view';
 import { cartaPeloCodigo, iniciarEscaneador, renderEscaneadorHtml } from './components/scanner';
-import { type Acao, agir, criarPartida, linhaDeStatus, type Naipe, type Partida } from './core/partida';
+import { type Acao, agir, criarPartida, type EscolhaDeMarco, linhaDeStatus, type Naipe, type Partida } from './core/partida';
 import {
   exportThemeJson,
   importThemeJson,
@@ -30,6 +30,7 @@ import {
   saveCardOverride,
   savePartida,
   saveThemeId,
+  syncEstadoDoMundo,
 } from './core/storage';
 import { ALL_THEME_IDS, DEFAULT_THEME_ID, THEMES } from './data/index';
 import type { GameCard, ThemeDeck, ThemeId } from './types/card';
@@ -86,6 +87,7 @@ export function mountLimiarApp(root: HTMLElement): void {
   function setPartida(next: Partida | null): void {
     state.partida = next;
     savePartida(next);
+    if (next) syncEstadoDoMundo(state.activeThemeId, next);
     render();
   }
 
@@ -372,6 +374,28 @@ export function mountLimiarApp(root: HTMLElement): void {
       btn.addEventListener('click', () => acaoDeMesa(btn.dataset.acaoMesa ?? ''));
     });
 
+    root.querySelectorAll<HTMLButtonElement>('[data-ritmo-mesa]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const meta = Number(btn.dataset.ritmoMesa);
+        if (meta > 0) {
+          state.preparo.metaPorPessoa = meta;
+          render();
+        }
+      });
+    });
+
+    root.querySelectorAll<HTMLButtonElement>('[data-sugestao-campo]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const campo = btn.dataset.sugestaoCampo ?? '';
+        const quem = Number(btn.dataset.sugestaoQuem ?? 0);
+        const texto = btn.dataset.sugestaoTexto ?? '';
+        const input = root.querySelector<HTMLInputElement>(`[data-campo="${campo}"][data-quem="${quem}"]`);
+        if (input) input.value = texto;
+        const trigger = root.querySelector<HTMLButtonElement>(`[data-acao="${campo}"][data-quem="${quem}"]`);
+        trigger?.click();
+      });
+    });
+
     root.querySelectorAll<HTMLButtonElement>('[data-acao]').forEach((btn) => {
       btn.addEventListener('click', () => {
         const acao = acaoDoBotao(btn);
@@ -402,7 +426,13 @@ export function mountLimiarApp(root: HTMLElement): void {
     }
     if (nome === 'comecar') {
       const nomeados = jogadores.map((j, i) => ({ ...j, nome: j.nome.trim() || `Jogador ${i + 1}` }));
-      setPartida(criarPartida({ jogadores: nomeados }));
+      setPartida(criarPartida({ jogadores: nomeados, metaPorPessoa: state.preparo.metaPorPessoa }));
+      return;
+    }
+    if (nome === 'salvarMundo') {
+      const nota = root.querySelector<HTMLInputElement>('[data-nota-mundo]')?.value.trim() ?? '';
+      syncEstadoDoMundo(state.activeThemeId, state.partida, nota);
+      showToast('Status do mundo salvo neste navegador.');
       return;
     }
     if (nome === 'abandonar') {
@@ -434,6 +464,14 @@ export function mountLimiarApp(root: HTMLElement): void {
       case 'sinal':
       case 'gesto':
         return { tipo: d.acao, quem, relato: texto };
+      case 'desafioMaster':
+        return { tipo: 'desafioMaster', quem, missao: d.missao ?? texto };
+      case 'resgatarMarco':
+        return {
+          tipo: 'resgatarMarco',
+          marco: Number(d.marco) === 2 ? 2 : 1,
+          escolha: (d.escolha as EscolhaDeMarco) || 'folego',
+        };
       case 'confirmarSinal':
         return { tipo: 'confirmarSinal', quem, resposta: texto };
       case 'ajudar':

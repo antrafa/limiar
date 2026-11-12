@@ -9,10 +9,13 @@ import { renderTemasHtml } from '../src/components/temas-view';
 import { ALL_THEME_IDS } from '../src/data/index';
 
 describe('Telas do app', () => {
-  it('Como jogar explica a cena, os dois papéis e leva à mesa', () => {
-    const deck = loadThemeWithOverrides('zombies');
+  it('Como jogar explica a cena, onde está o desafio, como contar história juntos e os dois papéis', () => {
+    const deck = loadThemeWithOverrides('eclipse');
     const html = renderQuickstartGuideHtml(deck);
     expect(html).toContain('O seu dia é a aventura.');
+    expect(html).toContain('Onde está o desafio? E como contar a história juntos sem ficar subjetivo?');
+    expect(html).toContain('Coroa Negra');
+    expect(html).toContain('O Devorador do Sol');
     expect(html).toContain('Uma cena, em sete passos');
     expect(html).toContain('O Eco faz a leitura');
     expect(html).toContain('Sozinho, em dupla ou em grupo');
@@ -96,12 +99,17 @@ describe('Telas do app', () => {
     expect(html).not.toContain('Mandar um sinal');
   });
 
-  it('a página de Temas mostra todos os temas, marca o atual e oferece a troca', () => {
+  it('a página de Temas explica as nuances do mundo, o desafio dos 30 pontos, mostra todos os temas e oferece a troca', () => {
     const temas = ALL_THEME_IDS.map((id) => loadThemeWithOverrides(id));
     const html = renderTemasHtml(temas, 'noir');
     expect(html.match(/class="theme-tile/g)).toHaveLength(ALL_THEME_IDS.length);
     expect(html.match(/Tema atual/g)).toHaveLength(1);
     expect(html).toContain('data-switch-theme="arcana"');
-    for (const t of temas) expect(html).toContain(t.chefe.nome.replace(/&/g, '&amp;'));
+    expect(html).toContain('O que acontece quando vocês juntam 30 troféus por pessoa?');
+    expect(html).toContain('Coroa Negra');
+    for (const t of temas) {
+      expect(html).toContain(t.chefe.nome.replace(/&/g, '&amp;'));
+      expect(html).toContain(t.chefe.descricao.replace(/&/g, '&amp;'));
+    }
   });
 });

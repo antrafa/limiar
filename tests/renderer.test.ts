@@ -56,11 +56,16 @@ describe('Cartas, impressão e referência', () => {
     expect(insegura).not.toContain('has-art');
   });
 
-  it('o modal ampliado traz título acessível e a História', () => {
+  it('o modal ampliado traz título acessível, identifica História e Ideia como sugestão e ensina como usar', () => {
     const cena = deck.cards.find((c) => c.rank === '7' && c.suit === 'spades')!;
     const html = renderCardModalContentHtml(cena);
     expect(html).toContain('id="zoom-dialog-title"');
     expect(html).toContain('<h4>História</h4>');
+    expect(html).toContain('Sugestão para contar a história');
+    expect(html).toContain('Como usar na partida:');
+    expect(html).toContain('Sugestão de rotina');
+    expect(renderMagicCardHtml(cena)).toContain('História · sugestão');
+    expect(renderMagicCardHtml(cena)).toContain('Ideia · sugestão');
   });
 
   it('imprime 9 cartas por folha A4, com 16 marcas de corte e régua de calibração', () => {
@@ -127,6 +132,18 @@ describe('Cartas, impressão e referência', () => {
     });
     expect(cardLotePoker).toContain('@page { size: 67mm 92mm; margin: 0; }');
     expect(cardLotePoker.match(/class="folha-card-grafica /g)).toHaveLength(13); // 12 frentes + 1 verso final
+  });
+
+  it('permite imprimir o Kit de Dinamismo com 9 cartas de suporte e desafios', () => {
+    const html = renderPrintSheetsHtml(deck, {
+      ...configDeImpressaoPadrao(),
+      conjunto: 'dinamismo',
+      frenteEVerso: false,
+    });
+    expect(html).toContain('Desafio Master');
+    expect(html).toContain('Oráculo Rápido');
+    expect(html).toContain('Status do Mundo');
+    expect(html.match(/class="folha-slot /g)).toHaveLength(9);
   });
 
   it('a referência rápida tem o desfecho, as classes e as 40 cenas do tema', () => {

@@ -76,4 +76,16 @@ describe('Partida salva', () => {
     localStorage.setItem('limiar_partida_v2', JSON.stringify({ modo: 'ao-vivo', frentes: [{ nome: 'x', mao: [], turnos: 2 }] }));
     expect(loadPartida()).toBeNull();
   });
+
+  it('guarda e sincroniza o status do mundo no localStorage', async () => {
+    const { criarPartida } = await import('../src/core/partida');
+    const { loadEstadoDoMundo, syncEstadoDoMundo } = await import('../src/core/storage');
+    const partida = criarPartida({ jogadores: [{ nome: 'Ana', classe: 'spades' }] });
+    syncEstadoDoMundo('eclipse', partida, 'Área central sem eletricidade');
+
+    const estado = loadEstadoDoMundo('eclipse');
+    expect(estado.themeId).toBe('eclipse');
+    expect(estado.notaDoMundo).toBe('Área central sem eletricidade');
+    expect(estado.estagio).toBe('calmo');
+  });
 });

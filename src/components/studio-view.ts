@@ -53,11 +53,11 @@ export function renderStudioGalleryHtml(
     : `
       <p class="muted">Escreva para servir a qualquer pessoa, sozinha ou em grupo: sem falar de parceiro, dupla ou "vocês".</p>
       <div class="editor-field">
-        <label for="edit-dailyIdea">Ideia (o que esta cena pode ser no dia)</label>
+        <label for="edit-dailyIdea">Ideia · sugestão (o que esta cena pode ser no dia)</label>
         <textarea id="edit-dailyIdea" name="dailyIdea" rows="2">${escapeHtml(selectedCard.dailyIdea ?? '')}</textarea>
       </div>
       <div class="editor-field">
-        <label for="edit-topWatcherEvent">História (o Eco lê e liga à cena da vida real)</label>
+        <label for="edit-topWatcherEvent">História · sugestão (inspiração para o Eco ligar à cena real)</label>
         <textarea id="edit-topWatcherEvent" name="topWatcherEvent" rows="3">${escapeHtml(selectedCard.topWatcherEvent ?? '')}</textarea>
       </div>
       <div class="editor-field">

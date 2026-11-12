@@ -27,6 +27,7 @@ export interface Cena {
   sinal: string;
   sinalConfirmado: string; // resposta do Eco; vazio = o sinal ainda não vale
   gesto: string;
+  desafioMaster?: string; // missão rápida saudável cumprida em cartas de Desafio Master (8, 9, 10) ou chefe
   ajudaDe: number | null;
   valete: boolean;
   fundos: Carta[]; // dois quando a Dama foi deitada
@@ -56,17 +57,21 @@ export interface Partida {
   resultado: null | 'vitoria' | 'derrota';
   motivoFim: string;
   diario: string[];
+  metaPorPessoa?: number; // 30 (padrão) ou 15 (partida rápida / sprint)
+  marcosResgatados?: number[]; // [1], [1, 2] quando resgatados aos 33% e 66%
 }
 
 export const REGRA = {
   folego: 3,
   trofeusPorPessoa: 30,
+  trofeusSprintPorPessoa: 15,
   ameacaPorPessoa: 5,
   chefeVidaBase: 2,
   chefeValor: 8,
   valorAs: 11,
   bonusSinal: 2,
   bonusGesto: 1,
+  bonusDesafioMaster: 2,
   bonusRei: 1,
   bonusAjuda: 2,
   bonusValete: 3,
@@ -120,6 +125,70 @@ export const REGRA_DA_ESTRELA = 'O Segundo Sol: o dono do baralho ganha +1 de F�
 export const REGRA_DA_CAVEIRA = 'Totalidade: a Ameaça sobe 1 e o chefe fica mais forte (+1 de vida e +1 de valor).';
 export const REGRA_DO_SINAL = `Se o sinal aparecer com a cena aberta, conte ao Eco; quando ele disser o que aquilo é na história, vale +${REGRA.bonusSinal}. Nunca é obrigatório.`;
 export const REGRA_DO_GESTO = `Faça o gesto da carta e conte ao Eco: +${REGRA.bonusGesto}. Nunca é obrigatório.`;
+export const REGRA_DO_DESAFIO_MASTER = `Cartas 8, 9 e 10 trazem um Desafio Master (encontro intenso no meio do baralho): cumpra uma missão saudável rápida do dia para somar +${REGRA.bonusDesafioMaster} na cena.`;
+
+/** Missões saudáveis, rápidas e acessíveis para os Desafios Master (cartas 8, 9 e 10 de cada naipe). */
+export const DESAFIOS_MASTER: Record<Naipe, readonly [string, string, string]> = {
+  spades: [
+    'Dar 200 passos seguidos ou subir um lance de escada',
+    'Alongar braços, ombros e pescoço por 1 minuto',
+    'Caminhar 3 minutos sem olhar para telas',
+  ],
+  hearts: [
+    'Cumprimentar alguém na rua, portaria ou comércio com um bom-dia',
+    'Mandar uma mensagem rápida perguntando como alguém querido está',
+    'Fazer um elogio sincero ou agradecer alguém hoje',
+  ],
+  diamonds: [
+    'Beber 400 ml de água (um copo grande cheio) agora',
+    'Arrumar 3 objetos fora do lugar na mesa ou mochila',
+    'Fazer uma pausa de 5 minutos longe de qualquer tela',
+  ],
+  clubs: [
+    'Fazer 5 respirações lentas e profundas perto de uma janela',
+    'Observar o ambiente por 2 minutos e notar 3 detalhes novos',
+    'Seguir por um lado diferente da calçada ou mudar um pequeno hábito',
+  ],
+};
+
+/** Cartas 8, 9 e 10 no meio do baralho funcionam como Encontros / Desafios Master mais intensos. */
+export function ehDesafioMaster(carta: Carta | null | undefined): boolean {
+  return !!carta && carta.valor >= 8 && carta.valor <= 10;
+}
+
+export function desafioMasterDaCarta(carta: Carta): string {
+  const lista = DESAFIOS_MASTER[carta.naipe];
+  const idx = Math.max(0, Math.min(2, carta.valor - 8));
+  return lista[idx];
+}
+
+export type EstagioDeAmeaca = 'calmo' | 'atencao' | 'critico' | 'chefe';
+
+export function estagioDeAmeaca(partida: Partida): EstagioDeAmeaca {
+  if (partida.chefe) return 'chefe';
+  const lim = limiteDeAmeaca(partida);
+  if (partida.ameaca >= Math.max(1, lim - 2)) return 'critico';
+  if (partida.ameaca >= Math.ceil(lim * 0.4)) return 'atencao';
+  return 'calmo';
+}
+
+/** Marcos de meio de caminho: 1 (aos 33% da meta) e 2 (aos 66% da meta). */
+export function marcoAlcancado(partida: Partida): 0 | 1 | 2 {
+  const meta = metaDeTrofeus(partida);
+  if (partida.trofeus >= Math.ceil((meta * 2) / 3)) return 2;
+  if (partida.trofeus >= Math.ceil(meta / 3)) return 1;
+  return 0;
+}
+
+export function marcoPendente(partida: Partida): 1 | 2 | null {
+  const alcancado = marcoAlcancado(partida);
+  const resgatados = partida.marcosResgatados ?? [];
+  if (alcancado >= 1 && !resgatados.includes(1)) return 1;
+  if (alcancado >= 2 && !resgatados.includes(2)) return 2;
+  return null;
+}
+
+export type EscolhaDeMarco = 'folego' | 'dama' | 'ameaca';
 
 export type Acao =
   | { tipo: 'abrir'; quem: number; eco?: number }
@@ -128,6 +197,8 @@ export type Acao =
   | { tipo: 'sinal'; quem: number; relato: string }
   | { tipo: 'confirmarSinal'; quem: number; resposta: string }
   | { tipo: 'gesto'; quem: number; relato: string }
+  | { tipo: 'desafioMaster'; quem: number; missao: string }
+  | { tipo: 'resgatarMarco'; marco: 1 | 2; escolha: EscolhaDeMarco }
   | { tipo: 'ajudar'; quem: number; de: number }
   | { tipo: 'valete'; quem: number }
   | { tipo: 'virarFundo'; quem: number }
@@ -171,7 +242,8 @@ export function valorDe(carta: Carta): number {
 }
 
 export function metaDeTrofeus(partida: Partida): number {
-  return REGRA.trofeusPorPessoa * partida.pessoas.length;
+  const porPessoa = partida.metaPorPessoa ?? REGRA.trofeusPorPessoa;
+  return porPessoa * partida.pessoas.length;
 }
 
 export function limiteDeAmeaca(partida: Partida): number {
@@ -203,6 +275,7 @@ export function bonusDaCena(partida: Partida, quem: number): Bonus {
   const partes: Array<[boolean, number, string]> = [
     [!!cena.sinalConfirmado, REGRA.bonusSinal, 'sinal'],
     [!!cena.gesto, REGRA.bonusGesto, 'gesto'],
+    [!!cena.desafioMaster, REGRA.bonusDesafioMaster, 'Desafio Master'],
     [cena.topo?.naipe === pessoa.classe, REGRA.bonusRei, `Rei ${SIMBOLO[pessoa.classe]}`],
     [cena.ajudaDe !== null, REGRA.bonusAjuda, `ajuda de ${partida.pessoas[cena.ajudaDe ?? 0]?.nome ?? ''}`],
     [cena.valete, REGRA.bonusValete, 'Valete'],
@@ -220,7 +293,7 @@ export function cenaComecou(cena: Cena): boolean {
 }
 
 export function criarPartida(
-  config: { jogadores: Array<{ nome: string; classe: Naipe }>; baralhos?: CartaDoBaralho[][] },
+  config: { jogadores: Array<{ nome: string; classe: Naipe }>; baralhos?: CartaDoBaralho[][]; metaPorPessoa?: number },
   rng: Rng = Math.random,
 ): Partida {
   const pessoas: Pessoa[] = config.jogadores.slice(0, REGRA.maxPessoas).map((j, i) => ({
@@ -243,6 +316,7 @@ export function criarPartida(
     resultado: null,
     motivoFim: '',
     diario: [],
+    ...(config.metaPorPessoa ? { metaPorPessoa: config.metaPorPessoa } : {}),
   };
   const nomes = pessoas.map((p) => `${p.nome} (${SIMBOLO[p.classe]} ${CLASSES[p.classe].nome})`).join(', ');
   partida.diario.push(`A campanha começou: ${nomes}. Meta: ${metaDeTrofeus(partida)} troféus.`);
@@ -482,7 +556,7 @@ function usarValete(partida: Partida, quem: number, quando: string): boolean {
 function escreverNaCena(
   partida: Partida,
   quem: number,
-  campo: 'declaracao' | 'leitura' | 'sinal' | 'sinalConfirmado' | 'gesto',
+  campo: 'declaracao' | 'leitura' | 'sinal' | 'sinalConfirmado' | 'gesto' | 'desafioMaster',
   texto: string,
 ): boolean {
   const cena = partida.pessoas[quem].cena;
@@ -494,9 +568,32 @@ function escreverNaCena(
     sinal: cenaComecou(cena),
     sinalConfirmado: cenaComecou(cena) && !!cena.sinal,
     gesto: cenaComecou(cena),
+    desafioMaster: cenaComecou(cena),
   };
   if (!precisaDe[campo]) return false;
   cena[campo] = limpo;
+  return true;
+}
+
+function resgatarMarco(partida: Partida, marco: 1 | 2, escolha: EscolhaDeMarco, quando: string): boolean {
+  if (marcoPendente(partida) !== marco) return false;
+  partida.marcosResgatados = [...(partida.marcosResgatados ?? []), marco];
+  const nomeMarco = marco === 1 ? 'Marco 1 (Primeiro Presságio)' : 'Marco 2 (Sombra do Chefe)';
+  if (escolha === 'folego') {
+    for (const p of partida.pessoas) {
+      p.folego = Math.min(p.folegoMax, p.folego + 1);
+    }
+    registrar(partida, quando, `${nomeMarco} resgatado: todo o grupo recuperou +1 de Fôlego.`);
+    return true;
+  }
+  if (escolha === 'dama') {
+    const alvo = partida.pessoas.find((p) => !p.dama) ?? partida.pessoas[0];
+    alvo.dama = true;
+    registrar(partida, quando, `${nomeMarco} resgatado: a Dama de ${alvo.nome} foi recarregada.`);
+    return true;
+  }
+  partida.ameaca = Math.max(0, partida.ameaca - 1);
+  registrar(partida, quando, `${nomeMarco} resgatado: a Ameaça recuou para ${partida.ameaca}.`);
   return true;
 }
 
@@ -538,6 +635,10 @@ function falas(partida: Partida, acao: Acao, quando: string): boolean {
       if (!escreverNaCena(partida, acao.quem, 'gesto', acao.relato)) return false;
       registrar(partida, quando, `${pessoa.nome} fez o gesto: “${cena.gesto}” (+${REGRA.bonusGesto})`);
       return true;
+    case 'desafioMaster':
+      if (!escreverNaCena(partida, acao.quem, 'desafioMaster', acao.missao)) return false;
+      registrar(partida, quando, `${pessoa.nome} cumpriu o Desafio Master: “${cena.desafioMaster}” (+${REGRA.bonusDesafioMaster})`);
+      return true;
     default:
       return false;
   }
@@ -576,6 +677,8 @@ function executar(partida: Partida, acao: Acao, quando: string): boolean {
       return narrar(partida, acao.quem, acao.texto, quando);
     case 'mandarSinal':
       return mandarSinal(partida, acao.de, acao.para, acao.texto, quando);
+    case 'resgatarMarco':
+      return resgatarMarco(partida, acao.marco, acao.escolha, quando);
     default:
       return falas(partida, acao, quando);
   }
