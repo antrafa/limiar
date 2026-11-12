@@ -21,14 +21,23 @@ import { renderTemasHtml } from './components/temas-view';
 import { cartaPeloCodigo, iniciarEscaneador, renderEscaneadorHtml } from './components/scanner';
 import { type Acao, agir, criarPartida, type EscolhaDeMarco, linhaDeStatus, type Naipe, type Partida } from './core/partida';
 import {
+  carregarDaSalaRemota,
+  codificarMesaUrl,
+  criarSalaRemota,
+  decodificarMesaUrl,
+  salvarNaSalaRemota,
+} from './core/online-sync';
+import {
   exportThemeJson,
   importThemeJson,
   loadPartida,
+  loadSalaOnlineId,
   loadThemeId,
   loadThemeWithOverrides,
   resetThemeOverrides,
   saveCardOverride,
   savePartida,
+  saveSalaOnlineId,
   saveThemeId,
   syncEstadoDoMundo,
 } from './core/storage';
@@ -56,12 +65,15 @@ interface AppState {
   partida: Partida | null;
   preparo: PreparacaoMesa;
   toastMessage: string | null;
+  salaOnlineId: string | null;
+  conectandoOnline: boolean;
 }
 
 export function mountLimiarApp(root: HTMLElement): void {
   const savedTheme = loadThemeId();
   const initialThemeId: ThemeId = savedTheme && ALL_THEME_IDS.includes(savedTheme) ? savedTheme : DEFAULT_THEME_ID;
   const partida = loadPartida();
+  const salaOnlineId = loadSalaOnlineId();
 
   const state: AppState = {
     activeTab: 'quickstart',
@@ -72,7 +84,64 @@ export function mountLimiarApp(root: HTMLElement): void {
     partida,
     preparo: preparacaoPadrao(),
     toastMessage: null,
+    salaOnlineId,
+    conectandoOnline: false,
   };
+
+  // Se houver parâmetros de sala na URL (#mesa=... ou ?mesa=...)
+  verificarParametrosDaUrl();
+
+  // Polling em segundo plano se houver sala online ativa (a cada 4s)
+  setInterval(async () => {
+    if (!state.salaOnlineId || !state.partida || state.activeTab !== 'playtest') return;
+    try {
+      const payload = await carregarDaSalaRemota(state.salaOnlineId);
+      if (!payload || !payload.partida) return;
+      // Compara se o diário ou estado mudou
+      const diarioLocal = state.partida.diario.join('|');
+      const diarioRemoto = payload.partida.diario.join('|');
+      if (diarioLocal !== diarioRemoto || state.partida.trofeus !== payload.partida.trofeus || state.partida.ameaca !== payload.partida.ameaca) {
+        setPartida(payload.partida, false);
+      }
+    } catch {}
+  }, 4000);
+
+  function verificarParametrosDaUrl(): void {
+    if (typeof window === 'undefined') return;
+
+    // 1. Verifica ?sala=ID
+    const params = new URLSearchParams(window.location.search);
+    const salaId = params.get('sala');
+    if (salaId) {
+      state.salaOnlineId = salaId;
+      saveSalaOnlineId(salaId);
+      state.activeTab = 'playtest';
+      carregarDaSalaRemota(salaId)
+        .then((payload) => {
+          if (payload && payload.partida) {
+            state.activeThemeId = payload.temaId;
+            saveThemeId(payload.temaId);
+            setPartida(payload.partida, false);
+            showToast('Conectado à sala online do link!');
+          }
+        })
+        .catch(() => {});
+      return;
+    }
+
+    // 2. Verifica hash #mesa=...
+    if (window.location.hash.startsWith('#mesa=')) {
+      const raw = window.location.hash.replace('#mesa=', '');
+      const payload = decodificarMesaUrl(raw);
+      if (payload && payload.partida) {
+        state.activeThemeId = payload.temaId;
+        saveThemeId(payload.temaId);
+        setPartida(payload.partida, false);
+        state.activeTab = 'playtest';
+        showToast('Mesa carregada a partir do link!');
+      }
+    }
+  }
 
   function showToast(msg: string): void {
     state.toastMessage = msg;
@@ -84,10 +153,13 @@ export function mountLimiarApp(root: HTMLElement): void {
     }, 2600);
   }
 
-  function setPartida(next: Partida | null): void {
+  function setPartida(next: Partida | null, enviarRemoto = true): void {
     state.partida = next;
     savePartida(next);
     if (next) syncEstadoDoMundo(state.activeThemeId, next);
+    if (enviarRemoto && state.salaOnlineId && next) {
+      salvarNaSalaRemota(state.salaOnlineId, state.activeThemeId, next).catch(() => {});
+    }
     render();
   }
 
@@ -122,7 +194,7 @@ export function mountLimiarApp(root: HTMLElement): void {
       case 'studio':
         return renderStudioGalleryHtml(deck, selectedCard, state.suitFilter);
       case 'playtest':
-        return renderPlaytestTableHtml(deck, state.partida, state.preparo);
+        return renderPlaytestTableHtml(deck, state.partida, state.preparo, state.salaOnlineId, state.conectandoOnline);
       case 'print':
         return renderPrintSheetsHtml(deck, state.impressao);
       default:
@@ -374,6 +446,10 @@ export function mountLimiarApp(root: HTMLElement): void {
       btn.addEventListener('click', () => acaoDeMesa(btn.dataset.acaoMesa ?? ''));
     });
 
+    root.querySelectorAll<HTMLButtonElement>('[data-acao-online]').forEach((btn) => {
+      btn.addEventListener('click', () => acaoOnline(btn.dataset.acaoOnline ?? ''));
+    });
+
     root.querySelectorAll<HTMLButtonElement>('[data-ritmo-mesa]').forEach((btn) => {
       btn.addEventListener('click', () => {
         const meta = Number(btn.dataset.ritmoMesa);
@@ -445,6 +521,112 @@ export function mountLimiarApp(root: HTMLElement): void {
         ?.writeText(linha)
         .then(() => showToast('Linha copiada. Cole na conversa.'))
         .catch(() => showToast('Não deu para copiar: selecione a linha e copie à mão.'));
+    }
+  }
+
+  async function acaoOnline(acao: string): Promise<void> {
+    if (acao === 'desconectar') {
+      state.salaOnlineId = null;
+      saveSalaOnlineId(null);
+      showToast('Desconectado da sala online.');
+      render();
+      return;
+    }
+
+    if (acao === 'copiarLink') {
+      if (!state.partida) return;
+      const urlBase = `${window.location.origin}${window.location.pathname}`;
+      const link = state.salaOnlineId
+        ? `${urlBase}?sala=${encodeURIComponent(state.salaOnlineId)}#playtest`
+        : `${urlBase}#mesa=${codificarMesaUrl({ versao: 1, temaId: state.activeThemeId, partida: state.partida, atualizadoEm: Date.now() })}`;
+
+      try {
+        await navigator.clipboard.writeText(link);
+        showToast('Link copiado! Envie para o seu parceiro.');
+      } catch {
+        showToast('Não foi possível copiar automaticamente.');
+      }
+      return;
+    }
+
+    if (acao === 'criar') {
+      let partidaAtual = state.partida;
+      if (!partidaAtual) {
+        const nomeados = state.preparo.jogadores.map((j, i) => ({ ...j, nome: j.nome.trim() || `Jogador ${i + 1}` }));
+        partidaAtual = criarPartida({ jogadores: nomeados, metaPorPessoa: state.preparo.metaPorPessoa });
+      }
+
+      state.conectandoOnline = true;
+      render();
+
+      try {
+        const idCriado = await criarSalaRemota(state.activeThemeId, partidaAtual);
+        state.salaOnlineId = idCriado;
+        saveSalaOnlineId(idCriado);
+        setPartida(partidaAtual, false);
+        state.activeTab = 'playtest';
+        showToast(`Sala online criada com sucesso!`);
+      } catch {
+        showToast('Erro ao criar sala online. Tente novamente.');
+      } finally {
+        state.conectandoOnline = false;
+        render();
+      }
+      return;
+    }
+
+    if (acao === 'entrar') {
+      const input = root.querySelector<HTMLInputElement>('[data-campo-sala]');
+      const raw = input?.value.trim() ?? '';
+      if (!raw) {
+        showToast('Digite ou cole o código da sala.');
+        return;
+      }
+
+      let id = raw;
+      if (raw.includes('sala=')) {
+        try {
+          const u = new URL(raw, window.location.href);
+          id = u.searchParams.get('sala') ?? raw;
+        } catch {}
+      }
+
+      state.conectandoOnline = true;
+      render();
+
+      try {
+        const payload = await carregarDaSalaRemota(id);
+        if (!payload || !payload.partida) {
+          showToast('Sala não encontrada ou código expirado.');
+        } else {
+          state.salaOnlineId = id;
+          saveSalaOnlineId(id);
+          state.activeThemeId = payload.temaId;
+          saveThemeId(payload.temaId);
+          setPartida(payload.partida, false);
+          state.activeTab = 'playtest';
+          showToast(`Conectado à sala!`);
+        }
+      } catch {
+        showToast('Não foi possível conectar à sala.');
+      } finally {
+        state.conectandoOnline = false;
+        render();
+      }
+      return;
+    }
+
+    if (acao === 'sincronizarAgora') {
+      if (!state.salaOnlineId) return;
+      try {
+        const payload = await carregarDaSalaRemota(state.salaOnlineId);
+        if (payload && payload.partida) {
+          setPartida(payload.partida, false);
+          showToast('Mesa atualizada da sala online!');
+        }
+      } catch {
+        showToast('Falha ao sincronizar.');
+      }
     }
   }
 

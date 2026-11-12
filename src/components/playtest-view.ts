@@ -46,13 +46,26 @@ export function preparacaoPadrao(): PreparacaoMesa {
   };
 }
 
-export function renderPlaytestTableHtml(deck: ThemeDeck, partida: Partida | null, preparo: PreparacaoMesa): string {
-  return partida ? renderPartida(deck, partida) : renderPreparacao(deck, preparo);
+export function renderPlaytestTableHtml(
+  deck: ThemeDeck,
+  partida: Partida | null,
+  preparo: PreparacaoMesa,
+  salaOnlineId: string | null = null,
+  conectandoOnline: boolean = false,
+): string {
+  return partida
+    ? renderPartida(deck, partida, salaOnlineId, conectandoOnline)
+    : renderPreparacao(deck, preparo, salaOnlineId, conectandoOnline);
 }
 
 // ---------- Preparação ----------
 
-function renderPreparacao(deck: ThemeDeck, preparo: PreparacaoMesa): string {
+function renderPreparacao(
+  deck: ThemeDeck,
+  preparo: PreparacaoMesa,
+  salaOnlineId: string | null = null,
+  conectandoOnline: boolean = false,
+): string {
   const n = preparo.jogadores.length;
   const jogadores = preparo.jogadores.map((j, i) => renderEscolhaDeJogador(deck, j, i)).join('');
   const quem = n === 1 ? 'Você joga sozinho e faz os dois papéis: vive a cena e é o próprio Eco.' : 'Cada cena tem quem vive e um Eco, que lê a carta, confirma os sinais, vira o desfecho e narra.';
@@ -109,6 +122,26 @@ function renderPreparacao(deck: ThemeDeck, preparo: PreparacaoMesa): string {
           : ''
       }
 
+      <div class="online-room-card">
+        <div class="online-room-head">
+          <span class="chip ${salaOnlineId ? 'chip-ok' : ''}">${salaOnlineId ? '● Sala Conectada' : 'Mesa Online'}</span>
+          <strong>${salaOnlineId ? `Código: ${escapeHtml(salaOnlineId)}` : 'Jogar à distância com outra pessoa'}</strong>
+        </div>
+        <p class="muted">Vocês verão as mesmas cartas e jogadas em tempo real sem precisar de servidor manual.</p>
+        <div class="inline wrap">
+          ${
+            salaOnlineId
+              ? `<button type="button" class="btn-secondary btn-sm" data-acao-online="copiarLink">Copiar link da mesa para o parceiro</button>
+                 <button type="button" class="btn-ghost btn-sm danger" data-acao-online="desconectar">Sair da sala online</button>`
+              : `<button type="button" class="btn-secondary btn-sm" data-acao-online="criar" ${conectandoOnline ? 'disabled' : ''}>${conectandoOnline ? 'Criando sala...' : 'Criar sala online'}</button>
+                 <div class="inline">
+                   <input type="text" maxlength="40" placeholder="Cole o código ou ID da sala" data-campo-sala aria-label="Código da sala" />
+                   <button type="button" class="btn-ghost btn-sm" data-acao-online="entrar" ${conectandoOnline ? 'disabled' : ''}>Entrar na sala</button>
+                 </div>`
+          }
+        </div>
+      </div>
+
       <div class="setup-players">${jogadores}</div>
 
       <div class="setup-actions">
@@ -145,10 +178,29 @@ function renderEscolhaDeJogador(deck: ThemeDeck, jogador: { nome: string; classe
 
 // ---------- Campanha ----------
 
-function renderPartida(deck: ThemeDeck, partida: Partida): string {
+function renderPartida(
+  deck: ThemeDeck,
+  partida: Partida,
+  salaOnlineId: string | null = null,
+  conectandoOnline: boolean = false,
+): string {
   const pessoas = partida.pessoas.map((p, i) => renderPessoa(deck, partida, p, i)).join('');
+  const barraOnline = salaOnlineId
+    ? `<div class="online-sync-bar">
+         <span class="chip chip-ok">● Sincronizado online</span>
+         <span>Código da sala: <strong>${escapeHtml(salaOnlineId)}</strong></span>
+         <button type="button" class="btn-ghost btn-sm" data-acao-online="copiarLink">Copiar link da mesa</button>
+         <button type="button" class="btn-ghost btn-sm" data-acao-online="sincronizarAgora" title="Buscar atualizações">Atualizar agora</button>
+         <button type="button" class="btn-ghost btn-sm danger" data-acao-online="desconectar">Desconectar</button>
+       </div>`
+    : `<div class="online-sync-bar">
+         <span>Mesa local.</span>
+         <button type="button" class="btn-secondary btn-sm" data-acao-online="criar" ${conectandoOnline ? 'disabled' : ''}>${conectandoOnline ? 'Criando sala...' : 'Compartilhar mesa online com meu parceiro'}</button>
+       </div>`;
+
   return `
     <div class="table">
+      ${barraOnline}
       ${renderPlacar(deck, partida)}
       ${renderResultado(deck, partida)}
       <div class="fronts fronts-${partida.pessoas.length}">${pessoas}</div>

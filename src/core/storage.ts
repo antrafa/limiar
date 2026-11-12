@@ -109,6 +109,18 @@ export function savePartida(partida: Partida | null): void {
 }
 
 const THEME_KEY = 'limiar_tema';
+const SALA_ONLINE_KEY = 'limiar_sala_online_id';
+
+export function loadSalaOnlineId(): string | null {
+  return getStorage()?.getItem(SALA_ONLINE_KEY) ?? null;
+}
+
+export function saveSalaOnlineId(salaId: string | null): void {
+  const store = getStorage();
+  if (!store) return;
+  if (salaId) store.setItem(SALA_ONLINE_KEY, salaId);
+  else store.removeItem(SALA_ONLINE_KEY);
+}
 
 export function loadThemeId(): ThemeId | null {
   return (getStorage()?.getItem(THEME_KEY) as ThemeId | null) ?? null;
