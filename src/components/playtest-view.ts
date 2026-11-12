@@ -294,7 +294,10 @@ function renderPlacar(deck: ThemeDeck, partida: Partida): string {
             <button type="button" class="btn-ghost btn-sm" data-acao-mesa="salvarMundo">Salvar status</button>
           </div>
         </div>
-        <div class="score-item"><button type="button" class="btn-ghost btn-sm" data-acao-mesa="abandonar">Nova campanha</button></div>
+        <div class="score-item score-actions-box">
+          <button type="button" class="btn-ghost btn-sm danger" data-acao-mesa="encerrarMesa" title="Encerra a partida atual mantendo o histórico">Encerrar mesa</button>
+          <button type="button" class="btn-primary btn-sm" data-acao-mesa="novaMesa" title="Começa uma nova mesa limpa">Começar nova mesa</button>
+        </div>
       </div>
     </section>
   `;
@@ -307,7 +310,10 @@ function renderResultado(deck: ThemeDeck, partida: Partida): string {
     <section class="result ${vitoria ? 'is-win' : 'is-loss'}">
       <span class="eyebrow">${vitoria ? 'Vitória' : 'Derrota'}</span>
       <h2>${vitoria ? `${escapeHtml(deck.chefe.nome)} caiu.` : escapeHtml(partida.motivoFim)}</h2>
-      <button type="button" class="btn-primary" data-acao-mesa="abandonar">Jogar de novo</button>
+      <div class="inline wrap">
+        <button type="button" class="btn-primary" data-acao-mesa="novaMesa">Começar nova mesa</button>
+        <button type="button" class="btn-ghost" data-acao-mesa="encerrarMesa">Voltar à preparação</button>
+      </div>
     </section>
   `;
 }

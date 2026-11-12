@@ -1,95 +1,159 @@
+import { Peer, type DataConnection } from 'peerjs';
 import type { Partida } from './partida';
 import type { ThemeId } from '../types/card';
 
-export interface SalaRemotaPayload {
-  versao: 1;
+export interface MensagemP2P {
+  tipo: 'sync' | 'pedirSync';
   temaId: ThemeId;
-  partida: Partida;
-  atualizadoEm: number;
+  partida: Partida | null;
+  enviadoEm: number;
 }
 
-const API_BASE = 'https://api.restful-api.dev/objects';
+let peerInstancia: Peer | null = null;
+const conexoesAtivas: Set<DataConnection> = new Set();
+let onReceberMensagemCallback: ((msg: MensagemP2P) => void) | null = null;
 
-/** Codifica um payload de sala para link direto via hash (ex: #mesa=...). Funciona offline e sem API. */
-export function codificarMesaUrl(payload: SalaRemotaPayload): string {
-  try {
-    const json = JSON.stringify(payload);
-    return btoa(encodeURIComponent(json));
-  } catch {
-    return '';
+function gerarPrefixoSala(codigo: string): string {
+  // Padroniza um ID amigável sem caracteres especiais (ex: limiar-mesa-xyz123)
+  const limpo = codigo.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return `limiar-mesa-${limpo}`;
+}
+
+export function gerarCodigoSalaAleatorio(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let res = '';
+  for (let i = 0; i < 6; i++) {
+    res += chars.charAt(Math.floor(Math.random() * chars.length));
   }
+  return res;
 }
 
-/** Decodifica um payload de sala vindo da URL hash. */
-export function decodificarMesaUrl(hashString: string): SalaRemotaPayload | null {
+export function registrarCallbackMensagem(callback: (msg: MensagemP2P) => void): void {
+  onReceberMensagemCallback = callback;
+}
+
+export function conectarOuHospedarSala(
+  codigoSala: string,
+  onConectado: (codigoExibicao: string) => void,
+  onErro: (err: string) => void,
+): void {
+  desconectarP2P();
+
+  const idPeerAlvo = gerarPrefixoSala(codigoSala);
+
   try {
-    const raw = decodeURIComponent(atob(hashString));
-    const parsed = JSON.parse(raw) as SalaRemotaPayload;
-    if (parsed && parsed.versao === 1 && parsed.partida && Array.isArray(parsed.partida.pessoas)) {
-      return parsed;
-    }
-    return null;
-  } catch {
-    return null;
-  }
-}
+    // 1. Tenta criar o Peer com o ID da sala (atuando como criador da sala)
+    const peer = new Peer(idPeerAlvo);
+    peerInstancia = peer;
 
-/** Cria uma nova sala online e retorna o ID remoto gerado pela API. */
-export async function criarSalaRemota(temaId: ThemeId, partida: Partida): Promise<string> {
-  const payload: SalaRemotaPayload = {
-    versao: 1,
-    temaId,
-    partida,
-    atualizadoEm: Date.now(),
-  };
-
-  const res = await fetch(API_BASE, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: `Limiar-${temaId}`,
-      data: payload,
-    }),
-  });
-
-  if (!res.ok) {
-    throw new Error('Não foi possível conectar ao servidor para criar a sala.');
-  }
-
-  const json = (await res.json()) as { id: string };
-  return json.id;
-}
-
-/** Atualiza o estado da partida na sala online. */
-export async function salvarNaSalaRemota(salaId: string, temaId: ThemeId, partida: Partida): Promise<void> {
-  const payload: SalaRemotaPayload = {
-    versao: 1,
-    temaId,
-    partida,
-    atualizadoEm: Date.now(),
-  };
-
-  await fetch(`${API_BASE}/${encodeURIComponent(salaId)}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: `Limiar-${temaId}`,
-      data: payload,
-    }),
-  });
-}
-
-/** Busca o estado atualizado da sala online. */
-export async function carregarDaSalaRemota(salaId: string): Promise<SalaRemotaPayload | null> {
-  try {
-    const res = await fetch(`${API_BASE}/${encodeURIComponent(salaId)}`, {
-      method: 'GET',
-      headers: { 'Accept': 'application/json' },
+    peer.on('open', () => {
+      onConectado(codigoSala.toUpperCase());
     });
-    if (!res.ok) return null;
-    const json = (await res.json()) as { data?: SalaRemotaPayload };
-    return json.data ?? null;
-  } catch {
-    return null;
+
+    peer.on('connection', (conn) => {
+      configurarConexao(conn);
+    });
+
+    peer.on('error', (err: any) => {
+      // Se o ID já existir ('unavailable-id'), significa que a sala já foi criada pelo parceiro!
+      // Conecta como convidado na mesma sala:
+      if (err.type === 'unavailable-id') {
+        conectarComoCliente(idPeerAlvo, codigoSala, onConectado, onErro);
+      } else {
+        onErro(err.message || 'Erro de conexão online');
+      }
+    });
+  } catch (e: any) {
+    onErro(e?.message || 'Falha ao iniciar conexão online');
+  }
+}
+
+function conectarComoCliente(
+  idPeerAlvo: string,
+  codigoSalaOriginal: string,
+  onConectado: (codigoExibicao: string) => void,
+  onErro: (err: string) => void,
+): void {
+  desconectarP2P();
+
+  const peerCliente = new Peer();
+  peerInstancia = peerCliente;
+
+  peerCliente.on('open', () => {
+    const conn = peerCliente.connect(idPeerAlvo, { reliable: true });
+
+    conn.on('open', () => {
+      configurarConexao(conn);
+      onConectado(codigoSalaOriginal.toUpperCase());
+      // Pede o estado atual da mesa para o anfitrião
+      conn.send({ tipo: 'pedirSync' });
+    });
+
+    conn.on('error', () => {
+      onErro('Não foi possível conectar à sala informada.');
+    });
+  });
+
+  peerCliente.on('error', (e: any) => {
+    onErro(e?.message || 'Erro na conexão com a sala');
+  });
+}
+
+function configurarConexao(conn: DataConnection): void {
+  conexoesAtivas.add(conn);
+
+  conn.on('data', (dados: any) => {
+    if (!dados || typeof dados !== 'object') return;
+    if (dados.tipo === 'pedirSync') {
+      onReceberMensagemCallback?.({
+        tipo: 'pedirSync',
+        temaId: '' as any,
+        partida: null,
+        enviadoEm: Date.now(),
+      });
+      return;
+    }
+    if (dados.tipo === 'sync' && dados.partida) {
+      onReceberMensagemCallback?.(dados as MensagemP2P);
+    }
+  });
+
+  conn.on('close', () => {
+    conexoesAtivas.delete(conn);
+  });
+
+  conn.on('error', () => {
+    conexoesAtivas.delete(conn);
+  });
+}
+
+export function enviarEstadoParaSala(temaId: ThemeId, partida: Partida): void {
+  const msg: MensagemP2P = {
+    tipo: 'sync',
+    temaId,
+    partida,
+    enviadoEm: Date.now(),
+  };
+
+  for (const conn of conexoesAtivas) {
+    if (conn.open) {
+      conn.send(msg);
+    }
+  }
+}
+
+export function desconectarP2P(): void {
+  for (const conn of conexoesAtivas) {
+    try {
+      conn.close();
+    } catch {}
+  }
+  conexoesAtivas.clear();
+
+  if (peerInstancia) {
+    try {
+      peerInstancia.destroy();
+    } catch {}
+    peerInstancia = null;
   }
 }
