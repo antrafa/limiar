@@ -33,7 +33,6 @@ import {
 import {
   exportThemeJson,
   importThemeJson,
-  loadPartida,
   loadThemeId,
   loadThemeWithOverrides,
   resetThemeOverrides,
@@ -71,52 +70,58 @@ interface AppState {
   conectandoOnline: boolean;
   parceiroOnline: boolean;
   ehHostDaSala: boolean;
+  versaoSala: number;
 }
 
 export function mountLimiarApp(root: HTMLElement): void {
   const savedTheme = loadThemeId();
   const initialThemeId: ThemeId = savedTheme && ALL_THEME_IDS.includes(savedTheme) ? savedTheme : DEFAULT_THEME_ID;
-  const partida = loadPartida();
   const paramsIniciais = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
   const urlSalaId = paramsIniciais.get('sala');
-  // Se não houver ?sala= na URL, limpa qualquer resquício salvo para não criar conexões fantasmas
-  if (!urlSalaId) {
-    saveSalaOnlineId(null);
-  }
-  const salaOnlineId = urlSalaId ? urlSalaId.toUpperCase() : null;
+  // Sem sala ativa, não exibe mesa nem partida antiga salva no navegador
+  saveSalaOnlineId(null);
 
   const state: AppState = {
-    activeTab: 'quickstart',
+    activeTab: urlSalaId ? 'playtest' : 'quickstart',
     activeThemeId: initialThemeId,
     suitFilter: 'all',
     impressao: configDeImpressaoPadrao(),
     selectedCardId: loadThemeWithOverrides(initialThemeId).cards[0].id,
-    partida,
+    partida: null,
     preparo: preparacaoPadrao(),
     toastMessage: null,
-    salaOnlineId,
+    salaOnlineId: null,
     conectandoOnline: false,
     parceiroOnline: false,
     ehHostDaSala: false,
+    versaoSala: 0,
   };
+
+  function sincronizarSala(): void {
+    if (!state.salaOnlineId) return;
+    state.versaoSala += 1;
+    enviarEstadoParaSala(state.activeThemeId, state.preparo, state.partida, state.versaoSala);
+  }
 
   // Conecta ao receptor P2P para sincronização em tempo real
   registrarCallbacksP2P(
     (msg) => {
       if (msg.tipo === 'pedirSync') {
-        if (state.partida) {
-          enviarEstadoParaSala(state.activeThemeId, state.partida);
+        if (state.salaOnlineId) {
+          enviarEstadoParaSala(state.activeThemeId, state.preparo, state.partida, state.versaoSala);
         }
         return;
       }
       if (msg.tipo === 'salaEncerrada') {
         desconectarP2P();
         state.salaOnlineId = null;
+        state.ehHostDaSala = false;
+        state.parceiroOnline = false;
+        state.versaoSala = 0;
         saveSalaOnlineId(null);
         limparParametroUrlSala();
         setPartida(null, false);
         showToast('A sala foi encerrada pelo anfitrião.');
-        render();
         return;
       }
       if (msg.tipo === 'parceiroSaiu') {
@@ -125,13 +130,28 @@ export function mountLimiarApp(root: HTMLElement): void {
         render();
         return;
       }
-      if (msg.tipo === 'sync' && msg.partida) {
+      if (msg.tipo === 'sync') {
+        if (typeof msg.versao === 'number' && msg.versao < state.versaoSala) {
+          return;
+        }
+        const partidaAnterior = state.partida;
+        state.versaoSala = Math.max(state.versaoSala, msg.versao ?? 0);
         if (msg.temaId && ALL_THEME_IDS.includes(msg.temaId)) {
           state.activeThemeId = msg.temaId;
           saveThemeId(msg.temaId);
         }
-        setPartida(msg.partida, false);
-        showToast('Mesa atualizada em tempo real pelo parceiro!');
+        if (msg.preparo && Array.isArray(msg.preparo.jogadores) && msg.preparo.jogadores.length > 0) {
+          state.preparo = {
+            jogadores: msg.preparo.jogadores.map((j) => ({ nome: j.nome, classe: j.classe })),
+            metaPorPessoa: msg.preparo.metaPorPessoa,
+          };
+        }
+        setPartida(msg.partida ?? null, false);
+        if (!partidaAnterior && msg.partida) {
+          showToast('Partida iniciada na sala!');
+        } else if (partidaAnterior && !msg.partida) {
+          showToast('A mesa voltou para a preparação.');
+        }
       }
     },
     (online) => {
@@ -163,7 +183,7 @@ export function mountLimiarApp(root: HTMLElement): void {
     }
   }
 
-  function criarNovaSala(codigoSugerido: string, partidaInicial?: Partida): void {
+  function criarNovaSala(codigoSugerido: string): void {
     state.conectandoOnline = true;
     render();
     criarSalaHost(
@@ -171,12 +191,12 @@ export function mountLimiarApp(root: HTMLElement): void {
       (codigoExibicao) => {
         state.salaOnlineId = codigoExibicao;
         state.ehHostDaSala = true;
+        state.versaoSala = 1;
+        state.partida = null;
+        savePartida(null);
         saveSalaOnlineId(codigoExibicao);
         state.conectandoOnline = false;
         state.activeTab = 'playtest';
-        if (partidaInicial) {
-          setPartida(partidaInicial, false);
-        }
         showToast(`Sala online ${codigoExibicao} criada! Convide seu parceiro.`);
         render();
       },
@@ -190,12 +210,14 @@ export function mountLimiarApp(root: HTMLElement): void {
 
   function entrarNaSalaComoCliente(codigo: string): void {
     state.conectandoOnline = true;
+    state.activeTab = 'playtest';
     render();
     entrarSalaCliente(
       codigo,
       (codigoExibicao) => {
         state.salaOnlineId = codigoExibicao;
         state.ehHostDaSala = false;
+        state.versaoSala = 0;
         saveSalaOnlineId(codigoExibicao);
         state.conectandoOnline = false;
         state.activeTab = 'playtest';
@@ -204,6 +226,7 @@ export function mountLimiarApp(root: HTMLElement): void {
       },
       (erro) => {
         state.conectandoOnline = false;
+        limparParametroUrlSala();
         showToast(erro);
         render();
       },
@@ -224,8 +247,8 @@ export function mountLimiarApp(root: HTMLElement): void {
     state.partida = next;
     savePartida(next);
     if (next) syncEstadoDoMundo(state.activeThemeId, next);
-    if (enviarRemoto && state.salaOnlineId && next) {
-      enviarEstadoParaSala(state.activeThemeId, next);
+    if (enviarRemoto && state.salaOnlineId) {
+      sincronizarSala();
     }
     render();
   }
@@ -371,6 +394,7 @@ export function mountLimiarApp(root: HTMLElement): void {
         state.activeThemeId = next;
         saveThemeId(next);
         state.selectedCardId = loadThemeWithOverrides(next).cards[0].id;
+        sincronizarSala();
         if (state.activeTab === 'temas' && !btn.dataset.gotoTab) showToast(`Tema escolhido: ${THEMES[next].name}.`);
         else render();
       });
@@ -498,6 +522,7 @@ export function mountLimiarApp(root: HTMLElement): void {
         const jogador = state.preparo.jogadores[Number(btn.dataset.jogador)];
         if (!jogador) return;
         jogador.classe = btn.dataset.classe as Naipe;
+        sincronizarSala();
         render();
       });
     });
@@ -507,6 +532,16 @@ export function mountLimiarApp(root: HTMLElement): void {
         const jogador = state.preparo.jogadores[Number(input.dataset.nomeJogador)];
         if (jogador) jogador.nome = input.value;
       });
+      input.addEventListener('change', () => {
+        sincronizarSala();
+      });
+    });
+
+    root.querySelector<HTMLInputElement>('[data-campo-sala]')?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        acaoOnline('entrar');
+      }
     });
 
     root.querySelectorAll<HTMLButtonElement>('[data-acao-mesa]').forEach((btn) => {
@@ -522,6 +557,7 @@ export function mountLimiarApp(root: HTMLElement): void {
         const meta = Number(btn.dataset.ritmoMesa);
         if (meta > 0) {
           state.preparo.metaPorPessoa = meta;
+          sincronizarSala();
           render();
         }
       });
@@ -559,17 +595,20 @@ export function mountLimiarApp(root: HTMLElement): void {
       const usadas = new Set(jogadores.map((j) => j.classe));
       const classe = (['spades', 'hearts', 'diamonds', 'clubs'] as Naipe[]).find((n) => !usadas.has(n)) ?? 'spades';
       jogadores.push({ nome: `Jogador ${jogadores.length + 1}`, classe });
+      sincronizarSala();
       render();
       return;
     }
     if (nome === 'menosPessoa' && jogadores.length > 1) {
       jogadores.pop();
+      sincronizarSala();
       render();
       return;
     }
     if (nome === 'comecar') {
       const nomeados = jogadores.map((j, i) => ({ ...j, nome: j.nome.trim() || `Jogador ${i + 1}` }));
-      setPartida(criarPartida({ jogadores: nomeados, metaPorPessoa: state.preparo.metaPorPessoa }));
+      state.preparo = { ...state.preparo, jogadores: nomeados };
+      setPartida(criarPartida({ jogadores: nomeados, metaPorPessoa: state.preparo.metaPorPessoa }), true);
       return;
     }
     if (nome === 'salvarMundo') {
@@ -579,26 +618,13 @@ export function mountLimiarApp(root: HTMLElement): void {
       return;
     }
     if (nome === 'abandonar' || nome === 'encerrarMesa') {
-      if (state.salaOnlineId) {
-        if (state.ehHostDaSala) {
-          avisarSalaEncerrada();
-        } else {
-          avisarSaidaDaSala();
-        }
-        desconectarP2P();
-        state.salaOnlineId = null;
-        state.ehHostDaSala = false;
-        state.parceiroOnline = false;
-        saveSalaOnlineId(null);
-        limparParametroUrlSala();
-      }
-      setPartida(null);
-      showToast('Mesa encerrada. O histórico anterior permanece preservado.');
-      render();
+      setPartida(null, true);
+      showToast('Mesa encerrada. Vocês voltaram à preparação da sala.');
       return;
     }
     if (nome === 'novaMesa') {
       const nomeados = state.preparo.jogadores.map((j, i) => ({ ...j, nome: j.nome.trim() || `Jogador ${i + 1}` }));
+      state.preparo = { ...state.preparo, jogadores: nomeados };
       const nova = criarPartida({ jogadores: nomeados, metaPorPessoa: state.preparo.metaPorPessoa });
       setPartida(nova, true);
       showToast('Nova mesa iniciada com sucesso!');
@@ -624,10 +650,11 @@ export function mountLimiarApp(root: HTMLElement): void {
       state.salaOnlineId = null;
       state.ehHostDaSala = false;
       state.parceiroOnline = false;
+      state.versaoSala = 0;
       saveSalaOnlineId(null);
       limparParametroUrlSala();
-      showToast('Desconectado da sala online.');
-      render();
+      setPartida(null, false);
+      showToast('Você saiu da sala.');
       return;
     }
 
@@ -646,14 +673,8 @@ export function mountLimiarApp(root: HTMLElement): void {
     }
 
     if (acao === 'criar') {
-      let partidaAtual = state.partida;
-      if (!partidaAtual) {
-        const nomeados = state.preparo.jogadores.map((j, i) => ({ ...j, nome: j.nome.trim() || `Jogador ${i + 1}` }));
-        partidaAtual = criarPartida({ jogadores: nomeados, metaPorPessoa: state.preparo.metaPorPessoa });
-      }
-
       const codigoSugerido = gerarCodigoSalaAleatorio();
-      criarNovaSala(codigoSugerido, partidaAtual);
+      criarNovaSala(codigoSugerido);
       return;
     }
 
@@ -678,9 +699,9 @@ export function mountLimiarApp(root: HTMLElement): void {
     }
 
     if (acao === 'sincronizarAgora') {
-      if (state.partida && state.salaOnlineId) {
-        enviarEstadoParaSala(state.activeThemeId, state.partida);
-        showToast('Estado da mesa reenviado para a sala!');
+      if (state.salaOnlineId) {
+        sincronizarSala();
+        showToast('Estado da sala reenviado!');
       }
     }
   }

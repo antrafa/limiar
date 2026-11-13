@@ -43,9 +43,21 @@ describe('Telas do app', () => {
     expect(html).toContain('edit-dailyIdea');
   });
 
-  it('a preparação permite de 1 a 4 pessoas com classes', () => {
+  it('sem sala ativa, a aba de mesa exige criar ou entrar em uma sala antes de mostrar a mesa', () => {
     const deck = loadThemeWithOverrides('vampires');
-    const html = renderPlaytestTableHtml(deck, null, preparacaoPadrao());
+    const html = renderPlaytestTableHtml(deck, null, preparacaoPadrao(), null);
+    expect(html).toContain('Criar ou entrar em uma sala');
+    expect(html).toContain('data-acao-online="criar"');
+    expect(html).toContain('data-acao-online="entrar"');
+    expect(html).toContain('data-campo-sala');
+    expect(html).not.toContain('Embaralhar e começar');
+    expect(html).not.toContain('data-acao-mesa="maisPessoa"');
+  });
+
+  it('a preparação dentro da sala permite de 1 a 4 pessoas com classes', () => {
+    const deck = loadThemeWithOverrides('vampires');
+    const html = renderPlaytestTableHtml(deck, null, preparacaoPadrao(), 'SALA12');
+    expect(html).toContain('SALA12');
     expect(html).toContain('data-acao-mesa="maisPessoa"');
     expect(html).toContain('Guardião');
     expect(html).toContain('Embaralhar e começar');
@@ -61,7 +73,7 @@ describe('Telas do app', () => {
     });
     partida.pessoas[0].baralho = [{ valor: 7, naipe: 'spades' }, { valor: 3, naipe: 'hearts' }];
     partida = agir(partida, { tipo: 'abrir', quem: 0 });
-    const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao());
+    const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao(), 'SALA12');
     const tema = deck.cards.find((c) => c.suit === 'spades' && c.rank === '7')!;
     expect(html.match(/class="front /g)).toHaveLength(2);
     expect(html).toContain(tema.title);
@@ -82,7 +94,7 @@ describe('Telas do app', () => {
     partida = agir(partida, { tipo: 'abrir', quem: 0 });
     partida = agir(partida, { tipo: 'declarar', quem: 0, texto: 'a reunião' });
     partida = agir(partida, { tipo: 'ler', quem: 0, texto: 'a ponte' });
-    const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao());
+    const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao(), 'SALA12');
     expect(html).toContain('data-acao="sinal"');
     expect(html).toContain('data-acao="gesto"');
     expect(html).toContain('data-acao="ajudar"');
@@ -93,7 +105,7 @@ describe('Telas do app', () => {
   it('sozinho, a pessoa é o próprio Eco', () => {
     const deck = loadThemeWithOverrides('eclipse');
     const partida = criarPartida({ jogadores: [{ nome: 'Ana', classe: 'hearts' }] });
-    const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao());
+    const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao(), 'SALA12');
     expect(html).toContain('Você é o próprio Eco.');
     expect(html).toContain('Campanha solo');
     expect(html).not.toContain('Mandar um sinal');
