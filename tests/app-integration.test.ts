@@ -102,13 +102,16 @@ describe('Telas do app', () => {
     expect(html).toContain('data-linha-status');
   });
 
-  it('sozinho, a pessoa é o próprio Eco', () => {
+  it('sozinho, a pessoa é o próprio Eco e a mesa mantém o contexto do tema visível', () => {
     const deck = loadThemeWithOverrides('eclipse');
     const partida = criarPartida({ jogadores: [{ nome: 'Ana', classe: 'hearts' }] });
     const html = renderPlaytestTableHtml(deck, partida, preparacaoPadrao(), 'SALA12');
     expect(html).toContain('Você é o próprio Eco.');
     expect(html).toContain('Campanha solo');
     expect(html).not.toContain('Mandar um sinal');
+    expect(html).toContain(deck.name);
+    expect(html).toContain(deck.tom);
+    expect(html).toContain('Coroa Negra');
   });
 
   it('a página de Temas explica as nuances do mundo, o desafio dos 30 pontos, mostra todos os temas e oferece a troca', () => {

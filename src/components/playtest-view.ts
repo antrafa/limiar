@@ -232,6 +232,7 @@ function renderPartida(
   return `
     <div class="table">
       ${barraOnline}
+      ${renderContextoDoMundo(deck)}
       ${renderPlacar(deck, partida)}
       ${renderResultado(deck, partida)}
       <div class="fronts fronts-${partida.pessoas.length}">${pessoas}</div>
@@ -241,6 +242,22 @@ function renderPartida(
       </div>
       ${renderDiario(partida)}
     </div>
+  `;
+}
+
+function renderContextoDoMundo(deck: ThemeDeck): string {
+  const nuance = NUANCES_DO_TEMA[deck.id] ?? NUANCES_DO_TEMA.eclipse;
+  return `
+    <details class="world-context" open>
+      <summary>
+        <span class="world-context-title">
+          <strong>${escapeHtml(deck.name)}</strong>
+          <span class="chip">${escapeHtml(deck.tom)}</span>
+        </span>
+        <span class="muted">${escapeHtml(deck.tagline)}</span>
+      </summary>
+      <p class="world-context-body">${escapeHtml(nuance.oQueEstaAcontecendo)}</p>
+    </details>
   `;
 }
 

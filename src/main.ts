@@ -312,8 +312,12 @@ export function mountLimiarApp(root: HTMLElement): void {
         </button>`,
     ).join('');
 
+    if (typeof document !== 'undefined') {
+      document.body.dataset.theme = state.activeThemeId;
+    }
+
     root.innerHTML = `
-      <div class="app">
+      <div class="app" data-theme="${escapeHtml(state.activeThemeId)}">
         <header class="topbar no-print">
           <div class="brand">
             <span class="brand-mark" aria-hidden="true">
